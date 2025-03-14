@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/global.dart';
 import 'package:testing/pages/Auth/register/bloc/register_bloc.dart';
-import 'package:testing/pages/Auth/register/sign_up_page.dart';
+import 'package:testing/pages/Auth/register/register_page.dart';
 import 'package:testing/pages/Auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:testing/pages/Auth/sign_in/sign_in_page.dart';
 import 'package:testing/pages/home/bloc/home_blocs.dart';
@@ -20,21 +20,21 @@ class AppPages {
   static List<PageEntity> routes() {
     return [
       PageEntity(
-        route: AppRoutes.SIGN_IN,
+        route: AppRoutes.signIn,
         page: const SignInPage(),
         bloc: BlocProvider(
           create: (_) => SignInBloc(),
         ),
       ),
       PageEntity(
-        route: AppRoutes.REGISTER,
+        route: AppRoutes.register,
         page: const SignUpPage(),
         bloc: BlocProvider(
           create: (_) => RegisterBloc(),
         ),
       ),
       PageEntity(
-        route: AppRoutes.HOME_PAGE,
+        route: AppRoutes.homePage,
         page: const HomePage(),
         bloc: BlocProvider(
           create: (_) => HomeBlocs(),
@@ -51,13 +51,13 @@ class AppPages {
     return blocProviders;
   }
 
-  static MaterialPageRoute GenerateRouteSettings(RouteSettings settings) {
+  static MaterialPageRoute generateRouteSettings(RouteSettings settings) {
     if (settings.name != null) {
       var result = routes().where((element) => element.route == settings.name);
       if (result.isNotEmpty) {
-        print("first log");
+        debugPrint("first log");
         bool deviceFirstOpen = Global.storageService.getDeviceFirstOpen();
-        if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+        if (result.first.route == AppRoutes.initial && deviceFirstOpen) {
           bool isLoggedIn = Global.storageService.getIsLoggedIn();
           if (isLoggedIn) {
             return MaterialPageRoute(

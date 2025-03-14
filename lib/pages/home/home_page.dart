@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  BuildCard(),
+                  buildCard(),
                 ],
               ),
             ),

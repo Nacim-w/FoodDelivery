@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:testing/common/extensions/text_style_extension.dart';
+import 'package:testing/common/res/styles/text.dart';
 
-Widget forgotPassword() {
+Widget forgotPassword(BuildContext context) {
   return SizedBox(
-    width: 325.w,
-    height: 44.h,
+    width: MediaQuery.of(context).size.width * 0.9,
+    height: 44,
     child: GestureDetector(
-        child: Text(
-          "Mot de passe oublié?",
-          textAlign: TextAlign.right,
-          style: TextStyle(
-            color: Color(0xFFFF7300),
-            fontWeight: FontWeight.w500,
-            fontSize: 15.sp,
-          ),
-        ),
-        onTap: () {}),
+      child: Text(
+        "Mot de passe oublié?",
+        textAlign: TextAlign.right,
+        style: TextStyles.textMedium.orange,
+      ),
+      onTap: () {},
+    ),
+  );
+}
+
+Widget goToRegister(Function()? func) {
+  return GestureDetector(
+    onTap: func,
+    child: Text(
+      "S'inscrire",
+      textAlign: TextAlign.right,
+      style: TextStyles.textMedium.orange,
+    ),
   );
 }

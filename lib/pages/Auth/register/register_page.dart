@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/common/widgets/base_text_widget.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
-import 'package:testing/pages/Auth/register/widgets/sign_up_widget.dart';
+import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/Auth/register/widgets/register_widget.dart';
+import 'package:testing/common/res/styles/colours.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -19,27 +20,26 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colours.lightThemePrimaryColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colours.lightThemePrimaryColor,
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AutoSizeText(
+              buildAutoSizeText(
                 'Créez votre nouveau compte',
-                style: TextStyle(
-                  fontSize: 35.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                maxLines: 2,
               ),
               buildSlogan(
                 "Créez un compte pour commencer à chercher les plats que vous aimez.",
               ),
-              SizedBox(height: 10.h),
+              SizedBox(
+                height: 10,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -47,29 +47,29 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Adresse e-mail",
                   ),
                   SizedBox(
-                    height: 5.h,
+                    height: 5,
                   ),
                   buildTextField(
                     "Ecivez votre adresse e-mail",
                     "email",
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                   reusableText("Nom d'utilisateur"),
                   SizedBox(
-                    height: 5.h,
+                    height: 5,
                   ),
                   buildTextField(
                     "Ecivez votre nom d'utilisateur",
                     "email",
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                   reusableText("Mot de passe"),
                   SizedBox(
-                    height: 5.h,
+                    height: 5,
                   ),
                   buildTextField(
                     "Ecivez votre mot de passe",
@@ -78,11 +78,16 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     children: [
                       Checkbox(
-                        side: BorderSide(color: Colors.white),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                        side: BorderSide(
+                          color: Colours.lightThemePrimaryColor,
                         ),
-                        fillColor: WidgetStateProperty.all(Color(0xFFFF7300)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            5.0,
+                          ),
+                        ),
+                        fillColor: WidgetStateProperty.all(
+                            Colours.lightThemeOrangeTextColor),
                         value: isChecked,
                         onChanged: (bool? value) {
                           setState(
@@ -93,17 +98,16 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                       ),
                       SizedBox(
-                        width: 280.w,
+                        width: 280,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 25.h),
+                          padding: EdgeInsets.only(
+                            top: 25,
+                          ),
                           child: Wrap(
                             children: [
                               AutoSizeText(
                                 "J'accepte ",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: TextStyles.textMedium,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -114,13 +118,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               Text(
                                 " et ",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: TextStyles.textMedium,
                               ),
-                              goToLegal(() => {},
-                                  "Politique de Confidentialité", "pol"),
+                              goToLegal(
+                                () => {},
+                                "Politique de Confidentialité",
+                                "pol",
+                              ),
                             ],
                           ),
                         ),
@@ -128,11 +132,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
-                  buildLogInAndRegButton("S'inscrire", "register", () {}),
+                  buildLogInAndRegButton(
+                      context, "S'inscrire", "register", () {}),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,18 +146,20 @@ class _SignUpPageState extends State<SignUpPage> {
                       SizedBox(
                         width: 64,
                         child: Divider(
-                          color: Color(0xFF878787),
+                          color: Colours.lightThemeSecondaryTextColor,
                           thickness: 0.5,
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: buildSlogan("Ou connectez-vous avec"),
+                        child: buildSlogan(
+                          "Ou connectez-vous avec",
+                        ),
                       ),
                       SizedBox(
                         width: 64,
                         child: Divider(
-                          color: Color(0xFF878787),
+                          color: Colours.lightThemeSecondaryTextColor,
                           thickness: 0.5,
                         ),
                       ),
@@ -160,18 +167,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   buildThirdPartyLogin(context),
                   SizedBox(
-                    height: 20.h,
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      reusableText("Vous n'avez pas de compte ? "),
-                      goToText(() =>
-                          Navigator.of(context).pushNamed(AppRoutes.REGISTER)),
+                      reusableText(
+                        "Vous n'avez pas de compte ? ",
+                      ),
+                      goToSignIn(() =>
+                          Navigator.of(context).pushNamed(AppRoutes.register)),
                     ],
                   ),
                   SizedBox(
-                    height: 40.h,
+                    height: 40,
                   ),
                 ],
               ),

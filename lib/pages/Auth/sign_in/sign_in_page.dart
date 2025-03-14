@@ -1,12 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/common/widgets/base_text_widget.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
+import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/home/home_page.dart';
 import 'package:testing/pages/Auth/sign_in/widgets/sign_in_widgets.dart';
-import 'package:testing/pages/Auth/register/sign_up_page.dart';
+import 'package:testing/common/res/styles/colours.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -20,100 +18,75 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colours.lightThemePrimaryColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colours.lightThemePrimaryColor,
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(
+            horizontal: 30,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AutoSizeText(
+              buildAutoSizeText(
                 'Connectez-vous à votre compte',
-                style: TextStyle(
-                  fontSize: 35.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                maxLines: 2,
               ),
               buildSlogan(
                 "Veuillez vous connecter à votre compte",
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 40),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   reusableText(
                     "Adresse e-mail",
                   ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                  SizedBox(height: 5),
                   buildTextField(
                     "Ecivez votre adresse e-mail",
                     "email",
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  SizedBox(height: 20),
                   reusableText("Mot de passe"),
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                  SizedBox(height: 5),
                   buildTextField(
                     "Ecivez votre mot de passe",
                     "password",
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  forgotPassword(),
-                  buildLogInAndRegButton("Se connecter", "login", () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
-                  }),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 64,
-                        child: Divider(
-                          color: Color(0xFF878787),
-                          thickness: 0.5,
+                  SizedBox(height: 20),
+                  forgotPassword(context),
+                  buildLogInAndRegButton(
+                    context,
+                    "Se connecter",
+                    "login",
+                    () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: buildSlogan("Ou connectez-vous avec"),
-                      ),
-                      SizedBox(
-                        width: 64,
-                        child: Divider(
-                          color: Color(0xFF878787),
-                          thickness: 0.5,
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                  buildThirdPartyLogin(context),
-                  SizedBox(
-                    height: 20.h,
+                  SizedBox(height: 20),
+                  buildSeperater(context),
+                  buildThirdPartyLogin(
+                    context,
                   ),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      reusableText("Vous n'avez pas de compte ? "),
-                      goToText(() {
-                        Navigator.of(context).pushNamed(AppRoutes.REGISTER);
-                      }),
+                      reusableText(
+                        "Vous n'avez pas de compte ? ",
+                      ),
+                      goToRegister(
+                        () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.register,
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ],

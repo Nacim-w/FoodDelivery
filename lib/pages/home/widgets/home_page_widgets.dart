@@ -2,77 +2,75 @@ import 'package:flutter/material.dart';
 
 AppBar buildAppBar() {
   return AppBar(
-    title: Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.only(right: 30),
-            child: SizedBox(
-              width: 25,
-              height: 25,
-              child: Image.asset(
-                "assets/icons/menu.png",
-              ),
+    title: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          padding: EdgeInsets.only(right: 30),
+          child: SizedBox(
+            width: 25,
+            height: 25,
+            child: Image.asset(
+              "assets/icons/menu.png",
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(right: 70),
-            child: GestureDetector(
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.location_on,
-                    color: Colors.black,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: "Location\n",
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 12,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: "Dakar, Senegal",
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        WidgetSpan(
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+        ),
+        Container(
+          padding: EdgeInsets.only(right: 70),
+          child: GestureDetector(
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.location_on,
+                  color: Colors.black,
+                ),
+                RichText(
+                  text: TextSpan(
+                    text: "Location\n",
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 12,
                     ),
+                    children: [
+                      TextSpan(
+                        text: "Dakar, Senegal",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      WidgetSpan(
+                        child: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          //icon button
-          IconButton(
-            onPressed: () {},
-            icon: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(
-                    "assets/icons/cart.png",
-                  ),
+        ),
+        //icon button
+        IconButton(
+          onPressed: () {},
+          icon: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/icons/cart.png",
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -175,7 +173,7 @@ Widget buildFeatured(String text, String image, double price) {
         bottom: 50,
         right: 20,
         child: Text(
-          "\$" + price.toString(),
+          "\$$price",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
@@ -183,7 +181,7 @@ Widget buildFeatured(String text, String image, double price) {
   );
 }
 
-Widget BuildCard() {
+Widget buildCard() {
   return Stack(
     children: [
       Container(
