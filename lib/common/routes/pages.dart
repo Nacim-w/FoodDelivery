@@ -82,6 +82,6 @@ class AppPages {
       }
     }
     //the user is not logged in and getting redirected to OTP page
-    return MaterialPageRoute(builder: (_) => OtpPage(), settings: settings);
+    return MaterialPageRoute(builder: (_) => SignInPage(), settings: settings);
   }
 }

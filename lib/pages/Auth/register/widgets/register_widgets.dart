@@ -29,7 +29,7 @@ Widget confidentialText() {
       padding: EdgeInsets.only(top: 25),
       child: RichText(
         text: TextSpan(
-          style: TextStyles.textMedium,
+          style: TextStyles.textMedium.black,
           children: [
             TextSpan(
               text: "J'accepte ",

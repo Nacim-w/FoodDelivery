@@ -21,7 +21,7 @@ Widget buildTextField(String hintText, String textType) {
       return Container(
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width,
-        height: 50,
+        height: MediaQuery.of(context).size.height * 0.07,
         decoration: BoxDecoration(
           color: Colours.lightThemePrimaryColor,
           borderRadius: BorderRadius.all(Radius.circular(8)),
