@@ -13,4 +13,6 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 15,
   );
+  static const TextStyle otpDefault =
+      TextStyle(fontSize: 32, fontWeight: FontWeight.w500);
 }
