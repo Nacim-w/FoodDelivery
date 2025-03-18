@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/global.dart';
+import 'package:testing/pages/Auth/forgot_password/forgot_password_page.dart';
+import 'package:testing/pages/Auth/opt/otp_page.dart';
 import 'package:testing/pages/Auth/register/bloc/register_bloc.dart';
 import 'package:testing/pages/Auth/register/register_page.dart';
 import 'package:testing/pages/Auth/sign_in/bloc/sign_in_bloc.dart';
@@ -40,6 +42,13 @@ class AppPages {
           create: (_) => HomeBlocs(),
         ),
       ),
+      PageEntity(
+        route: AppRoutes.forgotPassword,
+        page: const ForgotPasswordPage(),
+        bloc: BlocProvider(
+          create: (_) => HomeBlocs(),
+        ),
+      ),
     ];
   }
 
@@ -59,18 +68,20 @@ class AppPages {
         bool deviceFirstOpen = Global.storageService.getDeviceFirstOpen();
         if (result.first.route == AppRoutes.initial && deviceFirstOpen) {
           bool isLoggedIn = Global.storageService.getIsLoggedIn();
+          //the user is logged in and getting redirected to home page
           if (isLoggedIn) {
             return MaterialPageRoute(
                 builder: (_) => const HomePage(), settings: settings);
           }
 
           return MaterialPageRoute(
-              builder: (_) => const SignInPage(), settings: settings);
+              builder: (_) => const OtpPage(), settings: settings);
         }
         return MaterialPageRoute(
             builder: (_) => result.first.page, settings: settings);
       }
     }
-    return MaterialPageRoute(builder: (_) => SignInPage(), settings: settings);
+    //the user is not logged in and getting redirected to OTP page,
+    return MaterialPageRoute(builder: (_) => OtpPage(), settings: settings);
   }
 }

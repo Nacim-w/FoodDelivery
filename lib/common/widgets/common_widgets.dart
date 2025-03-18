@@ -41,7 +41,7 @@ toastInfo({
 Widget reusableText(String text,
     {Color color = Colours.lightThemePrimaryTextColor,
     int fontSize = 14,
-    FontWeight fontWeight = FontWeight.w500}) {
+    FontWeight fontWeight = FontWeight.w600}) {
   return Text(
     text,
     style: TextStyle(

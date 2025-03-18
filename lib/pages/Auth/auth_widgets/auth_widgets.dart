@@ -151,23 +151,22 @@ Widget buildSeperater(BuildContext context) {
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      SizedBox(
-        width: MediaQuery.of(context).size.width / 6.5,
+      Flexible(
+        flex: 1,
         child: Divider(
           color: Colours.lightThemeSecondaryTextColor,
           thickness: 0.5,
         ),
       ),
-      Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 15,
-        ),
-        child: buildSlogan(
-          "Ou connectez-vous avec",
+      Flexible(
+        flex: 5,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: buildSlogan("Ou connectez-vous avec"),
         ),
       ),
-      SizedBox(
-        width: MediaQuery.of(context).size.width / 6.5,
+      Flexible(
+        flex: 1,
         child: Divider(
           color: Colours.lightThemeSecondaryTextColor,
           thickness: 0.5,

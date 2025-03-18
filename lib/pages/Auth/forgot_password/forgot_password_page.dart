@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/Auth/sign_in/widgets/sign_in_widgets.dart';
 import 'package:testing/common/res/styles/colours.dart';
+import 'package:testing/pages/Auth/forgot_password/widgets/forgot_password_widgets.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,9 +20,9 @@ class _SignInPageState extends State<SignInPage> {
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
-            horizontal: 30,
+            horizontal: 20,
           ),
-          child: signInForm(context),
+          child: forgotPasswordForm(context),
         ),
       ),
     );

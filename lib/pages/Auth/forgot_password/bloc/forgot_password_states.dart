@@ -1,0 +1,3 @@
+class ForgotPasswordStates {
+  const ForgotPasswordStates();
+}
