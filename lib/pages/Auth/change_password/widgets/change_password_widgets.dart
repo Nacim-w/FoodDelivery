@@ -6,7 +6,7 @@ import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
-import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 
 Widget changePasswordForm(BuildContext context) {
   return Padding(
@@ -56,6 +56,7 @@ Widget buildSloganSucess(String slogan) {
 
 void showCustomModal(BuildContext context) {
   showModalBottomSheet(
+    showDragHandle: true,
     context: context,
     isScrollControlled: true,
     shape: RoundedRectangleBorder(

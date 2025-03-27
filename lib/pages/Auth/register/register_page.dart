@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/Auth/register/widgets/register_widgets.dart';
+import 'package:testing/pages/auth/register/widgets/register_widgets.dart';
 import 'package:testing/common/res/styles/colours.dart';
 
 class SignUpPage extends StatefulWidget {

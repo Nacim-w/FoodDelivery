@@ -69,11 +69,19 @@ Widget buildTextField(String hintText, String textType) {
                       });
                     },
                   )
-                : null, // No eye icon for non-password fields
+                : textType == "sex"
+                    ? Icon(
+                        Icons.arrow_drop_down,
+                        color: Colours.lightThemePrimaryTextColor,
+                      )
+                    : null, // No icon for other types
           ),
           style: TextStyles.textMedium.black,
           autocorrect: false,
           obscureText: obscureText, // Toggle the visibility
+          readOnly:
+              textType == "sex", // Prevents manual text input for dropdown
+          onTap: textType == "sex" ? () {} : null,
         ),
       );
     },

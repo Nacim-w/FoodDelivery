@@ -4,7 +4,8 @@ import 'package:pinput/pinput.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/change_password/change_password_page.dart';
 
 String formatTime(int seconds) {
   int minutes = seconds ~/ 60;
@@ -109,7 +110,18 @@ Widget otpForm(BuildContext context, bool canResend, int remainingSeconds,
       Gap(20),
       resendOtpTimer(remainingSeconds),
       Gap(40),
-      buildLogInAndRegButton(context, "Continuer", "continuer", () {}),
+      buildLogInAndRegButton(
+        context,
+        "Continuer",
+        "continuer",
+        () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ChangePasswordPage(),
+            ),
+          );
+        },
+      ),
     ],
   );
 }

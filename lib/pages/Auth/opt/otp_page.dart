@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/Auth/opt/widgets/otp_widgets.dart';
+import 'package:testing/pages/auth/opt/widgets/otp_widgets.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key});

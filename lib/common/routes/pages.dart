@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/global.dart';
-import 'package:testing/pages/Auth/forgot_password/forgot_password_page.dart';
-import 'package:testing/pages/Auth/opt/otp_page.dart';
-import 'package:testing/pages/Auth/register/bloc/register_bloc.dart';
-import 'package:testing/pages/Auth/register/register_page.dart';
-import 'package:testing/pages/Auth/sign_in/bloc/sign_in_bloc.dart';
-import 'package:testing/pages/Auth/sign_in/sign_in_page.dart';
+import 'package:testing/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:testing/pages/auth/opt/otp_page.dart';
+import 'package:testing/pages/auth/register/bloc/register_bloc.dart';
+import 'package:testing/pages/auth/register/register_page.dart';
+import 'package:testing/pages/auth/sign_in/bloc/sign_in_bloc.dart';
+import 'package:testing/pages/auth/sign_in/sign_in_page.dart';
 import 'package:testing/pages/home/bloc/home_blocs.dart';
 import 'package:testing/pages/home/home_page.dart';
+import 'package:testing/pages/profile/profile_settings/blocs/profile_settings_bloc.dart';
+import 'package:testing/pages/profile/profile_settings/profile_settings_page.dart';
 
 class PageEntity {
   String route;
@@ -49,6 +51,20 @@ class AppPages {
           create: (_) => HomeBlocs(),
         ),
       ),
+      PageEntity(
+        route: AppRoutes.forgotPassword,
+        page: const ForgotPasswordPage(),
+        bloc: BlocProvider(
+          create: (_) => HomeBlocs(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.profileSettings,
+        page: const ProfileSettingsPage(),
+        bloc: BlocProvider(
+          create: (_) => ProfileSettingsBloc(),
+        ),
+      ),
     ];
   }
 
@@ -81,7 +97,8 @@ class AppPages {
             builder: (_) => result.first.page, settings: settings);
       }
     }
-    //the user is not logged in and getting redirected to OTP page
-    return MaterialPageRoute(builder: (_) => SignInPage(), settings: settings);
+    //the user is not logged in and getting redirected to another page
+    return MaterialPageRoute(
+        builder: (_) => ProfileSettingsPage(), settings: settings);
   }
 }

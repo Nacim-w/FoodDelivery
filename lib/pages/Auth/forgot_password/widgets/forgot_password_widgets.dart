@@ -3,7 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
-import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/opt/otp_page.dart';
 
 Widget goToLegal(Function()? func, String text, String type) {
   return GestureDetector(
@@ -33,7 +34,13 @@ Widget forgotPasswordForm(BuildContext context) {
         context,
         "Continue",
         "forgotPassword",
-        () {},
+        () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => OtpPage(),
+            ),
+          );
+        },
       )
     ],
   );

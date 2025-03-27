@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/Auth/sign_in/widgets/sign_in_widgets.dart';
+import 'package:testing/pages/auth/sign_in/widgets/sign_in_widgets.dart';
 import 'package:testing/common/res/styles/colours.dart';
 
 class SignInPage extends StatefulWidget {

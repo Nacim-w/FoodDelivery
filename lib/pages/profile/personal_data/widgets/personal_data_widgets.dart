@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:testing/common/extensions/text_style_extension.dart';
+import 'package:testing/common/res/media.dart';
+import 'package:testing/common/res/styles/colours.dart';
+import 'package:testing/common/res/styles/text.dart';
+
+import 'package:testing/common/widgets/common_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/profile/profile_settings/widgets/profile_settings_widgets.dart';
+
+Widget personalDataForm(BuildContext context) {
+  return Column(
+    children: [
+      Center(
+        child: profilePictureStack(Media.profileAvatar),
+      ),
+      Gap(20),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          reusableText("Nom complet"),
+          Gap(8),
+          buildTextField("Nom complet", "email"),
+          Gap(8),
+          reusableText("Date de naissance"),
+          Gap(8),
+          buildTextField("Date de naissance", "email"),
+          Gap(8),
+          reusableText("Genre"),
+          Gap(8),
+          buildTextField("Genre", "sex"),
+          Gap(8),
+          reusableText("Téléphone"),
+          Gap(8),
+          buildTextField("Téléphone", "email"),
+          Gap(8),
+          reusableText("E-mail"),
+          Gap(8),
+          buildTextField("E-mail", "email"),
+          Gap(40),
+          continueButton(context, "Enregistrer", "nothing", () {})
+        ],
+      ),
+    ],
+  );
+}
+
+Widget continueButton(BuildContext context, String buttonName,
+    String buttonType, Function()? func) {
+  return GestureDetector(
+    onTap: func,
+    child: Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colours.lightThemeOrangeSecondaryTextColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(100),
+        ),
+      ),
+      child: Center(
+        child: Text(
+          buttonName,
+          textAlign: TextAlign.center,
+          style: TextStyles.textSemiBold.white,
+        ),
+      ),
+    ),
+  );
+}

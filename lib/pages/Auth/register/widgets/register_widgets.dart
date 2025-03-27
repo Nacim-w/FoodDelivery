@@ -5,7 +5,7 @@ import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
-import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 
 Widget goToLegal(Function()? func, String text, String type) {
   return GestureDetector(
@@ -17,7 +17,7 @@ Widget goToLegal(Function()? func, String text, String type) {
 Widget goToSignIn(Function()? func) {
   return GestureDetector(
     onTap: func,
-    child: Text("S'inscrire",
+    child: Text("Se Connecter",
         textAlign: TextAlign.right, style: TextStyles.textMedium.orange),
   );
 }
@@ -82,9 +82,9 @@ Widget suggestLogin(BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       reusableText(
-        "Vous n'avez pas de compte ? ",
+        "Vous avez un compte ? ",
       ),
-      goToSignIn(() => Navigator.of(context).pushNamed(AppRoutes.register)),
+      goToSignIn(() => Navigator.of(context).pushNamed(AppRoutes.signIn)),
     ],
   );
 }

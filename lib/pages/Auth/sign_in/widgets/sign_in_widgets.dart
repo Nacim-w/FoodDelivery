@@ -4,7 +4,7 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
-import 'package:testing/pages/Auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/home/home_page.dart';
 
 Widget forgotPassword(BuildContext context) {
