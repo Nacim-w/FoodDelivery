@@ -51,14 +51,14 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('OTP', style: TextStyles.textSemiBold),
-        ),
-        backgroundColor: Colours.lightThemePrimaryColor,
-        body: Padding(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('OTP', style: TextStyles.textSemiBold),
+      ),
+      backgroundColor: Colours.lightThemePrimaryColor,
+      body: SingleChildScrollView(
+        child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: otpForm(context, _canResend, _remainingSeconds, startTimer),
         ),

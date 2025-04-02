@@ -5,6 +5,7 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
+import 'package:testing/common/routes/names.dart';
 import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 
@@ -41,7 +42,7 @@ Widget buildAutoSizeTextSuccess(String text) {
   return AutoSizeText(
     text,
     textAlign: TextAlign.center,
-    style: TextStyles.headingBold.black,
+    style: TextStyles.titleBold.black,
     maxLines: 2,
   );
 }
@@ -56,6 +57,7 @@ Widget buildSloganSucess(String slogan) {
 
 void showCustomModal(BuildContext context) {
   showModalBottomSheet(
+    backgroundColor: Colors.white,
     showDragHandle: true,
     context: context,
     isScrollControlled: true,
@@ -91,7 +93,10 @@ void showCustomModal(BuildContext context) {
                   context,
                   "Verify Account",
                   "verify",
-                  () {},
+                  () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRoutes.homePage, (route) => false);
+                  },
                 ),
               ],
             ),

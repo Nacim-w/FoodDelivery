@@ -8,9 +8,11 @@ import 'package:testing/pages/auth/register/bloc/register_bloc.dart';
 import 'package:testing/pages/auth/register/register_page.dart';
 import 'package:testing/pages/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:testing/pages/auth/sign_in/sign_in_page.dart';
+import 'package:testing/pages/dashboard/bloc/dashboard_bloc.dart';
+import 'package:testing/pages/dashboard/dashboard.dart';
 import 'package:testing/pages/home/bloc/home_blocs.dart';
 import 'package:testing/pages/home/home_page.dart';
-import 'package:testing/pages/profile/profile_settings/blocs/profile_settings_bloc.dart';
+import 'package:testing/pages/profile/profile_settings/bloc/profile_settings_bloc.dart';
 import 'package:testing/pages/profile/profile_settings/profile_settings_page.dart';
 
 class PageEntity {
@@ -65,6 +67,13 @@ class AppPages {
           create: (_) => ProfileSettingsBloc(),
         ),
       ),
+      PageEntity(
+        route: AppRoutes.dashboard,
+        page: const DashboardPage(),
+        bloc: BlocProvider(
+          create: (_) => DashboardBloc(),
+        ),
+      ),
     ];
   }
 
@@ -99,6 +108,6 @@ class AppPages {
     }
     //the user is not logged in and getting redirected to another page
     return MaterialPageRoute(
-        builder: (_) => ProfileSettingsPage(), settings: settings);
+        builder: (_) => DashboardPage(), settings: settings);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing/pages/profile/profile_settings/blocs/profile_settings_events.dart';
-import 'package:testing/pages/profile/profile_settings/blocs/profile_settings_states.dart';
+import 'package:testing/pages/profile/profile_settings/bloc/profile_settings_events.dart';
+import 'package:testing/pages/profile/profile_settings/bloc/profile_settings_states.dart';
 
 class ProfileSettingsBloc
     extends Bloc<ProfileSettingsEvents, ProfileSettingsStates> {

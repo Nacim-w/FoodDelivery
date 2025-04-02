@@ -6,4 +6,5 @@ class AppRoutes {
   static const homePage = "/home_page";
   static const forgotPassword = "/forgot_password";
   static const profileSettings = "/profile_settings";
+  static const dashboard = "/dashboard";
 }

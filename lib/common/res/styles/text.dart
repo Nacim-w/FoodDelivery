@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 abstract class TextStyles {
-  static const TextStyle headingBold = TextStyle(
+  static const TextStyle titleBold = TextStyle(
     fontSize: 35,
     fontWeight: FontWeight.w600,
   );

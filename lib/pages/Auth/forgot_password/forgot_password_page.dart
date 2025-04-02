@@ -12,18 +12,16 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colours.lightThemePrimaryColor,
+      appBar: AppBar(
         backgroundColor: Colours.lightThemePrimaryColor,
-        appBar: AppBar(
-          backgroundColor: Colours.lightThemePrimaryColor,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
         ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: forgotPasswordForm(context),
-        ),
+        child: forgotPasswordForm(context),
       ),
     );
   }
