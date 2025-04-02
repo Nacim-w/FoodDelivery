@@ -4,10 +4,9 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
-
 import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/pages/profile/profile_settings/widgets/profile_settings_widgets.dart';
+import 'package:testing/pages/profile/profile_settings/sections/profile_picture/profile_picture_widgets.dart';
 
 Widget personalDataForm(BuildContext context) {
   return Column(

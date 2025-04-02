@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/pages/dashboard/bloc/dashboard_bloc.dart';
 import 'package:testing/pages/dashboard/bloc/dashboard_events.dart';
 import 'package:testing/pages/dashboard/bloc/dashboard_states.dart';
@@ -37,11 +38,11 @@ class _DashboardPageState extends State<DashboardPage> {
             ],
           ),
           child: BottomNavigationBar(
-            backgroundColor: Colors.white,
             currentIndex: state.index,
             onTap: (value) {
               context.read<DashboardBloc>().add(TriggerDashboard(value));
             },
+            selectedItemColor: Colours.lightThemeOrangeSecondaryTextColor,
             elevation: 2,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,

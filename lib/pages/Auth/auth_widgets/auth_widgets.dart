@@ -8,7 +8,7 @@ import 'package:testing/common/res/styles/text.dart';
 Widget buildAutoSizeText(String text) {
   return AutoSizeText(
     text,
-    style: TextStyles.titleBold.black,
+    style: TextStyles.titleMedium.black,
     maxLines: 2,
   );
 }

@@ -5,7 +5,6 @@ class Global {
   static late StorageService storageService;
   static Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    //wait Firebase.initializeApp();
     storageService = await StorageService().init();
   }
 }

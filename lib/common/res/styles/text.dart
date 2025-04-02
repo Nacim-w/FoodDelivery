@@ -1,17 +1,39 @@
 import 'package:flutter/widgets.dart';
 
 abstract class TextStyles {
-  static const TextStyle titleBold = TextStyle(
-    fontSize: 35,
+  static const TextStyle titleMedium = TextStyle(
+    fontSize: 32,
     fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle textMediumLarge = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
   );
   static const TextStyle textMedium = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 15,
+    fontSize: 14,
   );
+  static const TextStyle textMediumSmall = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+  );
+
   static const TextStyle textSemiBold = TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 15,
+    fontSize: 14,
+  );
+  static const TextStyle textSemiBoldSmall = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+  );
+  static const TextStyle textBold = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+  );
+  static const TextStyle textBoldSmall = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
   );
   static const TextStyle otpDefault =
       TextStyle(fontSize: 32, fontWeight: FontWeight.w500);

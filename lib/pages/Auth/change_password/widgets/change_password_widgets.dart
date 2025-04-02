@@ -42,7 +42,7 @@ Widget buildAutoSizeTextSuccess(String text) {
   return AutoSizeText(
     text,
     textAlign: TextAlign.center,
-    style: TextStyles.titleBold.black,
+    style: TextStyles.textBold.black,
     maxLines: 2,
   );
 }
