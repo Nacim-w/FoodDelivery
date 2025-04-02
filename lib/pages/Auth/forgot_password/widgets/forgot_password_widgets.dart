@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/auth/opt/otp_page.dart';
 
@@ -20,11 +19,12 @@ Widget forgotPasswordForm(BuildContext context) {
       buildAutoSizeText(
         "Mot de passe oublié?",
       ),
-      buildSlogan(
+      Text(
         "Saisissez votre e-mail pour recevoir un code de réinitialisation.",
+        style: TextStyles.textMedium.grey,
       ),
       Gap(20),
-      reusableText("Adresse e-mail"),
+      Text("Adresse e-mail", style: TextStyles.textMedium),
       buildTextField(
         "E-mail",
         "email",

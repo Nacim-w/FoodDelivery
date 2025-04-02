@@ -35,6 +35,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 24,
   );
+  static const TextStyle textBoldSmallest = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+  );
   static const TextStyle otpDefault =
       TextStyle(fontSize: 32, fontWeight: FontWeight.w500);
 }

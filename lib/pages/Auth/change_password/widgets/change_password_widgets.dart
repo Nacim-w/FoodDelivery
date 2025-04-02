@@ -6,7 +6,6 @@ import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 
 Widget changePasswordForm(BuildContext context) {
@@ -16,20 +15,31 @@ Widget changePasswordForm(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildAutoSizeText("Réinitialiser le mot de passe"),
-        buildSlogan(
-            "Votre nouveau mot de passe doit être différent de l'ancien."),
+        Text(
+          "Votre nouveau mot de passe doit être différent de l'ancien.",
+          style: TextStyles.textMedium.grey,
+        ),
         Gap(20),
-        reusableText("Nouveau mot de passe"),
+        Text("Nouveau mot de passe"),
         Gap(5),
         buildTextField("Nouveau mot de passe", "password"),
         Gap(5),
-        buildSlogan("Doit contenir au moins 8 caractères"),
+        Text(
+          "Doit contenir au moins 8 caractères",
+          style: TextStyles.textMedium.grey,
+        ),
         Gap(20),
-        reusableText("Confirmer le mot de passe"),
+        Text(
+          "Confirmer le mot de passe",
+          style: TextStyles.textMedium,
+        ),
         Gap(5),
         buildTextField("Confirmer le mot de passe", "password"),
         Gap(5),
-        buildSlogan("Les deux mots de passe doivent correspondre."),
+        Text(
+          "Les deux mots de passe doivent correspondre.",
+          style: TextStyles.textMedium.grey,
+        ),
         Gap(MediaQuery.of(context).size.height * 0.25),
         buildLogInAndRegButton(context, "Changer mot de passe", "Verify",
             () => showCustomModal(context)),
@@ -42,7 +52,7 @@ Widget buildAutoSizeTextSuccess(String text) {
   return AutoSizeText(
     text,
     textAlign: TextAlign.center,
-    style: TextStyles.textBold.black,
+    style: TextStyles.textBoldSmall.black,
     maxLines: 2,
   );
 }

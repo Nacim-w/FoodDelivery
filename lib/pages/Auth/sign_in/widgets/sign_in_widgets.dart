@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/home/home_page.dart';
 
@@ -38,7 +37,7 @@ Widget suggestRegister(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      reusableText(
+      Text(
         "Vous n'avez pas de compte ? ",
       ),
       goToRegister(
@@ -59,20 +58,19 @@ Widget signInForm(BuildContext context) {
       buildAutoSizeText(
         'Connectez-vous à votre compte',
       ),
-      buildSlogan(
+      Text(
         "Veuillez vous connecter à votre compte",
+        style: TextStyles.textMedium.grey,
       ),
       Gap(40),
-      reusableText(
-        "Adresse e-mail",
-      ),
+      Text("Adresse e-mail", style: TextStyles.textMedium.black),
       SizedBox(height: 5),
       buildTextField(
         "Ecivez votre adresse e-mail",
         "email",
       ),
       Gap(20),
-      reusableText("Mot de passe"),
+      Text("Mot de passe", style: TextStyles.textMedium.black),
       Gap(5),
       buildTextField(
         "Ecivez votre mot de passe",

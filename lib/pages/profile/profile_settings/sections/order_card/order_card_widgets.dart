@@ -23,11 +23,11 @@ Widget ordersContainer(BuildContext context) {
             children: [
               Text(
                 "Mes commandes",
-                style: TextStyles.textSemiBold,
+                style: TextStyles.textMediumLarge,
               ),
               Text(
                 "Voir tout",
-                style: TextStyles.textSemiBold.orangeSecondary,
+                style: TextStyles.textMedium.orange,
               ),
             ],
           ),
@@ -41,14 +41,11 @@ Widget ordersContainer(BuildContext context) {
               RichText(
                 text: TextSpan(
                   text: "ID de commande ",
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  style: TextStyles.textMediumSmall.grey,
                   children: [
                     TextSpan(
                       text: "888333777",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: TextStyles.textMediumSmall.black,
                     ),
                   ],
                 ),
@@ -59,11 +56,8 @@ Widget ordersContainer(BuildContext context) {
                   color: Colours.lightThemeOrangeSecondaryTextColor,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text(
-                  "En cours de livraison",
-                  style: TextStyle(
-                      fontSize: 12, color: Colours.lightThemePrimaryColor),
-                ),
+                child: Text("En cours de livraison",
+                    style: TextStyles.textMediumSmall.white),
               ),
             ],
           ),
@@ -88,25 +82,19 @@ Widget ordersContainer(BuildContext context) {
                   children: [
                     Text(
                       "Burger With Meat",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyles.textMedium.black,
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "\$ 12,230",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colours.lightThemeOrangeSecondaryTextColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      "12,230 CFA",
+                      style: TextStyles.textMedium.orange,
                     ),
                   ],
                 ),
               ),
               Text(
                 "14 articles",
-                style: TextStyle(
-                    fontSize: 14, color: Colours.lightThemePrimaryTextColor),
+                style: TextStyles.textMediumSmall.black,
               ),
             ],
           ),

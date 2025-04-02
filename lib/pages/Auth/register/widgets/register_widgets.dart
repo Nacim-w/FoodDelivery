@@ -4,7 +4,6 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 
 Widget goToLegal(Function()? func, String text, String type) {
@@ -81,8 +80,9 @@ Widget suggestLogin(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      reusableText(
+      Text(
         "Vous avez un compte ? ",
+        style: TextStyles.textMedium,
       ),
       goToSignIn(() => Navigator.of(context).pushNamed(AppRoutes.signIn)),
     ],
@@ -97,14 +97,16 @@ Widget registerForm(
       buildAutoSizeText(
         'Créez votre nouveau compte',
       ),
-      buildSlogan(
+      Text(
         "Créez un compte pour commencer à chercher les plats que vous aimez.",
+        style: TextStyles.textMedium.grey,
       ),
       Gap(
         10,
       ),
-      reusableText(
+      Text(
         "Adresse e-mail",
+        style: TextStyles.textMedium,
       ),
       Gap(
         5,
@@ -116,7 +118,10 @@ Widget registerForm(
       Gap(
         20,
       ),
-      reusableText("Nom d'utilisateur"),
+      Text(
+        "Nom d'utilisateur",
+        style: TextStyles.textMedium,
+      ),
       Gap(
         5,
       ),
@@ -127,7 +132,10 @@ Widget registerForm(
       Gap(
         20,
       ),
-      reusableText("Mot de passe"),
+      Text(
+        "Mot de passe",
+        style: TextStyles.textMedium,
+      ),
       Gap(
         5,
       ),

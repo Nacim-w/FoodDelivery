@@ -6,7 +6,6 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 
 Widget logoutbutton(BuildContext context) {
   return Padding(
@@ -62,7 +61,7 @@ Widget content(BuildContext context) {
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
       ),
       Gap(25),
-      buildSlogan("Voulez-vous vous déconnecter ?"),
+      Text("Voulez-vous vous déconnecter ?", style: TextStyles.textMedium.grey),
       Gap(25),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -96,8 +96,9 @@ Widget otpForm(BuildContext context, bool canResend, int remainingSeconds,
     children: [
       Gap(30),
       buildAutoSizeText('Vérification par e-mail'),
-      buildSlogan(
-          "Entrez le code de vérification que nous vous avons envoyé à : ${maskEmail("AlbertsTEST@gmail.com")}"),
+      Text(
+          "Entrez le code de vérification que nous vous avons envoyé à : ${maskEmail("AlbertsTEST@gmail.com")}",
+          style: TextStyles.textMedium.grey),
       Gap(40),
       Center(
         child: Pinput(

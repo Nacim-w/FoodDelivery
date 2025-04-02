@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/widgets/common_widgets.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/common/res/styles/text.dart';
 
 Widget profileAvatar(String name, String email) {
   return Column(
     children: [
       profilePictureStack(Media.profileAvatar),
       Gap(10),
-      reusableText(
+      Text(
         name.toUpperCase(),
+        style: TextStyles.textMediumLarge,
       ),
-      buildSlogan(email),
+      Text(email, style: TextStyles.textMedium.grey),
     ],
   );
 }

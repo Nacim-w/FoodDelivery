@@ -97,7 +97,7 @@ Widget builtListView(BuildContext context) {
 Widget buildSectionTitle(String title) {
   return Padding(
     padding: EdgeInsets.only(top: 16, bottom: 8),
-    child: Text(title, style: TextStyles.textSemiBold),
+    child: Text(title, style: TextStyles.textBoldSmallest.black),
   );
 }
 
@@ -115,7 +115,7 @@ Widget buildListTile(
         icon,
       ),
     ),
-    title: Text(title, style: TextStyle(fontSize: 16)),
+    title: Text(title, style: TextStyles.textMedium.black),
     trailing: Icon(Icons.arrow_forward_ios,
         size: 16, color: Colours.lightThemePrimaryTextColor),
     onTap: onTap,

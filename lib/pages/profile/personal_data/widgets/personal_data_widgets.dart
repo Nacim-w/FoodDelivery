@@ -4,7 +4,6 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/widgets/common_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/profile/profile_settings/sections/profile_picture/profile_picture_widgets.dart';
 
@@ -18,23 +17,35 @@ Widget personalDataForm(BuildContext context) {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          reusableText("Nom complet"),
+          Text(
+            "Nom complet",
+            style: TextStyles.textMedium,
+          ),
           Gap(8),
           buildTextField("Nom complet", "email"),
           Gap(8),
-          reusableText("Date de naissance"),
+          Text(
+            "Date de naissance",
+            style: TextStyles.textMedium,
+          ),
           Gap(8),
           buildTextField("Date de naissance", "email"),
           Gap(8),
-          reusableText("Genre"),
+          Text(
+            "Genre",
+            style: TextStyles.textMedium,
+          ),
           Gap(8),
           buildTextField("Genre", "sex"),
           Gap(8),
-          reusableText("Téléphone"),
+          Text("Téléphone"),
           Gap(8),
           buildTextField("Téléphone", "email"),
           Gap(8),
-          reusableText("E-mail"),
+          Text(
+            "E-mail",
+            style: TextStyles.textMedium,
+          ),
           Gap(8),
           buildTextField("E-mail", "email"),
           Gap(40),

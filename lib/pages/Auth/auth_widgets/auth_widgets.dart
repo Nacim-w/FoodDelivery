@@ -88,13 +88,6 @@ Widget buildTextField(String hintText, String textType) {
   );
 }
 
-Widget buildSlogan(String slogan) {
-  return Text(
-    slogan,
-    style: TextStyles.textMedium.grey,
-  );
-}
-
 Widget buildLogInAndRegButton(BuildContext context, String buttonName,
     String buttonType, Function()? func) {
   return GestureDetector(
@@ -170,7 +163,10 @@ Widget buildSeperater(BuildContext context) {
         flex: 5,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: buildSlogan("Ou connectez-vous avec"),
+          child: Text(
+            "Ou connectez-vous avec",
+            style: TextStyles.textMedium.grey,
+          ),
         ),
       ),
       Flexible(
