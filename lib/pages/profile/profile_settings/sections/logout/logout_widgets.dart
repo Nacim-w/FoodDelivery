@@ -7,7 +7,7 @@ import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
 
-Widget logoutbutton(BuildContext context) {
+Widget outbutton(BuildContext context) {
   return Padding(
     padding: EdgeInsets.all(16),
     child: OutlinedButton.icon(
@@ -64,9 +64,9 @@ Widget content(BuildContext context) {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          logOutButton(
+          loggingOutButton(
               context, "Annuler", "annuler", () => Navigator.pop(context)),
-          logOutButton(
+          loggingOutButton(
             context,
             "Déconnexion",
             "deconnexion",
@@ -79,8 +79,8 @@ Widget content(BuildContext context) {
   );
 }
 
-Widget logOutButton(BuildContext context, String buttonName, String buttonType,
-    Function()? func) {
+Widget loggingOutButton(BuildContext context, String buttonName,
+    String buttonType, Function()? func) {
   return GestureDetector(
     onTap: func,
     child: Container(

@@ -36,7 +36,6 @@ Widget builtListView(BuildContext context) {
         ),
         buildListTile(Media.language, "Sélectionner la langue", context,
             () => showLanguageModal(context)),
-
         Gap(10),
         buildSectionTitle("Support"),
         buildListTile(
@@ -66,7 +65,8 @@ Widget builtListView(BuildContext context) {
             MaterialPageRoute(builder: (context) => const PersonalDataPage()),
           ),
         ),
-        // Logout Button
+        //do not touch  whats under this, I don't even know how its even working
+        outbutton(context),
         Padding(
           padding: EdgeInsets.all(16),
           child: OutlinedButton.icon(

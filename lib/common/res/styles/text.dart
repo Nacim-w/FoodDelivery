@@ -6,6 +6,43 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static const TextStyle titleBold = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24,
+  );
+  static const TextStyle textBoldLarge = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+  );
+  static const TextStyle textBold = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+  );
+  static const TextStyle textBoldSmall = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+  );
+  static const TextStyle textBoldSmallest = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 10,
+  );
+  static const TextStyle titleSemiBold = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+  );
+  static const TextStyle textSemiBoldLarge = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+  );
+  static const TextStyle textSemiBold = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+  );
+  static const TextStyle textSemiBoldSmall = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+  );
+
   static const TextStyle textMediumLarge = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 16,
@@ -18,27 +55,20 @@ abstract class TextStyles {
     fontWeight: FontWeight.w500,
     fontSize: 12,
   );
-
-  static const TextStyle textSemiBold = TextStyle(
-    fontWeight: FontWeight.w600,
+  static const TextStyle textRegularLarge = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+  );
+  static const TextStyle textRegular = TextStyle(
+    fontWeight: FontWeight.w400,
     fontSize: 14,
   );
-  static const TextStyle textSemiBoldSmall = TextStyle(
-    fontWeight: FontWeight.w600,
+  static const TextStyle textRegularSmall = TextStyle(
+    fontWeight: FontWeight.w400,
     fontSize: 12,
   );
-  static const TextStyle textBold = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 24,
+  static const TextStyle otpDefault = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.w500,
   );
-  static const TextStyle textBoldSmall = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 24,
-  );
-  static const TextStyle textBoldSmallest = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 12,
-  );
-  static const TextStyle otpDefault =
-      TextStyle(fontSize: 32, fontWeight: FontWeight.w500);
 }

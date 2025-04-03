@@ -11,6 +11,8 @@ class HelpCenterPage extends StatefulWidget {
 class _HelpCenterPageState extends State<HelpCenterPage> {
   @override
   Widget build(BuildContext context) {
-    return helpCenterForm(context);
+    return Scaffold(
+      body: helpCenterForm(context),
+    );
   }
 }

@@ -1,8 +1,7 @@
 Versions:
-Flutter 3.27.1 
-Dart 3.6.0
+Flutter  3.29.2
 
-
+Dart 3.7.2
 Packages:
 auto_size_text: ^3.0.0
 flutter_bloc: ^9.0.0
