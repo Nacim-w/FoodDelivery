@@ -4,6 +4,7 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
+import 'package:testing/pages/profile/help_center/help_center_page.dart';
 import 'package:testing/pages/profile/params/params_page.dart';
 import 'package:testing/pages/profile/personal_data/personal_data_page.dart';
 import 'package:testing/pages/profile/profile_settings/sections/logout/logout_widgets.dart';
@@ -44,7 +45,7 @@ Widget builtListView(BuildContext context) {
           context,
           () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PersonalDataPage()),
+            MaterialPageRoute(builder: (context) => const HelpCenterPage()),
           ),
         ),
         buildListTile(
