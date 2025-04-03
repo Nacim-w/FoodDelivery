@@ -11,12 +11,23 @@ abstract class Media {
   static const whatsapp = '$_baseIcon/whatsapp.png';
   static const email = '$_baseIcon/email.png';
 
-  static const language = '$_baseIcon/language.png';
-  static const parametre = '$_baseIcon/parametre.png';
-  static const personal = '$_baseIcon/personal.png';
-  static const help = '$_baseIcon/help.png';
-  static const deleteAccount = '$_baseIcon/garbage.png';
-  static const addAccount = '$_baseIcon/add_account.png';
+  static const language = '$_baseIcon/language.svg';
+  static const parametre = '$_baseIcon/parametre.svg';
+  static const personal = '$_baseIcon/profile.svg';
+  static const help = '$_baseIcon/help.svg';
+  static const deleteAccount = '$_baseIcon/garbage.svg';
+  static const addAccount = '$_baseIcon/add_account.svg';
+
+  static const home = '$_baseIcon/home.svg';
+  static const homeActive = '$_baseIcon/homeActive.svg';
+  static const search = '$_baseIcon/search.svg';
+  static const searchActive = '$_baseIcon/searchActive.svg';
+  static const orders = '$_baseIcon/orders.svg';
+  static const ordersActive = '$_baseIcon/ordersActive.svg';
+  static const reels = '$_baseIcon/reels.svg';
+  static const reelsActive = '$_baseIcon/reelsActive.svg';
+  static const guest = '$_baseIcon/guest.svg';
+  static const guestActive = '$_baseIcon/guestActive.svg';
 
   static const resetPasswordSuccess = '$_baseImage/resetPasswordSuccess.png';
   static const profileAvatar = '$_baseImage/profileAvatar.png';

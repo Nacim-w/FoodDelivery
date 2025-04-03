@@ -26,10 +26,8 @@ Widget logoutbutton(BuildContext context) {
           borderRadius: BorderRadius.circular(30),
         ),
       ),
-      icon:
-          Icon(Icons.logout, color: Colours.lightThemeOrangeSecondaryTextColor),
-      label: Text("Se déconnecter",
-          style: TextStyles.textSemiBold.orangeSecondary),
+      icon: Icon(Icons.logout, color: Colours.lightThemeOrangeTextColor),
+      label: Text("Se déconnecter", style: TextStyles.textSemiBold.orange),
     ),
   );
 }
@@ -90,7 +88,7 @@ Widget logOutButton(BuildContext context, String buttonName, String buttonType,
       height: 50,
       decoration: BoxDecoration(
         color: buttonType == "deconnexion"
-            ? Colours.lightThemeOrangeSecondaryTextColor
+            ? Colours.lightThemeOrangeTextColor
             : Colours.lightThemePrimaryColor,
         borderRadius: BorderRadius.all(
           Radius.circular(100),
@@ -124,7 +122,7 @@ Widget buildContinueButton(
       width: MediaQuery.of(context).size.width,
       height: 50,
       decoration: BoxDecoration(
-        color: Colours.lightThemeOrangeSecondaryTextColor,
+        color: Colours.lightThemeOrangeTextColor,
         borderRadius: BorderRadius.all(
           Radius.circular(100),
         ),

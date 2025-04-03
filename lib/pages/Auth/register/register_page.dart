@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:testing/pages/auth/register/widgets/register_widgets.dart';
-import 'package:testing/common/res/styles/colours.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -20,10 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colours.lightThemePrimaryColor,
-      appBar: AppBar(
-        backgroundColor: Colours.lightThemePrimaryColor,
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           horizontal: 20,

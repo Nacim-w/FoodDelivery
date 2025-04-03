@@ -7,6 +7,7 @@ import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/profile/params/params_page.dart';
 import 'package:testing/pages/profile/personal_data/personal_data_page.dart';
 import 'package:testing/pages/profile/profile_settings/sections/logout/logout_widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 Widget builtListView(BuildContext context) {
   return Expanded(
@@ -83,10 +84,9 @@ Widget builtListView(BuildContext context) {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            icon: Icon(Icons.logout,
-                color: Colours.lightThemeOrangeSecondaryTextColor),
-            label: Text("Se déconnecter",
-                style: TextStyles.textSemiBold.orangeSecondary),
+            icon: Icon(Icons.logout, color: Colours.lightThemeOrangeTextColor),
+            label:
+                Text("Se déconnecter", style: TextStyles.textSemiBold.orange),
           ),
         ),
       ],
@@ -109,10 +109,14 @@ Widget buildListTile(
       height: 25,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: Colours.lightThemeWhiteIconColor,
+        color: Color(0xFFFEE1CF),
       ),
-      child: Image.asset(
-        icon,
+      child: Center(
+        child: SvgPicture.asset(
+          width: 15,
+          height: 17,
+          icon,
+        ),
       ),
     ),
     title: Text(title, style: TextStyles.textMedium.black),

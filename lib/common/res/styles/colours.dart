@@ -13,8 +13,6 @@ abstract class Colours {
   // lightThemeOrangeTextColor Color Switch
   static const Color lightThemeOrangeTextColor = Color(0xffff7300);
 
-  static const Color lightThemeOrangeSecondaryTextColor = Color(0xfffe8c00);
-
   // lightThemeBorderColor Color Switch
 
   static const Color lightThemeBorderColor = Color(0xffd6d6d6);

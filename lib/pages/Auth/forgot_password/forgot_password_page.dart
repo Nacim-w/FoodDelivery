@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/pages/auth/forgot_password/widgets/forgot_password_widgets.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -13,10 +12,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colours.lightThemePrimaryColor,
-      appBar: AppBar(
-        backgroundColor: Colours.lightThemePrimaryColor,
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           horizontal: 20,

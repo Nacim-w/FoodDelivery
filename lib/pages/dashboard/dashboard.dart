@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
+import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/dashboard/bloc/dashboard_bloc.dart';
 import 'package:testing/pages/dashboard/bloc/dashboard_events.dart';
 import 'package:testing/pages/dashboard/bloc/dashboard_states.dart';
@@ -19,35 +21,19 @@ class _DashboardPageState extends State<DashboardPage> {
     return BlocBuilder<DashboardBloc, DashboardStates>(
         builder: (context, state) {
       return Scaffold(
+        extendBody: true,
         body: buildPage(state.index, context),
-        bottomNavigationBar: Container(
-          width: 375,
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            boxShadow: [
-              BoxShadow(
-                // ignore: deprecated_member_use
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 1,
-              ),
-            ],
-          ),
-          child: BottomNavigationBar(
-            currentIndex: state.index,
-            onTap: (value) {
-              context.read<DashboardBloc>().add(TriggerDashboard(value));
-            },
-            selectedItemColor: Colours.lightThemeOrangeSecondaryTextColor,
-            elevation: 2,
-            showUnselectedLabels: false,
-            type: BottomNavigationBarType.fixed,
-            items: bottomTabs,
-          ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: state.index,
+          onTap: (value) {
+            context.read<DashboardBloc>().add(TriggerDashboard(value));
+          },
+          selectedItemColor: Colours.lightThemeOrangeTextColor,
+          elevation: 5,
+          showUnselectedLabels: false,
+          selectedLabelStyle: TextStyles.textBoldSmallest.orange,
+          type: BottomNavigationBarType.fixed,
+          items: bottomTabs,
         ),
       );
     });

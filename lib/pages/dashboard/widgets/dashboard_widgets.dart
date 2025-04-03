@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:testing/common/res/media.dart';
+import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/pages/profile/profile_settings/widgets/profile_settings_widgets.dart';
 
 Widget buildPage(int index, BuildContext context) {
@@ -14,78 +17,61 @@ Widget buildPage(int index, BuildContext context) {
 
 var bottomTabs = [
   BottomNavigationBarItem(
-    label: "home",
-    icon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset("assets/icons/home.png"),
-    ),
-    activeIcon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset(
-        "assets/icons/home.png",
-      ),
-    ),
+    label: "Home",
+    icon: inactiveIcon(Media.home),
+    activeIcon: activeIcon(Media.homeActive, "Home"),
+  ),
+  BottomNavigationBarItem(
+    label: "Orders",
+    icon: inactiveIcon(Media.orders),
+    activeIcon: activeIcon(Media.ordersActive, "Orders"),
   ),
   BottomNavigationBarItem(
     label: "Search",
-    icon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset("assets/icons/notes.png"),
-    ),
-    activeIcon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset(
-        "assets/icons/notes.png",
-      ),
-    ),
+    icon: inactiveIcon(Media.search),
+    activeIcon: activeIcon(Media.searchActive, "Search"),
   ),
   BottomNavigationBarItem(
-    label: "Course",
-    icon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset("assets/icons/search.png"),
-    ),
-    activeIcon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset(
-        "assets/icons/search.png",
-      ),
-    ),
-  ),
-  BottomNavigationBarItem(
-    label: "Chat",
-    icon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset("assets/icons/reels.png"),
-    ),
-    activeIcon: SizedBox(
-      width: 15,
-      height: 15,
-      child: Image.asset(
-        "assets/icons/reels.png",
-      ),
-    ),
+    label: "Reels",
+    icon: inactiveIcon(Media.reels),
+    activeIcon: activeIcon(Media.reelsActive, "Reels"),
   ),
   BottomNavigationBarItem(
     label: "Profile",
-    icon: SizedBox(
-      width: 25,
-      height: 25,
-      child: Image.asset("assets/images/avatar.png"),
-    ),
-    activeIcon: SizedBox(
-      width: 25,
-      height: 25,
-      child: Image.asset(
-        "assets/images/avatar.png",
-      ),
-    ),
+    icon: inactiveIcon(Media.guest),
+    activeIcon: activeIcon(Media.guestActive, "Profile"),
   ),
 ];
+
+Widget inactiveIcon(icon) {
+  return SizedBox(
+    width: 20,
+    height: 20,
+    child: SvgPicture.asset(
+      icon,
+    ),
+  );
+}
+
+Widget activeIcon(String icon, String label) {
+  return Column(
+    children: [
+      Transform.translate(
+        offset: Offset(0, -15),
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colours.lightThemeOrangeTextColor,
+          ),
+          width: 40,
+          height: 40,
+          child: Center(
+            child: SvgPicture.asset(
+              icon,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}

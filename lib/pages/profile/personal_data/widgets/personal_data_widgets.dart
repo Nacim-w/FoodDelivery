@@ -64,7 +64,7 @@ Widget continueButton(BuildContext context, String buttonName,
       width: MediaQuery.of(context).size.width,
       height: 50,
       decoration: BoxDecoration(
-        color: Colours.lightThemeOrangeSecondaryTextColor,
+        color: Colours.lightThemeOrangeTextColor,
         borderRadius: BorderRadius.all(
           Radius.circular(100),
         ),

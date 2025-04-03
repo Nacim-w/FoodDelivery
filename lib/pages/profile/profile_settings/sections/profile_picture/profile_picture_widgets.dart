@@ -43,7 +43,7 @@ Widget profilePictureStack(String picture) {
           ),
           child: Icon(
             Icons.camera_alt_rounded,
-            color: Colours.lightThemeOrangeSecondaryTextColor,
+            color: Colours.lightThemeOrangeTextColor,
             size: 14,
           ),
         ),

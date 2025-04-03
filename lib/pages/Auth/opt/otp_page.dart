@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/opt/widgets/otp_widgets.dart';
 
@@ -56,7 +55,6 @@ class _OtpPageState extends State<OtpPage> {
         centerTitle: true,
         title: const Text('OTP', style: TextStyles.textSemiBold),
       ),
-      backgroundColor: Colours.lightThemePrimaryColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),

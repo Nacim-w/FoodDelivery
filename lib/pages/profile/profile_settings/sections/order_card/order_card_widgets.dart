@@ -53,7 +53,7 @@ Widget ordersContainer(BuildContext context) {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Colours.lightThemeOrangeSecondaryTextColor,
+                  color: Colours.lightThemeOrangeTextColor,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text("En cours de livraison",
