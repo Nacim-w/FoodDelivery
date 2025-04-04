@@ -88,20 +88,7 @@ Widget helpCenterForm(BuildContext context) {
           const Gap(40),
           searchBar(),
           const Gap(50),
-          Row(
-            children: [
-              Text(
-                "Questions principales",
-                style: TextStyles.textSemiBoldLarge,
-              ),
-              Gap(MediaQuery.of(context).size.width * 0.34),
-              Text(
-                "Voir tout",
-                style: TextStyles.textBold.copyWith(color: Colors.red),
-              ),
-            ],
-          ),
-          builtAnimatedContainer(context),
+          buildAnimatedContainer(context),
         ],
       ),
     ),
@@ -130,7 +117,7 @@ Widget searchBar() {
   );
 }
 
-Widget builtAnimatedContainer(BuildContext context) {
+Widget buildAnimatedContainer(BuildContext context) {
   return SizedBox(
     height: MediaQuery.of(context).size.height * 0.6,
     child: ListView(
@@ -160,5 +147,21 @@ Widget buildExpendableTile(String title, String description) {
         ),
       ),
     ),
+  );
+}
+
+Widget buildHelpTitle() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        "Questions principales",
+        style: TextStyles.textSemiBoldLarge,
+      ),
+      Text(
+        "Voir tout",
+        style: TextStyles.textBold.copyWith(color: Colors.red),
+      ),
+    ],
   );
 }

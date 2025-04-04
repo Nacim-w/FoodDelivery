@@ -179,3 +179,10 @@ Widget buildSeperater(BuildContext context) {
     ],
   );
 }
+
+Widget goToLegal(Function()? func, String text, String type) {
+  return GestureDetector(
+    onTap: func,
+    child: Text(text, style: TextStyles.textSemiBold.orange),
+  );
+}

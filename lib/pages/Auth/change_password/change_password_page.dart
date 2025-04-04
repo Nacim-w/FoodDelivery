@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/change_password/widgets/change_password_widgets.dart';
+import 'package:testing/pages/auth/change_password/widgets/change_pass_form_widget.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -18,7 +18,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         title: const Text('Réinitialiser le mot de passe',
             style: TextStyles.textSemiBold),
       ),
-      body: changePasswordForm(context),
+      body: ChangePasswordForm(),
     );
   }
 }

@@ -5,13 +5,6 @@ import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/auth/opt/otp_page.dart';
 
-Widget goToLegal(Function()? func, String text, String type) {
-  return GestureDetector(
-    onTap: func,
-    child: Text(text, style: TextStyles.textSemiBold.orange),
-  );
-}
-
 Widget forgotPasswordForm(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
