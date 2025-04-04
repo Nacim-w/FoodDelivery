@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/profile/params/widgets/params_widgets.dart';
+import 'package:testing/pages/profile/params/widgets/params_form_widget.dart';
 
 class Params extends StatefulWidget {
   const Params({super.key});

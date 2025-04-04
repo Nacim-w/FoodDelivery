@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/auth/sign_in/widgets/sign_in_widgets.dart';
+import 'package:testing/pages/auth/sign_in/widgets/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -17,7 +17,7 @@ class _SignInPageState extends State<SignInPage> {
         padding: EdgeInsets.symmetric(
           horizontal: 30,
         ),
-        child: signInForm(context),
+        child: SignInForm(),
       ),
     );
   }

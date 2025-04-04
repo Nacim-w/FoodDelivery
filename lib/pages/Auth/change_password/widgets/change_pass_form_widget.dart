@@ -23,7 +23,8 @@ class ChangePasswordForm extends StatelessWidget {
           const Gap(20),
           const Text("Nouveau mot de passe"),
           const Gap(5),
-          buildTextField("Nouveau mot de passe", "password"),
+          BuildTextField(
+              hintText: "Nouveau mot de passe", textType: "password"),
           const Gap(5),
           Text(
             "Doit contenir au moins 8 caractères",
@@ -35,7 +36,8 @@ class ChangePasswordForm extends StatelessWidget {
             style: TextStyles.textMedium,
           ),
           const Gap(5),
-          buildTextField("Confirmer le mot de passe", "password"),
+          BuildTextField(
+              hintText: "Confirmer le mot de passe", textType: "password"),
           const Gap(5),
           Text(
             "Les deux mots de passe doivent correspondre.",

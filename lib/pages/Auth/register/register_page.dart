@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/auth/register/widgets/register_widgets.dart';
+import 'package:testing/pages/auth/register/widgets/register_form_widget.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -21,11 +21,10 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
-        child: registerForm(context, isChecked, handleCheckboxChange),
-      ),
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: RegisterForm()),
     );
   }
 }

@@ -11,6 +11,6 @@ class ProfileSettingsPage extends StatefulWidget {
 class _ProfileSettingsState extends State<ProfileSettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return profileSettingsform(context);
+    return ProfileSettingsForm();
   }
 }

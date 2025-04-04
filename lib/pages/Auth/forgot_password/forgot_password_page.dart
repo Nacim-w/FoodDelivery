@@ -17,7 +17,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         padding: EdgeInsets.symmetric(
           horizontal: 20,
         ),
-        child: forgotPasswordForm(context),
+        child: ForgotPasswordForm(),
       ),
     );
   }

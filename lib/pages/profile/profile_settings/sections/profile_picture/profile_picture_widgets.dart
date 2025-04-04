@@ -5,18 +5,26 @@ import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 
-Widget profileAvatar(String name, String email) {
-  return Column(
-    children: [
-      profilePictureStack(Media.profileAvatar),
-      Gap(10),
-      Text(
-        name.toUpperCase(),
-        style: TextStyles.textMediumLarge,
-      ),
-      Text(email, style: TextStyles.textMedium.grey),
-    ],
-  );
+class ProfileAvatar extends StatelessWidget {
+  final String name;
+  final String email;
+
+  const ProfileAvatar({super.key, required this.name, required this.email});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        profilePictureStack(Media.profileAvatar),
+        Gap(10),
+        Text(
+          name.toUpperCase(),
+          style: TextStyles.textMediumLarge,
+        ),
+        Text(email, style: TextStyles.textMedium.grey),
+      ],
+    );
+  }
 }
 
 Widget profilePictureStack(String picture) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/profile/personal_data/widgets/personal_data_widgets.dart';
+import 'package:testing/pages/profile/personal_data/widgets/personal_data_form_widget.dart';
 
 class PersonalDataPage extends StatefulWidget {
   const PersonalDataPage({super.key});
@@ -19,7 +19,7 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: personalDataForm(context),
+        child: PersonalDataForm(),
       ),
     );
   }

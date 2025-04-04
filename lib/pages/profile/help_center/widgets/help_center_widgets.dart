@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
 
 class ExpandableTile extends StatefulWidget {
   final Widget title;
@@ -72,96 +70,4 @@ class _ExpandableTileState extends State<ExpandableTile> {
       ),
     );
   }
-}
-
-Widget helpCenterForm(BuildContext context) {
-  return SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-      ),
-      child: Column(
-        children: [
-          const Gap(50),
-          Text("Comment pouvons-nous vous aider ?",
-              style: TextStyles.textSemiBoldLarge),
-          const Gap(40),
-          searchBar(),
-          const Gap(50),
-          buildAnimatedContainer(context),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget searchBar() {
-  return TextField(
-    decoration: InputDecoration(
-      hintText: 'Search...',
-      prefixIcon: const Icon(Icons.search),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: const BorderSide(
-            color: Colours.lightThemeOrangeTextColor, width: 2.0),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide:
-            const BorderSide(color: Colours.lightThemeInactiveBorderColor),
-      ),
-    ),
-  );
-}
-
-Widget buildAnimatedContainer(BuildContext context) {
-  return SizedBox(
-    height: MediaQuery.of(context).size.height * 0.6,
-    child: ListView(
-      children: [
-        buildExpendableTile("Comment créer un compte ?", "Work on progress"),
-        buildExpendableTile(
-            "Quels moyens de paiement sont acceptés ?", "Work on progress"),
-        buildExpendableTile(
-            "Que faire si ma commande est en retard ?", "Work on progress"),
-        buildExpendableTile(
-            "Comment modifier mon adresse de livraison ?", "Work on progress"),
-      ],
-    ),
-  );
-}
-
-Widget buildExpendableTile(String title, String description) {
-  return ExpandableTile(
-    title: Text(title, style: TextStyles.textSemiBold),
-    detailsBuilder: (context) => Container(
-      padding: const EdgeInsets.all(10),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          description,
-          style: TextStyles.textMedium.grey,
-        ),
-      ),
-    ),
-  );
-}
-
-Widget buildHelpTitle() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        "Questions principales",
-        style: TextStyles.textSemiBoldLarge,
-      ),
-      Text(
-        "Voir tout",
-        style: TextStyles.textBold.copyWith(color: Colors.red),
-      ),
-    ],
-  );
 }

@@ -13,79 +13,97 @@ Widget buildAutoSizeText(String text) {
   );
 }
 
-Widget buildTextField(String hintText, String textType) {
-  bool obscureText = textType == "password";
+class BuildTextField extends StatefulWidget {
+  final String hintText;
+  final String textType;
 
-  return StatefulBuilder(
-    builder: (context, setState) {
-      return Container(
-        alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.07,
-        decoration: BoxDecoration(
-          color: Colours.lightThemePrimaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          border: Border.all(color: Colours.lightThemeBorderColor),
-        ),
-        child: TextField(
-          keyboardType: textType == "password"
-              ? TextInputType.text
-              : TextInputType.multiline,
-          decoration: InputDecoration(
-            hintText: hintText,
-            contentPadding: EdgeInsets.fromLTRB(15, 0, 5, 0),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              ),
+  const BuildTextField({
+    super.key,
+    required this.hintText,
+    required this.textType,
+  });
+
+  @override
+  State<BuildTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<BuildTextField> {
+  bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    obscureText = widget.textType == "password";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.07,
+      decoration: BoxDecoration(
+        color: Colours.lightThemePrimaryColor,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        border: Border.all(color: Colours.lightThemeBorderColor),
+      ),
+      child: TextField(
+        keyboardType: widget.textType == "password"
+            ? TextInputType.text
+            : TextInputType.multiline,
+        decoration: InputDecoration(
+          hintText: widget.hintText,
+          contentPadding: EdgeInsets.fromLTRB(15, 0, 5, 0),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.transparent,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              ),
-            ),
-            hintStyle: TextStyle(
-              color: Colours.lightThemeSecondaryTextColor,
-            ),
-            suffixIcon: textType == "password"
-                ? IconButton(
-                    icon: Icon(
-                      obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: Colours.lightThemePrimaryTextColor,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                  )
-                : textType == "sex"
-                    ? Icon(
-                        Icons.arrow_drop_down,
-                        color: Colours.lightThemePrimaryTextColor,
-                      )
-                    : null, // No icon for other types
           ),
-          style: TextStyles.textMedium.black,
-          autocorrect: false,
-          obscureText: obscureText, // Toggle the visibility
-          readOnly:
-              textType == "sex", // Prevents manual text input for dropdown
-          onTap: textType == "sex" ? () {} : null,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          hintStyle: TextStyle(
+            color: Colours.lightThemeSecondaryTextColor,
+          ),
+          suffixIcon: widget.textType == "password"
+              ? IconButton(
+                  icon: Icon(
+                    obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colours.lightThemePrimaryTextColor,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                )
+              : widget.textType == "sex"
+                  ? Icon(
+                      Icons.arrow_drop_down,
+                      color: Colours.lightThemePrimaryTextColor,
+                    )
+                  : null,
         ),
-      );
-    },
-  );
+        style: TextStyles.textMedium.black,
+        autocorrect: false,
+        obscureText: obscureText,
+        readOnly: widget.textType == "sex",
+        onTap: widget.textType == "sex" ? () {} : null,
+      ),
+    );
+  }
 }
 
 Widget buildLogInAndRegButton(BuildContext context, String buttonName,

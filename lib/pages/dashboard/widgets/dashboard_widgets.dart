@@ -6,11 +6,11 @@ import 'package:testing/pages/profile/profile_settings/widgets/profile_settings_
 
 Widget buildPage(int index, BuildContext context) {
   List<Widget> widget = [
-    profileSettingsform(context),
+    ProfileSettingsForm(),
     Center(child: Text("test2")),
     Center(child: Text("test3")),
     Center(child: Text("test4")),
-    profileSettingsform(context),
+    ProfileSettingsForm()
   ];
   return widget[index];
 }

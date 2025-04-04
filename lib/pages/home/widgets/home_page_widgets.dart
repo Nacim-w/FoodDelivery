@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:testing/common/res/media.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -10,8 +12,8 @@ AppBar buildAppBar() {
           child: SizedBox(
             width: 25,
             height: 25,
-            child: Image.asset(
-              "assets/icons/menu.png",
+            child: SvgPicture.asset(
+              Media.orders,
             ),
           ),
         ),
