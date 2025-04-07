@@ -54,6 +54,13 @@ class AppPages {
         ),
       ),
       PageEntity(
+        route: AppRoutes.forgotPassword,
+        page: const ForgotPasswordPage(),
+        bloc: BlocProvider(
+          create: (_) => HomeBlocs(),
+        ),
+      ),
+      PageEntity(
         route: AppRoutes.profileSettings,
         page: const ProfileSettingsPage(),
         bloc: BlocProvider(

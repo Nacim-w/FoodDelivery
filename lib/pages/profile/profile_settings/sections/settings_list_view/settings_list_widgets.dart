@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/profile/help_center/help_center_page.dart';
+import 'package:testing/common/routes/names.dart';
 import 'package:testing/pages/profile/params/params_page.dart';
 import 'package:testing/pages/profile/personal_data/personal_data_page.dart';
 import 'package:testing/pages/profile/profile_settings/sections/logout/logout_widgets.dart';
@@ -51,10 +52,7 @@ class BuiltListView extends StatelessWidget {
             BuildListTile(
               icon: Media.help,
               title: "Centre d'aide",
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HelpCenterPage()),
-              ),
+              onTap: () => context.push(Routes.nestedHelpCenterPage),
             ),
             BuildListTile(
               icon: Media.deleteAccount,

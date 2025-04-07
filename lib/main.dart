@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing/common/routes/pages.dart';
+import 'package:testing/common/routes/router.dart';
 import 'package:testing/global.dart';
 
 void main() async {
@@ -14,11 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [...AppPages.allBlocProviders(context)],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light),
         themeMode: ThemeMode.light,
-        onGenerateRoute: AppPages.generateRouteSettings,
       ),
     );
   }
