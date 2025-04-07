@@ -6,9 +6,9 @@ import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
 import 'package:testing/pages/auth/auth_widgets/build_seperator_widget.dart';
 import 'package:testing/pages/auth/auth_widgets/thirdparty_login_widget.dart';
-import 'package:testing/pages/auth/register/widgets/checkbox_widget.dart';
-import 'package:testing/pages/auth/register/widgets/confidential_text_widget.dart';
-import 'package:testing/pages/auth/register/widgets/suggest_login_widget.dart';
+import 'package:testing/pages/auth/sign_up/widgets/checkbox_widget.dart';
+import 'package:testing/pages/auth/sign_up/widgets/confidential_text_widget.dart';
+import 'package:testing/pages/auth/sign_up/widgets/suggest_login_widget.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});

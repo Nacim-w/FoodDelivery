@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
@@ -15,11 +16,7 @@ class SuggestRegister extends StatelessWidget {
           "Vous n'avez pas de compte ? ",
         ),
         GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              AppRoutes.register,
-            );
-          },
+          onTap: () => context.go(Routes.signUpPage),
           child: Text(
             "S'inscrire",
             textAlign: TextAlign.right,

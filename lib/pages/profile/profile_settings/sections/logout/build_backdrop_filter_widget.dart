@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
@@ -52,11 +53,9 @@ Widget content(BuildContext context) {
             func: () => Navigator.pop(context),
           ),
           ConfirmOutButton(
-            buttonName: "Déconnexion",
-            buttonType: "deconnexion",
-            func: () => Navigator.of(context)
-                .pushNamedAndRemoveUntil(AppRoutes.signIn, (route) => false),
-          ),
+              buttonName: "Déconnexion",
+              buttonType: "deconnexion",
+              func: () => context.go(Routes.signInPage)),
         ],
       )
     ],

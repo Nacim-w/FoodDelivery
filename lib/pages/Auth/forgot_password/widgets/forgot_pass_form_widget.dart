@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
+import 'package:testing/common/routes/names.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/opt/otp_page.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({super.key});
@@ -31,13 +32,7 @@ class ForgotPasswordForm extends StatelessWidget {
         BuildLogInAndRegButton(
           "Continue",
           "forgotPassword",
-          () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => OtpPage(),
-              ),
-            );
-          },
+          () => context.go(Routes.otpPage),
         )
       ],
     );

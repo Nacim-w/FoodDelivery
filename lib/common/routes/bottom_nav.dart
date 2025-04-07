@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/destinations.dart';
+import 'package:testing/common/routes/bottom_nav_routes.dart';
 
 class LayoutScaffold extends StatelessWidget {
   const LayoutScaffold({

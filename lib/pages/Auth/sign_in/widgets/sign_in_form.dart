@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
@@ -8,7 +9,6 @@ import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
 import 'package:testing/pages/auth/auth_widgets/build_seperator_widget.dart';
 import 'package:testing/pages/auth/auth_widgets/thirdparty_login_widget.dart';
 import 'package:testing/pages/auth/sign_in/widgets/suggest_register_widget.dart';
-import 'package:testing/pages/home/home_page.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({super.key});
@@ -42,16 +42,7 @@ class SignInForm extends StatelessWidget {
         Gap(20),
         _forgotPassword(context),
         BuildLogInAndRegButton(
-          "Se connecter",
-          "login",
-          () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
-          },
-        ),
+            "Se connecter", "login", () => context.go(Routes.homePage)),
         Gap(20),
         BuildSeperater(),
         BuildThirdPartyLogin(),
@@ -67,8 +58,7 @@ Widget _forgotPassword(BuildContext context) {
     width: MediaQuery.of(context).size.width * 0.9,
     height: 44,
     child: GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamedAndRemoveUntil(AppRoutes.forgotPassword, (route) => false),
+      onTap: () => context.go(Routes.forgotPasswordPage),
       child: Text(
         "Mot de passe oublié?",
         textAlign: TextAlign.right,

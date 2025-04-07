@@ -1,5 +1,5 @@
-import 'package:testing/pages/auth/register/bloc/register_events.dart';
-import 'package:testing/pages/auth/register/bloc/register_states.dart';
+import 'package:testing/pages/auth/sign_up/bloc/register_events.dart';
+import 'package:testing/pages/auth/sign_up/bloc/register_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {

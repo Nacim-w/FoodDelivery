@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:testing/pages/profile/params/widgets/params_form_widget.dart';
 
-class Params extends StatefulWidget {
-  const Params({super.key});
+class ParamsPage extends StatefulWidget {
+  const ParamsPage({super.key});
 
   @override
-  State<Params> createState() => _ParamsState();
+  State<ParamsPage> createState() => _ParamsState();
 }
 
-class _ParamsState extends State<Params> {
+class _ParamsState extends State<ParamsPage> {
   @override
   Widget build(BuildContext context) {
     return ParamsForm();

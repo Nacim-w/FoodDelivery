@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/routes/names.dart';
@@ -37,12 +38,7 @@ class CustomModal extends StatelessWidget {
             BuildLogInAndRegButton(
               "Verify Account",
               "verify",
-              () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  AppRoutes.homePage,
-                  (route) => false,
-                );
-              },
+              () => context.go(Routes.homePage),
             ),
           ],
         ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
+import 'package:testing/common/routes/names.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/change_password/change_password_page.dart';
 import 'package:testing/pages/auth/opt/widgets/otp_widgets.dart';
 
 class OtpForm extends StatefulWidget {
@@ -51,13 +52,7 @@ class _OtpFormState extends State<OtpForm> {
         BuildLogInAndRegButton(
           "Continuer",
           "continuer",
-          () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => ChangePasswordPage(),
-              ),
-            );
-          },
+          () => context.go(Routes.changePasswordPage),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
@@ -16,7 +17,7 @@ class SuggestLogin extends StatelessWidget {
           style: TextStyles.textMedium,
         ),
         GestureDetector(
-          onTap: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
+          onTap: () => context.go(Routes.signInPage),
           child: Text(
             "Se Connecter",
             textAlign: TextAlign.right,
