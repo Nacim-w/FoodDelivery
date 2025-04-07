@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/opt/widgets/otp_widgets.dart';
+import 'package:testing/pages/auth/opt/widgets/otp_form_widget.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
 
   @override
-  State<OtpPage> createState() => _OtpPageState();
+  State<OtpPage> createState() => OtpPageState();
 }
 
-class _OtpPageState extends State<OtpPage> {
-  int _remainingSeconds = 600;
-  Timer? _timer;
-  bool _canResend = false;
+class OtpPageState extends State<OtpPage> {
+  int remainingSeconds = 600;
+  Timer? timer;
+  bool canResend = false;
 
   @override
   void initState() {
@@ -23,28 +23,28 @@ class _OtpPageState extends State<OtpPage> {
 
   void startTimer() {
     setState(() {
-      _canResend = false;
-      _remainingSeconds = 20;
+      canResend = false;
+      remainingSeconds = 20;
     });
 
-    _timer?.cancel();
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (_remainingSeconds > 0) {
+    timer?.cancel();
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (remainingSeconds > 0) {
         setState(() {
-          _remainingSeconds--;
+          remainingSeconds--;
         });
       } else {
         setState(() {
-          _canResend = true;
+          canResend = true;
         });
-        _timer?.cancel();
+        timer.cancel();
       }
     });
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -58,7 +58,11 @@ class _OtpPageState extends State<OtpPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
-          child: otpForm(context, _canResend, _remainingSeconds, startTimer),
+          child: OtpForm(
+            canResend: canResend,
+            remainingSeconds: remainingSeconds,
+            startTimer: startTimer,
+          ),
         ),
       ),
     );

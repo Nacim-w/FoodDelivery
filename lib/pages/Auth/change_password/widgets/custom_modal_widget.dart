@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
 import 'package:testing/pages/auth/change_password/widgets/build_succ_slog_widget.dart';
 import 'package:testing/pages/auth/change_password/widgets/build_succ_txt_widget.dart';
 
@@ -34,8 +34,7 @@ class CustomModal extends StatelessWidget {
             BuildSuccessSlogan(
                 "Mot de passe modifié. Connectez-vous avec le nouveau."),
             const Gap(20),
-            buildLogInAndRegButton(
-              context,
+            BuildLogInAndRegButton(
               "Verify Account",
               "verify",
               () {

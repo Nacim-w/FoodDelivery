@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:testing/common/res/media.dart';
+import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+
+class BuildThirdPartyLogin extends StatelessWidget {
+  const BuildThirdPartyLogin({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: 300,
+        margin: EdgeInsets.only(top: 20, bottom: 10),
+        padding: EdgeInsets.only(left: 0, right: 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            reusableIcons(Media.google),
+            reusableIcons(Media.facebook),
+            reusableIcons(Media.apple),
+          ],
+        ),
+      ),
+    );
+  }
+}

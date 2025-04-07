@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
 import 'package:testing/pages/auth/change_password/widgets/custom_modal_widget.dart';
 
 class ChangePasswordForm extends StatelessWidget {
@@ -44,8 +45,8 @@ class ChangePasswordForm extends StatelessWidget {
             style: TextStyles.textMedium.grey,
           ),
           Gap(MediaQuery.of(context).size.height * 0.20),
-          buildLogInAndRegButton(context, "Changer mot de passe", "Verify",
-              () => showCustomModal(context)),
+          BuildLogInAndRegButton(
+              "Changer mot de passe", "Verify", () => showCustomModal(context)),
         ],
       ),
     );

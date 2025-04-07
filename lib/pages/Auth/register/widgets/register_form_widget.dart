@@ -3,6 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:testing/pages/auth/auth_widgets/build_seperator_widget.dart';
+import 'package:testing/pages/auth/auth_widgets/thirdparty_login_widget.dart';
 import 'package:testing/pages/auth/register/widgets/checkbox_widget.dart';
 import 'package:testing/pages/auth/register/widgets/confidential_text_widget.dart';
 import 'package:testing/pages/auth/register/widgets/suggest_login_widget.dart';
@@ -89,12 +92,12 @@ class _RegisterFormState extends State<RegisterForm> {
         Gap(
           20,
         ),
-        buildLogInAndRegButton(context, "S'inscrire", "register", () {}),
+        BuildLogInAndRegButton("S'inscrire", "register", () {}),
         Gap(
           20,
         ),
-        buildSeperater(context),
-        buildThirdPartyLogin(context),
+        BuildSeperater(),
+        BuildThirdPartyLogin(),
         Gap(
           20,
         ),

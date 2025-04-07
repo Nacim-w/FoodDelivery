@@ -4,6 +4,9 @@ import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
 import 'package:testing/common/routes/names.dart';
+import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:testing/pages/auth/auth_widgets/build_seperator_widget.dart';
+import 'package:testing/pages/auth/auth_widgets/thirdparty_login_widget.dart';
 import 'package:testing/pages/auth/sign_in/widgets/suggest_register_widget.dart';
 import 'package:testing/pages/home/home_page.dart';
 
@@ -38,8 +41,7 @@ class SignInForm extends StatelessWidget {
         ),
         Gap(20),
         _forgotPassword(context),
-        buildLogInAndRegButton(
-          context,
+        BuildLogInAndRegButton(
           "Se connecter",
           "login",
           () {
@@ -51,10 +53,8 @@ class SignInForm extends StatelessWidget {
           },
         ),
         Gap(20),
-        buildSeperater(context),
-        buildThirdPartyLogin(
-          context,
-        ),
+        BuildSeperater(),
+        BuildThirdPartyLogin(),
         Gap(20),
         SuggestRegister(),
       ],

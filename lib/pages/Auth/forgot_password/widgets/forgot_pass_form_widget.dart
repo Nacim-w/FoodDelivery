@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
 import 'package:testing/pages/auth/opt/otp_page.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
@@ -27,8 +28,7 @@ class ForgotPasswordForm extends StatelessWidget {
           textType: "email",
         ),
         Gap(MediaQuery.of(context).size.height * 0.16),
-        buildLogInAndRegButton(
-          context,
+        BuildLogInAndRegButton(
           "Continue",
           "forgotPassword",
           () {
