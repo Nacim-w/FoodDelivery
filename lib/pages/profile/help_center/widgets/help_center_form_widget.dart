@@ -22,27 +22,14 @@ class HelpCenterForm extends StatelessWidget {
             const Gap(40),
             BuildSearchBar(),
             const Gap(40),
-            buildHelpTitle(),
+            Text(
+              "Questions principales",
+              style: TextStyles.textSemiBoldLarge,
+            ),
             BuildAnimatedContainer(),
           ],
         ),
       ),
     );
   }
-}
-
-Widget buildHelpTitle() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        "Questions principales",
-        style: TextStyles.textSemiBoldLarge,
-      ),
-      Text(
-        "Voir tout",
-        style: TextStyles.textBold.copyWith(color: Colors.red),
-      ),
-    ],
-  );
 }

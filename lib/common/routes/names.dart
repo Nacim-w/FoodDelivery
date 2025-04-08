@@ -7,7 +7,9 @@ class Routes {
   static const profilePage = "/profile";
   static const helpCenterPage = "helpCenter";
   static const nestedHelpCenterPage = "/profile/helpCenter";
-  static const placeHolderPage = "/placeHolder";
+  static const errorPage = "/error";
+  static const errorPage2 = "error2";
+  static const nestedErrorPage2 = "/profile/error2";
   static const personalDataPage = "personalDataPage";
   static const nestedPersonalDataPage = "/profile/personalDataPage";
   static const signUpPage = "/signUpPage";

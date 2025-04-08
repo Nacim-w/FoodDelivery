@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/_placeholder.dart';
+import 'package:testing/pages/error/errorPage.dart';
 import 'package:testing/common/routes/bottom_nav.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/pages/auth/change_password/change_password_page.dart';
@@ -36,7 +36,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.ordersPage,
-              builder: (context, state) => const PlaceHolderPage(),
+              builder: (context, state) => const ErrorPage(),
             ),
           ],
         ),
@@ -44,7 +44,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.searchPage,
-              builder: (context, state) => const PlaceHolderPage(),
+              builder: (context, state) => const ErrorPage(),
             ),
           ],
         ),
@@ -52,7 +52,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.reelsPage,
-              builder: (context, state) => const PlaceHolderPage(),
+              builder: (context, state) => const ErrorPage(),
             ),
           ],
         ),
@@ -63,15 +63,15 @@ final router = GoRouter(
               builder: (context, state) => const ProfileSettingsPage(),
               routes: [
                 GoRoute(
-                  path: Routes.nestedHelpCenterPage,
+                  path: Routes.helpCenterPage,
                   builder: (context, state) => HelpCenterPage(),
                 ),
                 GoRoute(
-                  path: Routes.nestedParamsPage,
+                  path: Routes.paramsPage,
                   builder: (context, state) => ParamsPage(),
                 ),
                 GoRoute(
-                  path: Routes.nestedPersonalDataPage,
+                  path: Routes.personalDataPage,
                   builder: (context, state) => PersonalDataPage(),
                 ),
               ],

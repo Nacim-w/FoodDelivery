@@ -19,7 +19,7 @@ class ProfileAvatar extends StatelessWidget {
         Gap(10),
         Text(
           name.toUpperCase(),
-          style: TextStyles.textMediumLarge,
+          style: TextStyles.textMediumLarge.black,
         ),
         Text(email, style: TextStyles.textMedium.grey),
       ],

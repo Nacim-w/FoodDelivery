@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/text.dart';
@@ -8,44 +9,31 @@ class ConfidentialText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 280,
-      child: Padding(
-        padding: EdgeInsets.only(top: 25),
-        child: RichText(
-          text: TextSpan(
-            style: TextStyles.textMedium.black,
-            children: [
-              TextSpan(
-                text: "J'accepte ",
-              ),
-              WidgetSpan(
-                child: _goToLegal(
-                  () => {},
-                  "Les Conditions d'Utilisation",
-                  "con",
-                ),
-              ),
-              TextSpan(
-                text: " et ",
-              ),
-              WidgetSpan(
-                child: _goToLegal(
-                  () => {},
-                  "Politique de Confidentialité",
-                  "pol",
-                ),
-              ),
-            ],
-          ),
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: "J'accepte ",
+              style: TextStyles.textMedium.black,
+            ),
+            TextSpan(
+              text: "Les Conditions d'Utilisation",
+              style: TextStyles.textMedium.orange,
+              recognizer: TapGestureRecognizer()..onTap = () => {},
+            ),
+            TextSpan(
+              text: " et ",
+              style: TextStyles.textMedium.black,
+            ),
+            TextSpan(
+              text: "Politique de Confidentialité",
+              style: TextStyles.textMedium.orange,
+              recognizer: TapGestureRecognizer()..onTap = () => {},
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-Widget _goToLegal(Function()? func, String text, String type) {
-  return GestureDetector(
-    onTap: func,
-    child: Text(text, style: TextStyles.textSemiBold.orange),
-  );
 }

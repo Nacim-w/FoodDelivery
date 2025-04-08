@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
@@ -20,16 +21,13 @@ Widget resendOtpText(
                     text: "Vous n'avez pas reçu le code ?",
                     style: TextStyles.textMedium.black,
                   ),
-                  WidgetSpan(
-                    child: GestureDetector(
-                      onTap: canResend ? startTimer : null,
-                      child: Text(
-                        " Renvoyer",
-                        style: canResend
-                            ? TextStyles.textSemiBold.orange
-                            : TextStyles.textSemiBold.grey,
-                      ),
-                    ),
+                  TextSpan(
+                    text: " Renvoyer",
+                    style: canResend
+                        ? TextStyles.textSemiBold.orange
+                        : TextStyles.textSemiBold.grey,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = canResend ? startTimer : null,
                   ),
                 ],
               ),

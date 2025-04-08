@@ -18,26 +18,23 @@ class BuildListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Container(
-        width: 25,
-        height: 25,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: Color(0xFFFEE1CF),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colours.lightThemeBorderColor),
+          borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(
-          child: SvgPicture.asset(
-            width: 15,
-            height: 17,
-            icon,
-          ),
+        leading: SvgPicture.asset(
+          width: 20,
+          height: 20,
+          icon,
         ),
+        title: Text(title, style: TextStyles.textMedium.black),
+        trailing: Icon(Icons.arrow_forward_ios_rounded,
+            size: 16, color: Colours.lightThemeGreyArrowColor),
+        onTap: onTap,
       ),
-      title: Text(title, style: TextStyles.textMedium.black),
-      trailing: Icon(Icons.arrow_forward_ios,
-          size: 16, color: Colours.lightThemePrimaryTextColor),
-      onTap: onTap,
     );
   }
 }

@@ -14,12 +14,12 @@ class SuggestRegister extends StatelessWidget {
       children: [
         Text(
           "Vous n'avez pas de compte ? ",
+          style: TextStyles.textMedium,
         ),
         GestureDetector(
           onTap: () => context.go(Routes.signUpPage),
           child: Text(
             "S'inscrire",
-            textAlign: TextAlign.right,
             style: TextStyles.textMedium.orange,
           ),
         ),

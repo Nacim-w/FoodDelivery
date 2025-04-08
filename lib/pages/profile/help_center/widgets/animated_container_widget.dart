@@ -36,7 +36,7 @@ class _ExpandableTileState extends State<ExpandableTile> {
       child: Column(
         children: [
           AnimatedContainer(
-            height: _expanded ? 100 : 60,
+            height: _expanded ? 120 : 70,
             duration: const Duration(milliseconds: 300),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(

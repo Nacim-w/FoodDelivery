@@ -1,12 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 abstract class TextStyles {
-  static const TextStyle titleMedium = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.w600,
-  );
-
-  static const TextStyle titleBold = TextStyle(
+  static const TextStyle titleBoldy = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 24,
   );
@@ -43,6 +38,10 @@ abstract class TextStyles {
     fontSize: 12,
   );
 
+  static const TextStyle titleMedium = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 32,
+  );
   static const TextStyle textMediumLarge = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 16,
@@ -54,6 +53,10 @@ abstract class TextStyles {
   static const TextStyle textMediumSmall = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 12,
+  );
+  static const TextStyle textMediumSmallest = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
   );
   static const TextStyle textRegularLarge = TextStyle(
     fontWeight: FontWeight.w400,

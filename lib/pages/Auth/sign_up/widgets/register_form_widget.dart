@@ -80,6 +80,7 @@ class _RegisterFormState extends State<RegisterForm> {
           hintText: "Ecivez votre mot de passe",
           textType: "password",
         ),
+        Gap(20),
         Row(
           children: [
             CheckboxWidget(

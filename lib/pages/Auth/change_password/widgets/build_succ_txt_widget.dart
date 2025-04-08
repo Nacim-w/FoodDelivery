@@ -13,7 +13,7 @@ class BuildSuccessText extends StatelessWidget {
     return AutoSizeText(
       text,
       textAlign: TextAlign.center,
-      style: TextStyles.textBoldLarge.black,
+      style: TextStyles.titleBoldy.black,
       maxLines: 2,
     );
   }

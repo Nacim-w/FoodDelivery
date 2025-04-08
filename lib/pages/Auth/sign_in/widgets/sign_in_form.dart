@@ -19,7 +19,7 @@ class SignInForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildAutoSizeText(
-          'Connectez-vous à votre compte',
+          'Connectez-vous à votre compte.',
         ),
         Text(
           "Veuillez vous connecter à votre compte",

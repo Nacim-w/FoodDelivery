@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:testing/common/res/media.dart';
-import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
 import 'package:testing/pages/auth/change_password/widgets/build_succ_slog_widget.dart';
@@ -17,7 +16,6 @@ class CustomModal extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.55,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colours.lightThemePrimaryColor,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -35,10 +33,13 @@ class CustomModal extends StatelessWidget {
             BuildSuccessSlogan(
                 "Mot de passe modifié. Connectez-vous avec le nouveau."),
             const Gap(20),
-            BuildLogInAndRegButton(
-              "Verify Account",
-              "verify",
-              () => context.go(Routes.homePage),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: BuildLogInAndRegButton(
+                "Verify Account",
+                "verify",
+                () => context.go(Routes.homePage),
+              ),
             ),
           ],
         ),
@@ -49,7 +50,6 @@ class CustomModal extends StatelessWidget {
 
 void showCustomModal(BuildContext context) {
   showModalBottomSheet(
-    backgroundColor: Colors.white,
     showDragHandle: true,
     context: context,
     isScrollControlled: true,

@@ -20,8 +20,8 @@ class BuildBackdropFilter extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Container(
-          width: 327,
-          height: 184,
+          width: MediaQuery.of(context).size.width * 0.8,
+          height: MediaQuery.of(context).size.height * 0.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
             color: Colours.lightThemePrimaryColor,

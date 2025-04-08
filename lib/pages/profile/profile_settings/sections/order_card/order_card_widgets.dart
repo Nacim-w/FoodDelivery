@@ -58,7 +58,7 @@ class OrdersContainer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text("En cours de livraison",
-                      style: TextStyles.textMediumSmall.white),
+                      style: TextStyles.textMediumSmallest.white),
                 ),
               ],
             ),

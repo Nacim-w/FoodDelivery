@@ -22,7 +22,10 @@ class ChangePasswordForm extends StatelessWidget {
             style: TextStyles.textMedium.grey,
           ),
           const Gap(20),
-          const Text("Nouveau mot de passe"),
+          Text(
+            "Nouveau mot de passe",
+            style: TextStyles.textMedium.black,
+          ),
           const Gap(5),
           BuildTextField(
               hintText: "Nouveau mot de passe", textType: "password"),
@@ -34,7 +37,7 @@ class ChangePasswordForm extends StatelessWidget {
           const Gap(20),
           Text(
             "Confirmer le mot de passe",
-            style: TextStyles.textMedium,
+            style: TextStyles.textMedium.black,
           ),
           const Gap(5),
           BuildTextField(

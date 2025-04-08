@@ -20,4 +20,8 @@ abstract class Colours {
   static const Color lightThemeWhiteIconColor = Color(0xfff5f5ff);
 
   static const Color lightThemeInactiveBorderColor = Color(0xffEDEDED);
+
+  static const Color lightThemeIconBorderColor = Color(0xFFFEE1CF);
+
+  static const Color lightThemeGreyArrowColor = Color(0xFFB2B2B2);
 }

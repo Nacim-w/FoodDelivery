@@ -18,7 +18,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: router,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.light),
+        theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'Montserrat',
+        ),
         themeMode: ThemeMode.light,
       ),
     );

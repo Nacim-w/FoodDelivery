@@ -42,7 +42,6 @@ class _CustomTextFieldState extends State<BuildTextField> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.07,
       decoration: BoxDecoration(
-        color: Colours.lightThemePrimaryColor,
         borderRadius: BorderRadius.all(Radius.circular(8)),
         border: Border.all(color: Colours.lightThemeBorderColor),
       ),
