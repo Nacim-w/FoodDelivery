@@ -9,14 +9,19 @@ class ProfileSettingsForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return SingleChildScrollView(
+      child: Column(
         children: [
           Gap(80),
           ProfileAvatar(name: "asma", email: "asma@gmail.com"),
           Gap(50),
           OrdersContainer(),
-          Gap(20),
+          Divider(
+            color: Colors.grey.withAlpha(50),
+            thickness: 0.5,
+            endIndent: 25,
+            indent: 25,
+          ),
           BuiltListView(),
         ],
       ),

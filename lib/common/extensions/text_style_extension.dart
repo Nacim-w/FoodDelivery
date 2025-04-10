@@ -7,4 +7,5 @@ extension TextStyleExt on TextStyle {
   TextStyle get grey => copyWith(color: Colours.lightThemeSecondaryTextColor);
   TextStyle get black => copyWith(color: Colours.lightThemePrimaryTextColor);
   TextStyle get white => copyWith(color: Colours.lightThemePrimaryColor);
+  TextStyle get red => copyWith(color: Colours.lightThemeRedTextColor);
 }

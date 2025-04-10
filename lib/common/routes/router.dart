@@ -1,14 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/pages/error/errorPage.dart';
 import 'package:testing/common/routes/bottom_nav.dart';
 import 'package:testing/common/routes/names.dart';
 import 'package:testing/pages/auth/change_password/change_password_page.dart';
 import 'package:testing/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:testing/pages/auth/opt/otp_page.dart';
-import 'package:testing/pages/auth/sign_up/sign_up_page.dart';
 import 'package:testing/pages/auth/sign_in/sign_in_page.dart';
-import 'package:testing/pages/home/home_page.dart';
+import 'package:testing/pages/auth/sign_up/sign_up_page.dart';
+import 'package:testing/pages/cart/cart_page.dart';
+import 'package:testing/pages/cart/full_cart/full_cart_widget.dart';
+import 'package:testing/pages/error/error_page.dart';
 import 'package:testing/pages/profile/help_center/help_center_page.dart';
 import 'package:testing/pages/profile/params/params_page.dart';
 import 'package:testing/pages/profile/personal_data/personal_data_page.dart';
@@ -16,8 +17,9 @@ import 'package:testing/pages/profile/profile_settings/profile_settings_page.dar
 
 final _rootNagivatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 final router = GoRouter(
+  errorBuilder: (context, state) => const ErrorPage(),
   navigatorKey: _rootNagivatorKey,
-  initialLocation: Routes.signInPage,
+  initialLocation: Routes.homePage,
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => LayoutScaffold(
@@ -28,7 +30,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.homePage,
-              builder: (context, state) => const HomePage(),
+              builder: (context, state) => const CartPage(),
             ),
           ],
         ),
@@ -36,7 +38,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.ordersPage,
-              builder: (context, state) => const ErrorPage(),
+              builder: (context, state) => const FullCart(),
             ),
           ],
         ),
@@ -64,15 +66,15 @@ final router = GoRouter(
               routes: [
                 GoRoute(
                   path: Routes.helpCenterPage,
-                  builder: (context, state) => HelpCenterPage(),
+                  builder: (context, state) => const HelpCenterPage(),
                 ),
                 GoRoute(
                   path: Routes.paramsPage,
-                  builder: (context, state) => ParamsPage(),
+                  builder: (context, state) => const ParamsPage(),
                 ),
                 GoRoute(
                   path: Routes.personalDataPage,
-                  builder: (context, state) => PersonalDataPage(),
+                  builder: (context, state) => const PersonalDataPage(),
                 ),
               ],
             ),

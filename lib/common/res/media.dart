@@ -19,6 +19,8 @@ abstract class Media {
   static const deleteAccount = '$_baseIcon/garbage.svg';
   static const addAccount = '$_baseIcon/addAccount.svg';
   static const logOut = '$_baseIcon/logout.svg';
+  static const notification = '$_baseIcon/notification.svg';
+  static const location = '$_baseIcon/location.svg';
   //bottom navigation bar icons
   static const home = '$_baseIcon/home.svg';
   static const homeActive = '$_baseIcon/homeActive.svg';
@@ -32,6 +34,16 @@ abstract class Media {
   static const guestActive = '$_baseIcon/guestActive.svg';
   // error page
   static const error = '$_baseImage/error.png';
+  //cart page
+  static const emptyCart = '$_baseImage/emptyCart.png';
+  static const burger = '$_baseImage/burger.png';
+  static const salad = '$_baseImage/salad.png';
+  static const heart = '$_baseImage/heart.png';
+
+  static const ramenNoodles = '$_baseImage/ramenNoodles.png';
+  static const paymentLocation = '$_baseIcon/paymentLocation.svg';
+  static const paymentWallet = '$_baseIcon/paymentWallet.svg';
+  static const paymentDiscount = '$_baseIcon/paymentDiscount.svg';
 
   static const resetPasswordSuccess = '$_baseImage/resetPasswordSuccess.png';
   static const profileAvatar = '$_baseImage/profileAvatar.png';

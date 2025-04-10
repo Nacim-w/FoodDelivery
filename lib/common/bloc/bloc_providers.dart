@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing/pages/auth/sign_up/bloc/register_bloc.dart';
 import 'package:testing/pages/auth/sign_in/bloc/sign_in_bloc.dart';
-import 'package:testing/pages/home/bloc/home_blocs.dart';
-import 'package:testing/pages/profile/profile_settings/bloc/profile_settings_bloc.dart';
 
 class Entity {
   dynamic bloc;
@@ -21,26 +19,6 @@ class AppPages {
       Entity(
         bloc: BlocProvider(
           create: (_) => RegisterBloc(),
-        ),
-      ),
-      Entity(
-        bloc: BlocProvider(
-          create: (_) => HomeBlocs(),
-        ),
-      ),
-      Entity(
-        bloc: BlocProvider(
-          create: (_) => HomeBlocs(),
-        ),
-      ),
-      Entity(
-        bloc: BlocProvider(
-          create: (_) => HomeBlocs(),
-        ),
-      ),
-      Entity(
-        bloc: BlocProvider(
-          create: (_) => ProfileSettingsBloc(),
         ),
       ),
     ];

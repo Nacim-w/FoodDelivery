@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   auto_size_text: ^3.0.0
+  dots_indicator: ^4.0.1
   expand: ^1.2.0
   flutter_advanced_switch: ^3.1.0
   flutter_bloc: ^9.0.0

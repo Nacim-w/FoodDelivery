@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:testing/common/service/storage_service.dart';
 
 class Global {
@@ -6,5 +7,6 @@ class Global {
   static Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
     storageService = await StorageService().init();
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }

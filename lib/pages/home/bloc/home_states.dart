@@ -1,3 +1,0 @@
-class HomeStates {
-  const HomeStates();
-}

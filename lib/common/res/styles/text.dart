@@ -25,6 +25,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 24,
   );
+  static const TextStyle textSemiBoldLargest = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+  );
   static const TextStyle textSemiBoldLarge = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 16,
@@ -41,6 +45,18 @@ abstract class TextStyles {
   static const TextStyle titleMedium = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 32,
+  );
+  static const TextStyle titleMediumSmall = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 24,
+  );
+  static const TextStyle titleMediumSmallest = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 22,
+  );
+  static const TextStyle textMediumLargest = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
   );
   static const TextStyle textMediumLarge = TextStyle(
     fontWeight: FontWeight.w500,
