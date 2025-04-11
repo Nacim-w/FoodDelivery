@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:testing/common/extensions/text_style_extension.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/cart/full_cart/sections/payment_section/payment_button_widget.dart';
+import 'package:testing/pages/order/full_cart/sections/payment_section/payment_button_widget.dart';
 
 class PaymentWidget extends StatefulWidget {
   const PaymentWidget({super.key});

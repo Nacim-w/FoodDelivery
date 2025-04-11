@@ -41,7 +41,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 12,
   );
-
+  static const TextStyle textSemiBoldSmallest = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+  );
   static const TextStyle titleMedium = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 32,
@@ -83,6 +86,10 @@ abstract class TextStyles {
     fontSize: 14,
   );
   static const TextStyle textRegularSmall = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+  );
+  static const TextStyle textRegularSmallest = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 12,
   );

@@ -39,6 +39,13 @@ abstract class Media {
   static const burger = '$_baseImage/burger.png';
   static const salad = '$_baseImage/salad.png';
   static const heart = '$_baseImage/heart.png';
+  //order history
+  static const bestSeller = '$_baseImage/bestSeller.png';
+  static const order1 = '$_baseImage/order1.png';
+  static const order2 = '$_baseImage/order2.png';
+  static const order3 = '$_baseImage/order3.png';
+  static const order4 = '$_baseImage/order4.png';
+  static const clock = '$_baseIcon/clock.svg';
 
   static const ramenNoodles = '$_baseImage/ramenNoodles.png';
   static const paymentLocation = '$_baseIcon/paymentLocation.svg';

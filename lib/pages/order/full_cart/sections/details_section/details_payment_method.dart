@@ -26,7 +26,7 @@ class _DetailsPaymentMethodState extends State<DetailsPaymentMethod> {
         leading: SvgPicture.asset(
           width: 20,
           height: 20,
-          Media.paymentLocation,
+          Media.paymentWallet,
         ),
         title:
             Text("Méthode de paiement", style: TextStyles.textSemiBold.black),

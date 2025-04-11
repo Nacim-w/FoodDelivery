@@ -7,8 +7,9 @@ import 'package:testing/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:testing/pages/auth/opt/otp_page.dart';
 import 'package:testing/pages/auth/sign_in/sign_in_page.dart';
 import 'package:testing/pages/auth/sign_up/sign_up_page.dart';
-import 'package:testing/pages/cart/cart_page.dart';
-import 'package:testing/pages/cart/full_cart/full_cart_widget.dart';
+import 'package:testing/pages/order/order_history/order_history_page.dart';
+import 'package:testing/pages/order/order_page.dart';
+import 'package:testing/pages/order/full_cart/full_cart_widget.dart';
 import 'package:testing/pages/error/error_page.dart';
 import 'package:testing/pages/profile/help_center/help_center_page.dart';
 import 'package:testing/pages/profile/params/params_page.dart';
@@ -46,7 +47,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.searchPage,
-              builder: (context, state) => const ErrorPage(),
+              builder: (context, state) => const OrderHistoryPage(),
             ),
           ],
         ),

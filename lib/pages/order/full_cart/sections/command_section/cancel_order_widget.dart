@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/pages/cart/full_cart/sections/command_section/order_content_widget.dart';
+import 'package:testing/pages/order/full_cart/sections/command_section/order_content_widget.dart';
 
 class CancelOrderWidget extends StatelessWidget {
   const CancelOrderWidget({super.key});

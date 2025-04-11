@@ -6,8 +6,8 @@ import 'package:testing/common/res/media.dart';
 import 'package:testing/common/res/styles/colours.dart';
 import 'package:testing/common/res/styles/text.dart';
 import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/cart/full_cart/sections/command_section/order_card__full_widget.dart';
-import 'package:testing/pages/cart/full_cart/sections/command_section/order_card_empty_widget.dart';
+import 'package:testing/pages/order/full_cart/sections/command_section/order_card__full_widget.dart';
+import 'package:testing/pages/order/full_cart/sections/command_section/order_card_empty_widget.dart';
 
 class Command extends StatefulWidget {
   const Command({super.key});
