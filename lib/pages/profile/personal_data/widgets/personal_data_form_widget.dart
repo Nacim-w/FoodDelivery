@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/pages/profile/personal_data/widgets/continue_button_widget.dart';
-import 'package:testing/pages/profile/profile_settings/sections/profile_picture/profile_picture_widgets.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/pages/profile/personal_data/widgets/continue_button_widget.dart';
+import 'package:legy/pages/profile/profile_settings/sections/profile_picture/profile_picture_widgets.dart';
 
 class PersonalDataForm extends StatelessWidget {
   const PersonalDataForm({super.key});

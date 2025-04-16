@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:testing/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/colours.dart';
 
 toastInfo({
   required String msg,
-  Color backgroundColor = Colours.lightThemePrimaryTextColor,
-  Color textColor = Colours.lightThemePrimaryColor,
+  Color backgroundColor = Colours.lightThemeOrange5,
+  Color textColor = Colours.lightThemeWhite1,
 }) {
   return Fluttertoast.showToast(
       msg: msg,

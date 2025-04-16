@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/order/full_cart/sections/payment_section/payment_button_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/order/full_cart/sections/payment_section/payment_button_widget.dart';
 
 class PaymentWidget extends StatefulWidget {
   const PaymentWidget({super.key});
@@ -25,11 +25,11 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             children: [
               Text(
                 "Sous-total",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black2,
               ),
               Text(
                 "31.50 CFA",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black2,
               ),
             ],
           ),
@@ -39,11 +39,11 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             children: [
               Text(
                 "Frais de livraison",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black2,
               ),
               Text(
                 "FREE",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black2,
               ),
             ],
           ),
@@ -53,16 +53,16 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             children: [
               Text(
                 "Remise",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black2,
               ),
               Text(
                 "-6.30 CFA",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black2,
               ),
             ],
           ),
           Divider(
-            color: Colours.lightThemePrimaryTextColor,
+            color: Colours.lightThemeBlack2,
             thickness: 1,
           ),
           Row(

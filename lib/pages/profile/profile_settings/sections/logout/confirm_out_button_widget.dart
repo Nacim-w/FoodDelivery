@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class ConfirmOutButton extends StatelessWidget {
   final String buttonName;
@@ -24,15 +24,15 @@ class ConfirmOutButton extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           color: buttonType == "deconnexion"
-              ? Colours.lightThemeOrangeTextColor
-              : Colours.lightThemePrimaryColor,
+              ? Colours.lightThemeOrange5
+              : Colours.lightThemeWhite1,
           borderRadius: BorderRadius.all(
             Radius.circular(100),
           ),
           border: Border.all(
             color: buttonType == "deconnexion"
                 ? Colors.transparent
-                : Colours.lightThemeBorderColor,
+                : Colours.lightThemeGrey2,
             width: 2,
           ),
         ),
@@ -41,8 +41,8 @@ class ConfirmOutButton extends StatelessWidget {
             buttonName,
             textAlign: TextAlign.center,
             style: buttonType == "deconnexion"
-                ? TextStyles.textSemiBold.white
-                : TextStyles.textSemiBold.black,
+                ? TextStyles.textSemiBold.white1
+                : TextStyles.textSemiBold.black2,
           ),
         ),
       ),

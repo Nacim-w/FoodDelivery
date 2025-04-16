@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/colours.dart';
 
 class ExpandableTile extends StatefulWidget {
   final Widget title;
@@ -41,7 +41,7 @@ class _ExpandableTileState extends State<ExpandableTile> {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colours.lightThemeBorderColor),
+              border: Border.all(color: Colours.lightThemeGrey2),
             ),
             child: Column(
               children: [
@@ -52,7 +52,7 @@ class _ExpandableTileState extends State<ExpandableTile> {
                     widget.trailing ??
                         Icon(
                           _expanded ? Icons.remove : Icons.add,
-                          color: Colors.red,
+                          color: Colours.lightThemeRed5,
                         ),
                   ],
                 ),

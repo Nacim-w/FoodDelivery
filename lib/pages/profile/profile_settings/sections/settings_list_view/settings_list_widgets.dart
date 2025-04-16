@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/profile/profile_settings/sections/logout/build_backdrop_filter_widget.dart';
-import 'package:testing/pages/profile/profile_settings/sections/settings_list_view/profile_list_tile_widget.dart';
-import 'package:testing/pages/profile/profile_settings/sections/settings_list_view/settings_categorie._widget.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/profile/profile_settings/sections/logout/build_backdrop_filter_widget.dart';
+import 'package:legy/pages/profile/profile_settings/sections/settings_list_view/profile_list_tile_widget.dart';
+import 'package:legy/pages/profile/profile_settings/sections/settings_list_view/settings_categorie._widget.dart';
 
 class BuiltListView extends StatelessWidget {
   const BuiltListView({super.key});

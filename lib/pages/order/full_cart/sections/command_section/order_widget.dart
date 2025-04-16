@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/order/full_cart/sections/command_section/order_card__full_widget.dart';
-import 'package:testing/pages/order/full_cart/sections/command_section/order_card_empty_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/order/full_cart/sections/command_section/order_card__full_widget.dart';
+import 'package:legy/pages/order/full_cart/sections/command_section/order_card_empty_widget.dart';
+import 'package:legy/pages/order/full_cart/widgets/cancel_order_content.dart';
 
 class Command extends StatefulWidget {
   const Command({super.key});
@@ -28,27 +27,20 @@ class _CommandState extends State<Command> {
             children: [
               Text(
                 "Détails commande",
-                style: TextStyles.textMediumLarge.black,
+                style: TextStyles.textMediumLarge.black1,
               ),
-              GestureDetector(
-                onTap: () {
-                  context.push(Routes.homePage);
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: 22,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(19),
-                    border: Border.all(color: Colours.lightThemeRedTextColor),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Annuler la commande",
-                      style: TextStyles.textMediumSmall.red,
-                    ),
-                  ),
+              OutlinedButton(
+                onPressed: () => showCancelModal(context),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colours.lightThemeRed5),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  minimumSize: Size(20, 30),
                 ),
-              )
+                child: Text(
+                  "Annuler la commande",
+                  style: TextStyles.textMediumSmall.red5,
+                ),
+              ),
             ],
           ),
           Gap(20),
@@ -81,6 +73,20 @@ class _CommandState extends State<Command> {
           )
         ],
       ),
+    );
+  }
+
+  void showCancelModal(BuildContext context) {
+    showModalBottomSheet(
+      showDragHandle: true,
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return const CancelOrderContent();
+      },
     );
   }
 }

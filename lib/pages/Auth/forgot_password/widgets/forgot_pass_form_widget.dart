@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/pages/auth/auth_widgets/build_login_reg_widget.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({super.key});
@@ -20,7 +20,7 @@ class ForgotPasswordForm extends StatelessWidget {
         ),
         Text(
           "Saisissez votre e-mail pour recevoir un code de réinitialisation.",
-          style: TextStyles.textMedium.grey,
+          style: TextStyles.textMedium.grey1,
         ),
         Gap(20),
         Text("Adresse e-mail", style: TextStyles.textMedium),

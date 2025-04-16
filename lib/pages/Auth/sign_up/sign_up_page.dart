@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/auth/sign_up/widgets/register_form_widget.dart';
+import 'package:legy/pages/auth/sign_up/widgets/register_form_widget.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

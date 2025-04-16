@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/auth_widgets/build_seperator_widget.dart';
-import 'package:testing/pages/auth/auth_widgets/thirdparty_login_widget.dart';
-import 'package:testing/pages/auth/sign_up/widgets/checkbox_widget.dart';
-import 'package:testing/pages/auth/sign_up/widgets/confidential_text_widget.dart';
-import 'package:testing/pages/auth/sign_up/widgets/suggest_login_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/pages/auth/auth_widgets/build_seperator_widget.dart';
+import 'package:legy/pages/auth/auth_widgets/thirdparty_login_widget.dart';
+import 'package:legy/pages/auth/sign_up/widgets/checkbox_widget.dart';
+import 'package:legy/pages/auth/sign_up/widgets/confidential_text_widget.dart';
+import 'package:legy/pages/auth/sign_up/widgets/suggest_login_widget.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -36,7 +36,7 @@ class _RegisterFormState extends State<RegisterForm> {
         ),
         Text(
           "Créez un compte pour commencer à chercher les plats que vous aimez.",
-          style: TextStyles.textMedium.grey,
+          style: TextStyles.textMedium.grey1,
         ),
         Gap(
           10,

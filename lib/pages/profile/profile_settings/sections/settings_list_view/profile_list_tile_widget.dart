@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class BuildListTile extends StatelessWidget {
   final String icon;
@@ -22,7 +22,7 @@ class BuildListTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListTile(
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colours.lightThemeBorderColor),
+          side: BorderSide(color: Colours.lightThemeGrey2),
           borderRadius: BorderRadius.circular(12),
         ),
         leading: SvgPicture.asset(
@@ -30,9 +30,9 @@ class BuildListTile extends StatelessWidget {
           height: 20,
           icon,
         ),
-        title: Text(title, style: TextStyles.textMedium.black),
+        title: Text(title, style: TextStyles.textMedium.black1),
         trailing: Icon(Icons.arrow_forward_ios_rounded,
-            size: 16, color: Colours.lightThemeGreyArrowColor),
+            size: 16, color: Colours.lightThemeGrey2),
         onTap: onTap,
       ),
     );

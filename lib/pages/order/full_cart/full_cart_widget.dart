@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'package:testing/pages/order/full_cart/sections/command_section/order_widget.dart';
-import 'package:testing/pages/order/full_cart/sections/details_section/details_widget.dart';
-import 'package:testing/pages/order/full_cart/sections/payment_section/payment_widget.dart';
+import 'package:legy/pages/order/full_cart/sections/command_section/order_widget.dart';
+import 'package:legy/pages/order/full_cart/sections/details_section/details_widget.dart';
+import 'package:legy/pages/order/full_cart/sections/payment_section/payment_widget.dart';
 
 class FullCart extends StatefulWidget {
   const FullCart({super.key});

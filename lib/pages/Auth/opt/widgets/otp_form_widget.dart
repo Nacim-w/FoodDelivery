@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/opt/widgets/otp_widgets.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/pages/auth/opt/widgets/otp_widgets.dart';
 
 class OtpForm extends StatefulWidget {
   final bool canResend;
@@ -35,7 +35,7 @@ class _OtpFormState extends State<OtpForm> {
         buildAutoSizeText('Vérification par e-mail'),
         Text(
             "Entrez le code de vérification que nous vous avons envoyé à : ${maskEmail("AlbertsTEST@gmail.com")}",
-            style: TextStyles.textMedium.grey),
+            style: TextStyles.textMedium.grey1),
         Gap(40),
         Center(
           child: Pinput(
@@ -62,15 +62,15 @@ class _OtpFormState extends State<OtpForm> {
 final defaultPinTheme = PinTheme(
   width: 75,
   height: 72,
-  textStyle: TextStyles.otpDefault.black,
+  textStyle: TextStyles.otpDefault.black1,
   decoration: BoxDecoration(
-    border: Border.all(color: Colours.lightThemeSecondaryTextColor),
+    border: Border.all(color: Colours.lightThemeGrey2),
     borderRadius: BorderRadius.circular(12),
   ),
 );
 
 final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-  border: Border.all(color: Colours.lightThemeOrangeTextColor),
+  border: Border.all(color: Colours.lightThemeOrange5),
   borderRadius: BorderRadius.circular(12),
 );
 

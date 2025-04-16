@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class OrdersContainer extends StatelessWidget {
   const OrdersContainer({super.key});
@@ -15,7 +15,7 @@ class OrdersContainer extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      color: Colours.lightThemePrimaryColor,
+      color: Colours.lightThemeWhite1,
       elevation: 1,
       child: Padding(
         padding: EdgeInsets.all(12),
@@ -31,7 +31,7 @@ class OrdersContainer extends StatelessWidget {
                 ),
                 Text(
                   "Voir tout",
-                  style: TextStyles.textMedium.orange,
+                  style: TextStyles.textMedium.orange5,
                 ),
               ],
             ),
@@ -42,11 +42,11 @@ class OrdersContainer extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     text: "ID de commande ",
-                    style: TextStyles.textMediumSmall.grey,
+                    style: TextStyles.textMediumSmall.grey1,
                     children: [
                       TextSpan(
                         text: "888333777",
-                        style: TextStyles.textMediumSmall.black,
+                        style: TextStyles.textMediumSmall.black1,
                       ),
                     ],
                   ),
@@ -54,11 +54,11 @@ class OrdersContainer extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colours.lightThemeOrangeTextColor,
+                    color: Colours.lightThemeOrange5,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text("En cours de livraison",
-                      style: TextStyles.textMediumSmallest.white),
+                      style: TextStyles.textMediumSmallest.white1),
                 ),
               ],
             ),
@@ -83,19 +83,19 @@ class OrdersContainer extends StatelessWidget {
                     children: [
                       Text(
                         "Burger With Meat",
-                        style: TextStyles.textMedium.black,
+                        style: TextStyles.textMedium.black1,
                       ),
                       SizedBox(height: 4),
                       Text(
                         "12,230 CFA",
-                        style: TextStyles.textMedium.orange,
+                        style: TextStyles.textMedium.orange5,
                       ),
                     ],
                   ),
                 ),
                 Text(
                   "14 articles",
-                  style: TextStyles.textMediumSmall.black,
+                  style: TextStyles.textMediumSmall.black1,
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class BuildSwitchTile extends StatelessWidget {
   final String title;
@@ -22,7 +22,7 @@ class BuildSwitchTile extends StatelessWidget {
       onChanged: onChanged,
       inactiveThumbColor: Colors.white,
       inactiveTrackColor: Color(0xFFDFE0F3),
-      activeColor: Colours.lightThemeOrangeTextColor,
+      activeColor: Colours.lightThemeOrange5,
     );
   }
 }

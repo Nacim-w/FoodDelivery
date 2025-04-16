@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/profile/personal_data/widgets/personal_data_form_widget.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/profile/personal_data/widgets/personal_data_form_widget.dart';
 
 class PersonalDataPage extends StatefulWidget {
   const PersonalDataPage({super.key});

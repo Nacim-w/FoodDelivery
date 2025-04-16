@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing/pages/auth/sign_up/bloc/register_bloc.dart';
-import 'package:testing/pages/auth/sign_in/bloc/sign_in_bloc.dart';
+import 'package:legy/pages/auth/sign_up/bloc/register_bloc.dart';
+import 'package:legy/pages/auth/sign_in/bloc/sign_in_bloc.dart';
 
 class Entity {
   dynamic bloc;

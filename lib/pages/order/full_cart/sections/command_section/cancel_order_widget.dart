@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/pages/order/full_cart/sections/command_section/order_content_widget.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/pages/order/full_cart/sections/command_section/order_content_widget.dart';
 
 class CancelOrderWidget extends StatelessWidget {
   const CancelOrderWidget({super.key});
@@ -19,7 +19,7 @@ class CancelOrderWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.42,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: Colours.lightThemePrimaryColor,
+            color: Colours.lightThemeBlack2,
           ),
           child: OrderContentWidget(),
         ),

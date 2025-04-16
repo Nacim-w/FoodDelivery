@@ -6,14 +6,14 @@
     [
       "C:\\Users\\Nacim\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
       "-C",
-      "C:\\Users\\Nacim\\Desktop\\pfe\\testing\\android\\app\\.cxx\\Debug\\1413o4y5\\x86",
+      "C:\\Users\\Nacim\\Desktop\\pfe\\legy\\android\\app\\.cxx\\Debug\\1413o4y5\\x86",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "C:\\Users\\Nacim\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
     "-C",
-    "C:\\Users\\Nacim\\Desktop\\pfe\\testing\\android\\app\\.cxx\\Debug\\1413o4y5\\x86",
+    "C:\\Users\\Nacim\\Desktop\\pfe\\legy\\android\\app\\.cxx\\Debug\\1413o4y5\\x86",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {}

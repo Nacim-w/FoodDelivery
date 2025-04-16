@@ -1,20 +1,20 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/routes/bottom_nav.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/change_password/change_password_page.dart';
-import 'package:testing/pages/auth/forgot_password/forgot_password_page.dart';
-import 'package:testing/pages/auth/opt/otp_page.dart';
-import 'package:testing/pages/auth/sign_in/sign_in_page.dart';
-import 'package:testing/pages/auth/sign_up/sign_up_page.dart';
-import 'package:testing/pages/order/order_history/order_history_page.dart';
-import 'package:testing/pages/order/order_page.dart';
-import 'package:testing/pages/order/full_cart/full_cart_widget.dart';
-import 'package:testing/pages/error/error_page.dart';
-import 'package:testing/pages/profile/help_center/help_center_page.dart';
-import 'package:testing/pages/profile/params/params_page.dart';
-import 'package:testing/pages/profile/personal_data/personal_data_page.dart';
-import 'package:testing/pages/profile/profile_settings/profile_settings_page.dart';
+import 'package:legy/common/routes/bottom_nav.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/auth/change_password/change_password_page.dart';
+import 'package:legy/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:legy/pages/auth/opt/otp_page.dart';
+import 'package:legy/pages/auth/sign_in/sign_in_page.dart';
+import 'package:legy/pages/auth/sign_up/sign_up_page.dart';
+import 'package:legy/pages/home/home_page.dart';
+import 'package:legy/pages/order/order_history/order_history_page.dart';
+import 'package:legy/pages/order/full_cart/full_cart_widget.dart';
+import 'package:legy/pages/error/error_page.dart';
+import 'package:legy/pages/profile/help_center/help_center_page.dart';
+import 'package:legy/pages/profile/params/params_page.dart';
+import 'package:legy/pages/profile/personal_data/personal_data_page.dart';
+import 'package:legy/pages/profile/profile_settings/profile_settings_page.dart';
 
 final _rootNagivatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 final router = GoRouter(
@@ -31,7 +31,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.homePage,
-              builder: (context, state) => const CartPage(),
+              builder: (context, state) => const HomePage(),
             ),
           ],
         ),

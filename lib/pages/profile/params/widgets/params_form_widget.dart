@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/profile/params/widgets/build_list_tile_widget.dart';
-import 'package:testing/pages/profile/params/widgets/build_switch_tile_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/profile/params/widgets/build_list_tile_widget.dart';
+import 'package:legy/pages/profile/params/widgets/build_switch_tile_widget.dart';
 
 class ParamsForm extends StatefulWidget {
   const ParamsForm({super.key});
@@ -61,7 +61,7 @@ Widget _buildSectionTitle(String title) {
     padding: EdgeInsets.only(top: 16, bottom: 8),
     child: Text(
       title,
-      style: TextStyles.textSemiBold.black,
+      style: TextStyles.textSemiBold.black1,
     ),
   );
 }

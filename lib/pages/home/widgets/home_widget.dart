@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/home/widgets/home_category_widget.dart';
-import 'package:testing/pages/home/widgets/home_page_widgets.dart';
-import 'package:testing/pages/home/widgets/home_recommanded_widget.dart';
-import 'package:testing/pages/home/widgets/home_story_widget.dart';
+import 'package:gap/gap.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/home/widgets/home_appbar.dart';
+import 'package:legy/pages/home/widgets/home_caroussel_widget.dart';
+import 'package:legy/pages/home/widgets/home_category_widget.dart';
+//import 'package:legy/pages/home/widgets/home_recommanded_widget.dart';
+import 'package:legy/pages/home/widgets/home_restaurants_widget.dart';
+import 'package:legy/pages/home/widgets/home_story_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,138 +23,132 @@ class _HomeState extends State<Home> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            padding: EdgeInsets.only(top: 20),
-            height: 150,
+          CustomRow(),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.12,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: stories,
             ),
           ),
-          Image(
-            image: AssetImage("assets/images/hero.png"),
-          ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Top Categories',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'See all',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                Text("Offres spéciales",
+                    style: TextStyles.textSemiBoldLarge.black3),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Tout voir",
+                      style: TextStyles.textSemiBoldSmall.yellow5),
                 ),
-                HomeCategory(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'La Plus Rapide',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'See all',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 250,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: featuredItems.length,
-                    itemBuilder: (context, index) {
-                      final item = featuredItems[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: HomeRecommanded(
-                            image: item["image"],
-                            text: item["name"],
-                            price: item["price"]),
-                      );
-                    },
-                  ),
-                ),
-                buildCard(),
               ],
             ),
+          ),
+          HomeCaroussal(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Catégories',
+                      style: TextStyles.textSemiBoldLarge.black3,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('Tout voir',
+                          style: TextStyles.textSemiBoldSmall.yellow5),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  HomeCategory(image: Media.categorie1, name: "Sénégalaise"),
+                  HomeCategory(image: Media.categorie2, name: "Internationale"),
+                  HomeCategory(image: Media.categorie3, name: "Saine"),
+                  HomeCategory(image: Media.categorie4, name: "Dessert"),
+                ],
+              ),
+              Gap(10),
+
+              /*SizedBox(
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: featuredItems.length,
+                  itemBuilder: (context, index) {
+                    final item = featuredItems[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: HomeRecommanded(
+                          image: item["image"],
+                          text: item["name"],
+                          price: item["price"]),
+                    );
+                  },
+                ),
+              ),*/
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Restaurants près de vous',
+                          style: TextStyles.textSemiBoldLarge.black3,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text('Tout voir',
+                              style: TextStyles.textSemiBoldSmall.yellow5),
+                        ),
+                      ],
+                    ),
+                    HomeRestaurants(
+                      image: Media.restaurant1,
+                      title: "Pizzania",
+                      description:
+                          "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
+                      time: "20-25 mins",
+                      rating: "4.6",
+                      distance: "7 km",
+                    ),
+                    Gap(15),
+                    HomeRestaurants(
+                      image: Media.restaurant2,
+                      title: "Burger",
+                      description:
+                          "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
+                      time: "20-25 mins",
+                      rating: "4.6",
+                      distance: "7 km",
+                    ),
+                    Gap(15),
+                    HomeRestaurants(
+                      image: Media.restaurant2,
+                      title: "Burger",
+                      description:
+                          "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
+                      time: "20-25 mins",
+                      rating: "4.6",
+                      distance: "7 km",
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ],
       ),
     );
   }
 }
-
-List<Widget> stories = [
-  Stack(
-    children: [
-      HomeStory(username: "alex", image: "assets/images/story2.png"),
-      Positioned(
-        bottom: 0,
-        left: 10,
-        top: 0,
-        child: Image(
-          image: AssetImage("assets/icons/plus.png"),
-        ),
-      ),
-    ],
-  ),
-  HomeStory(username: "james", image: "assets/images/story3.png"),
-  HomeStory(username: "mohamed", image: "assets/images/story4.png"),
-  HomeStory(username: "nacim", image: "assets/images/story.png"),
-  HomeStory(username: "test", image: "assets/images/story2.png"),
-];
-
-List<Map<String, dynamic>> featuredItems = [
-  {
-    "name": "Prawn mix salad",
-    "image": "assets/images/featured2.png",
-    "price": 5.98,
-  },
-  {
-    "name": "Prawn mix salad",
-    "image": "assets/images/featured.png",
-    "price": 5.98,
-  },
-  {
-    "name": "Prawn mix salad",
-    "image": "assets/images/featured.png",
-    "price": 5.98,
-  },
-];

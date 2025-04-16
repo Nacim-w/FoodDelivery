@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/colours.dart';
 
 class CheckboxWidget extends StatefulWidget {
   final bool isChecked;
@@ -25,12 +25,12 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
   Widget build(BuildContext context) {
     return Checkbox(
       side: BorderSide(
-        color: Colours.lightThemePrimaryColor,
+        color: Colours.lightThemeOrange5,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5.0),
       ),
-      fillColor: WidgetStateProperty.all(Colours.lightThemeOrangeTextColor),
+      fillColor: WidgetStateProperty.all(Colours.lightThemeOrange5),
       value: _isChecked,
       onChanged: (bool? value) {
         setState(() {

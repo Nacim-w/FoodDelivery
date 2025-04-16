@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing/common/bloc/bloc_providers.dart';
-import 'package:testing/common/routes/router.dart';
-import 'package:testing/global.dart';
+import 'package:legy/common/bloc/bloc_providers.dart';
+import 'package:legy/common/routes/router.dart';
+import 'package:legy/global.dart';
 
 void main() async {
   await Global.init();

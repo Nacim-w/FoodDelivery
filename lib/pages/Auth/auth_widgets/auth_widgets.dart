@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 Widget buildAutoSizeText(String text) {
   return AutoSizeText(
     text,
-    style: TextStyles.titleMedium.black,
+    style: TextStyles.titleMedium.black2,
     maxLines: 2,
   );
 }
@@ -43,7 +43,7 @@ class _CustomTextFieldState extends State<BuildTextField> {
       height: MediaQuery.of(context).size.height * 0.07,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        border: Border.all(color: Colours.lightThemeBorderColor),
+        border: Border.all(color: Colours.lightThemeGrey2),
       ),
       child: TextField(
         keyboardType: widget.textType == "password"
@@ -73,13 +73,13 @@ class _CustomTextFieldState extends State<BuildTextField> {
             ),
           ),
           hintStyle: TextStyle(
-            color: Colours.lightThemeSecondaryTextColor,
+            color: Colours.lightThemeGrey1,
           ),
           suffixIcon: widget.textType == "password"
               ? IconButton(
                   icon: Icon(
                     obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: Colours.lightThemePrimaryTextColor,
+                    color: Colours.lightThemeBlack2,
                   ),
                   onPressed: () {
                     setState(() {
@@ -90,11 +90,11 @@ class _CustomTextFieldState extends State<BuildTextField> {
               : widget.textType == "sex"
                   ? Icon(
                       Icons.arrow_drop_down,
-                      color: Colours.lightThemePrimaryTextColor,
+                      color: Colours.lightThemeBlack2,
                     )
                   : null,
         ),
-        style: TextStyles.textMedium.black,
+        style: TextStyles.textMedium.black1,
         autocorrect: false,
         obscureText: obscureText,
         readOnly: widget.textType == "sex",
@@ -111,7 +111,7 @@ Widget reusableIcons(String url) {
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colours.lightThemeBorderColor, width: 2),
+        border: Border.all(color: Colours.lightThemeGrey2, width: 2),
       ),
       child: Center(
         child: Image.asset(url, width: 20, height: 20),
@@ -124,6 +124,6 @@ Widget reusableIcons(String url) {
 Widget goToLegal(Function()? func, String text, String type) {
   return GestureDetector(
     onTap: func,
-    child: Text(text, style: TextStyles.textSemiBold.orange),
+    child: Text(text, style: TextStyles.textSemiBold.orange5),
   );
 }

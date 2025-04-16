@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class InputField extends StatelessWidget {
   const InputField({
@@ -69,7 +69,7 @@ class InputField extends StatelessWidget {
         readOnly: readOnly,
         maxLines: expandable ? 5 : 1,
         minLines: expandable ? 1 : null,
-        style: TextStyles.textRegular.black,
+        style: TextStyles.textRegular.black1,
         onTap: onTap,
         onTapOutside: onTapOutside,
         onFieldSubmitted: onSubmitted,
@@ -85,8 +85,8 @@ class InputField extends StatelessWidget {
           hintText: hintText,
           suffixIcon: suffixIcon,
           suffixIconConstraints: suffixIconConstraints,
-          hintStyle: TextStyles.textRegular.grey,
-          suffixIconColor: Colours.lightThemeGreyArrowColor,
+          hintStyle: TextStyles.textRegular.grey1,
+          suffixIconColor: Colours.lightThemeGrey1,
           prefix: prefix,
           prefixIcon: prefixIcon,
           contentPadding: contentPadding ??
@@ -94,7 +94,7 @@ class InputField extends StatelessWidget {
                 horizontal: 16,
               ),
           filled: true,
-          fillColor: fillColor ?? Colours.lightThemePrimaryTextColor,
+          fillColor: fillColor ?? Colours.lightThemeBlack2,
         ),
         inputFormatters: inputFormatters,
         validator: defaultValidation

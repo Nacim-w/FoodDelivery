@@ -1,47 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class HomeCategory extends StatelessWidget {
-  const HomeCategory({super.key});
+  final String image;
+  final String name;
+
+  const HomeCategory({super.key, required this.image, required this.name});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Column(
-              children: [
-                ClipOval(
-                  child: Image.asset(
-                    categories[index]['image']!,
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Text(
-                  categories[index]['name']!,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ClipOval(
+            child: Image.asset(
+              image,
+              width: MediaQuery.of(context).size.width * 0.22,
+              height: MediaQuery.of(context).size.width * 0.22,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            name,
+            style: TextStyles.textBoldSmall.black3.copyWith(
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(2, 3),
+                  blurRadius: 15.0,
+                  color: Colours.lightThemeBlack1.withAlpha(127),
                 ),
               ],
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
 }
-
-final List<Map<String, String>> categories = const [
-  {'name': 'Pizza', 'image': 'assets/images/Categories.png'},
-  {'name': 'Pan-cake', 'image': 'assets/images/Categories.png'},
-  {'name': 'Sandwich', 'image': 'assets/images/Categories.png'},
-  {'name': 'Ice-cream', 'image': 'assets/images/Categories.png'},
-];

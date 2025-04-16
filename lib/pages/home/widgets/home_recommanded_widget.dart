@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/pages/home/widgets/home_page_widgets.dart';
+import 'package:legy/common/res/styles/colours.dart';
 
 class HomeRecommanded extends StatelessWidget {
   final String image;
@@ -22,8 +21,8 @@ class HomeRecommanded extends StatelessWidget {
           height: 160,
           width: 150,
           decoration: BoxDecoration(
-            color: Colours.lightThemeOrangeTextColor,
-            borderRadius: BorderRadius.circular(20),
+            color: Colours.lightThemeOrange5,
+            borderRadius: BorderRadius.circular(37),
           ),
         ),
         Positioned(
@@ -38,7 +37,7 @@ class HomeRecommanded extends StatelessWidget {
           bottom: 50,
           right: 70,
           child: Text(
-            formatText(text),
+            text,
             style: TextStyle(color: Colors.white, fontSize: 15),
             textAlign: TextAlign.center,
           ),
@@ -55,3 +54,21 @@ class HomeRecommanded extends StatelessWidget {
     );
   }
 }
+
+List<Map<String, dynamic>> featuredItems = [
+  {
+    "name": "Prawn mix salad",
+    "image": "assets/images/featured2.png",
+    "price": "5.98",
+  },
+  {
+    "name": "Prawn mix salad",
+    "image": "assets/images/featured.png",
+    "price": "5.98",
+  },
+  {
+    "name": "Prawn mix salad",
+    "image": "assets/images/featured.png",
+    "price": "5.98",
+  },
+];

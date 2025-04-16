@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/bottom_nav_routes.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/common/routes/bottom_nav_routes.dart';
 
 class LayoutScaffold extends StatelessWidget {
   const LayoutScaffold({
@@ -22,10 +22,10 @@ class LayoutScaffold extends StatelessWidget {
             navigationShell.goBranch(index);
           },
           currentIndex: navigationShell.currentIndex,
-          selectedItemColor: Colours.lightThemeOrangeTextColor,
+          selectedItemColor: Colours.lightThemeOrange5,
           elevation: 5,
           showUnselectedLabels: false,
-          selectedLabelStyle: TextStyles.textBoldSmallest.orange,
+          selectedLabelStyle: TextStyles.textBoldSmallest.orange5,
           type: BottomNavigationBarType.fixed,
         ),
       );

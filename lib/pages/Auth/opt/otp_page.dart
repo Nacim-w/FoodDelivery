@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/opt/widgets/otp_form_widget.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/auth/opt/widgets/otp_form_widget.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key});

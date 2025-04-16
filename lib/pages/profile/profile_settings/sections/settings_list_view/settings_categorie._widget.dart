@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class SettingsCategorieWidget extends StatelessWidget {
   final String icon;
@@ -18,7 +18,7 @@ class SettingsCategorieWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.25,
       height: 30,
       decoration: BoxDecoration(
-          color: Colours.lightThemePrimaryColor,
+          color: Colours.lightThemeWhite1,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
@@ -39,7 +39,7 @@ class SettingsCategorieWidget extends StatelessWidget {
           Gap(10),
           Text(
             text,
-            style: TextStyles.textMediumSmallest.black,
+            style: TextStyles.textMediumSmallest.black1,
             textAlign: TextAlign.center,
           ),
         ],

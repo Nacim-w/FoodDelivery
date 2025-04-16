@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/profile/help_center/widgets/build_animated_container.dart';
-import 'package:testing/pages/profile/help_center/widgets/seach_bar_widget.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/profile/help_center/widgets/build_animated_container.dart';
+import 'package:legy/pages/profile/help_center/widgets/seach_bar_widget.dart';
 
 class HelpCenterForm extends StatelessWidget {
   const HelpCenterForm({super.key});

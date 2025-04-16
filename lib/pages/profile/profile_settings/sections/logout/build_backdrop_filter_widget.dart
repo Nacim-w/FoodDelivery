@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/profile/profile_settings/sections/logout/confirm_out_button_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/profile/profile_settings/sections/logout/confirm_out_button_widget.dart';
 
 class BuildBackdropFilter extends StatelessWidget {
   const BuildBackdropFilter({super.key});
@@ -21,10 +21,10 @@ class BuildBackdropFilter extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.3,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: Colours.lightThemePrimaryColor,
+            color: Colours.lightThemeWhite1,
           ),
           child: content(context),
         ),
@@ -42,7 +42,8 @@ Widget content(BuildContext context) {
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
       ),
       Gap(25),
-      Text("Voulez-vous vous déconnecter ?", style: TextStyles.textMedium.grey),
+      Text("Voulez-vous vous déconnecter ?",
+          style: TextStyles.textMedium.grey1),
       Gap(25),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

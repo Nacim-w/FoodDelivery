@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:testing/common/service/storage_service.dart';
+import 'package:legy/common/service/storage_service.dart';
 
 class Global {
   static late StorageService storageService;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/profile/params/widgets/params_form_widget.dart';
+import 'package:legy/pages/profile/params/widgets/params_form_widget.dart';
 
 class ParamsPage extends StatefulWidget {
   const ParamsPage({super.key});

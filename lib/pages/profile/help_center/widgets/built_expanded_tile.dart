@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/profile/help_center/widgets/animated_container_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/profile/help_center/widgets/animated_container_widget.dart';
 
 class BuildExpendableTile extends StatelessWidget {
   final String title;
@@ -32,7 +32,7 @@ class BuildExpendableTile extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             description,
-            style: TextStyles.textMedium.grey,
+            style: TextStyles.textMedium.grey1,
           ),
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/change_password/widgets/change_pass_form_widget.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/auth/change_password/widgets/change_pass_form_widget.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});

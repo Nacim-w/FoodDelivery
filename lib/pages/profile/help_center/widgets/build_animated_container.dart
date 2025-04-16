@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:testing/pages/profile/help_center/widgets/built_expanded_tile.dart';
+import 'package:legy/pages/profile/help_center/widgets/built_expanded_tile.dart';
 
 class BuildAnimatedContainer extends StatelessWidget {
   const BuildAnimatedContainer({super.key});

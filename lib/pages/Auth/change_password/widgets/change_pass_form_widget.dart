@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/change_password/widgets/custom_modal_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/pages/auth/change_password/widgets/custom_modal_widget.dart';
 
 class ChangePasswordForm extends StatelessWidget {
   const ChangePasswordForm({super.key});
@@ -19,12 +19,12 @@ class ChangePasswordForm extends StatelessWidget {
           buildAutoSizeText("Réinitialiser le mot de passe"),
           Text(
             "Votre nouveau mot de passe doit être différent de l'ancien.",
-            style: TextStyles.textMedium.grey,
+            style: TextStyles.textMedium.grey1,
           ),
           const Gap(20),
           Text(
             "Nouveau mot de passe",
-            style: TextStyles.textMedium.black,
+            style: TextStyles.textMedium.black1,
           ),
           const Gap(5),
           BuildTextField(
@@ -32,12 +32,12 @@ class ChangePasswordForm extends StatelessWidget {
           const Gap(5),
           Text(
             "Doit contenir au moins 8 caractères",
-            style: TextStyles.textMedium.grey,
+            style: TextStyles.textMedium.grey1,
           ),
           const Gap(20),
           Text(
             "Confirmer le mot de passe",
-            style: TextStyles.textMedium.black,
+            style: TextStyles.textMedium.black1,
           ),
           const Gap(5),
           BuildTextField(
@@ -45,7 +45,7 @@ class ChangePasswordForm extends StatelessWidget {
           const Gap(5),
           Text(
             "Les deux mots de passe doivent correspondre.",
-            style: TextStyles.textMedium.grey,
+            style: TextStyles.textMedium.grey1,
           ),
           Gap(MediaQuery.of(context).size.height * 0.20),
           BuildLogInAndRegButton(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/profile/help_center/widgets/help_center_form_widget.dart';
+import 'package:legy/pages/profile/help_center/widgets/help_center_form_widget.dart';
 
 class HelpCenterPage extends StatefulWidget {
   const HelpCenterPage({super.key});

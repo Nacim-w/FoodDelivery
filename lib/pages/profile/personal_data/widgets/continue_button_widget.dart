@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class ContinueButton extends StatelessWidget {
   final String buttonName;
@@ -21,7 +21,7 @@ class ContinueButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 50,
         decoration: BoxDecoration(
-          color: Colours.lightThemeOrangeTextColor,
+          color: Colours.lightThemeOrange5,
           borderRadius: BorderRadius.all(
             Radius.circular(100),
           ),
@@ -30,7 +30,7 @@ class ContinueButton extends StatelessWidget {
           child: Text(
             buttonName,
             textAlign: TextAlign.center,
-            style: TextStyles.textSemiBold.white,
+            style: TextStyles.textSemiBold.white1,
           ),
         ),
       ),

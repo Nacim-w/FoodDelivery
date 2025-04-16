@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final String name;
@@ -19,9 +19,9 @@ class ProfileAvatar extends StatelessWidget {
         Gap(10),
         Text(
           name.toUpperCase(),
-          style: TextStyles.textMediumLarge.black,
+          style: TextStyles.textMediumLarge.black1,
         ),
-        Text(email, style: TextStyles.textMedium.grey),
+        Text(email, style: TextStyles.textMedium.grey1),
       ],
     );
   }
@@ -46,12 +46,12 @@ Widget profilePictureStack(String picture) {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            color: Colours.lightThemeWhiteIconColor,
+            color: Colours.lightThemeWhite3,
             shape: BoxShape.circle,
           ),
           child: Icon(
             Icons.camera_alt_rounded,
-            color: Colours.lightThemeOrangeTextColor,
+            color: Colours.lightThemeWhite3,
             size: 14,
           ),
         ),

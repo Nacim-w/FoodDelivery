@@ -46,11 +46,36 @@ abstract class Media {
   static const order3 = '$_baseImage/order3.png';
   static const order4 = '$_baseImage/order4.png';
   static const clock = '$_baseIcon/clock.svg';
+  // comment page
+  static const activeStar = '$_baseIcon/activeStar.svg';
+  static const inActiveStar = '$_baseIcon/inActiveStar.svg';
+  // home page
+  static const sidebar = '$_baseIcon/sidebar.svg';
+  static const cart = '$_baseIcon/cart.svg';
+  static const homeClock = '$_baseIcon/homeClock.svg';
+  static const ratingStar = '$_baseIcon/ratingStar.svg';
+  static const dot = '$_baseIcon/dot.svg';
+  static const notificationBell = '$_baseIcon/notificationBell.svg';
+  static const story1 = '$_baseImage/story1.png';
+  static const story2 = '$_baseImage/story2.png';
+  static const story3 = '$_baseImage/story3.png';
+  static const homeBanner1 = '$_baseImage/homeBanner1.png';
+  static const homeBanner2 = '$_baseImage/homeBanner2.png';
+  static const categorie1 = '$_baseImage/categorie1.png';
+  static const categorie2 = '$_baseImage/categorie2.png';
+  static const categorie3 = '$_baseImage/categorie3.png';
+  static const categorie4 = '$_baseImage/categorie4.png';
+  static const restaurant1 = '$_baseImage/restaurant1.png';
+  static const restaurant2 = '$_baseImage/restaurant2.png';
+  static const restaurant3 = '$_baseImage/restaurant3.png';
 
   static const ramenNoodles = '$_baseImage/ramenNoodles.png';
   static const paymentLocation = '$_baseIcon/paymentLocation.svg';
   static const paymentWallet = '$_baseIcon/paymentWallet.svg';
   static const paymentDiscount = '$_baseIcon/paymentDiscount.svg';
+  //Paiement page
+  static const paymentSuccess = '$_baseImage/paymentSuccess.png';
+  static const paymentFailed = '$_baseImage/paymentFailed.png';
 
   static const resetPasswordSuccess = '$_baseImage/resetPasswordSuccess.png';
   static const profileAvatar = '$_baseImage/profileAvatar.png';

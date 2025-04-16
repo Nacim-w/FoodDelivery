@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/common/routes/names.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/common/routes/names.dart';
 
 class SuggestRegister extends StatelessWidget {
   const SuggestRegister({super.key});
@@ -20,7 +20,7 @@ class SuggestRegister extends StatelessWidget {
           onTap: () => context.go(Routes.signUpPage),
           child: Text(
             "S'inscrire",
-            style: TextStyles.textMedium.orange,
+            style: TextStyles.textMedium.orange5,
           ),
         ),
       ],

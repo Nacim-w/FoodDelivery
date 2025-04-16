@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/change_password/widgets/build_succ_slog_widget.dart';
-import 'package:testing/pages/auth/change_password/widgets/build_succ_txt_widget.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/pages/auth/change_password/widgets/build_succ_slog_widget.dart';
+import 'package:legy/pages/auth/change_password/widgets/build_succ_txt_widget.dart';
 
 class CustomModal extends StatelessWidget {
   const CustomModal({super.key});

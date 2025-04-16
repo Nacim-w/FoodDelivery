@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/pages/auth/sign_in/widgets/sign_in_form.dart';
+import 'package:legy/pages/auth/sign_in/widgets/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

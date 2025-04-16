@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:testing/common/res/media.dart';
-import 'package:testing/common/res/styles/colours.dart';
+import 'package:legy/common/res/media.dart';
+import 'package:legy/common/res/styles/colours.dart';
 
 class Destinations {
   const Destinations(
@@ -69,7 +69,7 @@ Widget activeIcon(String icon) {
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colours.lightThemeOrangeTextColor,
+            color: Colours.lightThemeOrange5,
           ),
           width: 40,
           height: 40,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/text.dart';
-import 'package:testing/pages/auth/auth_widgets/auth_widgets.dart';
-import 'package:testing/common/routes/names.dart';
-import 'package:testing/pages/auth/auth_widgets/build_login_reg_widget.dart';
-import 'package:testing/pages/auth/auth_widgets/build_seperator_widget.dart';
-import 'package:testing/pages/auth/auth_widgets/thirdparty_login_widget.dart';
-import 'package:testing/pages/auth/sign_in/widgets/suggest_register_widget.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/text.dart';
+import 'package:legy/pages/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/common/routes/names.dart';
+import 'package:legy/pages/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/pages/auth/auth_widgets/build_seperator_widget.dart';
+import 'package:legy/pages/auth/auth_widgets/thirdparty_login_widget.dart';
+import 'package:legy/pages/auth/sign_in/widgets/suggest_register_widget.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({super.key});
@@ -23,17 +23,17 @@ class SignInForm extends StatelessWidget {
         ),
         Text(
           "Veuillez vous connecter à votre compte",
-          style: TextStyles.textMedium.grey,
+          style: TextStyles.textMedium.grey1,
         ),
         Gap(40),
-        Text("Adresse e-mail", style: TextStyles.textMedium.black),
+        Text("Adresse e-mail", style: TextStyles.textMedium.black2),
         SizedBox(height: 5),
         BuildTextField(
           hintText: "Ecivez votre adresse e-mail",
           textType: "email",
         ),
         Gap(20),
-        Text("Mot de passe", style: TextStyles.textMedium.black),
+        Text("Mot de passe", style: TextStyles.textMedium.black2),
         Gap(5),
         BuildTextField(
           hintText: "Ecivez votre mot de passe",
@@ -62,7 +62,7 @@ Widget _forgotPassword(BuildContext context) {
       child: Text(
         "Mot de passe oublié?",
         textAlign: TextAlign.right,
-        style: TextStyles.textMedium.orange,
+        style: TextStyles.textMedium.orange5,
       ),
     ),
   );

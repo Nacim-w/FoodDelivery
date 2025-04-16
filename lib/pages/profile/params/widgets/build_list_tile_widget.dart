@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class BuildListTile extends StatelessWidget {
   final String title;

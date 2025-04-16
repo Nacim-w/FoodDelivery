@@ -77,6 +77,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w500,
     fontSize: 10,
   );
+  static const TextStyle textMediumtiny = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 8,
+  );
   static const TextStyle textRegularLarge = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 16,
@@ -91,7 +95,11 @@ abstract class TextStyles {
   );
   static const TextStyle textRegularSmallest = TextStyle(
     fontWeight: FontWeight.w400,
-    fontSize: 12,
+    fontSize: 10,
+  );
+  static const TextStyle textRegularTiny = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 8,
   );
   static const TextStyle otpDefault = TextStyle(
     fontSize: 32,

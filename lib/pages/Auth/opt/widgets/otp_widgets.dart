@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 Widget resendOtpText(
     bool canResend, int remainingSeconds, VoidCallback startTimer) {
@@ -19,13 +19,13 @@ Widget resendOtpText(
                 children: [
                   TextSpan(
                     text: "Vous n'avez pas reçu le code ?",
-                    style: TextStyles.textMedium.black,
+                    style: TextStyles.textMedium.black1,
                   ),
                   TextSpan(
                     text: " Renvoyer",
                     style: canResend
-                        ? TextStyles.textSemiBold.orange
-                        : TextStyles.textSemiBold.grey,
+                        ? TextStyles.textSemiBold.orange5
+                        : TextStyles.textSemiBold.grey1,
                     recognizer: TapGestureRecognizer()
                       ..onTap = canResend ? startTimer : null,
                   ),
@@ -43,12 +43,11 @@ Widget resendOtpTimer(int remainingSeconds) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(Icons.access_time_rounded,
-          color: Colours.lightThemeSecondaryTextColor),
+      Icon(Icons.access_time_rounded, color: Colours.lightThemeGrey1),
       Gap(5),
       Text(
         formatTime(remainingSeconds),
-        style: TextStyles.textMedium.grey,
+        style: TextStyles.textMedium.grey1,
       ),
     ],
   );

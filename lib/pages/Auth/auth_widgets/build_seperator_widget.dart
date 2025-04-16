@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:testing/common/extensions/text_style_extension.dart';
-import 'package:testing/common/res/styles/colours.dart';
-import 'package:testing/common/res/styles/text.dart';
+import 'package:legy/common/extensions/text_style_extension.dart';
+import 'package:legy/common/res/styles/colours.dart';
+import 'package:legy/common/res/styles/text.dart';
 
 class BuildSeperater extends StatelessWidget {
   const BuildSeperater({super.key});
@@ -15,7 +15,7 @@ class BuildSeperater extends StatelessWidget {
         Flexible(
           flex: 1,
           child: Divider(
-            color: Colours.lightThemeSecondaryTextColor,
+            color: Colours.lightThemeGrey1,
             thickness: 0.5,
           ),
         ),
@@ -25,14 +25,14 @@ class BuildSeperater extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
               "Ou connectez-vous avec",
-              style: TextStyles.textMedium.grey,
+              style: TextStyles.textMedium.grey1,
             ),
           ),
         ),
         Flexible(
           flex: 1,
           child: Divider(
-            color: Colours.lightThemeSecondaryTextColor,
+            color: Colours.lightThemeGrey1,
             thickness: 0.5,
           ),
         ),
