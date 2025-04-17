@@ -134,7 +134,7 @@ class _HomeState extends State<Home> {
                     ),
                     Gap(15),
                     HomeRestaurants(
-                      image: Media.restaurant2,
+                      image: Media.restaurant3,
                       title: "Burger",
                       description:
                           "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",

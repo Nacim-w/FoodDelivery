@@ -7,10 +7,10 @@ import 'package:legy/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:legy/pages/auth/opt/otp_page.dart';
 import 'package:legy/pages/auth/sign_in/sign_in_page.dart';
 import 'package:legy/pages/auth/sign_up/sign_up_page.dart';
-import 'package:legy/pages/home/home_page.dart';
 import 'package:legy/pages/order/order_history/order_history_page.dart';
 import 'package:legy/pages/order/full_cart/full_cart_widget.dart';
 import 'package:legy/pages/error/error_page.dart';
+import 'package:legy/pages/payment/payment_page.dart';
 import 'package:legy/pages/profile/help_center/help_center_page.dart';
 import 'package:legy/pages/profile/params/params_page.dart';
 import 'package:legy/pages/profile/personal_data/personal_data_page.dart';
@@ -31,7 +31,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.homePage,
-              builder: (context, state) => const HomePage(),
+              builder: (context, state) => PaymentForm(),
             ),
           ],
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:legy/pages/home/widgets/home_widget.dart';
+import 'package:legy/pages/maps/map_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Home(),
+      body: MapWidget(),
     );
   }
 }

@@ -73,9 +73,12 @@ abstract class Media {
   static const paymentLocation = '$_baseIcon/paymentLocation.svg';
   static const paymentWallet = '$_baseIcon/paymentWallet.svg';
   static const paymentDiscount = '$_baseIcon/paymentDiscount.svg';
-  //Paiement page
+  //Payment page
   static const paymentSuccess = '$_baseImage/paymentSuccess.png';
   static const paymentFailed = '$_baseImage/paymentFailed.png';
+  static const visa = '$_baseIcon/visa.svg';
+  static const masterCard = '$_baseIcon/masterCard.svg';
+  static const americanExpress = '$_baseIcon/americanExpress.svg';
 
   static const resetPasswordSuccess = '$_baseImage/resetPasswordSuccess.png';
   static const profileAvatar = '$_baseImage/profileAvatar.png';

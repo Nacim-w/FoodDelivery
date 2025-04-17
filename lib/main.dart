@@ -6,7 +6,9 @@ import 'package:legy/global.dart';
 
 void main() async {
   await Global.init();
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
