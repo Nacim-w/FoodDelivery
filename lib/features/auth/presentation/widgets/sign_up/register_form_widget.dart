@@ -8,7 +8,7 @@ import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seper
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/checkbox_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/confidential_text_widget.dart';
-import 'package:legy/features/auth/presentation/widgets/sign_up/widgets/suggest_login_widget.dart';
+import 'package:legy/features/auth/presentation/widgets/sign_up/suggest_login_widget.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});

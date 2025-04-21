@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/sign_in/sign_in_page.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 
 class SuggestLogin extends StatelessWidget {
   const SuggestLogin({super.key});

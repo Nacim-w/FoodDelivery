@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/sign_in/sign_in_page.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/profile/profile_settings/sections/logout/confirm_out_button_widget.dart';
 
 class BuildBackdropFilter extends StatelessWidget {

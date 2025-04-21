@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legy/core/res/media.dart';
-import 'package:legy/features/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 
 class BuildThirdPartyLogin extends StatelessWidget {
   const BuildThirdPartyLogin({super.key});

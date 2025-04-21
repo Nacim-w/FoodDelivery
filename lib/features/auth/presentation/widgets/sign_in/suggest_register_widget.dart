@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/sign_up/sign_up_page.dart';
+import 'package:legy/features/auth/presentation/views/sign_up_view.dart';
 
 class SuggestRegister extends StatelessWidget {
   const SuggestRegister({super.key});
