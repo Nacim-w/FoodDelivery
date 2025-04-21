@@ -1,0 +1,17 @@
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:legy/features/dashboard/bottom_nav.dart';
+import 'package:legy/features/auth/change_password/change_password_page.dart';
+import 'package:legy/features/auth/forgot_password/forgot_password_page.dart';
+import 'package:legy/features/auth/opt/otp_page.dart';
+import 'package:legy/features/auth/sign_in/sign_in_page.dart';
+import 'package:legy/features/auth/sign_up/sign_up_page.dart';
+import 'package:legy/features/home/home_page.dart';
+import 'package:legy/features/order/full_cart/full_cart_widget.dart';
+import 'package:legy/features/order/order_history/order_history_page.dart';
+import 'package:legy/features/error/error_page.dart';
+import 'package:legy/features/profile/help_center/help_center_page.dart';
+import 'package:legy/features/profile/params/params_page.dart';
+import 'package:legy/features/profile/personal_data/personal_data_page.dart';
+import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
+part 'router.main.dart';

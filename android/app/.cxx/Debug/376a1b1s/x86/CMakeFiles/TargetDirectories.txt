@@ -1,0 +1,2 @@
+C:/Users/Nacim/Desktop/pfe/legy/android/app/.cxx/Debug/376a1b1s/x86/CMakeFiles/edit_cache.dir
+C:/Users/Nacim/Desktop/pfe/legy/android/app/.cxx/Debug/376a1b1s/x86/CMakeFiles/rebuild_cache.dir
