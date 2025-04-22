@@ -1,5 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/features/auth/presentation/views/change_password_view.dart';
+import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:legy/features/auth/presentation/views/otp_view.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
+import 'package:legy/features/auth/presentation/views/sign_up_view.dart';
 import 'package:legy/features/dashboard/bottom_nav.dart';
 import 'package:legy/features/auth/presentation/views/change_password_view.dart';
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
