@@ -1,31 +1,21 @@
 part of 'router.dart';
 
-final _rootNagivatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
+final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 
 final router = GoRouter(
-  refreshListenable: Global.authNotifier,
-
-  navigatorKey: _rootNagivatorKey,
-  initialLocation: SignInPage.routePath,
+  navigatorKey: _rootNavigatorKey,
   errorBuilder: (context, state) => const ErrorPage(),
-
-  //  Redirect Logic
-  redirect: (context, state) {
-    final isLoggedIn = Global.authNotifier.isLoggedIn;
-    final isLoggingIn = state.uri.toString() == SignInPage.routePath;
-
-    if (!isLoggedIn && !isLoggingIn) {
-      return SignInPage.routePath;
-    }
-
-    if (isLoggedIn && isLoggingIn) {
-      return HomePage.routePath;
-    }
-
-    return null;
-  },
-
   routes: [
+    GoRoute(
+      path: '/',
+      redirect: (context, state) {
+        final sessionToken = Cache.instance.sessionToken;
+        if (sessionToken != null ) {
+          return HomePage.routePath;
+        }
+        return SignInPage.routePath;
+      },
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
           LayoutScaffold(navigationShell: navigationShell),
@@ -86,11 +76,14 @@ final router = GoRouter(
         ),
       ],
     ),
-
-    // 🆓 Public Routes
     GoRoute(
       path: SignInPage.routePath,
-      builder: (context, state) => const SignInPage(),
+      builder: (context, state) {
+        return BlocProvider(
+          create: (_) => sl<AuthCubit>(),
+          child: SignInPage(),
+        );
+      },
     ),
     GoRoute(
       path: SignUpPage.routePath,

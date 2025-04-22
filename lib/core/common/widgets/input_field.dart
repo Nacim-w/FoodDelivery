@@ -94,7 +94,7 @@ class InputField extends StatelessWidget {
                 horizontal: 16,
               ),
           filled: true,
-          fillColor: fillColor ?? Colours.lightThemeBlack2,
+          fillColor: fillColor ?? Colours.lightThemeWhite1,
         ),
         inputFormatters: inputFormatters,
         validator: defaultValidation

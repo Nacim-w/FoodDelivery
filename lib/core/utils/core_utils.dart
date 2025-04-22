@@ -1,8 +1,8 @@
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:legy/core/res/styles/colours.dart';
 
-void showToast(String message, {bool success = true}) {
+void showToast({required String message, bool success = true}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,
