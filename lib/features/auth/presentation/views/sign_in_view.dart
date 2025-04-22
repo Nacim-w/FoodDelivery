@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:legy/features/auth/presentation/widgets/sign_in/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
@@ -16,10 +17,8 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-          horizontal: 30,
-        ),
-        child: SignInForm(),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: const SignInForm(),
       ),
     );
   }

@@ -15,11 +15,13 @@ Widget buildAutoSizeText(String text) {
 class BuildTextField extends StatefulWidget {
   final String hintText;
   final String textType;
+  final TextEditingController? controller; // Added controller
 
   const BuildTextField({
     super.key,
     required this.hintText,
     required this.textType,
+    this.controller, // Accept controller as optional
   });
 
   @override
@@ -46,6 +48,7 @@ class _CustomTextFieldState extends State<BuildTextField> {
         border: Border.all(color: Colours.lightThemeGrey2),
       ),
       child: TextField(
+        controller: widget.controller,
         keyboardType: widget.textType == "password"
             ? TextInputType.text
             : TextInputType.multiline,

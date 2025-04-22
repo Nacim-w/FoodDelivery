@@ -1,13 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/sign_in/sign_in_page.dart';
 import 'package:legy/features/profile/profile_settings/sections/logout/confirm_out_button_widget.dart';
+import 'package:legy/features/auth/app/auth_cubit.dart';
 
 class BuildBackdropFilter extends StatelessWidget {
   const BuildBackdropFilter({super.key});
@@ -31,34 +31,38 @@ class BuildBackdropFilter extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget content(BuildContext context) {
-  return Column(
-    children: [
-      Gap(8),
-      Text(
-        "Se déconnecter",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-      ),
-      Gap(25),
-      Text("Voulez-vous vous déconnecter ?",
-          style: TextStyles.textMedium.grey1),
-      Gap(25),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ConfirmOutButton(
-            buttonName: "Annuler",
-            buttonType: "annuler",
-            func: () => Navigator.pop(context),
-          ),
-          ConfirmOutButton(
+  Widget content(BuildContext context) {
+    return Column(
+      children: [
+        const Gap(8),
+        const Text(
+          "Se déconnecter",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+        ),
+        const Gap(25),
+        Text("Voulez-vous vous déconnecter ?",
+            style: TextStyles.textMedium.grey1),
+        const Gap(25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ConfirmOutButton(
+              buttonName: "Annuler",
+              buttonType: "annuler",
+              func: () => Navigator.pop(context),
+            ),
+            ConfirmOutButton(
               buttonName: "Déconnexion",
               buttonType: "deconnexion",
-              func: () => context.go(SignInPage.routePath)),
-        ],
-      )
-    ],
-  );
+              func: () async {
+                context.read<LoginCubit>().logout();
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+      ],
+    );
+  }
 }

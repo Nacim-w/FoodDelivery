@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/auth_widgets/auth_widgets.dart';
+import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/profile/personal_data/widgets/continue_button_widget.dart';
 import 'package:legy/features/profile/profile_settings/sections/profile_picture/profile_picture_widgets.dart';
 

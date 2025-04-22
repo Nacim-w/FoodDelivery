@@ -3,14 +3,32 @@ part of 'router.dart';
 final _rootNagivatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 
 final router = GoRouter(
-  errorBuilder: (context, state) => const ErrorPage(),
+  refreshListenable: Global.authNotifier,
+
   navigatorKey: _rootNagivatorKey,
-  initialLocation: HomePage.routePath,
+  initialLocation: SignInPage.routePath,
+  errorBuilder: (context, state) => const ErrorPage(),
+
+  //  Redirect Logic
+  redirect: (context, state) {
+    final isLoggedIn = Global.authNotifier.isLoggedIn;
+    final isLoggingIn = state.uri.toString() == SignInPage.routePath;
+
+    if (!isLoggedIn && !isLoggingIn) {
+      return SignInPage.routePath;
+    }
+
+    if (isLoggedIn && isLoggingIn) {
+      return HomePage.routePath;
+    }
+
+    return null;
+  },
+
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) => LayoutScaffold(
-        navigationShell: navigationShell,
-      ),
+      builder: (context, state, navigationShell) =>
+          LayoutScaffold(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [
@@ -47,19 +65,19 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: ProfileSettingsPage.routePath, // '/profile-settings'
+              path: ProfileSettingsPage.routePath,
               builder: (context, state) => const ProfileSettingsPage(),
               routes: [
                 GoRoute(
-                  path: HelpCenterPage.routePath, // 'help-center'
+                  path: HelpCenterPage.routePath,
                   builder: (context, state) => const HelpCenterPage(),
                 ),
                 GoRoute(
-                  path: ParamsPage.routePath, // 'params'
+                  path: ParamsPage.routePath,
                   builder: (context, state) => const ParamsPage(),
                 ),
                 GoRoute(
-                  path: PersonalDataPage.routePath, // 'personal-data'
+                  path: PersonalDataPage.routePath,
                   builder: (context, state) => const PersonalDataPage(),
                 ),
               ],
@@ -68,6 +86,8 @@ final router = GoRouter(
         ),
       ],
     ),
+
+    // 🆓 Public Routes
     GoRoute(
       path: SignInPage.routePath,
       builder: (context, state) => const SignInPage(),

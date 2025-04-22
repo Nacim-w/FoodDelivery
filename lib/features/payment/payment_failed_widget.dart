@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
 import 'package:legy/features/home/home_page.dart';
 
 class PaymentSuccessWidget extends StatelessWidget {

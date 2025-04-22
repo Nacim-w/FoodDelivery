@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/res/styles/colours.dart';
-import 'package:legy/features/auth/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
 
 class CancelOrderContent extends StatefulWidget {
   const CancelOrderContent({super.key});

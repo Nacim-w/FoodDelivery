@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:legy/features/profile/profile_settings/widgets/profile_settings_widgets.dart';
 
 class ProfileSettingsPage extends StatefulWidget {
@@ -13,6 +14,6 @@ class ProfileSettingsPage extends StatefulWidget {
 class _ProfileSettingsState extends State<ProfileSettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return ProfileSettingsForm();
+    return const ProfileSettingsForm();
   }
 }
