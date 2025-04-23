@@ -12,19 +12,37 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
     try {
       final responseCategories = await homeService.getTopCategories();
-      /*final responseRestaurants = await homeService.getNearbyRestaurants(
-          longitude: 11, latitude: 28, maxDistanceKm: 100, limit: 100);
-*/
+
       final categories = responseCategories;
-      //final restaurants = responseRestaurants;
 
       emit(
-        HomeLoaded(categories: categories),
+        CategoriesLoaded(categories: categories),
       );
     } catch (e, stackTrace) {
       debugPrint('Error loading categories: $e');
       debugPrint('StackTrace: $stackTrace');
       emit(HomeError(message: 'Failed to load categories: $e'));
+    }
+  }
+
+  Future<void> loadRestaurants() async {
+    emit(HomeLoading());
+    try {
+      final responseRestaurants = await homeService.getNearbyRestaurants(
+          longitude: 73.4447,
+          latitude: 44.6928,
+          maxDistanceKm: 10000,
+          limit: 10000);
+
+      final restaurants = responseRestaurants;
+
+      emit(
+        RestaurantsLoaded(restaurants: restaurants),
+      );
+    } catch (e, stackTrace) {
+      debugPrint('Error loading restaurants: $e');
+      debugPrint('StackTrace: $stackTrace');
+      emit(HomeError(message: 'Failed to load restaurants: $e'));
     }
   }
 }

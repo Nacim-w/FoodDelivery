@@ -14,7 +14,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Menu icon to open drawer
             Builder(
               builder: (context) => GestureDetector(
                 onTap: () => Scaffold.of(context).openDrawer(),
@@ -25,8 +24,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-
-            // Notification + Cart icons
             Row(
               children: [
                 _iconCircleButton(Media.notificationBell),

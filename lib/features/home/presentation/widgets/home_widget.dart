@@ -23,6 +23,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     context.read<HomeCubit>().loadCategories();
+    context.read<HomeCubit>().loadRestaurants();
   }
 
   @override
@@ -91,10 +92,10 @@ class _HomeState extends State<Home> {
                               state.message,
                               style: TextStyle(color: Colors.red),
                             ));
-                          } else if (state is HomeLoaded) {
+                          } else if (state is CategoriesLoaded) {
                             return SingleChildScrollView(
-                              scrollDirection: Axis
-                                  .horizontal, // Make it scrollable horizontally
+                              scrollDirection:
+                                  Axis.horizontal, // Horizontal scroll
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: state.categories.map((category) {
@@ -127,34 +128,45 @@ class _HomeState extends State<Home> {
                                 ),
                               ],
                             ),
-                            HomeRestaurants(
-                              image: Media.restaurant1,
-                              title: "Pizzania",
-                              description:
-                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
-                              time: "20-25 mins",
-                              rating: "4.6",
-                              distance: "7 km",
-                            ),
-                            Gap(15),
-                            HomeRestaurants(
-                              image: Media.restaurant2,
-                              title: "Burger",
-                              description:
-                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
-                              time: "20-25 mins",
-                              rating: "4.6",
-                              distance: "7 km",
-                            ),
-                            Gap(15),
-                            HomeRestaurants(
-                              image: Media.restaurant3,
-                              title: "Burger",
-                              description:
-                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
-                              time: "20-25 mins",
-                              rating: "4.6",
-                              distance: "7 km",
+                            BlocBuilder<HomeCubit, HomeState>(
+                              builder: (context, state) {
+                                if (state is HomeLoading) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else if (state is HomeError) {
+                                  return Center(
+                                      child: Text(
+                                    state.message,
+                                    style: TextStyle(color: Colors.red),
+                                  ));
+                                } else if (state is RestaurantsLoaded) {
+                                  return SingleChildScrollView(
+                                    child: Column(
+                                      children:
+                                          state.restaurants.map((restaurant) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom:
+                                                  16.0), // Add gap between items
+                                          child: HomeRestaurants(
+                                            image: restaurant
+                                                .logo, // Dynamic image
+                                            title:
+                                                restaurant.nom, // Dynamic name
+                                            description:
+                                                "Description goes here",
+                                            time: "20-25 mins",
+                                            rating: "4.6",
+                                            distance: "7 km",
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  );
+                                }
+                                return const Center(
+                                    child: Text('No restaurants found.'));
+                              },
                             ),
                           ],
                         ),

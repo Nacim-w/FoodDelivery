@@ -25,18 +25,13 @@ class HomeService {
         uri,
         headers: NetworkConstants.headers,
       );
-
-      debugPrint("response: ${response.body}");
-      debugPrint("response: ${response.statusCode}");
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
-        debugPrint("Error occurred: $errorMessage");
         throw ServerException(message: errorMessage);
       }
 
       final data = jsonDecode(response.body);
-
       debugPrint("Decoded Data: $data");
 
       if (data is List) {
@@ -60,7 +55,7 @@ class HomeService {
     }
   }
 
-  /* Future<List<NearbyRestaurantModel>> getNearbyRestaurants({
+  Future<List<NearbyRestaurantModel>> getNearbyRestaurants({
     required double longitude,
     required double latitude,
     required double maxDistanceKm,
@@ -68,7 +63,7 @@ class HomeService {
   }) async {
     try {
       final uri =
-          Uri.parse('${NetworkConstants.baseUrl}$NEARBY_RESTAURANT_ENDPOINT/')
+          Uri.parse('${NetworkConstants.baseUrl}$NEARBY_RESTAURANT_ENDPOINT')
               .replace(queryParameters: {
         'longitude': longitude.toString(),
         'latitude': latitude.toString(),
@@ -76,22 +71,18 @@ class HomeService {
         'limit': limit.toString(),
       });
 
-      final response = await http.get(
+      final response2 = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
 
-      debugPrint("response: ${response.body}");
-      debugPrint("response: ${response.statusCode}");
-
-      if (response.statusCode != 200) {
-        final errorJson = jsonDecode(response.body);
+      if (response2.statusCode != 200) {
+        final errorJson = jsonDecode(response2.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
-        debugPrint("Error occurred: $errorMessage");
         throw ServerException(message: errorMessage);
       }
 
-      final List data = jsonDecode(response.body);
+      final List data = jsonDecode(response2.body);
 
       debugPrint("Decoded Data: $data");
 
@@ -110,5 +101,4 @@ class HomeService {
       );
     }
   }
-*/
 }
