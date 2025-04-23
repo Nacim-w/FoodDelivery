@@ -68,6 +68,14 @@ abstract class Media {
   static const restaurant1 = '$_baseImage/restaurant1.png';
   static const restaurant2 = '$_baseImage/restaurant2.png';
   static const restaurant3 = '$_baseImage/restaurant3.png';
+  //drawer
+  static const legyDrawer = '$_baseImage/legy.png';
+  static const profileDrawer = '$_baseIcon/profileDrawer.svg';
+  static const orderDrawer = '$_baseIcon/orderDrawer.svg';
+  static const paymentDrawer = '$_baseIcon/paymentDrawer.svg';
+  static const locationDrawer = '$_baseIcon/locationDrawer.svg';
+  static const settingsDrawer = '$_baseIcon/settingsDrawer.svg';
+  static const subscriptionDrawer = '$_baseIcon/subscriptionDrawer.svg';
 
   static const ramenNoodles = '$_baseImage/ramenNoodles.png';
   static const paymentLocation = '$_baseIcon/paymentLocation.svg';

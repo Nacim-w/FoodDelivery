@@ -15,7 +15,6 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: const SignInForm(),

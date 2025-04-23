@@ -12,7 +12,7 @@ class ProfileSettingsForm extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Gap(80),
+          Gap(30),
           ProfileAvatar(name: "asma", email: "asma@gmail.com"),
           Gap(50),
           OrdersContainer(),

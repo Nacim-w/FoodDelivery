@@ -1,0 +1,172 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
+import 'package:legy/features/home/presentation/app/adapter/home_state.dart';
+import 'package:legy/features/home/presentation/widgets/home_caroussel_widget.dart';
+import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
+import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.dart';
+import 'package:legy/features/home/presentation/widgets/home_story_widget.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().loadCategories();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double storyHeight = MediaQuery.of(context).size.height * 0.12;
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          SizedBox(
+            height: storyHeight,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: stories, // Ensure you have a 'stories' list available
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: storyHeight),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Offres spéciales",
+                            style: TextStyles.textSemiBoldLarge.black3),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text("Tout voir",
+                              style: TextStyles.textSemiBoldSmall.yellow5),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(child: HomeCaroussal()),
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Catégories',
+                                style: TextStyles.textSemiBoldLarge.black3),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('Tout voir',
+                                  style: TextStyles.textSemiBoldSmall.yellow5),
+                            ),
+                          ],
+                        ),
+                      ),
+                      BlocBuilder<HomeCubit, HomeState>(
+                        builder: (context, state) {
+                          if (state is HomeLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (state is HomeError) {
+                            return Center(
+                                child: Text(
+                              state.message,
+                              style: TextStyle(color: Colors.red),
+                            ));
+                          } else if (state is HomeLoaded) {
+                            return SingleChildScrollView(
+                              scrollDirection: Axis
+                                  .horizontal, // Make it scrollable horizontally
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: state.categories.map((category) {
+                                  return HomeCategory(
+                                      image: Media.categorie1,
+                                      name: category.name);
+                                }).toList(),
+                              ),
+                            );
+                          }
+                          return const Center(
+                              child: Text('Something went wrong.'));
+                        },
+                      ),
+                      Gap(10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Restaurants près de vous',
+                                    style: TextStyles.textSemiBoldLarge.black3),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text('Tout voir',
+                                      style:
+                                          TextStyles.textSemiBoldSmall.yellow5),
+                                ),
+                              ],
+                            ),
+                            HomeRestaurants(
+                              image: Media.restaurant1,
+                              title: "Pizzania",
+                              description:
+                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
+                              time: "20-25 mins",
+                              rating: "4.6",
+                              distance: "7 km",
+                            ),
+                            Gap(15),
+                            HomeRestaurants(
+                              image: Media.restaurant2,
+                              title: "Burger",
+                              description:
+                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
+                              time: "20-25 mins",
+                              rating: "4.6",
+                              distance: "7 km",
+                            ),
+                            Gap(15),
+                            HomeRestaurants(
+                              image: Media.restaurant3,
+                              title: "Burger",
+                              description:
+                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
+                              time: "20-25 mins",
+                              rating: "4.6",
+                              distance: "7 km",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

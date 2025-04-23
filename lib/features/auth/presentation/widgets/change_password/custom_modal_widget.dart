@@ -6,7 +6,7 @@ import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login
 
 import 'package:legy/features/auth/presentation/widgets/change_password/build_succ_slog_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/change_password/build_succ_txt_widget.dart';
-import 'package:legy/features/home/home_page.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class CustomModal extends StatelessWidget {
   const CustomModal({super.key});

@@ -99,7 +99,7 @@ class InputField extends StatelessWidget {
         inputFormatters: inputFormatters,
         validator: defaultValidation
             ? (value) {
-                if (value == null || value.isEmpty) return 'Required Field';
+                if (value == null || value.isEmpty) return 'Champ Obligatoire';
                 return validator?.call(value);
               }
             : validator,

@@ -4,6 +4,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   await _authInit();
+  await _homeInit();
   await _cacheInit();
 }
 
@@ -19,4 +20,10 @@ Future<void> _authInit() async {
   sl
     ..registerFactory(() => AuthCubit(authService: sl()))
     ..registerLazySingleton(() => AuthService());
+}
+
+Future<void> _homeInit() async {
+  sl
+    ..registerFactory(() => HomeCubit(homeService: sl()))
+    ..registerLazySingleton(() => HomeService());
 }

@@ -50,4 +50,7 @@ extension TextStyleExt on TextStyle {
   TextStyle get white1 => copyWith(color: Colours.lightThemeWhite1);
   TextStyle get white2 => copyWith(color: Colours.lightThemeWhite2);
   TextStyle get white3 => copyWith(color: Colours.lightThemeWhite3);
+
+  // Drawer color
+  TextStyle get drawerColor => copyWith(color: Colours.lightThemeDrawerColor);
 }

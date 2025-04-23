@@ -28,7 +28,7 @@ class CurrentOrderWidget extends StatelessWidget {
                 width: 1.5,
               ),
             ),
-            height: MediaQuery.of(context).size.height * 0.3,
+            height: MediaQuery.of(context).size.height * 0.25,
             child: Stack(
               children: [
                 Positioned(

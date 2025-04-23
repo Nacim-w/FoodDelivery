@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
+import 'package:legy/features/profile/params/params_page.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
 import 'package:legy/features/profile/profile_settings/sections/logout/build_backdrop_filter_widget.dart';
 import 'package:legy/features/profile/profile_settings/sections/settings_list_view/profile_list_tile_widget.dart';
@@ -39,17 +40,20 @@ class BuiltListView extends StatelessWidget {
         BuildListTile(
           icon: Media.favorites,
           title: "Mes favoris",
-          onTap: () => context.push('${ProfileSettingsPage.routePath}/${HelpCenterPage.routePath}'),
+          onTap: () => context.push(
+              '${ProfileSettingsPage.routePath}/${HelpCenterPage.routePath}'),
         ),
         BuildListTile(
           icon: Media.helpCenter,
           title: "Centre d’aide",
-          onTap: () => context.push('/profile/help-center'),
+          onTap: () => context.push(
+              '${ProfileSettingsPage.routePath}/${HelpCenterPage.routePath}'),
         ),
         BuildListTile(
           icon: Media.parametre,
           title: "Paramètre",
-          onTap: () => context.push('/profile/params'),
+          onTap: () => context
+              .push('${ProfileSettingsPage.routePath}/${ParamsPage.routePath}'),
         ),
         BuildListTile(
             icon: Media.logOut,

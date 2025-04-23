@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:legy/features/home/widgets/caroussal_items.dart';
+import 'package:legy/features/home/presentation/widgets/caroussal_items.dart';
 
 class HomeCaroussal extends StatefulWidget {
   const HomeCaroussal({super.key});

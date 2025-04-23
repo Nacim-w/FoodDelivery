@@ -30,7 +30,6 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String phoneNumber,
     required String address,
-    required String guestSessionId,
   }) async {
     emit(AuthLoading());
     try {

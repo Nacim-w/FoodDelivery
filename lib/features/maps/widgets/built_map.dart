@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:legy/core/res/styles/colours.dart';
 
-import 'package:legy/features/maps/map_widget.dart';
+import 'package:legy/features/maps/widgets/bottom_sheet.dart';
 import 'package:legy/features/maps/widgets/save_button.dart';
 
 class BuiltMap extends StatefulWidget {
@@ -82,7 +82,7 @@ class _BuiltMapState extends State<BuiltMap> {
         Stack(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.7,
               child: GoogleMap(
                 onMapCreated: (controller) => mapController = controller,
                 initialCameraPosition: CameraPosition(

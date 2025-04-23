@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
-import 'package:legy/core/utils/error_response.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
@@ -30,10 +29,9 @@ class AuthService {
         headers: NetworkConstants.headers,
       );
       if (response.statusCode != 200) {
-        final errorResponse = ErrorResponse(message: response.body);
-        throw ServerException(
-          message: errorResponse.errorMessage,
-        );
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        throw ServerException(message: errorMessage);
       }
       final data = jsonDecode(response.body);
       final userResponse = LoginResponseModel.fromJson(data);
@@ -76,9 +74,10 @@ class AuthService {
       );
 
       if (response.statusCode != 201 && response.statusCode != 200) {
-        final errorResponse = ErrorResponse(message: response.body);
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
         throw ServerException(
-          message: errorResponse.errorMessage,
+          message: errorMessage.errorMessage,
         );
       }
 

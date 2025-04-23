@@ -21,7 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
             horizontal: 20,

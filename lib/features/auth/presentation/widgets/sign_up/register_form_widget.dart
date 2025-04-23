@@ -11,13 +11,13 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/utils/core_utils.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seperator_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/checkbox_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/confidential_text_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/suggest_login_widget.dart';
-import 'package:legy/features/home/home_page.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -29,13 +29,13 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final formKey = GlobalKey<FormState>();
 
-  final _usernameController = TextEditingController();
   final _firstnameController = TextEditingController();
   final _lastnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   bool isPasswordVisible = true;
   bool isChecked = false;
@@ -60,17 +60,28 @@ class _RegisterFormState extends State<RegisterForm> {
 
     if (formKey.currentState!.validate()) {
       context.read<AuthCubit>().register(
-            username: _usernameController.text.trim(),
+            username:
+                '${_firstnameController.text.trim()} ${_lastnameController.text.trim()}',
             firstname: _firstnameController.text.trim(),
             lastname: _lastnameController.text.trim(),
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
             phoneNumber: _phoneController.text.trim(),
             address: _addressController.text.trim(),
-            guestSessionId:
-                "guest-session-id-placeholder", // Replace with real logic if needed
           );
     }
+  }
+
+  @override
+  void dispose() {
+    _firstnameController.dispose();
+    _lastnameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -81,7 +92,7 @@ class _RegisterFormState extends State<RegisterForm> {
           showToast(message: message, success: false);
         }
         if (state is Registered) {
-          context.go(HomePage.routePath);
+          context.go(SignInPage.routePath);
         }
       },
       builder: (context, state) {
@@ -90,6 +101,7 @@ class _RegisterFormState extends State<RegisterForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Gap(60),
               buildAutoSizeText("Créez votre nouveau compte"),
               Text(
                 "Créez un compte pour commencer à chercher les plats que vous aimez.",
@@ -97,6 +109,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const Gap(20),
               VerticalLabelField(
+                defaultValidation: false,
                 label: "Adresse e-mail",
                 hintText: "Écrivez votre adresse e-mail",
                 keyboardType: TextInputType.emailAddress,
@@ -107,15 +120,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const Gap(20),
               VerticalLabelField(
-                label: "Nom d'utilisateur",
-                hintText: "Écrivez votre nom d'utilisateur",
-                controller: _usernameController,
-                validator: (val) => val == null || val.isEmpty
-                    ? "Veuillez entrer votre nom d'utilisateur"
-                    : null,
-              ),
-              const Gap(20),
-              VerticalLabelField(
+                defaultValidation: false,
                 label: "Prénom",
                 hintText: "Écrivez votre prénom",
                 controller: _firstnameController,
@@ -125,6 +130,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const Gap(20),
               VerticalLabelField(
+                defaultValidation: false,
                 label: "Nom",
                 hintText: "Écrivez votre nom",
                 controller: _lastnameController,
@@ -134,6 +140,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const Gap(20),
               VerticalLabelField(
+                defaultValidation: false,
                 label: "Téléphone",
                 hintText: "Entrez votre numéro de téléphone",
                 controller: _phoneController,
@@ -144,6 +151,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const Gap(20),
               VerticalLabelField(
+                defaultValidation: false,
                 label: "Adresse",
                 hintText: "Entrez votre adresse",
                 controller: _addressController,
@@ -153,6 +161,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
               const Gap(20),
               VerticalLabelField(
+                defaultValidation: false,
                 label: "Mot de passe",
                 hintText: "Écrivez votre mot de passe",
                 controller: _passwordController,
@@ -160,11 +169,35 @@ class _RegisterFormState extends State<RegisterForm> {
                 suffixIcon: IconButton(
                   onPressed: _togglePasswordVisibility,
                   icon: Icon(
-                      isPasswordVisible ? IconlyLight.hide : IconlyLight.show),
+                    isPasswordVisible ? IconlyLight.hide : IconlyLight.show,
+                  ),
                 ),
                 validator: (val) => val == null || val.isEmpty
                     ? "Veuillez entrer un mot de passe"
                     : null,
+              ),
+              const Gap(20),
+              VerticalLabelField(
+                defaultValidation: false,
+                label: "Confirmer le mot de passe",
+                hintText: "Répétez votre mot de passe",
+                controller: _confirmPasswordController,
+                obscureText: isPasswordVisible,
+                suffixIcon: IconButton(
+                  onPressed: _togglePasswordVisibility,
+                  icon: Icon(
+                    isPasswordVisible ? IconlyLight.hide : IconlyLight.show,
+                  ),
+                ),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Veuillez confirmer votre mot de passe";
+                  }
+                  if (val != _passwordController.text) {
+                    return "Les mots de passe ne correspondent pas";
+                  }
+                  return null;
+                },
               ),
               const Gap(20),
               Row(

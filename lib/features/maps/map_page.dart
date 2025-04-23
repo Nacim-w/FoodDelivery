@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/order/full_cart/full_cart_widget.dart';
+import 'package:legy/features/maps/widgets/built_map.dart';
 
-class CartPage extends StatefulWidget {
-  static const routePath = '/orders';
-
-  const CartPage({super.key});
+class MapPage extends StatefulWidget {
+  static const routePath = 'map';
+  const MapPage({super.key});
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,11 @@ class _CartPageState extends State<CartPage> {
           },
         ),
       ),
-      body: FullCart(),
+      body: Column(
+        children: [
+          BuiltMap(),
+        ],
+      ),
     );
   }
 }

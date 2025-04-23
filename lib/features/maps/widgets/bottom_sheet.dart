@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:legy/features/maps/widgets/built_map.dart';
-
 import 'package:legy/features/maps/widgets/home_dropdowns.dart';
 import 'package:legy/features/maps/widgets/home_textarea.dart';
 import 'package:legy/features/maps/widgets/home_textfield.dart';
 import 'package:legy/features/maps/widgets/save_button.dart';
-
-class MapWidget extends StatefulWidget {
-  const MapWidget({super.key});
-
-  @override
-  State<MapWidget> createState() => _MapWidgetState();
-}
-
-class _MapWidgetState extends State<MapWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BuiltMap(),
-      ],
-    );
-  }
-}
 
 class MapBottomSheet extends StatelessWidget {
   const MapBottomSheet({super.key});

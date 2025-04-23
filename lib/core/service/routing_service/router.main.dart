@@ -18,13 +18,28 @@ final router = GoRouter(
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
-          LayoutScaffold(navigationShell: navigationShell),
+          DashboardPage(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: HomePage.routePath,
-              builder: (context, state) => const HomePage(),
+              builder: (context, state) {
+                return BlocProvider(
+                  create: (_) => sl<HomeCubit>(),
+                  child: HomePage(),
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: PaymentPage.routePath,
+                  builder: (context, state) => const PaymentPage(),
+                ),
+                GoRoute(
+                  path: MapPage.routePath,
+                  builder: (context, state) => const MapPage(),
+                ),
+              ],
             ),
           ],
         ),

@@ -16,7 +16,7 @@ import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widget
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seperator_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_in/suggest_register_widget.dart';
-import 'package:legy/features/home/home_page.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -56,6 +56,7 @@ class _SignInFormState extends State<SignInForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Gap(60),
               buildAutoSizeText('Connectez-vous à votre compte.'),
               Text(
                 "Veuillez vous connecter à votre compte",
