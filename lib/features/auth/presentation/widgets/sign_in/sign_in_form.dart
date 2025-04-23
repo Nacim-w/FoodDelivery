@@ -80,7 +80,9 @@ class _SignInFormState extends State<SignInForm> {
                 label: 'Mot de passe',
                 suffixIcon: IconButton(
                     onPressed: _togglePasswordVisibility,
-                    icon: Icon(IconlyLight.password)),
+                    icon: Icon(isPasswordVisible
+                        ? IconlyLight.hide
+                        : IconlyLight.show)),
                 controller: _passwordController,
                 hintText: 'Écrivez votre mot de passe',
                 keyboardType: TextInputType.text,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_in/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
-  static const routePath = '/signUpPage';
+  static const routePath = '/signInPage';
 
   const SignInPage({super.key});
 

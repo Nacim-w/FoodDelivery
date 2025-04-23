@@ -20,6 +20,15 @@ final class LoggedIn extends AuthState {
   List<Object> get props => [loginResponseModel];
 }
 
+final class Registered extends AuthState {
+  const Registered(this.registerResponseModel);
+
+  final RegisterResponseModel registerResponseModel;
+
+  @override
+  List<Object> get props => [registerResponseModel];
+}
+
 final class AuthError extends AuthState {
   const AuthError(this.message);
 

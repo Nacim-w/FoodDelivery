@@ -10,7 +10,7 @@ final router = GoRouter(
       path: '/',
       redirect: (context, state) {
         final sessionToken = Cache.instance.sessionToken;
-        if (sessionToken != null ) {
+        if (sessionToken != null) {
           return HomePage.routePath;
         }
         return SignInPage.routePath;
@@ -87,7 +87,12 @@ final router = GoRouter(
     ),
     GoRoute(
       path: SignUpPage.routePath,
-      builder: (context, state) => const SignUpPage(),
+      builder: (context, state) {
+        return BlocProvider(
+          create: (_) => sl<AuthCubit>(),
+          child: SignUpPage(),
+        );
+      },
     ),
     GoRoute(
       path: ForgotPasswordPage.routePath,

@@ -9,7 +9,7 @@ import 'package:legy/features/auth/presentation/views/change_password_view.dart'
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:legy/features/auth/presentation/views/otp_view.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
-import 'package:legy/features/auth/presentation/views/sign_up_View.dart';
+import 'package:legy/features/auth/presentation/views/sign_up_view.dart';
 import 'package:legy/features/home/home_page.dart';
 import 'package:legy/features/order/full_cart/full_cart_widget.dart';
 import 'package:legy/features/order/order_history/order_history_page.dart';
