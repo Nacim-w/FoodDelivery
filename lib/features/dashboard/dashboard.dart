@@ -20,7 +20,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: isHomeTab ? const HomeDrawer() : null,
+      drawer:  const HomeDrawer() ,
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: destinations,

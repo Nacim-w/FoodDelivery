@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_state.dart';
 import 'package:legy/features/home/service/home_service.dart';
@@ -6,43 +5,36 @@ import 'package:legy/features/home/service/home_service.dart';
 class HomeCubit extends Cubit<HomeState> {
   final HomeService homeService;
 
-  HomeCubit({required this.homeService}) : super(HomeInitial());
+  HomeCubit({required this.homeService}) : super(HomeState());
 
   Future<void> loadCategories() async {
-    emit(HomeLoading());
+    emit(state.copyWith(isLoadingCategories: true, categoriesError: null));
     try {
-      final responseCategories = await homeService.getTopCategories();
-
-      final categories = responseCategories;
-
-      emit(
-        CategoriesLoaded(categories: categories),
-      );
-    } catch (e, stackTrace) {
-      debugPrint('Error loading categories: $e');
-      debugPrint('StackTrace: $stackTrace');
-      emit(HomeError(message: 'Failed to load categories: $e'));
+      final categories = await homeService.getTopCategories();
+      emit(state.copyWith(categories: categories, isLoadingCategories: false));
+    } catch (e) {
+      emit(state.copyWith(
+        categoriesError: 'Failed to load categories: $e',
+        isLoadingCategories: false,
+      ));
     }
   }
 
   Future<void> loadRestaurants() async {
-    emit(HomeLoading());
+    emit(state.copyWith(isLoadingRestaurants: true, restaurantsError: null));
     try {
-      final responseRestaurants = await homeService.getNearbyRestaurants(
-          longitude: 73.4447,
-          latitude: 44.6928,
-          maxDistanceKm: 10000,
-          limit: 10000);
-
-      final restaurants = responseRestaurants;
-
-      emit(
-        RestaurantsLoaded(restaurants: restaurants),
+      final restaurants = await homeService.getNearbyRestaurants(
+        longitude: 73.4447,
+        latitude: 44.6928,
+        maxDistanceKm: 10000,
+        limit: 10000,
       );
-    } catch (e, stackTrace) {
-      debugPrint('Error loading restaurants: $e');
-      debugPrint('StackTrace: $stackTrace');
-      emit(HomeError(message: 'Failed to load restaurants: $e'));
+      emit(state.copyWith(restaurants: restaurants, isLoadingRestaurants: false));
+    } catch (e) {
+      emit(state.copyWith(
+        restaurantsError: 'Failed to load restaurants: $e',
+        isLoadingRestaurants: false,
+      ));
     }
   }
 }

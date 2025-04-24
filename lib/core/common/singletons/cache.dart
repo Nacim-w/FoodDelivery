@@ -7,7 +7,6 @@ class Cache {
 
   String? get sessionToken => _sessionToken;
 
-
   void setSessionToken(String? newToken) {
     if (_sessionToken != newToken) _sessionToken = newToken;
   }

@@ -43,14 +43,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       height: 40,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(25),
-            blurRadius: 3,
-            offset: const Offset(0, 3),
-          ),
-        ],
         shape: BoxShape.circle,
+        border: Border.all(
+          //TODO: change the grey color
+          color: const Color(0xFFEBE8E8),
+          width: 2,
+        ),
       ),
       child: IconButton(
         onPressed: () {}, // Add your logic here

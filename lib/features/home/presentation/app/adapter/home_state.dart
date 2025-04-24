@@ -2,40 +2,48 @@ import 'package:equatable/equatable.dart';
 import 'package:legy/features/home/model/nearby_restaurant_model.dart';
 import 'package:legy/features/home/model/top_category_model.dart';
 
-abstract class HomeState extends Equatable {
-  const HomeState();
+class HomeState extends Equatable {
+  final List<TopCategoryModel>? categories;
+  final List<NearbyRestaurantModel>? restaurants;
+  final bool isLoadingCategories;
+  final bool isLoadingRestaurants;
+  final String? categoriesError;
+  final String? restaurantsError;
+
+  const HomeState({
+    this.categories,
+    this.restaurants,
+    this.isLoadingCategories = false,
+    this.isLoadingRestaurants = false,
+    this.categoriesError,
+    this.restaurantsError,
+  });
+
+  HomeState copyWith({
+    List<TopCategoryModel>? categories,
+    List<NearbyRestaurantModel>? restaurants,
+    bool? isLoadingCategories,
+    bool? isLoadingRestaurants,
+    String? categoriesError,
+    String? restaurantsError,
+  }) {
+    return HomeState(
+      categories: categories ?? this.categories,
+      restaurants: restaurants ?? this.restaurants,
+      isLoadingCategories: isLoadingCategories ?? this.isLoadingCategories,
+      isLoadingRestaurants: isLoadingRestaurants ?? this.isLoadingRestaurants,
+      categoriesError: categoriesError ?? this.categoriesError,
+      restaurantsError: restaurantsError ?? this.restaurantsError,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
-
-class HomeInitial extends HomeState {}
-
-class HomeLoading extends HomeState {}
-
-class CategoriesLoaded extends HomeState {
-  const CategoriesLoaded({required this.categories});
-
-  final List<TopCategoryModel> categories;
-
-  @override
-  List<Object> get props => [categories];
-}
-
-class RestaurantsLoaded extends HomeState {
-  const RestaurantsLoaded({required this.restaurants});
-
-  final List<NearbyRestaurantModel> restaurants;
-
-  @override
-  List<Object> get props => [restaurants];
-}
-
-class HomeError extends HomeState {
-  const HomeError({required this.message});
-
-  final String message;
-
-  @override
-  List<Object> get props => [message];
+  List<Object?> get props => [
+    categories,
+    restaurants,
+    isLoadingCategories,
+    isLoadingRestaurants,
+    categoriesError,
+    restaurantsError,
+  ];
 }

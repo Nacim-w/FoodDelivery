@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -29,6 +30,7 @@ class HomeRestaurants extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
       decoration: BoxDecoration(
+        //TODO: change the white color
         color: Color(0xFFFFF6F5),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -38,11 +40,12 @@ class HomeRestaurants extends StatelessWidget {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.13,
+                //TODO: change the width 100
                 width: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: NetworkImage(image),
+                    image: CachedNetworkImageProvider(image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -54,6 +57,7 @@ class HomeRestaurants extends StatelessWidget {
                   Text(title, style: TextStyles.textMediumSmall.brown5),
                   Gap(5),
                   SizedBox(
+                    //TODO: change the width 200
                     width: 200,
                     child: AutoSizeText(
                       description,

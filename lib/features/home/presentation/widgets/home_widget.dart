@@ -83,22 +83,18 @@ class _HomeState extends State<Home> {
                       ),
                       BlocBuilder<HomeCubit, HomeState>(
                         builder: (context, state) {
-                          if (state is HomeLoading) {
+                          if (state.isLoadingCategories) {
                             return const Center(
                                 child: CircularProgressIndicator());
-                          } else if (state is HomeError) {
-                            return Center(
-                                child: Text(
-                              state.message,
-                              style: TextStyle(color: Colors.red),
-                            ));
-                          } else if (state is CategoriesLoaded) {
+                          } else if (state.categoriesError != null) {
+                            return Center(child: Text(state.categoriesError!));
+                          } else if (state.categories != null) {
                             return SingleChildScrollView(
                               scrollDirection:
                                   Axis.horizontal, // Horizontal scroll
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: state.categories.map((category) {
+                                children: state.categories!.map((category) {
                                   return HomeCategory(
                                       image: Media.categorie1,
                                       name: category.name);
@@ -130,29 +126,26 @@ class _HomeState extends State<Home> {
                             ),
                             BlocBuilder<HomeCubit, HomeState>(
                               builder: (context, state) {
-                                if (state is HomeLoading) {
+                                if (state.isLoadingRestaurants) {
                                   return const Center(
                                       child: CircularProgressIndicator());
-                                } else if (state is HomeError) {
+                                } else if (state.restaurantsError != null) {
                                   return Center(
-                                      child: Text(
-                                    state.message,
-                                    style: TextStyle(color: Colors.red),
-                                  ));
-                                } else if (state is RestaurantsLoaded) {
+                                      child: Text(state.restaurantsError!));
+                                } else if (state.categories != null) {
                                   return SingleChildScrollView(
                                     child: Column(
                                       children:
-                                          state.restaurants.map((restaurant) {
+                                          state.restaurants!.map((restaurant) {
                                         return Padding(
                                           padding: const EdgeInsets.only(
                                               bottom:
                                                   16.0), // Add gap between items
                                           child: HomeRestaurants(
-                                            image: restaurant
-                                                .logo, // Dynamic image
-                                            title:
-                                                restaurant.nom, // Dynamic name
+                                            image: restaurant.logo,
+                                            // Dynamic image
+                                            title: restaurant.nom,
+                                            // Dynamic name
                                             description:
                                                 "Description goes here",
                                             time: "20-25 mins",

@@ -33,6 +33,7 @@ dependencies:
   provider: ^6.1.4
   shared_preferences: ^2.5.2
   iconly: ^1.0.1
+  cached_network_image: ^3.4.1
 
   
 dev_dependencies:
