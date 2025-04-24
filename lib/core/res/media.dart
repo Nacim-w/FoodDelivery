@@ -65,9 +65,13 @@ abstract class Media {
   static const categorie2 = '$_baseImage/categorie2.png';
   static const categorie3 = '$_baseImage/categorie3.png';
   static const categorie4 = '$_baseImage/categorie4.png';
+  //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
   static const restaurant2 = '$_baseImage/restaurant2.png';
   static const restaurant3 = '$_baseImage/restaurant3.png';
+  static const restaurant4 = '$_baseImage/restaurant4.png';
+  static const restaurant5 = '$_baseImage/restaurant5.png';
+  static const restaurant6 = '$_baseImage/restaurant6.png';
   //drawer
   static const legyDrawer = '$_baseImage/legy.png';
   static const profileDrawer = '$_baseIcon/profileDrawer.svg';

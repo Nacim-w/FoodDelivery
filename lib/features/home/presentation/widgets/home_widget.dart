@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_state.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_caroussel_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_story_widget.dart';
+import 'package:legy/features/restaurant/presentation/view/restaurant_view.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -118,7 +121,8 @@ class _HomeState extends State<Home> {
                                 Text('Restaurants près de vous',
                                     style: TextStyles.textSemiBoldLarge.black3),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () => context.push(
+                                      '${HomePage.routePath}/${RestaurantView.routePath}'),
                                   child: Text('Tout voir',
                                       style:
                                           TextStyles.textSemiBoldSmall.yellow5),

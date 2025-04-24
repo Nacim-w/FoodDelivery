@@ -39,6 +39,10 @@ final router = GoRouter(
                   path: MapPage.routePath,
                   builder: (context, state) => const MapPage(),
                 ),
+                GoRoute(
+                  path: RestaurantView.routePath,
+                  builder: (context, state) => const RestaurantView(),
+                ),
               ],
             ),
           ],

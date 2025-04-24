@@ -21,4 +21,5 @@ import 'package:legy/features/profile/help_center/help_center_page.dart';
 import 'package:legy/features/profile/params/params_page.dart';
 import 'package:legy/features/profile/personal_data/personal_data_page.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
+import 'package:legy/features/restaurant/presentation/view/restaurant_view.dart';
 part 'router.main.dart';

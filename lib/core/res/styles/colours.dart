@@ -24,6 +24,7 @@ abstract class Colours {
   static const Color lightThemeYellow3 = Color(0xFFF9D769);
   static const Color lightThemeYellow2 = Color(0xFFFCE49A);
   static const Color lightThemeYellow1 = Color(0xFFFEF1CE);
+  static const Color lightThemeYellow0 = Color(0xFFF1C623);
 
   static const Color lightThemeBrown5 = Color(0xFF441406);
   static const Color lightThemeBrown4 = Color(0xFF694338);
@@ -37,6 +38,7 @@ abstract class Colours {
 
   static const Color lightThemeGrey1 = Color(0xFF878787);
   static const Color lightThemeGrey2 = Color(0xFFD6D6D6);
+  static const Color lightThemeGrey3 = Color(0xFF636366);
 
   static const Color lightThemeWhite1 = Color(0xFFFFFFFF);
   static const Color lightThemeWhite2 = Color(0xFFF8F9FA);
