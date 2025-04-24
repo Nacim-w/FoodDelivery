@@ -4,6 +4,8 @@ import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/service/home_service.dart';
+import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
+import 'package:legy/features/restaurant/service/restaurant_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'injection_container.main.dart';

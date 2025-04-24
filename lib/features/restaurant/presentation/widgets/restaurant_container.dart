@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:legy/core/extension/media_extension.dart';
@@ -9,8 +10,14 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
 class RestaurantContainer extends StatelessWidget {
-  const RestaurantContainer({super.key, required this.image});
+  const RestaurantContainer(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.rating});
   final String image;
+  final String name;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class RestaurantContainer extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-              image: AssetImage(image),
+              image: CachedNetworkImageProvider(image),
               fit: BoxFit.cover,
             ),
           ),
@@ -61,7 +68,7 @@ class RestaurantContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.star, color: Colors.white, size: 12),
-                Text("4.6", style: TextStyles.textBoldSmall.white1)
+                Text('$rating', style: TextStyles.textBoldSmall.white1)
               ],
             ),
           ),
@@ -73,7 +80,7 @@ class RestaurantContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Gourmet Griddle',
+                name,
                 style: TextStyles.textBoldSmall.white1,
               ),
               Text('Indian - Mangalore',
@@ -81,7 +88,7 @@ class RestaurantContainer extends StatelessWidget {
               Row(
                 children: [
                   SvgPicture.asset(Media.clock, width: 12, height: 12),
-                  Text('15 min', style: TextStyles.textBoldSmallest.white1),
+                  Text('  15 min', style: TextStyles.textBoldSmallest.white1),
                   Text('-', style: TextStyles.textBoldSmallest.white1),
                   Text('3 km', style: TextStyles.textBoldSmallest.white1)
                 ],
