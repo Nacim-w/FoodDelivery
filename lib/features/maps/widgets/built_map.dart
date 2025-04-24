@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 
 import 'package:legy/features/maps/widgets/bottom_sheet.dart';
@@ -82,7 +83,7 @@ class _BuiltMapState extends State<BuiltMap> {
         Stack(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: context.height * 0.7,
               child: GoogleMap(
                 onMapCreated: (controller) => mapController = controller,
                 initialCameraPosition: CameraPosition(
@@ -96,7 +97,7 @@ class _BuiltMapState extends State<BuiltMap> {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.1,
+              bottom: context.height * 0.1,
               right: 20,
               child: FloatingActionButton(
                 onPressed: _goToCurrentLocation,

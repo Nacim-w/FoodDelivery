@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -123,7 +124,7 @@ class _SignInFormState extends State<SignInForm> {
 
   Widget _forgotPassword(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: context.width * 0.9,
       height: 44,
       child: GestureDetector(
         onTap: () => context.go(ForgotPasswordPage.routePath),

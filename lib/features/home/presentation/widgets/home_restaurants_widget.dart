@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -28,10 +29,9 @@ class HomeRestaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.13,
+      height: context.height * 0.13,
       decoration: BoxDecoration(
-        //TODO: change the white color
-        color: Color(0xFFFFF6F5),
+        color: Colours.lightThemeWhite4,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Stack(
@@ -39,9 +39,8 @@ class HomeRestaurants extends StatelessWidget {
           Row(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.13,
-                //TODO: change the width 100
-                width: 100,
+                height: context.height * 0.13,
+                width: context.width * 0.25,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
@@ -57,8 +56,7 @@ class HomeRestaurants extends StatelessWidget {
                   Text(title, style: TextStyles.textMediumSmall.brown5),
                   Gap(5),
                   SizedBox(
-                    //TODO: change the width 200
-                    width: 200,
+                    width: context.width * 0.55,
                     child: AutoSizeText(
                       description,
                       style: TextStyles.textRegularTiny.black1,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -45,7 +46,7 @@ class _PaymentFormState extends State<PaymentForm> {
                 children: [
                   Text("Utiliser carte", style: TextStyles.textSemiBold.grey1),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.55,
+                    width: context.width * 0.55,
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -100,7 +101,7 @@ class _PaymentFormState extends State<PaymentForm> {
                       Text("Expry date: ",
                           style: TextStyles.textRegularSmall.grey1),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.42,
+                        width: context.width * 0.42,
                         child: PaymentTextfield(),
                       ),
                     ],
@@ -110,7 +111,7 @@ class _PaymentFormState extends State<PaymentForm> {
                       Text("Expry date: ",
                           style: TextStyles.textRegularSmall.grey1),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.42,
+                        width: context.width * 0.42,
                         child: PaymentTextfield(),
                       ),
                     ],
@@ -139,7 +140,7 @@ class _PaymentFormState extends State<PaymentForm> {
               ),
               Gap(10.0),
               Container(
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: context.height * 0.25,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colours.lightThemeGrey2),
                   borderRadius: BorderRadius.circular(12),

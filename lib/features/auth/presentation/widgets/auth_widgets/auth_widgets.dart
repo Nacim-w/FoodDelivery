@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -41,8 +42,8 @@ class _CustomTextFieldState extends State<BuildTextField> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.07,
+      width: context.width,
+      height: context.height * 0.07,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         border: Border.all(color: Colours.lightThemeGrey2),

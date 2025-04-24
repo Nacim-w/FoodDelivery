@@ -71,18 +71,18 @@ class HomeService {
         'limit': limit.toString(),
       });
 
-      final response2 = await http.get(
+      final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
 
-      if (response2.statusCode != 200) {
-        final errorJson = jsonDecode(response2.body);
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
         throw ServerException(message: errorMessage);
       }
 
-      final List data = jsonDecode(response2.body);
+      final List data = jsonDecode(response.body);
 
       debugPrint("Decoded Data: $data");
 

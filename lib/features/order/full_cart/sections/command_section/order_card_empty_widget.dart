@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -25,7 +26,7 @@ class _CommandCardEmptyState extends State<CommandCardEmpty> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
-      width: MediaQuery.of(context).size.width,
+      width: context.width,
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite1,
         borderRadius: BorderRadius.circular(20),

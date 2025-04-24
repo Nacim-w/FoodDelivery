@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
@@ -28,7 +29,7 @@ class ForgotPasswordForm extends StatelessWidget {
           hintText: "E-mail",
           textType: "email",
         ),
-        Gap(MediaQuery.of(context).size.height * 0.16),
+        Gap(context.height * 0.16),
         BuildLogInAndRegButton(
           "Continue",
           "forgotPassword",

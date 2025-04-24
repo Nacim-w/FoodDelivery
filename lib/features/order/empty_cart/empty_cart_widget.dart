@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -19,7 +20,7 @@ class EmptyCart extends StatelessWidget {
         Text("Aïe ! J'ai faim !", style: TextStyles.titleMediumSmall.black2),
         Gap(15),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: context.width * 0.7,
           height: 100,
           child: AutoSizeText(
             "Il semble que vous n'ayez pas encore commandé de nourriture.",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 
 import 'package:legy/features/profile/help_center/widgets/built_expanded_tile.dart';
 
@@ -8,7 +9,7 @@ class BuildAnimatedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: context.height * 0.6,
       child: ListView(
         children: [
           BuildExpendableTile(

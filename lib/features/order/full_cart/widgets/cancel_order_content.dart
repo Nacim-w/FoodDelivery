@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
@@ -17,8 +18,8 @@ class _CancelOrderContentState extends State<CancelOrderContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
-      width: MediaQuery.of(context).size.width,
+      height: context.height * 0.8,
+      width: context.width,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),

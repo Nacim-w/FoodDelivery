@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
 
@@ -14,8 +15,8 @@ class CustomModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.55,
-      width: MediaQuery.of(context).size.width,
+      height: context.height * 0.55,
+      width: context.width,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),

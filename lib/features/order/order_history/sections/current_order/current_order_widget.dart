@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -28,7 +29,7 @@ class CurrentOrderWidget extends StatelessWidget {
                 width: 1.5,
               ),
             ),
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: context.height * 0.25,
             child: Stack(
               children: [
                 Positioned(
@@ -120,7 +121,7 @@ class CurrentOrderWidget extends StatelessWidget {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
+                            width: context.width * 0.4,
                             height: 50,
                             decoration: BoxDecoration(
                               color: Colours.lightThemeOrange5,
@@ -141,7 +142,7 @@ class CurrentOrderWidget extends StatelessWidget {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
+                            width: context.width * 0.4,
                             height: 50,
                             decoration: BoxDecoration(
                               border: Border.all(

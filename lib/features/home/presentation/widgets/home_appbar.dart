@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/colours.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -45,8 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: Colors.white,
         shape: BoxShape.circle,
         border: Border.all(
-          //TODO: change the grey color
-          color: const Color(0xFFEBE8E8),
+          color: Colours.lightThemeWhite1,
           width: 2,
         ),
       ),

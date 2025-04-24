@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -20,7 +21,7 @@ class ConfirmOutButton extends StatelessWidget {
     return GestureDetector(
       onTap: func,
       child: Container(
-        width: MediaQuery.of(context).size.width / 3,
+        width: context.width / 3,
         height: 50,
         decoration: BoxDecoration(
           color: buttonType == "deconnexion"

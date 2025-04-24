@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -27,7 +28,7 @@ class OrderContentWidget extends StatelessWidget {
           maxLines: 2,
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: context.width * 0.7,
           child: Text(
             "On revient encore meilleurs !",
             style: TextStyles.textMediumLarge.grey1,

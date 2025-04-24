@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 
@@ -52,7 +53,7 @@ class _BurgerCustomizationScreenState extends State<BurgerCustomizationScreen> {
 
           // Burger Display Section
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6, // Adjusted height
+            height: context.height * 0.6, // Adjusted height
             child: isBurgerReady
                 ? Column(
                     children: [

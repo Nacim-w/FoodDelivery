@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
 class DrawerItem extends StatelessWidget {
@@ -27,7 +28,7 @@ class DrawerItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: Colours.lightThemeGrey2,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(

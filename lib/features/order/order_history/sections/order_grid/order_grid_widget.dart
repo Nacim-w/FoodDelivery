@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -38,7 +39,7 @@ class _OrderGridState extends State<OrderGrid> {
         ),
         Gap(15),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: context.height * 0.4,
           child: GridView.count(
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,

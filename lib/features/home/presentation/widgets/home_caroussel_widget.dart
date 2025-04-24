@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:legy/features/home/presentation/widgets/caroussal_items.dart';
@@ -41,7 +42,7 @@ class _HomeCaroussalState extends State<HomeCaroussal> {
             ),
           ],
           options: CarouselOptions(
-            height: MediaQuery.of(context).size.height * 0.17,
+            height: context.height * 0.17,
             initialPage: _currentPage,
             enableInfiniteScroll: true,
             autoPlay: true,

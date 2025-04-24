@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -45,7 +46,7 @@ class _CommandState extends State<Command> {
           ),
           Gap(20),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: context.height * 0.55,
             child: ListView(
               children: [
                 CommandCardWidget(

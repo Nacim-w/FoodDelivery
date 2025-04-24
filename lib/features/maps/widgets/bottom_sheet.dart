@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/features/maps/widgets/home_dropdowns.dart';
 import 'package:legy/features/maps/widgets/home_textarea.dart';
 import 'package:legy/features/maps/widgets/home_textfield.dart';
@@ -11,7 +12,7 @@ class MapBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.60,
+      height: context.height * 0.60,
       child: Column(
         children: [
           Expanded(

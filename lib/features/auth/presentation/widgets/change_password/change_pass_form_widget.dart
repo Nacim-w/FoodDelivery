@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
@@ -47,7 +48,7 @@ class ChangePasswordForm extends StatelessWidget {
             "Les deux mots de passe doivent correspondre.",
             style: TextStyles.textMedium.grey1,
           ),
-          Gap(MediaQuery.of(context).size.height * 0.20),
+          Gap(context.height * 0.20),
           BuildLogInAndRegButton(
               "Changer mot de passe", "Verify", () => showCustomModal(context)),
         ],

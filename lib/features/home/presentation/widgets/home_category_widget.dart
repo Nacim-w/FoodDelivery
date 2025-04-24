@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -19,8 +20,8 @@ class HomeCategory extends StatelessWidget {
           ClipOval(
             child: Image.asset(
               image,
-              width: MediaQuery.of(context).size.width * 0.22,
-              height: MediaQuery.of(context).size.width * 0.22,
+              width: context.width * 0.22,
+              height: context.width * 0.22,
               fit: BoxFit.cover,
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -35,7 +36,7 @@ class PaymentButtonWidget extends StatelessWidget {
               },
             ),
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: context.width * 0.5,
               height: 50,
               decoration: BoxDecoration(
                 color: Colours.lightThemeOrange5,

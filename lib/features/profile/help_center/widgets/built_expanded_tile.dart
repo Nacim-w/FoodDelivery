@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/profile/help_center/widgets/animated_container_widget.dart';
@@ -19,7 +20,7 @@ class BuildExpendableTile extends StatelessWidget {
     return ExpandableTile(
       //Autosizetext has an issue with ExpandbleTile thats why I wrapped it with Sizedbox
       title: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.7,
+        width: context.width * 0.7,
         child: AutoSizeText(
           title,
           style: TextStyles.textSemiBold,

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 
@@ -40,7 +41,7 @@ class CaroussalItems extends StatelessWidget {
                   Text(title, style: TextStyles.textRegularSmallest.white1),
                   Gap(20),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
+                    width: context.width * 0.4,
                     child: AutoSizeText(
                       "PROFITEZ DE LA DÉLICIEUSE CRÊPE",
                       style: TextStyles.textSemiBoldLarge.white1,
