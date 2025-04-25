@@ -23,5 +23,6 @@ import 'package:legy/features/profile/profile_settings/profile_settings_page.dar
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/view/restaurant_view.dart';
 import 'package:legy/features/restaurant/presentation/view/restaurants_view.dart';
+import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';
 import 'package:legy/features/search/presentation/view/search_view.dart';
 part 'router.main.dart';

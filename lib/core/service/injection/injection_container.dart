@@ -6,6 +6,8 @@ import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/service/home_service.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/service/restaurant_service.dart';
+import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';
+import 'package:legy/features/search/service/search_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'injection_container.main.dart';

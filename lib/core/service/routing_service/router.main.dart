@@ -77,7 +77,12 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: SearchView.routePath,
-              builder: (context, state) => const SearchView(),
+              builder: (context, state) {
+                return BlocProvider(
+                  create: (_) => sl<SearchCubit>(),
+                  child: SearchView(),
+                );
+              },
             ),
           ],
         ),
