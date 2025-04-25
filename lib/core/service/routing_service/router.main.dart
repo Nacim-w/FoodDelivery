@@ -68,16 +68,16 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: FullCart.routePath,
-              builder: (context, state) => const FullCart(),
+              path: OrderHistoryPage.routePath,
+              builder: (context, state) => const OrderHistoryPage(),
             ),
           ],
         ),
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: OrderHistoryPage.routePath,
-              builder: (context, state) => const OrderHistoryPage(),
+              path: SearchView.routePath,
+              builder: (context, state) => const SearchView(),
             ),
           ],
         ),

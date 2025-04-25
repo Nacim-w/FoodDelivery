@@ -13,7 +13,6 @@ import 'package:legy/features/auth/presentation/views/sign_up_page.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
-import 'package:legy/features/order/full_cart/full_cart_widget.dart';
 import 'package:legy/features/order/order_history/order_history_page.dart';
 import 'package:legy/features/error/error_page.dart';
 import 'package:legy/features/payment/payment_page.dart';
@@ -24,4 +23,5 @@ import 'package:legy/features/profile/profile_settings/profile_settings_page.dar
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/view/restaurant_view.dart';
 import 'package:legy/features/restaurant/presentation/view/restaurants_view.dart';
+import 'package:legy/features/search/presentation/view/search_view.dart';
 part 'router.main.dart';
