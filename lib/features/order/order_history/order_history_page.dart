@@ -30,11 +30,13 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
       ),
       body: Padding(
         padding: EdgeInsets.all(12),
-        child: Column(
-          children: [
-            CurrentOrderWidget(),
-            OrderGrid(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CurrentOrderWidget(),
+              OrderGrid(),
+            ],
+          ),
         ),
       ),
     );
