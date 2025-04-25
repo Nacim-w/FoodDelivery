@@ -20,7 +20,6 @@ class RestaurantService {
         uri,
         headers: NetworkConstants.headers,
       );
-      debugPrint("Response Status Code: ${response.statusCode}");
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
@@ -28,7 +27,6 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
-      debugPrint("Decoded Data: $data");
 
       if (data is List) {
         List<RestaurantModel> restaurants = data
@@ -47,6 +45,42 @@ class RestaurantService {
       throw const ServerException(
         message:
             "Une erreur s'est produite lors de la récupération des catégories. Veuillez réessayer plus tard.",
+      );
+    }
+  }
+
+  Future<RestaurantModel> getRestaurantById(String restaurantId) async {
+    try {
+      final uri = Uri.parse(
+          '${NetworkConstants.baseUrl}$RESTAURANT_ENDPOINT/$restaurantId');
+
+      final response = await http.get(
+        uri,
+        headers: NetworkConstants.headers,
+      );
+      debugPrint("Response Status Code: ${response.statusCode}");
+
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        throw ServerException(message: errorMessage);
+      }
+
+      final data = jsonDecode(response.body);
+      debugPrint("HELLO: $data");
+      if (data is Map) {
+        return RestaurantModel.fromJson(data as Map<String, dynamic>);
+      } else {
+        throw ServerException(
+          message: "Invalid data format received. Expected a single object.",
+        );
+      }
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite lors de la récupération du restaurant. Veuillez réessayer plus tard.",
       );
     }
   }

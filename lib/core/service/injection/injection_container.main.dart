@@ -31,6 +31,6 @@ Future<void> _homeInit() async {
 
 Future<void> _restaurantInit() async {
   sl
-    ..registerFactory(() => RestaurantCubit(restaurantService: sl()))
+    ..registerFactory(() => RestaurantCubit(restaurantsService: sl()))
     ..registerLazySingleton(() => RestaurantService());
 }

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_container.dart';
 
-class RestaurantWidget extends StatefulWidget {
-  const RestaurantWidget({super.key});
+class RestaurantsWidget extends StatefulWidget {
+  const RestaurantsWidget({super.key});
 
   @override
-  State<RestaurantWidget> createState() => _RestaurantWidgetState();
+  State<RestaurantsWidget> createState() => _RestaurantsWidgetState();
 }
 
-class _RestaurantWidgetState extends State<RestaurantWidget> {
+class _RestaurantsWidgetState extends State<RestaurantsWidget> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<RestaurantCubit>()
-        .loadRestaurants(); // Load restaurants on init
+    context.read<RestaurantCubit>().loadRestaurants();
   }
 
   @override
@@ -42,15 +41,15 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
           Gap(10),
           BlocBuilder<RestaurantCubit, RestaurantState>(
             builder: (context, state) {
-              if (state is RestaurantLoading) {
+              if (state is RestaurantsLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state is RestaurantError) {
+              } else if (state is RestaurantsError) {
                 return Center(
                   child: Text(state.message),
                 );
-              } else if (state is RestaurantLoaded) {
+              } else if (state is RestaurantsLoaded) {
                 return GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -62,16 +61,21 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   itemCount: state.restaurants.length,
                   itemBuilder: (context, index) {
                     final restaurant = state.restaurants[index];
-                    return RestaurantContainer(
-                      image: restaurant.logo,
-                      name: restaurant.nom,
-                      rating: restaurant.averageRating,
+                    return GestureDetector(
+                      onTap: () {
+                        context.push(
+                            '/home/restaurants/restaurant/${restaurant.id}');
+                      },
+                      child: RestaurantContainer(
+                        image: restaurant.logo,
+                        name: restaurant.nom,
+                        rating: restaurant.averageRating,
+                      ),
                     );
                   },
                 );
               }
-              return const Center(
-                  child: Text('No restaurants found.')); // Fallback if no data
+              return const Center(child: Text('No restaurants found.'));
             },
           ),
         ],

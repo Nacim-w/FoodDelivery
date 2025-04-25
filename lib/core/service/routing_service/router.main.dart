@@ -40,13 +40,26 @@ final router = GoRouter(
                   builder: (context, state) => const MapPage(),
                 ),
                 GoRoute(
-                  path: RestaurantView.routePath,
+                  path: RestaurantsView.routePath,
                   builder: (context, state) {
                     return BlocProvider(
                       create: (_) => sl<RestaurantCubit>(),
-                      child: RestaurantView(),
+                      child: RestaurantsView(),
                     );
                   },
+                  routes: [
+                    GoRoute(
+                      path: 'restaurant/:restaurantId',
+                      builder: (context, state) {
+                        final restaurantId =
+                            state.pathParameters['restaurantId']!;
+                        return BlocProvider(
+                          create: (_) => sl<RestaurantCubit>(),
+                          child: RestaurantView(restaurantId: restaurantId),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

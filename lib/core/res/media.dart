@@ -72,6 +72,8 @@ abstract class Media {
   static const restaurant4 = '$_baseImage/restaurant4.png';
   static const restaurant5 = '$_baseImage/restaurant5.png';
   static const restaurant6 = '$_baseImage/restaurant6.png';
+  static const augmentedReality = '$_baseIcon/augmentedReality.svg';
+
   //drawer
   static const legyDrawer = '$_baseImage/legy.png';
   static const profileDrawer = '$_baseIcon/profileDrawer.svg';

@@ -13,7 +13,7 @@ import 'package:legy/features/home/presentation/widgets/home_caroussel_widget.da
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_story_widget.dart';
-import 'package:legy/features/restaurant/presentation/view/restaurant_view.dart';
+import 'package:legy/features/restaurant/presentation/view/restaurants_view.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
             height: storyHeight,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: stories, // Ensure you have a 'stories' list available
+              children: stories,
             ),
           ),
           Padding(
@@ -122,7 +122,7 @@ class _HomeState extends State<Home> {
                                     style: TextStyles.textSemiBoldLarge.black3),
                                 TextButton(
                                   onPressed: () => context.push(
-                                      '${HomePage.routePath}/${RestaurantView.routePath}'),
+                                      '${HomePage.routePath}/${RestaurantsView.routePath}'),
                                   child: Text('Tout voir',
                                       style:
                                           TextStyles.textSemiBoldSmall.yellow5),
@@ -144,18 +144,22 @@ class _HomeState extends State<Home> {
                                           state.restaurants!.map((restaurant) {
                                         return Padding(
                                           padding: const EdgeInsets.only(
-                                              bottom:
-                                                  16.0), // Add gap between items
-                                          child: HomeRestaurants(
-                                            image: restaurant.logo,
-                                            // Dynamic image
-                                            title: restaurant.nom,
-                                            // Dynamic name
-                                            description:
-                                                "Description goes here",
-                                            time: "20-25 mins",
-                                            rating: "4.6",
-                                            distance: "7 km",
+                                              bottom: 16.0),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              context.push(
+                                                  '/home/restaurants/restaurant/${restaurant.id}');
+                                            },
+                                            child: HomeRestaurants(
+                                              image: restaurant.logo,
+                                              title: restaurant.nom,
+                                              description:
+                                                  "Description goes here",
+                                              time: "20-25 mins",
+                                              rating:
+                                                  '${restaurant.averageRating}',
+                                              distance: "7 km",
+                                            ),
                                           ),
                                         );
                                       }).toList(),

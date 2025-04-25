@@ -57,6 +57,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w500,
     fontSize: 22,
   );
+  static const TextStyle titleMediumTiny = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+  );
   static const TextStyle textMediumLargest = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 18,
