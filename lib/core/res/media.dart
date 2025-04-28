@@ -111,6 +111,10 @@ abstract class Media {
   static const dish2 = '$_baseImage/dish2.png';
   static const categoryScooter = '$_baseIcon/categoryScooter.svg';
   static const categoryStar = '$_baseIcon/categoryStar.svg';
+  //order page
+  static const emptyActiveOrder = '$_baseIcon/emptyActiveOrder.svg';
+  static const emptyCanceledOrder = '$_baseIcon/emptyCanceledOrder.svg';
+  static const emptyCompletedOrder = '$_baseIcon/emptyCompletedOrder.svg';
 
   static const burgerMeat1 = '$_baseImage/burgerMeat1.png';
   static const burgerMeat2 = '$_baseImage/burgerMeat2.png';

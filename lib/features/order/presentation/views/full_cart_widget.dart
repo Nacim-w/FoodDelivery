@@ -3,9 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
-import 'package:legy/features/order/full_cart/sections/command_section/order_widget.dart';
-import 'package:legy/features/order/full_cart/sections/details_section/details_widget.dart';
-import 'package:legy/features/order/full_cart/sections/payment_section/payment_widget.dart';
+import 'package:legy/features/order/presentation/widgets/command_section/order_widget.dart';
+import 'package:legy/features/order/presentation/widgets/details_section/details_widget.dart';
+import 'package:legy/features/order/presentation/widgets/payment_section/payment_widget.dart';
 
 class FullCart extends StatefulWidget {
   static const routePath = 'fullCart';

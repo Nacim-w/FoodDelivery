@@ -3,7 +3,7 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/order/full_cart/sections/command_section/cancel_order_widget.dart';
+import 'package:legy/features/order/presentation/widgets/command_section/cancel_order_widget.dart';
 
 class PaymentButtonWidget extends StatelessWidget {
   const PaymentButtonWidget({super.key});

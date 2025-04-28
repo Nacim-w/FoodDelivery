@@ -4,7 +4,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
-import 'package:legy/features/order/full_cart/full_cart_widget.dart';
+import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
 import 'package:legy/features/order/order_page.dart';
 import 'package:legy/features/profile/params/params_page.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';

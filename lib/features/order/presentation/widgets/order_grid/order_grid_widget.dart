@@ -5,7 +5,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/order/order_history/sections/order_grid/grid_order_item_widget.dart';
+import 'package:legy/features/order/presentation/widgets/order_grid/grid_order_item_widget.dart';
 
 class OrderGrid extends StatefulWidget {
   const OrderGrid({super.key});

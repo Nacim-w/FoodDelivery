@@ -77,7 +77,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: OrderHistoryPage.routePath,
-              builder: (context, state) => const OrderHistoryPage(),
+              builder: (context, state) => const EmptyHistoryView(),
             ),
           ],
         ),

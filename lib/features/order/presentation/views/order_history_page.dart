@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/order/order_history/sections/current_order/current_order_widget.dart';
-import 'package:legy/features/order/order_history/sections/order_grid/order_grid_widget.dart';
+import 'package:legy/features/order/presentation/widgets/current_order_widget.dart';
+import 'package:legy/features/order/presentation/widgets/order_grid/order_grid_widget.dart';
 
 class OrderHistoryPage extends StatefulWidget {
   static const routePath = '/orders';

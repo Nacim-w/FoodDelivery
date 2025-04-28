@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
-import 'package:legy/features/order/full_cart/sections/command_section/order_content_widget.dart';
+import 'package:legy/features/order/presentation/widgets/command_section/order_content_widget.dart';
 
 class CancelOrderWidget extends StatelessWidget {
   const CancelOrderWidget({super.key});

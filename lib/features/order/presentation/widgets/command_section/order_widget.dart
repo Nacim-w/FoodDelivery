@@ -5,9 +5,9 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/order/full_cart/sections/command_section/order_card__full_widget.dart';
-import 'package:legy/features/order/full_cart/sections/command_section/order_card_empty_widget.dart';
-import 'package:legy/features/order/full_cart/widgets/cancel_order_content.dart';
+import 'package:legy/features/order/presentation/widgets/command_section/order_card__full_widget.dart';
+import 'package:legy/features/order/presentation/widgets/command_section/order_card_empty_widget.dart';
+import 'package:legy/features/order/presentation/widgets/cancel_order_content.dart';
 
 class Command extends StatefulWidget {
   const Command({super.key});
