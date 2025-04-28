@@ -19,19 +19,16 @@ class SearchService {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$SEARCH_ENDPOINT');
       final token = _cacheHelper.getSessionToken();
-      debugPrint("Token: $token");
       final response = await http.get(
         uri.replace(queryParameters: {'query': query}),
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       );
-      debugPrint('Request URL: ${response.request?.url}');
-      debugPrint('HELLO');
-      debugPrint('Response: ${response.body}');
-      debugPrint('Status Code: ${response.statusCode}');
-      debugPrint('Headers: ${response.headers}');
-      debugPrint('Request Headers: ${response.request?.headers}');
+      //
+      // final uri = NetworkConstants.baseUrl.startsWith('https')
+      //     ? Uri.https(NetworkConstants.developAuthority, endpoint, queryParams)
+      //     : Uri.http(NetworkConstants.localAuthority, endpoint, queryParams);
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';

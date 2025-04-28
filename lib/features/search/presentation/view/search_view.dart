@@ -45,7 +45,7 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0).copyWith(top: 60),
         child: Column(
           children: [
             SearchBarWidget(
