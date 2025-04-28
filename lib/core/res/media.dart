@@ -37,7 +37,6 @@ abstract class Media {
   //cart page
   static const emptyCart = '$_baseImage/emptyCart.png';
   static const burger = '$_baseImage/burger.png';
-  static const salad = '$_baseImage/salad.png';
   static const heart = '$_baseImage/heart.png';
   //order history
   static const bestSeller = '$_baseImage/bestSeller.png';
@@ -67,11 +66,8 @@ abstract class Media {
   static const categorie4 = '$_baseImage/categorie4.png';
   //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
-  static const restaurant2 = '$_baseImage/restaurant2.png';
-  static const restaurant3 = '$_baseImage/restaurant3.png';
-  static const restaurant4 = '$_baseImage/restaurant4.png';
-  static const restaurant5 = '$_baseImage/restaurant5.png';
-  static const restaurant6 = '$_baseImage/restaurant6.png';
+  static const background = '$_baseImage/background.png';
+
   static const augmentedReality = '$_baseIcon/augmentedReality.svg';
 
   //drawer
@@ -107,6 +103,14 @@ abstract class Media {
   static const burgerFilling6 = '$_baseImage/burgerFilling6.png';
   static const burgerFilling7 = '$_baseImage/burgerFilling7.png';
   static const burgerFilling8 = '$_baseImage/burgerFilling8.png';
+  //categories
+  static const categorySwap1 = '$_baseImage/categorySwap1.png';
+  static const categorySwap2 = '$_baseImage/categorySwap2.png';
+  static const categorySwap3 = '$_baseImage/categorySwap3.png';
+  static const dish1 = '$_baseImage/dish1.png';
+  static const dish2 = '$_baseImage/dish2.png';
+  static const categoryScooter = '$_baseIcon/categoryScooter.svg';
+  static const categoryStar = '$_baseIcon/categoryStar.svg';
 
   static const burgerMeat1 = '$_baseImage/burgerMeat1.png';
   static const burgerMeat2 = '$_baseImage/burgerMeat2.png';

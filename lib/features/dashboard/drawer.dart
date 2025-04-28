@@ -106,10 +106,9 @@ class HomeDrawer extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               DrawerItem(
-                leading: Media.paymentDrawer,
-                title: 'Paiement',
-                routing: FullCart.routePath,
-              ),
+                  leading: Media.paymentDrawer,
+                  title: 'Paiement',
+                  routing: '${HomePage.routePath}/${FullCart.routePath}'),
               const SizedBox(height: 8.0),
               DrawerItem(
                 leading: Media.locationDrawer,

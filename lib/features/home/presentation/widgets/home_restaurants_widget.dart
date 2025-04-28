@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -29,7 +29,7 @@ class HomeRestaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height * 0.13,
+      height: context.height * 0.115,
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite4,
         borderRadius: BorderRadius.circular(20),
@@ -39,12 +39,12 @@ class HomeRestaurants extends StatelessWidget {
           Row(
             children: [
               Container(
-                height: context.height * 0.13,
+                height: context.height * 0.115,
                 width: context.width * 0.25,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: CachedNetworkImageProvider(image),
+                    image: AssetImage(image),
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -6,6 +6,7 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_state.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
@@ -78,7 +79,8 @@ class _HomeState extends State<Home> {
                             Text('Catégories',
                                 style: TextStyles.textSemiBoldLarge.black3),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () => context.push(
+                                  '${HomePage.routePath}/${CategoryDetails.routePath}'),
                               child: Text('Tout voir',
                                   style: TextStyles.textSemiBoldSmall.yellow5),
                             ),

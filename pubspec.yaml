@@ -67,3 +67,13 @@ flutter:
           weight: 800
         - asset: assets/fonts/Montserrat-900.ttf
           weight: 900
+        - asset: assets/fonts/Satoshi-light.ttf
+          weight: 100
+        - asset: assets/fonts/Satoshi-regular.ttf
+          weight: 400
+        - asset: assets/fonts/Satoshi-medium.ttf
+          weight: 500
+        - asset: assets/fonts/Satoshi-bold.ttf
+          weight: 700
+        - asset: assets/fonts/Satoshi-black.ttf
+          weight: 900

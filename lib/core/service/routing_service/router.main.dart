@@ -36,6 +36,10 @@ final router = GoRouter(
                   builder: (context, state) => const PaymentPage(),
                 ),
                 GoRoute(
+                  path: FullCart.routePath,
+                  builder: (context, state) => const FullCart(),
+                ),
+                GoRoute(
                   path: MapPage.routePath,
                   builder: (context, state) => const MapPage(),
                 ),
@@ -60,6 +64,10 @@ final router = GoRouter(
                       },
                     ),
                   ],
+                ),
+                GoRoute(
+                  path: CategoryDetails.routePath,
+                  builder: (context, state) => const CategoryDetails(),
                 ),
               ],
             ),

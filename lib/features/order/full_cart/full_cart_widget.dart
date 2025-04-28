@@ -8,7 +8,7 @@ import 'package:legy/features/order/full_cart/sections/details_section/details_w
 import 'package:legy/features/order/full_cart/sections/payment_section/payment_widget.dart';
 
 class FullCart extends StatefulWidget {
-  static const routePath = '/fullCart';
+  static const routePath = 'fullCart';
 
   const FullCart({super.key});
 

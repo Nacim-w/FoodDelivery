@@ -1,6 +1,16 @@
 import 'package:flutter/widgets.dart';
 
 abstract class TextStyles {
+  static const TextStyle text900fs28 = TextStyle(
+    fontWeight: FontWeight.w900,
+    fontSize: 28,
+    fontFamily: "Satoshi",
+  );
+  static const TextStyle text900fs24 = TextStyle(
+    fontWeight: FontWeight.w900,
+    fontSize: 24,
+    fontFamily: "Satoshi",
+  );
   static const TextStyle titleBoldy = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 24,
