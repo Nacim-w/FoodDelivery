@@ -11,7 +11,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding:
+            const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -43,11 +44,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colours.lightThemeWhite1,
         shape: BoxShape.circle,
         border: Border.all(
-          color: Colours.lightThemeWhite1,
-          width: 2,
+          color: Colours.lightThemeGrey2,
+          width: 0.5,
         ),
       ),
       child: IconButton(
@@ -62,5 +63,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(72);
+  Size get preferredSize => const Size.fromHeight(55);
 }

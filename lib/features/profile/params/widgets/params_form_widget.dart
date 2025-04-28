@@ -18,10 +18,7 @@ class _ParamsFormState extends State<ParamsForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Settings"),
-        elevation: 0,
-      ),
+      appBar: AppBar(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16),
         children: [
@@ -58,7 +55,7 @@ class _ParamsFormState extends State<ParamsForm> {
 
 Widget _buildSectionTitle(String title) {
   return Padding(
-    padding: EdgeInsets.only(top: 16, bottom: 8),
+    padding: EdgeInsets.only(bottom: 8),
     child: Text(
       title,
       style: TextStyles.textSemiBold.black1,

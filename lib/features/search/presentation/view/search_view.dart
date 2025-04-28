@@ -45,18 +45,15 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0).copyWith(top: 60),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SearchBarWidget(
-                onSearch:
-                    addRecentSearch), // Pass the add function to the SearchBar
+            SearchBarWidget(onSearch: addRecentSearch),
             Gap(20),
             RecentSearchWidget(
               recentSearches: recentSearches,
               onRemoveSearch: removeSearch,
-              onClearAll:
-                  clearAllSearches, // Pass the remove and clear functions
+              onClearAll: clearAllSearches,
             ),
             Divider(
               color: Colors.grey.shade300,
