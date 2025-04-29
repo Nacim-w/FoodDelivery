@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/order/presentation/views/empty_cart_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -28,9 +31,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Row(
               children: [
-                _iconCircleButton(Media.notificationBell),
+                _iconCircleButton(Media.notificationBell, () {}),
                 Gap(10),
-                _iconCircleButton(Media.cart),
+                _iconCircleButton(
+                    Media.cart,
+                    () => context
+                        .go('${HomePage.routePath}/${EmptyCart.routePath}')),
               ],
             ),
           ],
@@ -39,7 +45,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _iconCircleButton(String asset) {
+  Widget _iconCircleButton(String asset, func) {
     return Container(
       width: 40,
       height: 40,
@@ -52,7 +58,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       child: IconButton(
-        onPressed: () {}, // Add your logic here
+        onPressed: func,
         icon: SvgPicture.asset(
           asset,
           width: 20,

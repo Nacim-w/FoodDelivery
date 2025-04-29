@@ -30,16 +30,20 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   void _openSearchSettingsSheet() {
     showModalBottomSheet(
+      isScrollControlled: true, // Important to allow full screen height
+      useRootNavigator: true,
+      showDragHandle: true,
+      enableDrag: true,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
         return DraggableScrollableSheet(
+          initialChildSize: 0.8,
+          minChildSize: 0.6, // Can shrink to 40%
+          maxChildSize: 0.8, // Can expand to 100%
           expand: false,
-          initialChildSize: 1,
-          minChildSize: 1,
-          maxChildSize: 1.0,
           builder: (context, scrollController) {
             return SingleChildScrollView(
               controller: scrollController,

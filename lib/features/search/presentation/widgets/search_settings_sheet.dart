@@ -34,22 +34,11 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colours.lightThemeGrey1,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
           Center(
             child: Text("Filtres", style: TextStyles.textMediumLarge),
           ),
@@ -84,8 +73,8 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
             min: 10.0,
             max: 50.0,
             values: SfRangeValues(priceRange.start, priceRange.end),
-            interval: 5, // steps between ticks
-            showLabels: true, // ✅ show min and max labels by default
+            interval: 10,
+            showLabels: true,
             activeColor: Colours.lightThemeYellow5,
             inactiveColor: Colours.lightThemeWhite2,
             onChanged: (SfRangeValues newValues) {

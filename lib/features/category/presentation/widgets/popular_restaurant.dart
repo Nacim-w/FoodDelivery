@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.dart';
+import 'package:legy/features/category/presentation/widgets/category_restaurant.dart';
 
 class PopularRestaurant extends StatefulWidget {
   const PopularRestaurant({super.key});
@@ -23,7 +23,7 @@ class _PopularRestaurantState extends State<PopularRestaurant> {
           style: TextStyles.text900fs24.brown5,
         ),
         Gap(15),
-        HomeRestaurants(
+        CategoryRestaurant(
           image: Media.restaurant1,
           title: 'Le Festin du Chef',
           description: 'description',
@@ -32,7 +32,7 @@ class _PopularRestaurantState extends State<PopularRestaurant> {
           rating: '4.6',
         ),
         Gap(15),
-        HomeRestaurants(
+        CategoryRestaurant(
           image: Media.restaurant1,
           title: 'Le Festin du Chef',
           description: 'description',
@@ -41,7 +41,7 @@ class _PopularRestaurantState extends State<PopularRestaurant> {
           rating: '4.6',
         ),
         Gap(15),
-        HomeRestaurants(
+        CategoryRestaurant(
           image: Media.restaurant1,
           title: 'Le Festin du Chef',
           description: 'description',

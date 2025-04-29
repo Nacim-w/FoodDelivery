@@ -44,6 +44,10 @@ final router = GoRouter(
                   builder: (context, state) => const MapPage(),
                 ),
                 GoRoute(
+                  path: EmptyCart.routePath,
+                  builder: (context, state) => const FullCart(),
+                ),
+                GoRoute(
                   path: RestaurantsView.routePath,
                   builder: (context, state) {
                     return BlocProvider(

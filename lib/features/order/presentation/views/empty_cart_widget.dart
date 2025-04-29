@@ -8,6 +8,8 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
 
 class EmptyCart extends StatelessWidget {
+  static const routePath = 'emptyCart';
+
   const EmptyCart({super.key});
 
   @override
