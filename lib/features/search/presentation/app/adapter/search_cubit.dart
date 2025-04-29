@@ -14,6 +14,7 @@ class SearchCubit extends Cubit<SearchState> {
     emit(SearchLoading());
     try {
       final searchResults = await searchService.search(query);
+
       emit(SearchSuccess(searchResults));
     } catch (e) {
       emit(SearchError(e.toString()));

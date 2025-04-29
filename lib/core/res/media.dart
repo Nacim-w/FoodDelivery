@@ -68,6 +68,10 @@ abstract class Media {
   static const restaurant1 = '$_baseImage/restaurant1.png';
   static const background = '$_baseImage/background.png';
 
+  //search
+  static const searchSettings = '$_baseIcon/searchSettings.svg';
+  static const searchLocation = '$_baseIcon/searchLocation.svg';
+
   static const augmentedReality = '$_baseIcon/augmentedReality.svg';
 
   //drawer

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -61,11 +62,8 @@ class _RecentOrdersWidgetState extends State<RecentOrdersWidget> {
                         style: TextStyles.textMediumSmall.black1,
                       ),
                       Gap(5),
-                      Icon(
-                        Icons.location_on_outlined,
-                        color: Colours.lightThemeOrange5,
-                        size: 18,
-                      ),
+                      SvgPicture.asset(Media.searchLocation),
+                      Gap(5),
                       Text(
                         "190m",
                         style: TextStyles.textMediumSmall.black1,

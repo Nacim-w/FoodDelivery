@@ -37,7 +37,7 @@ abstract class TextStyles {
   );
   static const TextStyle textSemiBoldLargest = TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 16,
+    fontSize: 18,
   );
   static const TextStyle textSemiBoldLarge = TextStyle(
     fontWeight: FontWeight.w600,

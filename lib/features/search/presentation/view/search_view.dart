@@ -15,29 +15,33 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  // A list to store recent searches
   List<String> recentSearches = [];
+  bool isSearching = false;
 
-  // Function to add a search to the recent searches
   void addRecentSearch(String search) {
     setState(() {
       if (!recentSearches.contains(search)) {
-        recentSearches.add(search); // Add new search if not already in the list
+        recentSearches.add(search);
       }
+      isSearching = false;
     });
   }
 
-  // Function to remove a specific search
   void removeSearch(String search) {
     setState(() {
       recentSearches.remove(search);
     });
   }
 
-  // Function to remove all searches
   void clearAllSearches() {
     setState(() {
       recentSearches.clear();
+    });
+  }
+
+  void updateSearching(bool searching) {
+    setState(() {
+      isSearching = searching;
     });
   }
 
@@ -47,27 +51,33 @@ class _SearchViewState extends State<SearchView> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SearchBarWidget(onSearch: addRecentSearch),
-            Gap(20),
-            RecentSearchWidget(
-              recentSearches: recentSearches,
-              onRemoveSearch: removeSearch,
-              onClearAll: clearAllSearches,
+            SearchBarWidget(
+              onSearch: addRecentSearch,
+              onSearchTyping: updateSearching,
             ),
-            Divider(
-              color: Colors.grey.shade300,
-              thickness: 1.0,
-              indent: 10,
-              endIndent: 10,
-            ),
-            Text(
-              'Mes commandes récentes',
-              style: TextStyles.textMediumLarge,
-            ),
-            RecentOrdersWidget(),
-            RecentOrdersWidget(),
-            RecentOrdersWidget(),
+            if (!isSearching) ...[
+              Gap(20),
+              RecentSearchWidget(
+                recentSearches: recentSearches,
+                onRemoveSearch: removeSearch,
+                onClearAll: clearAllSearches,
+              ),
+              Divider(
+                color: Colors.grey.shade300,
+                thickness: 1.0,
+                indent: 10,
+                endIndent: 10,
+              ),
+              Text(
+                'Mes commandes récentes',
+                style: TextStyles.textMediumLarge,
+              ),
+              RecentOrdersWidget(),
+              RecentOrdersWidget(),
+              RecentOrdersWidget(),
+            ],
           ],
         ),
       ),
