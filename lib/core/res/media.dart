@@ -71,6 +71,9 @@ abstract class Media {
   //search
   static const searchSettings = '$_baseIcon/searchSettings.svg';
   static const searchLocation = '$_baseIcon/searchLocation.svg';
+  //notification Page
+  static const notificationGreen = '$_baseIcon/notificationGreen.svg';
+  static const emptyNotification = '$_baseIcon/emptyNotification.svg';
 
   static const augmentedReality = '$_baseIcon/augmentedReality.svg';
 

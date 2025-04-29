@@ -40,9 +40,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       ),
       builder: (context) {
         return DraggableScrollableSheet(
-          initialChildSize: 0.8,
-          minChildSize: 0.6, // Can shrink to 40%
-          maxChildSize: 0.8, // Can expand to 100%
+          initialChildSize: 0.9,
+          minChildSize: 0.8,
+          maxChildSize: 0.9,
           expand: false,
           builder: (context, scrollController) {
             return SingleChildScrollView(

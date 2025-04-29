@@ -4,7 +4,8 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/search/presentation/widgets/custom_choice_wrap.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:legy/features/search/presentation/widgets/custom_list_view.dart';
+import 'package:legy/features/search/presentation/widgets/custom_slider.dart';
 
 class SearchSettingsSheet extends StatefulWidget {
   const SearchSettingsSheet({super.key});
@@ -19,9 +20,9 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
     "Pizza",
     "Burger",
     "Salade",
+    "Grill",
     "Soupe",
     "Poulet",
-    "Grill",
     "Petit déjeuner"
   ];
   final List<int> stars = [1, 2, 3, 4, 5];
@@ -29,7 +30,6 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
   String? selectedCategory = "Sénégalaise";
   String? selectedProduct = "Salade";
   int? selectedRating;
-  RangeValues priceRange = const RangeValues(20, 40);
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +40,20 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Text("Filtres", style: TextStyles.textMediumLarge),
+            child: Text("Filtres", style: TextStyles.textSemiBoldLarge.black1),
           ),
           const Gap(25),
-          Text("Sélectionner les catégories", style: TextStyles.textMedium),
+          Text("Sélectionner les catégories",
+              style: TextStyles.textSemiBoldLarge),
           const Gap(10),
-          CustomChoiceWrap<String>(
+          CustomListView<String>(
             options: categories,
             selectedOption: selectedCategory,
             onSelected: (cat) => setState(() => selectedCategory = cat),
           ),
           const Gap(20),
-          Text("Sélectionner le type de produit", style: TextStyles.textMedium),
+          Text("Sélectionner le type de produit",
+              style: TextStyles.textSemiBoldLarge),
           const Gap(10),
           CustomChoiceWrap<String>(
             options: products,
@@ -59,7 +61,7 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
             onSelected: (prod) => setState(() => selectedProduct = prod),
           ),
           const Gap(20),
-          Text("Évaluation", style: TextStyles.textMedium),
+          Text("Évaluation", style: TextStyles.textSemiBoldLarge),
           const Gap(10),
           CustomChoiceWrap<int>(
             options: stars,
@@ -68,28 +70,15 @@ class _SearchSettingsSheetState extends State<SearchSettingsSheet> {
             useIcon: true,
           ),
           const Gap(25),
-          Text("Plage de prix", style: TextStyles.textMedium),
-          SfRangeSlider(
-            min: 10.0,
-            max: 50.0,
-            values: SfRangeValues(priceRange.start, priceRange.end),
-            interval: 10,
-            showLabels: true,
-            activeColor: Colours.lightThemeYellow5,
-            inactiveColor: Colours.lightThemeWhite2,
-            onChanged: (SfRangeValues newValues) {
-              setState(() {
-                priceRange = RangeValues(newValues.start, newValues.end);
-              });
-            },
-          ),
-          Gap(25),
+          Text("Plage de prix", style: TextStyles.textSemiBoldLarge),
+          CustomSlider(),
+          Gap(50),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colours.lightThemeOrange0,
+                backgroundColor: Colours.lightThemeOrange5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),

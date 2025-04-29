@@ -48,6 +48,10 @@ final router = GoRouter(
                   builder: (context, state) => const FullCart(),
                 ),
                 GoRoute(
+                  path: NotificationView.routePath,
+                  builder: (context, state) => const NotificationView(),
+                ),
+                GoRoute(
                   path: RestaurantsView.routePath,
                   builder: (context, state) {
                     return BlocProvider(

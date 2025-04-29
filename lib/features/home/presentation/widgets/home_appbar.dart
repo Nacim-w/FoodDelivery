@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/notification/presentation/view/notification.dart';
 import 'package:legy/features/order/presentation/views/empty_cart_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -31,7 +32,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Row(
               children: [
-                _iconCircleButton(Media.notificationBell, () {}),
+                _iconCircleButton(
+                    Media.notificationBell,
+                    () => context.go(
+                        '${HomePage.routePath}/${NotificationView.routePath}')),
                 Gap(10),
                 _iconCircleButton(
                     Media.cart,
