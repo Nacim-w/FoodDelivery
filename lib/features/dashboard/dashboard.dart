@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -22,13 +21,8 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const HomeDrawer(),
-      body: Column(
-        children: [
-          Gap(30),
-          Expanded(
-            child: navigationShell,
-          ),
-        ],
+      body: Expanded(
+        child: navigationShell,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: destinations,

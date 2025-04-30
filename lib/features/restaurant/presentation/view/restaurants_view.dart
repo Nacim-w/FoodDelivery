@@ -12,7 +12,7 @@ class RestaurantsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Restaurant", style: TextStyles.textSemiBoldLarge.black1),
+        title: Text("Restaurants", style: TextStyles.textSemiBoldLarge.black1),
         centerTitle: true,
       ),
       body: RestaurantsWidget(),

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/category/presentation/app/provider/color_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_restaurant.dart';
 
-class PopularRestaurant extends StatefulWidget {
+class PopularRestaurant extends StatelessWidget {
   const PopularRestaurant({super.key});
 
-  @override
-  State<PopularRestaurant> createState() => _PopularRestaurantState();
-}
-
-class _PopularRestaurantState extends State<PopularRestaurant> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,29 +23,32 @@ class _PopularRestaurantState extends State<PopularRestaurant> {
         CategoryRestaurant(
           image: Media.restaurant1,
           title: 'Le Festin du Chef',
-          description: 'description',
+          description: 'Délices africains servis avec passion.',
           time: '20-25 mins',
           distance: '7',
           rating: '4.6',
+          accentColor: context.watch<ColorProvider>().color,
         ),
         Gap(15),
         CategoryRestaurant(
           image: Media.restaurant1,
-          title: 'Le Festin du Chef',
-          description: 'description',
-          time: '20-25 mins',
-          distance: '7',
-          rating: '4.6',
+          title: 'Maison Gourmande',
+          description: 'Fusions internationales pour palais curieux.',
+          time: '18-22 mins',
+          distance: '5',
+          rating: '4.8',
+          accentColor: context.watch<ColorProvider>().color,
         ),
         Gap(15),
         CategoryRestaurant(
           image: Media.restaurant1,
-          title: 'Le Festin du Chef',
-          description: 'description',
-          time: '20-25 mins',
-          distance: '7',
-          rating: '4.6',
-        )
+          title: 'Repas Santé',
+          description: 'Ingrédients frais, options équilibrées.',
+          time: '25-30 mins',
+          distance: '6',
+          rating: '4.5',
+          accentColor: context.watch<ColorProvider>().color,
+        ),
       ],
     );
   }

@@ -75,7 +75,7 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: CategoryDetails.routePath,
-                  builder: (context, state) => const CategoryDetails(),
+                  builder: (context, state) => const CategoryView(),
                 ),
               ],
             ),

@@ -15,10 +15,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
-      drawer: HomeDrawer(),
-      body: Home(),
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Scaffold(
+        appBar: CustomAppBar(),
+        drawer: HomeDrawer(),
+        body: Home(),
+      ),
     );
   }
 }

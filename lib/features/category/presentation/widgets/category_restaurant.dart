@@ -8,23 +8,31 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
-class CategoryRestaurant extends StatelessWidget {
+class CategoryRestaurant extends StatefulWidget {
   final String image;
   final String title;
   final String description;
   final String time;
   final String distance;
   final String rating;
+  final Color accentColor;
 
-  const CategoryRestaurant(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.description,
-      required this.time,
-      required this.distance,
-      required this.rating});
+  const CategoryRestaurant({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.description,
+    required this.time,
+    required this.distance,
+    required this.rating,
+    required this.accentColor,
+  });
 
+  @override
+  State<CategoryRestaurant> createState() => _CategoryRestaurantState();
+}
+
+class _CategoryRestaurantState extends State<CategoryRestaurant> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +51,7 @@ class CategoryRestaurant extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: AssetImage(image),
+                    image: AssetImage(widget.image),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -52,12 +60,12 @@ class CategoryRestaurant extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyles.textMediumSmall.brown5),
+                  Text(widget.title, style: TextStyles.textMediumSmall.brown5),
                   Gap(5),
                   SizedBox(
                     width: context.width * 0.55,
                     child: AutoSizeText(
-                      description,
+                      widget.description,
                       style: TextStyles.textRegularTiny.black1,
                       maxLines: 3,
                     ),
@@ -67,15 +75,21 @@ class CategoryRestaurant extends StatelessWidget {
                     children: [
                       SvgPicture.asset(Media.homeClock),
                       Gap(3),
-                      Text(time, style: TextStyles.textMediumSmall.red5),
+                      Text(widget.time,
+                          style: TextStyles.textMediumSmall
+                              .copyWith(color: widget.accentColor)),
                       Gap(15),
                       SvgPicture.asset(Media.ratingStar),
                       Gap(3),
-                      Text(rating, style: TextStyles.textMediumSmall.red5),
+                      Text(widget.rating,
+                          style: TextStyles.textMediumSmall
+                              .copyWith(color: widget.accentColor)),
                       Gap(15),
                       SvgPicture.asset(Media.dot),
                       Gap(3),
-                      Text(distance, style: TextStyles.textMediumSmall.red5),
+                      Text(widget.distance,
+                          style: TextStyles.textMediumSmall
+                              .copyWith(color: widget.accentColor)),
                     ],
                   ),
                 ],
@@ -89,7 +103,7 @@ class CategoryRestaurant extends StatelessWidget {
               width: 50,
               height: 30,
               decoration: BoxDecoration(
-                color: Colours.lightThemeRed5,
+                color: widget.accentColor,
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(20),
                   bottomLeft: Radius.circular(20),

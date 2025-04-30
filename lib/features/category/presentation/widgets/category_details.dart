@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
-import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
@@ -17,41 +17,55 @@ class CategoryDetails extends StatefulWidget {
 }
 
 class _CategoryDetailsState extends State<CategoryDetails> {
+  int selectedCategoryIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CategoryHero(),
-          Text(
-            'Plats populaires',
-            style: TextStyles.text900fs24.brown5,
+          CategoryHero(
+            onCategoryChanged: (index) {
+              setState(() {
+                selectedCategoryIndex = index;
+              });
+            },
           ),
-          SizedBox(
-            height: context.height * 0.3,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: PopularDish(),
-                );
-              },
+          Gap(10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Plats populaires',
+              style: TextStyles.text900fs24.brown5,
             ),
           ),
-          Stack(
-            clipBehavior: Clip.none,
+          Gap(20),
+          Column(
             children: [
-              Positioned(
-                left: -30,
-                child: Image.asset(Media.background),
+              SizedBox(
+                height: context.height * 0.3,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: PopularDish(),
+                    );
+                  },
+                ),
               ),
-              PopularRestaurant(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    PopularRestaurant(),
+                  ],
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

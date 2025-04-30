@@ -25,7 +25,8 @@ class RestaurantService {
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
         throw ServerException(message: errorMessage);
       }
-
+      debugPrint("Response Status Code: ${response.statusCode}");
+      debugPrint("Response Body: ${response.body}");
       final data = jsonDecode(response.body);
 
       if (data is List) {

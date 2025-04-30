@@ -66,7 +66,6 @@ abstract class Media {
   static const categorie4 = '$_baseImage/categorie4.png';
   //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
-  static const background = '$_baseImage/background.png';
 
   //search
   static const searchSettings = '$_baseIcon/searchSettings.svg';
@@ -118,6 +117,10 @@ abstract class Media {
   static const dish2 = '$_baseImage/dish2.png';
   static const categoryScooter = '$_baseIcon/categoryScooter.svg';
   static const categoryStar = '$_baseIcon/categoryStar.svg';
+  static const backgroundRed = '$_baseIcon/backgroundRed.svg';
+  static const backgroundGreen = '$_baseIcon/backgroundGreen.svg';
+  static const backgroundOrange = '$_baseIcon/backgroundOrange.svg';
+
   //order page
   static const emptyActiveOrder = '$_baseIcon/emptyActiveOrder.svg';
   static const emptyCanceledOrder = '$_baseIcon/emptyCanceledOrder.svg';

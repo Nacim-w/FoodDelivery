@@ -1,6 +1,7 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:legy/core/extension/media_extension.dart';
@@ -21,6 +22,9 @@ class RestaurantContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final base64Str = image.split(',').last;
+    Uint8List imageBytes = base64Decode(base64Str);
+
     return Stack(
       children: [
         Container(
@@ -29,7 +33,7 @@ class RestaurantContainer extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-              image: CachedNetworkImageProvider(image),
+              image: MemoryImage(imageBytes),
               fit: BoxFit.cover,
             ),
           ),
