@@ -37,6 +37,7 @@ abstract class Colours {
   static const Color lightThemeBlack3 = Color(0xFF000000);
   static const Color lightThemeBlack2 = Color(0xFF101010);
   static const Color lightThemeBlack1 = Color(0xFF212121);
+  static const Color lightThemeBlack0 = Color(0xFF242329);
 
   static const Color lightThemeGrey0 = Color(0xFF60655C);
   static const Color lightThemeGrey1 = Color(0xFF878787);

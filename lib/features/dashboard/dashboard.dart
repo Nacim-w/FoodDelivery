@@ -21,9 +21,7 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const HomeDrawer(),
-      body: Expanded(
-        child: navigationShell,
-      ),
+      body: navigationShell, // ✅ Fixed here
       bottomNavigationBar: BottomNavigationBar(
         items: destinations,
         onTap: (index) => navigationShell.goBranch(index),

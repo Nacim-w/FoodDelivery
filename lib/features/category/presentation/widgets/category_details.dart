@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
+import 'package:legy/features/dish/presentation/widgets/dish_details.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class CategoryDetails extends StatefulWidget {
   static const routePath = "category";
@@ -50,9 +53,13 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(left: 18.0),
-                      child: PopularDish(),
-                    );
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: InkWell(
+                          child: PopularDish(),
+                          onTap: () => context.go(
+                            '${HomePage.routePath}/${CategoryDetails.routePath}/${DishDetails.routePath}',
+                          ),
+                        ));
                   },
                 ),
               ),

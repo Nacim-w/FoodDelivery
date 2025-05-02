@@ -13,38 +13,35 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Builder(
-              builder: (context) => GestureDetector(
-                onTap: () => Scaffold.of(context).openDrawer(),
-                child: SvgPicture.asset(
-                  Media.sidebar,
-                  width: 16,
-                  height: 16,
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Builder(
+            builder: (context) => GestureDetector(
+              onTap: () => Scaffold.of(context).openDrawer(),
+              child: SvgPicture.asset(
+                Media.sidebar,
+                width: 16,
+                height: 16,
               ),
             ),
-            Row(
-              children: [
-                _iconCircleButton(
-                    Media.notificationBell,
-                    () => context.go(
-                        '${HomePage.routePath}/${NotificationView.routePath}')),
-                Gap(10),
-                _iconCircleButton(
-                    Media.cart,
-                    () => context
-                        .go('${HomePage.routePath}/${EmptyCart.routePath}')),
-              ],
-            ),
-          ],
-        ),
+          ),
+          Row(
+            children: [
+              _iconCircleButton(
+                  Media.notificationBell,
+                  () => context.go(
+                      '${HomePage.routePath}/${NotificationView.routePath}')),
+              Gap(10),
+              _iconCircleButton(
+                  Media.cart,
+                  () => context
+                      .go('${HomePage.routePath}/${EmptyCart.routePath}')),
+            ],
+          ),
+        ],
       ),
     );
   }

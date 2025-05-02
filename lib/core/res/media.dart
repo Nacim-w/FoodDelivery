@@ -120,6 +120,14 @@ abstract class Media {
   static const backgroundRed = '$_baseIcon/backgroundRed.svg';
   static const backgroundGreen = '$_baseIcon/backgroundGreen.svg';
   static const backgroundOrange = '$_baseIcon/backgroundOrange.svg';
+  //dish page
+  static const salad1 = '$_baseImage/salad1.png';
+  static const salad2 = '$_baseImage/salad2.png';
+  static const salad3 = '$_baseImage/salad3.png';
+  static const bgLight = '$_baseIcon/bgLight.svg';
+  static const dishDecoration = '$_baseImage/dishDecoration.png';
+
+  static const ingrediant = '$_baseImage/ingrediant.png';
 
   //order page
   static const emptyActiveOrder = '$_baseIcon/emptyActiveOrder.svg';

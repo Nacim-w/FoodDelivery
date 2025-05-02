@@ -11,6 +11,10 @@ abstract class TextStyles {
     fontSize: 24,
     fontFamily: "Satoshi",
   );
+  static const TextStyle titleBoldLarge = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 32,
+  );
   static const TextStyle titleBoldy = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 24,
@@ -34,6 +38,10 @@ abstract class TextStyles {
   static const TextStyle titleSemiBold = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 24,
+  );
+  static const TextStyle titleSemiBoldTiny = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
   );
   static const TextStyle textSemiBoldLargest = TextStyle(
     fontWeight: FontWeight.w600,

@@ -62,7 +62,6 @@ class _CategoryHeroState extends State<CategoryHero> {
       selectedIndex = index;
     });
     context.read<ColorProvider>().changeColor(newColor: categoryColors[index]);
-    print(categoryColors[index]);
 
     widget.onCategoryChanged?.call(index);
   }
