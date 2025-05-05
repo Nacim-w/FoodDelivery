@@ -1,5 +1,7 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -28,6 +30,8 @@ class HomeRestaurants extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final base64Str = image.split(',').last;
+    Uint8List imageBytes = base64Decode(base64Str);
     return Container(
       height: context.height * 0.115,
       decoration: BoxDecoration(
@@ -44,7 +48,7 @@ class HomeRestaurants extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: CachedNetworkImageProvider(image),
+                    image: MemoryImage(imageBytes),
                     fit: BoxFit.cover,
                   ),
                 ),

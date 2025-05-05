@@ -7,6 +7,7 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
+import 'package:legy/features/dessert/presentation/widgets/dessert_details.dart';
 import 'package:legy/features/dish/presentation/widgets/dish_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
@@ -57,7 +58,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                         child: InkWell(
                           child: PopularDish(),
                           onTap: () => context.go(
-                            '${HomePage.routePath}/${CategoryDetails.routePath}/${DishDetails.routePath}',
+                            '${HomePage.routePath}/${CategoryDetails.routePath}/${DessertDetails.routePath}',
                           ),
                         ));
                   },

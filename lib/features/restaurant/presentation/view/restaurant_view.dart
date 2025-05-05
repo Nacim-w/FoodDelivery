@@ -1,5 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -39,10 +40,13 @@ class _RestaurantViewState extends State<RestaurantView> {
             return const Center(child: CircularProgressIndicator());
           } else if (state is RestaurantLoaded) {
             final restaurant = state.restaurant;
+            final base64Str = restaurant.logo.split(',').last;
+            Uint8List imageBytes = base64Decode(base64Str);
+
             return Stack(
               children: [
-                CachedNetworkImage(
-                  imageUrl: restaurant.logo,
+                Image.memory(
+                  imageBytes,
                   fit: BoxFit.cover,
                   height: context.height * 0.3,
                   width: double.infinity,
@@ -112,8 +116,7 @@ class _RestaurantViewState extends State<RestaurantView> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
-                                        image: CachedNetworkImageProvider(
-                                            restaurant.logo),
+                                        image: MemoryImage(imageBytes),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

@@ -12,6 +12,7 @@ import 'package:legy/features/auth/presentation/views/forgot_password_view.dart'
 import 'package:legy/features/auth/presentation/views/otp_view.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/auth/presentation/views/sign_up_page.dart';
+import 'package:legy/features/dessert/presentation/widgets/dessert_details.dart';
 import 'package:legy/features/dish/presentation/widgets/dish_details.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';

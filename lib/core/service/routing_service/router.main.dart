@@ -81,6 +81,10 @@ final router = GoRouter(
                       path: DishDetails.routePath,
                       builder: (context, state) => const DishDetails(),
                     ),
+                    GoRoute(
+                      path: DessertDetails.routePath,
+                      builder: (context, state) => const DessertDetails(),
+                    ),
                   ],
                 ),
               ],

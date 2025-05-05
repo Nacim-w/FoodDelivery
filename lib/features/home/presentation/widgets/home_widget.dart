@@ -100,7 +100,8 @@ class _HomeState extends State<Home> {
                                   Axis.horizontal, // Horizontal scroll
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: state.categories!.map((category) {
+                                children:
+                                    state.categories!.take(4).map((category) {
                                   return HomeCategory(
                                       image: Media.categorie1,
                                       name: category.name);

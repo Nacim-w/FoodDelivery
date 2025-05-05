@@ -124,8 +124,15 @@ abstract class Media {
   static const salad1 = '$_baseImage/salad1.png';
   static const salad2 = '$_baseImage/salad2.png';
   static const salad3 = '$_baseImage/salad3.png';
+  static const dessert1 = '$_baseImage/dessert1.png';
+  static const dessert2 = '$_baseImage/dessert2.png';
+  static const dessert3 = '$_baseImage/dessert3.png';
+  static const dessert4 = '$_baseImage/dessert4.png';
+  static const bgLightRed = '$_baseIcon/bgLightRed.svg';
   static const bgLight = '$_baseIcon/bgLight.svg';
   static const dishDecoration = '$_baseImage/dishDecoration.png';
+  static const blueCherry = '$_baseImage/blueCherry.png';
+  static const redCherry = '$_baseImage/redCherry.png';
 
   static const ingrediant = '$_baseImage/ingrediant.png';
 
