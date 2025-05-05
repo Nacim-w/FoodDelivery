@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
@@ -25,8 +24,7 @@ class RestaurantService {
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
         throw ServerException(message: errorMessage);
       }
-      debugPrint("Response Status Code: ${response.statusCode}");
-      debugPrint("Response Body: ${response.body}");
+
       final data = jsonDecode(response.body);
 
       if (data is List) {
@@ -59,7 +57,6 @@ class RestaurantService {
         uri,
         headers: NetworkConstants.headers,
       );
-      debugPrint("Response Status Code: ${response.statusCode}");
 
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
@@ -68,7 +65,6 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
-      debugPrint("HELLO: $data");
       if (data is Map) {
         return RestaurantModel.fromJson(data as Map<String, dynamic>);
       } else {

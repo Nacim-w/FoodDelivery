@@ -85,6 +85,10 @@ final router = GoRouter(
                       path: DessertDetails.routePath,
                       builder: (context, state) => const DessertDetails(),
                     ),
+                    GoRoute(
+                      path: BurgerDetails.routePath,
+                      builder: (context, state) => const BurgerDetails(),
+                    ),
                   ],
                 ),
               ],

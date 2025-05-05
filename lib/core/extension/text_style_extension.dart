@@ -3,6 +3,7 @@ import 'package:legy/core/res/styles/colours.dart';
 
 extension TextStyleExt on TextStyle {
   // Orange shades
+  TextStyle get orange0 => copyWith(color: Colours.lightThemeOrange0);
   TextStyle get orange1 => copyWith(color: Colours.lightThemeOrange1);
   TextStyle get orange2 => copyWith(color: Colours.lightThemeOrange2);
   TextStyle get orange3 => copyWith(color: Colours.lightThemeOrange3);

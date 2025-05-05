@@ -32,7 +32,6 @@ class HomeService {
       }
 
       final data = jsonDecode(response.body);
-      debugPrint("Decoded Data: $data");
 
       if (data is List) {
         List<TopCategoryModel> categories = data
@@ -81,10 +80,7 @@ class HomeService {
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
         throw ServerException(message: errorMessage);
       }
-      debugPrint("Response Status Code: ${response.statusCode}");
-      debugPrint("Response Body: ${response.body}");
-      debugPrint("Response Headers: ${response.headers}");
-      debugPrint("Response URI: ${response.request?.url}");
+
       final List data = jsonDecode(response.body);
 
       debugPrint("Decoded Data: $data");
