@@ -6,6 +6,7 @@ import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/category/presentation/views/category_view.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
+import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/dashboard.dart';
 import 'package:legy/features/auth/presentation/views/change_password_view.dart';
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
@@ -116,9 +117,9 @@ class HomeDrawer extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             DrawerItem(
-              leading: Media.subscriptionDrawer,
-              title: 'Abonnement...',
-              routing: ProfileSettingsPage.routePath,
+              leading: Media.offreDrawer,
+              title: 'Offres',
+              routing: '${HomePage.routePath}/${CouponView.routePath}',
             ),
             const SizedBox(height: 8.0),
             DrawerItem(

@@ -83,12 +83,14 @@ abstract class Media {
   static const paymentDrawer = '$_baseIcon/paymentDrawer.svg';
   static const locationDrawer = '$_baseIcon/locationDrawer.svg';
   static const settingsDrawer = '$_baseIcon/settingsDrawer.svg';
-  static const subscriptionDrawer = '$_baseIcon/subscriptionDrawer.svg';
-
+  static const offreDrawer = '$_baseIcon/offreDrawer.svg';
   static const ramenNoodles = '$_baseImage/ramenNoodles.png';
   static const paymentLocation = '$_baseIcon/paymentLocation.svg';
   static const paymentWallet = '$_baseIcon/paymentWallet.svg';
   static const paymentDiscount = '$_baseIcon/paymentDiscount.svg';
+  //offer page
+  static const discount = '$_baseIcon/discount.svg';
+
   //Payment page
   static const paymentSuccess = '$_baseImage/paymentSuccess.png';
   static const paymentFailed = '$_baseImage/paymentFailed.png';
