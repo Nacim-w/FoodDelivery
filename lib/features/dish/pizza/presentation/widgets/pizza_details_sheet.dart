@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/dish/salad/presentation/widgets/add_to_cart.dart';
-import 'package:legy/features/dish/salad/presentation/widgets/extra_list.dart';
-import 'package:legy/features/dish/salad/presentation/widgets/price_info.dart';
-import 'salad_selector.dart';
-import 'quantity_selector.dart';
-import 'description_block.dart';
-import 'ingredients_list.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_add_to_cart.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_drinks_list.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_extra_list.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_selector.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_supplement.dart';
 
-class DishDetailsSheet extends StatelessWidget {
-  const DishDetailsSheet({super.key});
+class PizzaDetailsSheet extends StatelessWidget {
+  const PizzaDetailsSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.55,
       minChildSize: 0.4,
-      maxChildSize: 0.95,
+      maxChildSize: 0.6,
       builder: (context, scrollController) => Container(
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10)],
+          boxShadow: const [
+            BoxShadow(color: Colours.lightThemeBlack1, blurRadius: 10)
+          ],
         ),
         child: SingleChildScrollView(
           controller: scrollController,
@@ -32,30 +34,39 @@ class DishDetailsSheet extends StatelessWidget {
               _DragHandle(),
               Padding(
                 padding: EdgeInsets.all(16),
-                child: Text('La table verte', style: TextStyles.titleBoldLarge),
+                child: Text(
+                  'Pizza Varities',
+                  style: TextStyles.titleSemiBold.black1,
+                ),
               ),
               Gap(16),
-              SaladSelector(),
-              Gap(16),
+              PizzaSelector(),
+              Gap(26),
               Padding(
                 padding: EdgeInsets.all(16),
-                child: QuantitySelector(),
+                child: Text(
+                  'Suppléments',
+                  style: TextStyles.titleSemiBold.black1,
+                ),
+              ),
+              PizzaSupplement(),
+              Gap(26),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: PizzaExtraList(),
               ),
               Gap(16),
               Padding(
-                padding: EdgeInsets.all(16),
-                child: PriceInfoRow(),
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: PizzaDrinkList(),
               ),
-              Gap(10),
-              Padding(
-                padding: EdgeInsets.all(16),
-                child: DescriptionBlock(),
-              ),
-              IngredientsList(),
-              Gap(24),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ExtrasList(),
+              Gap(12),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  '12.00 CFA',
+                  style: TextStyles.titleMediumSmallest.orange5,
+                ),
               ),
               Gap(24),
               Padding(

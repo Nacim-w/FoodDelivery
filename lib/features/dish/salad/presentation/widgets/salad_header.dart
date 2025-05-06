@@ -6,22 +6,22 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/dish/salad/presentation/app/dish_details_provider.dart';
+import 'package:legy/features/dish/salad/presentation/app/salad_details_provider.dart';
 import 'package:provider/provider.dart';
 
-class DishHeader extends StatefulWidget {
-  const DishHeader({super.key});
+class SaladHeader extends StatefulWidget {
+  const SaladHeader({super.key});
 
   @override
-  State<DishHeader> createState() => _DishHeaderState();
+  State<SaladHeader> createState() => _SaladHeaderState();
 }
 
-class _DishHeaderState extends State<DishHeader> {
+class _SaladHeaderState extends State<SaladHeader> {
   bool isFavorited = false;
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DishDetailsProvider>(context);
+    final provider = Provider.of<SaladDetailsProvider>(context);
     final salads = [
       {'image': Media.salad1},
       {'image': Media.salad2},

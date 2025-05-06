@@ -7,7 +7,7 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
-import 'package:legy/features/dish/burger/presentation/widgets/burger_details.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -57,7 +57,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                         child: InkWell(
                           child: PopularDish(),
                           onTap: () => context.go(
-                            '${HomePage.routePath}/${CategoryDetails.routePath}/${BurgerDetails.routePath}',
+                            '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
                           ),
                         ));
                   },

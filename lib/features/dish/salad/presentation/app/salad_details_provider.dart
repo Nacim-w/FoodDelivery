@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DishDetailsProvider with ChangeNotifier {
+class SaladDetailsProvider with ChangeNotifier {
   int quantity = 1;
   int selectedSaladIndex = 0;
   List<Map<String, dynamic>> extras = [

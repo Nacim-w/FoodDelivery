@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/dish/salad/presentation/app/dish_details_provider.dart';
+import 'package:legy/features/dish/salad/presentation/app/salad_details_provider.dart';
 import 'package:provider/provider.dart';
 
 class QuantitySelector extends StatelessWidget {
@@ -10,7 +10,7 @@ class QuantitySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DishDetailsProvider>(context);
+    final provider = Provider.of<SaladDetailsProvider>(context);
     return Row(
       children: [
         Column(

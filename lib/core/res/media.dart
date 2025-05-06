@@ -120,26 +120,43 @@ abstract class Media {
   static const backgroundRed = '$_baseIcon/backgroundRed.svg';
   static const backgroundGreen = '$_baseIcon/backgroundGreen.svg';
   static const backgroundOrange = '$_baseIcon/backgroundOrange.svg';
-  //dish page
+  //salad page
   static const salad1 = '$_baseImage/salad1.png';
   static const salad2 = '$_baseImage/salad2.png';
   static const salad3 = '$_baseImage/salad3.png';
+  static const bgLight = '$_baseIcon/bgLight.svg';
+  static const dishDecoration = '$_baseImage/dishDecoration.png';
+
+  //dessert page
+  static const bgLightRed = '$_baseIcon/bgLightRed.svg';
   static const dessert1 = '$_baseImage/dessert1.png';
   static const dessert2 = '$_baseImage/dessert2.png';
   static const dessert3 = '$_baseImage/dessert3.png';
   static const dessert4 = '$_baseImage/dessert4.png';
+  static const blueCherry = '$_baseImage/blueCherry.png';
+  static const redCherry = '$_baseImage/redCherry.png';
+  //burger page
   static const burger1 = '$_baseImage/burger1.png';
   static const burger2 = '$_baseImage/burger2.png';
   static const burger3 = '$_baseImage/burger3.png';
   static const burger4 = '$_baseImage/burger4.png';
-  static const bgLightRed = '$_baseIcon/bgLightRed.svg';
-  static const bgLight = '$_baseIcon/bgLight.svg';
-  static const dishDecoration = '$_baseImage/dishDecoration.png';
-  static const blueCherry = '$_baseImage/blueCherry.png';
-  static const redCherry = '$_baseImage/redCherry.png';
   static const spinach = '$_baseImage/spinach.png';
   static const spinach2 = '$_baseImage/spinach2.png';
   static const pepper = '$_baseImage/pepper.png';
+  //pizza page
+  static const pizza1 = '$_baseImage/pizza1.png';
+  static const pizza2 = '$_baseImage/pizza2.png';
+  static const pizza3 = '$_baseImage/pizza3.png';
+  static const pizza4 = '$_baseImage/pizza4.png';
+  static const woodenPlate = '$_baseImage/woodenPlate.png';
+
+  static const cocacola = '$_baseImage/cocacola.png';
+  static const pepsi = '$_baseImage/pepsi.png';
+  static const sprite = '$_baseImage/sprite.png';
+  static const fanta = '$_baseImage/fanta.png';
+  static const nuggets = '$_baseImage/nuggets.png';
+  static const chips = '$_baseImage/chips.png';
+  static const fries = '$_baseImage/fries.png';
 
   static const ingrediant = '$_baseImage/ingrediant.png';
 

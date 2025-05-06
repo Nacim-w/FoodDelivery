@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/dish/salad/presentation/app/dish_details_provider.dart';
+import 'package:legy/features/dish/pizza/presentation/app/pizza_details_provider.dart';
 import 'package:provider/provider.dart';
 
-class ExtrasList extends StatelessWidget {
-  const ExtrasList({super.key});
+class PizzaExtraList extends StatelessWidget {
+  const PizzaExtraList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DishDetailsProvider>(context);
+    final provider = Provider.of<PizzaDetailsProvider>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +30,7 @@ class ExtrasList extends StatelessWidget {
                 children: [
                   Text(
                     '59 CFA',
-                    style: TextStyles.textMedium.green5,
+                    style: TextStyles.textMedium.orange5,
                   ),
                   Checkbox(
                     value: extra['selected'],
@@ -39,8 +39,8 @@ class ExtrasList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     side: const BorderSide(
-                        color: Colours.lightThemeGreen5, width: 2),
-                    activeColor: Colours.lightThemeGreen5,
+                        color: Colours.lightThemeOrange5, width: 2),
+                    activeColor: Colours.lightThemeOrange5,
                   ),
                 ],
               ),

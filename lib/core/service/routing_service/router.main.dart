@@ -78,8 +78,8 @@ final router = GoRouter(
                   builder: (context, state) => const CategoryView(),
                   routes: [
                     GoRoute(
-                      path: DishDetails.routePath,
-                      builder: (context, state) => const DishDetails(),
+                      path: SaladDetails.routePath,
+                      builder: (context, state) => const SaladDetails(),
                     ),
                     GoRoute(
                       path: DessertDetails.routePath,
@@ -88,6 +88,10 @@ final router = GoRouter(
                     GoRoute(
                       path: BurgerDetails.routePath,
                       builder: (context, state) => const BurgerDetails(),
+                    ),
+                    GoRoute(
+                      path: PizzaDetails.routePath,
+                      builder: (context, state) => const PizzaDetails(),
                     ),
                   ],
                 ),
