@@ -17,25 +17,29 @@ class HomeCategory extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ClipOval(
-            child: Image.asset(
-              image,
-              width: context.width * 0.22,
-              height: context.width * 0.22,
-              fit: BoxFit.cover,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colours.lightThemeBlack1.withAlpha(70),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ClipOval(
+              child: Image.asset(
+                image,
+                width: context.width * 0.22,
+                height: context.width * 0.22,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Text(
             name,
-            style: TextStyles.textBoldSmall.black3.copyWith(
-              shadows: <Shadow>[
-                Shadow(
-                  offset: Offset(2, 3),
-                  blurRadius: 15.0,
-                  color: Colours.lightThemeBlack1.withAlpha(127),
-                ),
-              ],
-            ),
+            style: TextStyles.textBoldSmall.black3.copyWith(),
           ),
         ],
       ),

@@ -92,7 +92,28 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
-                      BlocBuilder<HomeCubit, HomeState>(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          HomeCategory(
+                            image: Media.category3,
+                            name: 'Sénégalaise',
+                          ),
+                          HomeCategory(
+                            image: Media.category2,
+                            name: 'Internationale',
+                          ),
+                          HomeCategory(
+                            image: Media.category1,
+                            name: 'Saine',
+                          ),
+                          HomeCategory(
+                            image: Media.category4,
+                            name: 'Desserts',
+                          ),
+                        ],
+                      ),
+                      /* BlocBuilder<HomeCubit, HomeState>(
                         builder: (context, state) {
                           if (state.isLoadingCategories) {
                             return const Center(
@@ -117,7 +138,7 @@ class _HomeState extends State<Home> {
                           return const Center(
                               child: Text('Something went wrong.'));
                         },
-                      ),
+                      ),*/
                       Gap(10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
