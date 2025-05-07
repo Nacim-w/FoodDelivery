@@ -3,10 +3,10 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurants_widget.dart';
 
-class RestaurantsView extends StatelessWidget {
+class AllRestaurantsView extends StatelessWidget {
   static const routePath = "restaurants";
 
-  const RestaurantsView({super.key});
+  const AllRestaurantsView({super.key});
 
   @override
   Widget build(BuildContext context) {

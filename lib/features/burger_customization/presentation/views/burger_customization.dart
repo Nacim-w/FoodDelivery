@@ -4,6 +4,8 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 
 class BurgerCustomizationScreen extends StatefulWidget {
+  static const routePath = "burger_customization";
+
   const BurgerCustomizationScreen({super.key});
 
   @override
@@ -13,16 +15,14 @@ class BurgerCustomizationScreen extends StatefulWidget {
 
 class _BurgerCustomizationScreenState extends State<BurgerCustomizationScreen> {
   List<String> ingredientAssets = [];
-  bool isBurgerReady = false; // Flag to show the burger is ready
+  bool isBurgerReady = false;
 
-  // Function to add an image as an ingredient
   void addIngredient(String imageAsset) {
     setState(() {
       ingredientAssets.add(imageAsset);
     });
   }
 
-  // Function to mark the burger as ready
   void finishBurger() {
     setState(() {
       isBurgerReady = true;
@@ -32,10 +32,9 @@ class _BurgerCustomizationScreenState extends State<BurgerCustomizationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF242329), // Dark background color
+      backgroundColor: Color(0xFF242329),
       body: Column(
         children: <Widget>[
-          // Button to finalize the burger
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(

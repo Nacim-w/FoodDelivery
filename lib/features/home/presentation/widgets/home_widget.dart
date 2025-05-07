@@ -14,7 +14,8 @@ import 'package:legy/features/home/presentation/widgets/home_caroussel_widget.da
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_story_widget.dart';
-import 'package:legy/features/restaurant/presentation/view/restaurants_view.dart';
+import 'package:legy/features/burger_customization/presentation/views/burger_customization.dart';
+import 'package:legy/features/restaurant/presentation/views/all_restaurants_view.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -66,7 +67,11 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                SliverToBoxAdapter(child: HomeCaroussal()),
+                SliverToBoxAdapter(
+                    child: GestureDetector(
+                        onTap: () => context.go(
+                            '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
+                        child: HomeCaroussal())),
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +130,7 @@ class _HomeState extends State<Home> {
                                     style: TextStyles.textSemiBoldLarge.black3),
                                 TextButton(
                                   onPressed: () => context.push(
-                                      '${HomePage.routePath}/${RestaurantsView.routePath}'),
+                                      '${HomePage.routePath}/${AllRestaurantsView.routePath}'),
                                   child: Text('Tout voir',
                                       style:
                                           TextStyles.textSemiBoldSmall.yellow5),

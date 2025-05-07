@@ -32,6 +32,10 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
+                  path: BurgerCustomizationScreen.routePath,
+                  builder: (context, state) => const BeginCustomization(),
+                ),
+                GoRoute(
                   path: PaymentPage.routePath,
                   builder: (context, state) => const PaymentPage(),
                 ),
@@ -56,25 +60,30 @@ final router = GoRouter(
                   builder: (context, state) => const NotificationView(),
                 ),
                 GoRoute(
-                  path: RestaurantsView.routePath,
+                  path: AllRestaurantsView.routePath,
                   builder: (context, state) {
                     return BlocProvider(
                       create: (_) => sl<RestaurantCubit>(),
-                      child: RestaurantsView(),
+                      child: AllRestaurantsView(),
                     );
                   },
                   routes: [
                     GoRoute(
-                      path: 'restaurant/:restaurantId',
-                      builder: (context, state) {
-                        final restaurantId =
-                            state.pathParameters['restaurantId']!;
-                        return BlocProvider(
-                          create: (_) => sl<RestaurantCubit>(),
-                          child: RestaurantView(restaurantId: restaurantId),
-                        );
-                      },
-                    ),
+                        path: 'restaurant/:restaurantId',
+                        builder: (context, state) {
+                          final restaurantId =
+                              state.pathParameters['restaurantId']!;
+                          return BlocProvider(
+                            create: (_) => sl<RestaurantCubit>(),
+                            child: RestaurantView(restaurantId: restaurantId),
+                          );
+                        },
+                        routes: [
+                          GoRoute(
+                            path: ProductView.routePath,
+                            builder: (context, state) => const ProductView(),
+                          ),
+                        ]),
                   ],
                 ),
                 GoRoute(

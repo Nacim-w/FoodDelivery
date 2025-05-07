@@ -64,6 +64,10 @@ abstract class Media {
   static const categorie2 = '$_baseImage/categorie2.png';
   static const categorie3 = '$_baseImage/categorie3.png';
   static const categorie4 = '$_baseImage/categorie4.png';
+  static const category1 = '$_baseImage/category1.png';
+  static const category2 = '$_baseImage/category2.png';
+  static const category3 = '$_baseImage/category3.png';
+  static const category4 = '$_baseImage/category4.png';
   //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
 
@@ -98,11 +102,18 @@ abstract class Media {
   static const masterCard = '$_baseIcon/masterCard.svg';
   static const americanExpress = '$_baseIcon/americanExpress.svg';
   //burger contruction page
+  static const burgerBackground = '$_baseImage/burgerBackground.png';
+  static const helperArrow = '$_baseIcon/helperArrow.svg';
   static const burgerItem1 = '$_baseImage/burgerItem1.png';
   static const burgerItem2 = '$_baseImage/burgerItem2.png';
   static const burgerItem3 = '$_baseImage/burgerItem3.png';
   static const burgerItem4 = '$_baseImage/burgerItem4.png';
   static const burgerItem5 = '$_baseImage/burgerItem5.png';
+  static const bun1 = '$_baseImage/bun1.png';
+  static const bun2 = '$_baseImage/bun2.png';
+  static const bun3 = '$_baseImage/bun3.png';
+  static const bun4 = '$_baseImage/bun4.png';
+  static const bun5 = '$_baseImage/bun5.png';
   static const burgerFilling1 = '$_baseImage/burgerFilling1.png';
   static const burgerFilling2 = '$_baseImage/burgerFilling2.png';
   static const burgerFilling3 = '$_baseImage/burgerFilling3.png';
@@ -122,6 +133,8 @@ abstract class Media {
   static const backgroundRed = '$_baseIcon/backgroundRed.svg';
   static const backgroundGreen = '$_baseIcon/backgroundGreen.svg';
   static const backgroundOrange = '$_baseIcon/backgroundOrange.svg';
+  //products page
+
   //salad page
   static const salad1 = '$_baseImage/salad1.png';
   static const salad2 = '$_baseImage/salad2.png';
