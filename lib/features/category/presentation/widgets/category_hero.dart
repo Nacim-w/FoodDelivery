@@ -7,7 +7,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/category/presentation/app/provider/color_provider.dart';
+import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 
 class CategoryHero extends StatefulWidget {
   final ValueChanged<int>? onCategoryChanged;
@@ -19,7 +19,7 @@ class CategoryHero extends StatefulWidget {
 }
 
 class _CategoryHeroState extends State<CategoryHero> {
-  int selectedIndex = 0;
+  int? selectedIndex;
 
   final List<String> categoryImages = [
     Media.categorie1,
@@ -57,18 +57,33 @@ class _CategoryHeroState extends State<CategoryHero> {
     'Goûtez Saine',
   ];
 
-  void _onCategorySelected(int index) {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final initialIndex = context.read<CategoryProvider>().index;
+      setState(() {
+        selectedIndex = initialIndex;
+      });
+      context.read<CategoryProvider>().changeColor(
+            newColor: categoryColors[initialIndex],
+          );
+    });
+  }
+
+  void onCategorySelected(int index) {
     setState(() {
       selectedIndex = index;
     });
-    context.read<ColorProvider>().changeColor(newColor: categoryColors[index]);
-
+    context
+        .read<CategoryProvider>()
+        .changeColor(newColor: categoryColors[index]);
     widget.onCategoryChanged?.call(index);
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentColor = categoryColors[selectedIndex];
+    if (selectedIndex == null) return const SizedBox();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -78,9 +93,11 @@ class _CategoryHeroState extends State<CategoryHero> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                categoryTitles[selectedIndex],
+                categoryTitles[selectedIndex!],
                 key: ValueKey(selectedIndex),
-                style: TextStyles.text900fs28.copyWith(color: currentColor),
+                style: TextStyles.text900fs28.copyWith(
+                  color: context.watch<CategoryProvider>().color,
+                ),
               ),
               Gap(15),
               SizedBox(
@@ -91,7 +108,7 @@ class _CategoryHeroState extends State<CategoryHero> {
                   transitionBuilder: (child, animation) =>
                       FadeTransition(opacity: animation, child: child),
                   child: AutoSizeText(
-                    categorySubtitles[selectedIndex],
+                    categorySubtitles[selectedIndex!],
                     key: ValueKey('subtitle_$selectedIndex'),
                     style: TextStyles.textMediumLarge.black1,
                     maxLines: 2,
@@ -102,7 +119,7 @@ class _CategoryHeroState extends State<CategoryHero> {
               Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: ElevatedButton(
-                  onPressed: () => _onCategorySelected(selectedIndex),
+                  onPressed: () => onCategorySelected(selectedIndex!),
                   style: ElevatedButton.styleFrom(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -111,15 +128,16 @@ class _CategoryHeroState extends State<CategoryHero> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
                       side: BorderSide(
-                        color: currentColor,
+                        color: context.watch<CategoryProvider>().color,
                       ),
                     ),
                   ),
                   child: Text(
-                    categoryButton[selectedIndex],
+                    categoryButton[selectedIndex!],
                     key: ValueKey(selectedIndex),
-                    style: TextStyles.textSemiBoldSmall
-                        .copyWith(color: currentColor),
+                    style: TextStyles.textSemiBoldSmall.copyWith(
+                      color: context.watch<CategoryProvider>().color,
+                    ),
                   ),
                 ),
               ),
@@ -132,7 +150,7 @@ class _CategoryHeroState extends State<CategoryHero> {
                       Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          onTap: () => _onCategorySelected(index),
+                          onTap: () => onCategorySelected(index),
                           splashColor: Colours.lightThemeGrey1.withAlpha(25),
                           customBorder: const CircleBorder(),
                           child: Image.asset(
@@ -174,12 +192,12 @@ class _CategoryHeroState extends State<CategoryHero> {
               child: Container(
                 width: context.width * 0.4,
                 height: context.width * 0.4,
-                key: ValueKey<int>(selectedIndex),
+                key: ValueKey<int>(selectedIndex!),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: AssetImage(swapImages[selectedIndex]),
+                    image: AssetImage(swapImages[selectedIndex!]),
                     fit: BoxFit.cover,
                   ),
                 ),

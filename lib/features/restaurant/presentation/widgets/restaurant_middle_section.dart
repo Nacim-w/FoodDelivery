@@ -52,7 +52,7 @@ class RestaurantMiddleSection extends StatelessWidget {
                         '/home/restaurants/restaurant/${restaurant.id}/product');
                   },
                   borderRadius: BorderRadius.circular(16),
-                  splashColor: Colours.lightThemeOrange5.withOpacity(0.3),
+                  splashColor: Colours.lightThemeOrange5.withAlpha(60),
                   child: RestaurantProduct(
                     image: product['image']!,
                     title: product['title']!,

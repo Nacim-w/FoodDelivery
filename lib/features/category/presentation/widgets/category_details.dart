@@ -20,7 +20,7 @@ class CategoryDetails extends StatefulWidget {
 }
 
 class _CategoryDetailsState extends State<CategoryDetails> {
-  int selectedCategoryIndex = 0;
+  late int selectedCategoryIndex;
 
   @override
   Widget build(BuildContext context) {

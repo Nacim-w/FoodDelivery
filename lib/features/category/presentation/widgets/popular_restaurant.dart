@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/category/presentation/app/provider/color_provider.dart';
+import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_restaurant.dart';
 
 class PopularRestaurant extends StatelessWidget {
@@ -27,7 +27,7 @@ class PopularRestaurant extends StatelessWidget {
           time: '20-25 mins',
           distance: '7',
           rating: '4.6',
-          accentColor: context.watch<ColorProvider>().color,
+          accentColor: context.watch<CategoryProvider>().color,
         ),
         Gap(15),
         CategoryRestaurant(
@@ -37,7 +37,7 @@ class PopularRestaurant extends StatelessWidget {
           time: '18-22 mins',
           distance: '5',
           rating: '4.8',
-          accentColor: context.watch<ColorProvider>().color,
+          accentColor: context.watch<CategoryProvider>().color,
         ),
         Gap(15),
         CategoryRestaurant(
@@ -47,7 +47,7 @@ class PopularRestaurant extends StatelessWidget {
           time: '25-30 mins',
           distance: '6',
           rating: '4.5',
-          accentColor: context.watch<ColorProvider>().color,
+          accentColor: context.watch<CategoryProvider>().color,
         ),
       ],
     );

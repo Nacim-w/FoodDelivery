@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legy/features/category/presentation/app/provider/color_provider.dart';
+import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 
 class DynamicBackButton extends StatefulWidget {
   const DynamicBackButton({
@@ -16,7 +16,7 @@ class _DynamicBackButtonState extends State<DynamicBackButton> {
   Widget build(BuildContext context) {
     return Material(
       shape: const CircleBorder(),
-      color: context.watch<ColorProvider>().color,
+      color: context.watch<CategoryProvider>().color,
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: () => Navigator.of(context).pop(),

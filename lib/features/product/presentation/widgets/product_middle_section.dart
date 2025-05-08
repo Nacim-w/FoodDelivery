@@ -6,8 +6,6 @@ import 'package:legy/core/res/styles/colours.dart';
 class ProductMiddleSection extends StatelessWidget {
   const ProductMiddleSection({super.key});
 
-  final categories = const ['Petit Déjeuner', 'pizzas', 'Plats'];
-
   @override
   Widget build(BuildContext context) {
     return Container(

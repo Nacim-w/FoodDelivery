@@ -14,6 +14,10 @@ class ProductDescription extends StatelessWidget {
       children: [
         Text('Menu Petit Déjeuner', style: TextStyles.titleMediumTiny.black1),
         const Gap(5),
+        Text(
+          '12,230 CFA',
+          style: TextStyles.textBoldLargest,
+        ),
         Row(
           children: [
             Icon(Icons.star, color: Colours.lightThemeYellow5),

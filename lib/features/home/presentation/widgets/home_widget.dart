@@ -6,7 +6,9 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
+import 'package:legy/features/dish/dessert/presentation/widgets/dessert_details.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_state.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
@@ -84,8 +86,13 @@ class _HomeState extends State<Home> {
                             Text('Catégories',
                                 style: TextStyles.textSemiBoldLarge.black3),
                             TextButton(
-                              onPressed: () => context.push(
-                                  '${HomePage.routePath}/${CategoryDetails.routePath}'),
+                              onPressed: () => {
+                                context
+                                    .read<CategoryProvider>()
+                                    .changeIndex(newIndex: 2),
+                                context.push(
+                                    '${HomePage.routePath}/${CategoryDetails.routePath}')
+                              },
                               child: Text('Tout voir',
                                   style: TextStyles.textSemiBoldSmall.yellow5),
                             ),
@@ -95,24 +102,58 @@ class _HomeState extends State<Home> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          HomeCategory(
-                            image: Media.category3,
-                            name: 'Sénégalaise',
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<CategoryProvider>()
+                                  .changeIndex(newIndex: 0);
+                              context.push(
+                                  '${HomePage.routePath}/${CategoryDetails.routePath}');
+                            },
+                            child: HomeCategory(
+                              image: Media.category3,
+                              name: 'Sénégalaise',
+                            ),
                           ),
-                          HomeCategory(
-                            image: Media.category2,
-                            name: 'Internationale',
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<CategoryProvider>()
+                                  .changeIndex(newIndex: 1);
+                              context.push(
+                                  '${HomePage.routePath}/${CategoryDetails.routePath}');
+                            },
+                            child: HomeCategory(
+                              image: Media.category2,
+                              name: 'Internationale',
+                            ),
                           ),
-                          HomeCategory(
-                            image: Media.category1,
-                            name: 'Saine',
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<CategoryProvider>()
+                                  .changeIndex(newIndex: 2);
+                              context.push(
+                                  '${HomePage.routePath}/${CategoryDetails.routePath}');
+                            },
+                            child: HomeCategory(
+                              image: Media.category1,
+                              name: 'Saine',
+                            ),
                           ),
-                          HomeCategory(
-                            image: Media.category4,
-                            name: 'Desserts',
+                          GestureDetector(
+                            onTap: () {
+                              context.push(
+                                  '${HomePage.routePath}/${CategoryDetails.routePath}/${DessertDetails.routePath}');
+                            },
+                            child: HomeCategory(
+                              image: Media.category4,
+                              name: 'Desserts',
+                            ),
                           ),
                         ],
                       ),
+
                       /* BlocBuilder<HomeCubit, HomeState>(
                         builder: (context, state) {
                           if (state.isLoadingCategories) {

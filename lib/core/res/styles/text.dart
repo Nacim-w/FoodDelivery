@@ -19,6 +19,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 24,
   );
+  static const TextStyle textBoldLargest = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+  );
   static const TextStyle textBoldLarge = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 16,
