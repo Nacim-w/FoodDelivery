@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
@@ -36,44 +37,40 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final double storyHeight = context.height * 0.12;
+    final double fixedHeight = context.height * 0.15;
 
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
-            height: storyHeight,
+          // Background and story bar
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(32),
+                bottomRight: Radius.circular(32),
+              ),
+              color: Colours.lightThemeOrange0,
+            ),
+            height: context.height * 0.2,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: stories,
             ),
           ),
+
           Padding(
-            padding: EdgeInsets.only(top: storyHeight),
+            padding: EdgeInsets.only(top: fixedHeight + 8),
+            child: GestureDetector(
+              onTap: () => context.go(
+                  '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
+              child: HomeCaroussal(),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.only(top: context.height * 0.36),
             child: CustomScrollView(
               slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Offres spéciales",
-                            style: TextStyles.textSemiBoldLarge.black3),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text("Tout voir",
-                              style: TextStyles.textSemiBoldSmall.yellow5),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                    child: GestureDetector(
-                        onTap: () => context.go(
-                            '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
-                        child: HomeCaroussal())),
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,31 +152,31 @@ class _HomeState extends State<Home> {
                       ),
 
                       /* BlocBuilder<HomeCubit, HomeState>(
-                        builder: (context, state) {
-                          if (state.isLoadingCategories) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (state.categoriesError != null) {
-                            return Center(child: Text(state.categoriesError!));
-                          } else if (state.categories != null) {
-                            return SingleChildScrollView(
-                              scrollDirection:
-                                  Axis.horizontal, // Horizontal scroll
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children:
-                                    state.categories!.take(4).map((category) {
-                                  return HomeCategory(
-                                      image: Media.categorie1,
-                                      name: category.name);
-                                }).toList(),
-                              ),
-                            );
-                          }
+                      builder: (context, state) {
+                        if (state.isLoadingCategories) {
                           return const Center(
-                              child: Text('Something went wrong.'));
-                        },
-                      ),*/
+                              child: CircularProgressIndicator());
+                        } else if (state.categoriesError != null) {
+                          return Center(child: Text(state.categoriesError!));
+                        } else if (state.categories != null) {
+                          return SingleChildScrollView(
+                            scrollDirection:
+                                Axis.horizontal, // Horizontal scroll
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children:
+                                  state.categories!.take(4).map((category) {
+                                return HomeCategory(
+                                    image: Media.categorie1,
+                                    name: category.name);
+                              }).toList(),
+                            ),
+                          );
+                        }
+                        return const Center(
+                            child: Text('Something went wrong.'));
+                      },
+                    ),*/
                       Gap(10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),

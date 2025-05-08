@@ -23,26 +23,27 @@ class _HomeCaroussalState extends State<HomeCaroussal> {
         CarouselSlider(
           items: [
             CaroussalItems(
-              image: Media.homeBanner1,
-              title: "Spécial crêpes",
-              body: "PROFITEZ DE LA DÉLICIEUSE CRÊPE",
-              description: "60% de réduction",
+              image: Media.homeBurger,
+              title: "BURGER SPÉCIAL",
+              body: "OBTENEZ VOTRE BURGER PRÉFÉRÉ !",
+              buttonName: "Créez votre burger",
             ),
             CaroussalItems(
-              image: Media.homeBanner2,
-              title: "Spécial crêpes",
-              body: "PROFITEZ DE LA DÉLICIEUSE CRÊPE",
-              description: "60% de réduction",
+              image: Media.homeBurger,
+              title: "BURGER SPÉCIAL",
+              body: "OBTENEZ VOTRE BURGER PRÉFÉRÉ !",
+              buttonName: "Créez votre burger",
             ),
             CaroussalItems(
-              image: Media.homeBanner1,
-              title: "Spécial crêpes",
-              body: "PROFITEZ DE LA DÉLICIEUSE CRÊPE",
-              description: "60% de réduction",
+              image: Media.homeBurger,
+              title: "BURGER SPÉCIAL",
+              body: "OBTENEZ VOTRE BURGER PRÉFÉRÉ !",
+              buttonName: "Créez votre burger",
             ),
           ],
           options: CarouselOptions(
-            height: context.height * 0.17,
+            viewportFraction: 1.0,
+            height: context.height * 0.20,
             initialPage: _currentPage,
             enableInfiniteScroll: true,
             autoPlay: true,
@@ -52,7 +53,7 @@ class _HomeCaroussalState extends State<HomeCaroussal> {
             scrollDirection: Axis.horizontal,
             onPageChanged: (index, reason) {
               setState(() {
-                _currentPage = index; // Update current page
+                _currentPage = index;
               });
             },
           ),

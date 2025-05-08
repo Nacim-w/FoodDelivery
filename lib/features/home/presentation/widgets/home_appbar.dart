@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/home/presentation/widgets/appbar_icon.dart';
+import 'package:legy/features/home/presentation/widgets/home_location.dart';
 import 'package:legy/features/notification/presentation/view/notification.dart';
 import 'package:legy/features/order/presentation/views/empty_cart_widget.dart';
 
@@ -13,57 +15,52 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Scaffold.of(context).openDrawer(),
-              child: SvgPicture.asset(
-                Media.sidebar,
-                width: 16,
-                height: 16,
+    return Container(
+      color: Colours.lightThemeOrange0,
+      child: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Menu icon
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Scaffold.of(context).openDrawer(),
+                child: SvgPicture.asset(
+                  Media.sidebar,
+                  colorFilter: ColorFilter.mode(
+                      Colours.lightThemeWhite1, BlendMode.srcIn),
+                  width: 16,
+                  height: 16,
+                ),
               ),
             ),
-          ),
-          Row(
-            children: [
-              _iconCircleButton(
-                  Media.notificationBell,
-                  () => context.go(
-                      '${HomePage.routePath}/${NotificationView.routePath}')),
-              Gap(10),
-              _iconCircleButton(
-                  Media.cart,
-                  () => context
-                      .go('${HomePage.routePath}/${EmptyCart.routePath}')),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _iconCircleButton(String asset, func) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: Colours.lightThemeWhite1,
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: Colours.lightThemeGrey2,
-          width: 0.5,
-        ),
-      ),
-      child: IconButton(
-        onPressed: func,
-        icon: SvgPicture.asset(
-          asset,
-          width: 20,
-          height: 20,
+            // Center Location Button
+            const Expanded(
+              child: Center(
+                child: CurrentLocationButton(),
+              ),
+            ),
+
+            // Notification & Cart
+            Row(
+              children: [
+                AppbarIcon(
+                  asset: Media.notificationBell,
+                  func: () => context.go(
+                      '${HomePage.routePath}/${NotificationView.routePath}'),
+                ),
+                const Gap(10),
+                AppbarIcon(
+                  asset: Media.cart,
+                  func: () => context
+                      .go('${HomePage.routePath}/${EmptyCart.routePath}'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

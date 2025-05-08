@@ -68,6 +68,7 @@ abstract class Media {
   static const category2 = '$_baseImage/category2.png';
   static const category3 = '$_baseImage/category3.png';
   static const category4 = '$_baseImage/category4.png';
+  static const homeBurger = '$_baseImage/homeBurger.png';
   //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
 

@@ -52,7 +52,7 @@ class BuildDecoration extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: context.height * 0.12,
+          bottom: context.height * 0.14,
           right: context.width * 0.05,
           child: Image(
             height: context.height * 0.85,
