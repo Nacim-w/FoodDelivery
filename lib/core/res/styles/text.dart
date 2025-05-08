@@ -11,6 +11,10 @@ abstract class TextStyles {
     fontSize: 24,
     fontFamily: "Satoshi",
   );
+  static const TextStyle text800fs15 = TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: 15,
+  );
   static const TextStyle titleBoldLarge = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 32,

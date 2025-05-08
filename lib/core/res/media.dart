@@ -134,6 +134,8 @@ abstract class Media {
   static const backgroundGreen = '$_baseIcon/backgroundGreen.svg';
   static const backgroundOrange = '$_baseIcon/backgroundOrange.svg';
   //products page
+  static const recommandedProduct1 = '$_baseImage/recommandedProduct1.png';
+  static const recommandedProduct2 = '$_baseImage/recommandedProduct2.png';
 
   //salad page
   static const salad1 = '$_baseImage/salad1.png';

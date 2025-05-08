@@ -16,23 +16,78 @@ class ProductDescription extends StatelessWidget {
         const Gap(5),
         Text(
           '12,230 CFA',
-          style: TextStyles.textBoldLargest,
+          style: TextStyles.textBoldLargest.orange0,
         ),
-        Row(
-          children: [
-            Icon(Icons.star, color: Colours.lightThemeYellow5),
-            const Gap(5),
-            Text("4.5", style: TextStyles.textMediumLarge.black1),
-            const Gap(20),
-            Icon(Icons.access_time_outlined,
-                color: Colours.lightThemeBlack1, size: 20),
-            const Gap(5),
-            Text("25-35 mins", style: TextStyles.textMediumLarge.black1),
-            const Gap(20),
-            Icon(Icons.circle, color: Colours.lightThemeBlack1, size: 8),
-            const Gap(5),
-            Text("7 km", style: TextStyles.textMediumLarge.black1),
-          ],
+        Gap(5),
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colours.lightThemeOrange5.withAlpha(10),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'CFA',
+                    style: TextStyles.text800fs15.orange5,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Free Delivery',
+                    style: TextStyles.textRegular.grey1,
+                  ),
+                ],
+              ),
+
+              // Center: Timer Icon + Text
+              Row(
+                children: [
+                  Icon(
+                    Icons.timer,
+                    color: Colours.lightThemeOrange5,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '20 - 30',
+                    style: TextStyles.textRegular.grey1,
+                  ),
+                ],
+              ),
+
+              // Right: Star Icon + Rating
+              Row(
+                children: [
+                  Icon(
+                    Icons.star,
+                    color: Colours.lightThemeOrange5,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '4.5',
+                    style: TextStyles.textRegular.grey1,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Description', style: TextStyles.titleMediumTiny.black1),
+              const Gap(5),
+              Text(
+                'Un petit déjeuner complet, parfait pour bien commencer la journée avec énergie et bonne humeur !',
+                style: TextStyles.textRegular.grey1,
+              ),
+            ],
+          ),
         ),
       ],
     );
