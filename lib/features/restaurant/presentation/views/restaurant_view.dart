@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_product_provider.dart';
+import 'package:legy/features/restaurant/presentation/widgets/restaurant_appbar.dart';
 import 'package:provider/provider.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
@@ -45,10 +46,16 @@ class _RestaurantViewState extends State<RestaurantView> {
                     ],
                   ),
                   Positioned(
+                    child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 35, left: 16, right: 16),
+                        child: RestaurantAppbar()),
+                  ),
+                  Positioned(
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.6,
                     child: Container(
                       decoration: const BoxDecoration(
                         color: Colors.white,

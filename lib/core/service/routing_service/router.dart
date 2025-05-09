@@ -21,7 +21,7 @@ import 'package:legy/features/dish/salad/presentation/widgets/salad_details.dart
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
-import 'package:legy/features/notification/presentation/view/notification.dart';
+import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/order/presentation/views/empty_cart_widget.dart';
 import 'package:legy/features/order/presentation/views/empty_history_view.dart';
 import 'package:legy/features/order/presentation/views/full_cart_widget.dart';

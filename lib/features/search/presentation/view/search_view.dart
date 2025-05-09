@@ -53,6 +53,7 @@ class _SearchViewState extends State<SearchView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Gap(40),
             SearchBarWidget(
               onSearch: addRecentSearch,
               onSearchTyping: updateSearching,

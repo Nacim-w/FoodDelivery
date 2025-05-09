@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/features/product/presentation/widgets/product_appbar.dart';
 
 import 'package:legy/features/product/presentation/widgets/product_cover.dart';
 import 'package:legy/features/product/presentation/widgets/product_middle_section.dart';
@@ -13,14 +14,14 @@ class ProductView extends StatefulWidget {
 
 class _ProductViewState extends State<ProductView> {
   @override
-  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Column(
-          children: [
-            ProductCover(),
-          ],
+        ProductCover(),
+        Positioned(
+          child: Padding(
+              padding: const EdgeInsets.only(top: 35, left: 16, right: 16),
+              child: ProductAppbar()),
         ),
         Positioned(
           bottom: 0,

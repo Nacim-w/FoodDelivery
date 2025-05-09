@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/appbar_icon.dart';
 import 'package:legy/features/home/presentation/widgets/home_location.dart';
-import 'package:legy/features/notification/presentation/view/notification.dart';
+import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/order/presentation/views/empty_cart_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -18,33 +19,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       color: Colours.lightThemeOrange0,
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 8).copyWith(top: 40),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // Menu icon
             Builder(
-              builder: (context) => GestureDetector(
-                onTap: () => Scaffold.of(context).openDrawer(),
-                child: SvgPicture.asset(
+              builder: (context) => IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: SvgPicture.asset(
                   Media.sidebar,
+                  width: context.width * 0.03,
+                  height: context.height * 0.03,
                   colorFilter: ColorFilter.mode(
-                      Colours.lightThemeWhite1, BlendMode.srcIn),
-                  width: 16,
-                  height: 16,
+                    Colours.lightThemeWhite1,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),
-
-            // Center Location Button
             const Expanded(
               child: Center(
                 child: CurrentLocationButton(),
               ),
             ),
-
-            // Notification & Cart
             Row(
               children: [
                 AppbarIcon(
@@ -67,5 +64,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(55);
+  Size get preferredSize => const Size.fromHeight(80);
 }

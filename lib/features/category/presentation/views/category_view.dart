@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:legy/features/category/presentation/widgets/category_appbar.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
 
 class CategoryView extends StatefulWidget {
@@ -13,7 +12,6 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CategoryAppBar(),
       body: CategoryDetails(),
     );
   }

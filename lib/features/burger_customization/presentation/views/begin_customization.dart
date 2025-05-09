@@ -25,6 +25,7 @@ class _BeginCustomizationState extends State<BeginCustomization> {
             const SuggestionListview(),
             const Gap(50),
             const MiddleSection(),
+            const Gap(20),
             const BurgerChoices(),
           ],
         ),

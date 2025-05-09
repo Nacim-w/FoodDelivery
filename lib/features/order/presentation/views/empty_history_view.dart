@@ -7,6 +7,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/order/presentation/widgets/history_appbar.dart';
 
 class EmptyHistoryView extends StatefulWidget {
   const EmptyHistoryView({super.key});
@@ -23,15 +24,16 @@ class _EmptyHistoryViewState extends State<EmptyHistoryView> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Commandes récentes',
-              style: TextStyles.textSemiBold.black1,
-            ),
+          const Gap(40),
+          HistoryAppbar(),
+          const Gap(20),
+          Text(
+            'Commandes récentes',
+            style: TextStyles.textSemiBold.black1,
           ),
-          const Gap(10),
+          const Gap(15),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

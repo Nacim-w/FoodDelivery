@@ -37,38 +37,42 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final double fixedHeight = context.height * 0.15;
+    final double fixedHeight = context.height * 0.18;
 
     return Scaffold(
       body: Stack(
         children: [
-          // Background and story bar
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(32),
-                bottomRight: Radius.circular(32),
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
               ),
               color: Colours.lightThemeOrange0,
             ),
-            height: context.height * 0.2,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: stories,
+            height: context.height * 0.22,
+            child: Column(
+              children: [
+                Gap(20),
+                Expanded(
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: stories,
+                  ),
+                ),
+              ],
             ),
           ),
-
           Padding(
-            padding: EdgeInsets.only(top: fixedHeight + 8),
+            padding: EdgeInsets.only(top: fixedHeight - 25),
             child: GestureDetector(
               onTap: () => context.go(
                   '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
               child: HomeCaroussal(),
             ),
           ),
-
           Padding(
-            padding: EdgeInsets.only(top: context.height * 0.36),
+            padding: EdgeInsets.only(top: context.height * 0.38),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -91,7 +95,7 @@ class _HomeState extends State<Home> {
                                     '${HomePage.routePath}/${CategoryDetails.routePath}')
                               },
                               child: Text('Tout voir',
-                                  style: TextStyles.textSemiBoldSmall.yellow5),
+                                  style: TextStyles.textSemiBoldSmall.orange5),
                             ),
                           ],
                         ),
@@ -192,7 +196,7 @@ class _HomeState extends State<Home> {
                                       '${HomePage.routePath}/${AllRestaurantsView.routePath}'),
                                   child: Text('Tout voir',
                                       style:
-                                          TextStyles.textSemiBoldSmall.yellow5),
+                                          TextStyles.textSemiBoldSmall.orange5),
                                 ),
                               ],
                             ),

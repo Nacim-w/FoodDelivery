@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -32,6 +31,7 @@ class _CurrentLocationButtonState extends State<CurrentLocationButton> {
       }
 
       final position = await Geolocator.getCurrentPosition(
+          // ignore: deprecated_member_use
           desiredAccuracy: LocationAccuracy.high);
       final placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
