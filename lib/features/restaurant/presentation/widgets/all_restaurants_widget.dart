@@ -8,14 +8,14 @@ import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cub
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_container.dart';
 
-class RestaurantsWidget extends StatefulWidget {
-  const RestaurantsWidget({super.key});
+class AllRestaurantsWidget extends StatefulWidget {
+  const AllRestaurantsWidget({super.key});
 
   @override
-  State<RestaurantsWidget> createState() => _RestaurantsWidgetState();
+  State<AllRestaurantsWidget> createState() => _AllRestaurantsWidgetState();
 }
 
-class _RestaurantsWidgetState extends State<RestaurantsWidget> {
+class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
   @override
   void initState() {
     super.initState();

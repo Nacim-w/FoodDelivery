@@ -18,17 +18,14 @@ class _BeginCustomizationState extends State<BeginCustomization> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colours.lightThemeBlack0,
-      body: SingleChildScrollView(
-        // Wrap the Column inside a SingleChildScrollView
-        child: Column(
-          children: [
-            const SuggestionListview(),
-            const Gap(50),
-            const MiddleSection(),
-            const Gap(20),
-            const BurgerChoices(),
-          ],
-        ),
+      body: Column(
+        children: [
+          const SuggestionListview(),
+          const Gap(50),
+          const MiddleSection(),
+          const Gap(10),
+          const BurgerChoices(),
+        ],
       ),
     );
   }

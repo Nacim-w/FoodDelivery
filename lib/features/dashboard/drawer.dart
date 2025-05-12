@@ -7,7 +7,7 @@ import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
 import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
 import 'package:legy/features/order/order_page.dart';
-import 'package:legy/features/profile/params/params_page.dart';
+import 'package:legy/features/profile/params/presentation/views/params_view.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -126,7 +126,7 @@ class HomeDrawer extends StatelessWidget {
               leading: Media.settingsDrawer,
               title: 'Paramètres',
               routing:
-                  '${ProfileSettingsPage.routePath}/${ParamsPage.routePath}',
+                  '${ProfileSettingsPage.routePath}/${ParamsView.routePath}',
             ),
           ],
         ),

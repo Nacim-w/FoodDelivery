@@ -19,7 +19,7 @@ class _BurgerChoicesState extends State<BurgerChoices> {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      height: context.height * 0.3,
+      height: context.height * 0.15,
       padding: const EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite1,
@@ -45,14 +45,17 @@ class _BurgerChoicesState extends State<BurgerChoices> {
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _categoryButton('Pains'),
-              _categoryButton('Galette'),
-              _categoryButton('Garnitures'),
-              _categoryButton('Sauces'),
-            ],
+          SizedBox(
+            height: context.height * 0.06,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                _categoryButton('Pains'),
+                _categoryButton('Galette'),
+                _categoryButton('Garnitures'),
+                _categoryButton('Sauces'),
+              ],
+            ),
           ),
         ],
       ),

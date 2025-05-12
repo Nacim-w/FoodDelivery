@@ -106,7 +106,7 @@ class _MiddleSectionState extends State<MiddleSection>
             ),
           ),
           Positioned(
-            bottom: context.height * 0.08,
+            bottom: context.height * 0.035,
             left: context.width * 0.05,
             child: Image.asset(
               Media.burgerBackground,

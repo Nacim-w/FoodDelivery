@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
@@ -82,8 +81,6 @@ class HomeService {
       }
 
       final List data = jsonDecode(response.body);
-
-      debugPrint("Decoded Data: $data");
 
       List<NearbyRestaurantModel> restaurants = data
           .map((restaurantJson) =>

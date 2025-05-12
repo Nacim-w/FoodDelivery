@@ -22,9 +22,9 @@ class _CategoryHeroState extends State<CategoryHero> {
   int? selectedIndex;
 
   final List<String> categoryImages = [
-    Media.categorie1,
-    Media.categorie2,
     Media.categorie3,
+    Media.categorie2,
+    Media.categorie1,
   ];
 
   final List<String> swapImages = [

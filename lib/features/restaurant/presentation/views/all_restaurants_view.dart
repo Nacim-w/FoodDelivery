@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/restaurant/presentation/widgets/restaurants_widget.dart';
+import 'package:legy/features/restaurant/presentation/widgets/all_restaurants_widget.dart';
 
 class AllRestaurantsView extends StatelessWidget {
   static const routePath = "restaurants";
@@ -15,7 +15,7 @@ class AllRestaurantsView extends StatelessWidget {
         title: Text("Restaurants", style: TextStyles.textSemiBoldLarge.black1),
         centerTitle: true,
       ),
-      body: RestaurantsWidget(),
+      body: AllRestaurantsWidget(),
     );
   }
 }

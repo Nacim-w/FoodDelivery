@@ -25,6 +25,19 @@ abstract class Media {
   static const logOut = '$_baseIcon/logout.svg';
   static const notification = '$_baseIcon/notification.svg';
   static const location = '$_baseIcon/location.svg';
+  //params page
+  static const paramChangePassword = '$_baseIcon/paramChangePassword.svg';
+  static const paramProfileDetails = '$_baseIcon/paramProfileDetails.svg';
+  static const paramTos = '$_baseIcon/paramTos.svg';
+  //favorite page
+  static const favoriteOrangy = '$_baseIcon/favoriteOrangy.svg';
+  static const favoriteMeal1 = '$_baseImage/favoriteMeal1.png';
+  static const favoriteMeal2 = '$_baseImage/favoriteMeal2.png';
+  static const favoriteMeal3 = '$_baseImage/favoriteMeal3.png';
+  static const favoriteMeal4 = '$_baseImage/favoriteMeal4.png';
+  static const favoriteMeal5 = '$_baseImage/favoriteMeal5.png';
+  static const favoriteMeal6 = '$_baseImage/favoriteMeal6.png';
+
   //bottom navigation bar icons
   static const home = '$_baseIcon/home.svg';
   static const homeActive = '$_baseIcon/homeActive.svg';

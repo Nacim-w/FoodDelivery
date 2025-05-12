@@ -136,8 +136,8 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: ErrorPage.routePath,
-              builder: (context, state) => const ErrorPage(),
+              path: ReelsView.routePath,
+              builder: (context, state) => const ReelsView(),
             ),
           ],
         ),
@@ -152,9 +152,18 @@ final router = GoRouter(
                   builder: (context, state) => const HelpCenterPage(),
                 ),
                 GoRoute(
-                  path: ParamsPage.routePath,
-                  builder: (context, state) => const ParamsPage(),
+                  path: FavoriteView.routePath,
+                  builder: (context, state) => const FavoriteView(),
                 ),
+                GoRoute(
+                    path: ParamsView.routePath,
+                    builder: (context, state) => const ParamsView(),
+                    routes: [
+                      GoRoute(
+                        path: TermsServiceView.routePath,
+                        builder: (context, state) => const TermsServiceView(),
+                      ),
+                    ]),
                 GoRoute(
                   path: PersonalDataPage.routePath,
                   builder: (context, state) => const PersonalDataPage(),
