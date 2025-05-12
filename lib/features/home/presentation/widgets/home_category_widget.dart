@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -15,7 +16,6 @@ class HomeCategory extends StatelessWidget {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -31,12 +31,13 @@ class HomeCategory extends StatelessWidget {
             child: ClipOval(
               child: Image.asset(
                 image,
-                width: context.width * 0.22,
-                height: context.width * 0.22,
+                width: context.width * 0.17,
+                height: context.width * 0.17,
                 fit: BoxFit.cover,
               ),
             ),
           ),
+          Gap(15),
           Text(
             name,
             style: TextStyles.textBoldSmall.black3.copyWith(),

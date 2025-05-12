@@ -9,7 +9,8 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
 class PopularDish extends StatefulWidget {
-  const PopularDish({super.key});
+  const PopularDish({super.key, required this.image});
+  final String image;
 
   @override
   State<PopularDish> createState() => _PopularDishState();
@@ -45,7 +46,7 @@ class _PopularDishState extends State<PopularDish> {
                   height: context.height * 0.3,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(Media.dish1),
+                      image: AssetImage(widget.image),
                     ),
                   ),
                 ),

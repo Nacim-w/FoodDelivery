@@ -1,6 +1,8 @@
 part of 'router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,

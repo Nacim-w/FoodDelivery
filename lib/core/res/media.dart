@@ -65,7 +65,7 @@ abstract class Media {
   // comment page
   static const activeStar = '$_baseIcon/activeStar.svg';
   static const inActiveStar = '$_baseIcon/inActiveStar.svg';
-  // home page
+  // homepage
   static const sidebar = '$_baseIcon/sidebar.svg';
   static const cart = '$_baseIcon/cart.svg';
   static const homeClock = '$_baseIcon/homeClock.svg';
@@ -75,6 +75,8 @@ abstract class Media {
   static const story1 = '$_baseImage/story1.png';
   static const story2 = '$_baseImage/story2.png';
   static const story3 = '$_baseImage/story3.png';
+  static const story4 = '$_baseImage/story4.png';
+  static const story5 = '$_baseImage/story5.png';
   static const homeBanner1 = '$_baseImage/homeBanner1.png';
   static const homeBanner2 = '$_baseImage/homeBanner2.png';
   static const categorie1 = '$_baseImage/categorie1.png';
@@ -86,6 +88,10 @@ abstract class Media {
   static const category3 = '$_baseImage/category3.png';
   static const category4 = '$_baseImage/category4.png';
   static const homeBurger = '$_baseImage/homeBurger.png';
+  static const homeAvatar = '$_baseImage/homeAvatar.png';
+  static const homePin = '$_baseIcon/homePin.svg';
+  static const homeCamera = '$_baseIcon/homeCamera.svg';
+
   //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
 
@@ -144,8 +150,13 @@ abstract class Media {
   static const categorySwap1 = '$_baseImage/categorySwap1.png';
   static const categorySwap2 = '$_baseImage/categorySwap2.png';
   static const categorySwap3 = '$_baseImage/categorySwap3.png';
-  static const dish1 = '$_baseImage/dish1.png';
-  static const dish2 = '$_baseImage/dish2.png';
+  static const categoryDish1 = '$_baseImage/categoryDish1.png';
+  static const categoryDish2 = '$_baseImage/categoryDish2.png';
+  static const categoryDish3 = '$_baseImage/categoryDish3.png';
+  static const categoryDish4 = '$_baseImage/categoryDish4.png';
+  static const categoryDish5 = '$_baseImage/categoryDish5.png';
+  static const categoryDish6 = '$_baseImage/categoryDish6.png';
+
   static const categoryScooter = '$_baseIcon/categoryScooter.svg';
   static const categoryStar = '$_baseIcon/categoryStar.svg';
   static const backgroundRed = '$_baseIcon/backgroundRed.svg';

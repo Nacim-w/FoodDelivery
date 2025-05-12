@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
               ),
               color: Colours.lightThemeOrange0,
             ),
-            height: context.height * 0.22,
+            height: context.height * 0.24,
             child: Column(
               children: [
                 Gap(20),
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: fixedHeight - 25),
+            padding: EdgeInsets.only(top: fixedHeight - 10),
             child: GestureDetector(
               onTap: () => context.go(
                   '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: context.height * 0.38),
+            padding: EdgeInsets.only(top: context.height * 0.4),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -86,73 +86,71 @@ class _HomeState extends State<Home> {
                           children: [
                             Text('Catégories',
                                 style: TextStyles.textSemiBoldLarge.black3),
-                            TextButton(
-                              onPressed: () => {
-                                context
-                                    .read<CategoryProvider>()
-                                    .changeIndex(newIndex: 2),
-                                context.push(
-                                    '${HomePage.routePath}/${CategoryDetails.routePath}')
-                              },
-                              child: Text('Tout voir',
-                                  style: TextStyles.textSemiBoldSmall.orange5),
-                            ),
                           ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<CategoryProvider>()
-                                  .changeIndex(newIndex: 0);
-                              context.push(
-                                  '${HomePage.routePath}/${CategoryDetails.routePath}');
-                            },
-                            child: HomeCategory(
-                              image: Media.category3,
-                              name: 'Sénégalaise',
+                      Gap(20),
+                      SizedBox(
+                        height: context.height * 0.15,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16), // Optional outer padding
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<CategoryProvider>()
+                                    .changeIndex(newIndex: 0);
+                                context.push(
+                                    '${HomePage.routePath}/${CategoryDetails.routePath}');
+                              },
+                              child: HomeCategory(
+                                image: Media.category3,
+                                name: 'Sénégalaise',
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<CategoryProvider>()
-                                  .changeIndex(newIndex: 1);
-                              context.push(
-                                  '${HomePage.routePath}/${CategoryDetails.routePath}');
-                            },
-                            child: HomeCategory(
-                              image: Media.category2,
-                              name: 'Internationale',
+                            const Gap(30),
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<CategoryProvider>()
+                                    .changeIndex(newIndex: 1);
+                                context.push(
+                                    '${HomePage.routePath}/${CategoryDetails.routePath}');
+                              },
+                              child: HomeCategory(
+                                image: Media.category2,
+                                name: 'Internationale',
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<CategoryProvider>()
-                                  .changeIndex(newIndex: 2);
-                              context.push(
-                                  '${HomePage.routePath}/${CategoryDetails.routePath}');
-                            },
-                            child: HomeCategory(
-                              image: Media.category1,
-                              name: 'Saine',
+                            const Gap(30),
+                            GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<CategoryProvider>()
+                                    .changeIndex(newIndex: 2);
+                                context.push(
+                                    '${HomePage.routePath}/${CategoryDetails.routePath}');
+                              },
+                              child: HomeCategory(
+                                image: Media.category1,
+                                name: 'Saine',
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              context.push(
-                                  '${HomePage.routePath}/${CategoryDetails.routePath}/${DessertDetails.routePath}');
-                            },
-                            child: HomeCategory(
-                              image: Media.category4,
-                              name: 'Desserts',
+                            const Gap(30),
+                            GestureDetector(
+                              onTap: () {
+                                context.push(
+                                    '${HomePage.routePath}/${CategoryDetails.routePath}/${DessertDetails.routePath}');
+                              },
+                              child: HomeCategory(
+                                image: Media.category4,
+                                name: 'Desserts',
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
 
                       /* BlocBuilder<HomeCubit, HomeState>(
@@ -181,7 +179,7 @@ class _HomeState extends State<Home> {
                             child: Text('Something went wrong.'));
                       },
                     ),*/
-                      Gap(10),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(

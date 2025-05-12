@@ -39,6 +39,13 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
       height: context.height * 0.115,
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite4,
+        boxShadow: [
+          BoxShadow(
+            color: Colours.lightThemeBlack1.withAlpha(25),
+            blurRadius: 10,
+            spreadRadius: 2,
+          ),
+        ],
         borderRadius: BorderRadius.circular(20),
       ),
       child: Stack(
@@ -78,16 +85,20 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
                       Text(widget.time,
                           style: TextStyles.textMediumSmall
                               .copyWith(color: widget.accentColor)),
-                      Gap(15),
-                      SvgPicture.asset(Media.ratingStar),
+                      Gap(25),
+                      SvgPicture.asset(
+                        Media.ratingStar,
+                        colorFilter: ColorFilter.mode(
+                            Colours.lightThemeYellow5, BlendMode.srcIn),
+                      ),
                       Gap(3),
                       Text(widget.rating,
                           style: TextStyles.textMediumSmall
                               .copyWith(color: widget.accentColor)),
-                      Gap(15),
+                      Gap(20),
                       SvgPicture.asset(Media.dot),
                       Gap(3),
-                      Text(widget.distance,
+                      Text('${widget.distance} km',
                           style: TextStyles.textMediumSmall
                               .copyWith(color: widget.accentColor)),
                     ],
@@ -109,11 +120,7 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
                   bottomLeft: Radius.circular(20),
                 ),
               ),
-              child: const Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 18,
-              ),
+              child: Center(child: SvgPicture.asset(Media.homeCamera)),
             ),
           ),
         ],

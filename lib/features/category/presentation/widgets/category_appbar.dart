@@ -40,9 +40,11 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.location_on_outlined,
-                  size: 18, color: Colors.black),
-              const SizedBox(width: 4),
+              SvgPicture.asset(Media.homePin,
+                  width: 18,
+                  height: 18,
+                  colorFilter: ColorFilter.mode(
+                      Colours.lightThemeBlack1, BlendMode.srcIn)),
               Text("phnom penh, Cambodia",
                   style: TextStyle(color: Colors.black, fontSize: 14)),
               const Icon(Icons.keyboard_arrow_down,

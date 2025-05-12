@@ -22,9 +22,9 @@ class _CategoryHeroState extends State<CategoryHero> {
   int? selectedIndex;
 
   final List<String> categoryImages = [
-    Media.categorie3,
-    Media.categorie2,
     Media.categorie1,
+    Media.categorie2,
+    Media.categorie3,
   ];
 
   final List<String> swapImages = [
@@ -78,6 +78,8 @@ class _CategoryHeroState extends State<CategoryHero> {
     context
         .read<CategoryProvider>()
         .changeColor(newColor: categoryColors[index]);
+    context.read<CategoryProvider>().changeIndex(newIndex: index);
+
     widget.onCategoryChanged?.call(index);
   }
 
@@ -101,7 +103,7 @@ class _CategoryHeroState extends State<CategoryHero> {
               ),
               Gap(15),
               SizedBox(
-                width: context.width * 0.58,
+                width: context.width * 0.5,
                 height: context.height * 0.1,
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
@@ -111,13 +113,13 @@ class _CategoryHeroState extends State<CategoryHero> {
                     categorySubtitles[selectedIndex!],
                     key: ValueKey('subtitle_$selectedIndex'),
                     style: TextStyles.textMediumLarge.black1,
-                    maxLines: 2,
+                    maxLines: 3,
                   ),
                 ),
               ),
               Gap(40),
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
+              SizedBox(
+                width: context.width * 0.38,
                 child: ElevatedButton(
                   onPressed: () => onCategorySelected(selectedIndex!),
                   style: ElevatedButton.styleFrom(
@@ -179,7 +181,7 @@ class _CategoryHeroState extends State<CategoryHero> {
             ],
           ),
           Positioned(
-            right: 0,
+            right: 20,
             top: context.height * 0.1,
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 600),

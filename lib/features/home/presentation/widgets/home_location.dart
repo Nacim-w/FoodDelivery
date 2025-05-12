@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:legy/core/res/media.dart';
 
 class CurrentLocationButton extends StatefulWidget {
   const CurrentLocationButton({super.key});
@@ -56,8 +58,7 @@ class _CurrentLocationButtonState extends State<CurrentLocationButton> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.location_on, color: Colors.white, size: 18),
-          const SizedBox(width: 5),
+          SvgPicture.asset(Media.homePin),
           _loading
               ? const SizedBox(
                   width: 14,

@@ -34,11 +34,20 @@ class HomeRestaurants extends StatelessWidget {
     Uint8List imageBytes = base64Decode(base64Str);
     return Container(
       height: context.height * 0.115,
+      width: context.width * 0.95,
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite4,
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colours.lightThemeBlack1.withAlpha(25),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
           Row(
             children: [
@@ -73,11 +82,11 @@ class HomeRestaurants extends StatelessWidget {
                       SvgPicture.asset(Media.homeClock),
                       Gap(3),
                       Text(time, style: TextStyles.textMediumSmall.red5),
-                      Gap(15),
+                      Gap(38),
                       SvgPicture.asset(Media.ratingStar),
                       Gap(3),
                       Text(rating, style: TextStyles.textMediumSmall.red5),
-                      Gap(15),
+                      Gap(38),
                       SvgPicture.asset(Media.dot),
                       Gap(3),
                       Text(distance, style: TextStyles.textMediumSmall.red5),
@@ -100,10 +109,8 @@ class HomeRestaurants extends StatelessWidget {
                   bottomLeft: Radius.circular(20),
                 ),
               ),
-              child: const Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 18,
+              child: Center(
+                child: SvgPicture.asset(Media.homeCamera),
               ),
             ),
           ),

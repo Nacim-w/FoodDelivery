@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
-import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/home/presentation/widgets/appbar_icon.dart';
 import 'package:legy/features/home/presentation/widgets/home_location.dart';
-import 'package:legy/features/notification/presentation/view/notification_view.dart';
-import 'package:legy/features/order/presentation/views/empty_cart_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -42,20 +36,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: CurrentLocationButton(),
               ),
             ),
-            Row(
-              children: [
-                AppbarIcon(
-                  asset: Media.notificationBell,
-                  func: () => context.go(
-                      '${HomePage.routePath}/${NotificationView.routePath}'),
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colours.lightThemeGrey0,
+                  width: 2,
                 ),
-                const Gap(10),
-                AppbarIcon(
-                  asset: Media.cart,
-                  func: () => context
-                      .go('${HomePage.routePath}/${EmptyCart.routePath}'),
-                ),
-              ],
+              ),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundImage: const AssetImage(Media.homeAvatar),
+              ),
             ),
           ],
         ),
