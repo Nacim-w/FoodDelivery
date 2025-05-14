@@ -20,7 +20,7 @@ class PizzaCarousel extends StatelessWidget {
     ];
 
     return Positioned(
-      top: context.height * 0.18,
+      top: context.width * 0.35,
       child: SizedBox(
         width: context.width,
         height: context.width * 0.8,

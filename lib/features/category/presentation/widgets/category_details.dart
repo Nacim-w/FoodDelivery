@@ -37,7 +37,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Gap(35),
+        Gap(60),
         CategoryAppBar(),
         Gap(20),
         Expanded(

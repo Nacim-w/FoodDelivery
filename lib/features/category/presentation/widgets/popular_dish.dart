@@ -39,14 +39,16 @@ class _PopularDishState extends State<PopularDish> {
             clipBehavior: Clip.none,
             children: [
               Positioned(
-                top: context.height * -0.15,
-                left: 8,
+                top: context.height * -0.05,
+                left: context.width * 0.05,
                 child: Container(
-                  width: context.width * 0.3,
-                  height: context.height * 0.3,
+                  width: context.width * 0.25,
+                  height: context.width * 0.25,
+
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(widget.image),
+                      fit: BoxFit.cover
                     ),
                   ),
                 ),

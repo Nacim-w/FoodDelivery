@@ -19,7 +19,7 @@ class BackgroundLayer extends StatelessWidget {
           height: context.height,
           child: Column(
             children: [
-              const Gap(30),
+              const Gap(60),
               BuildHeaderBar(),
               const SizedBox(height: 16),
               Text('Sélectionnez votre favori',
