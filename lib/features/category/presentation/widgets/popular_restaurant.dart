@@ -23,7 +23,8 @@ class PopularRestaurant extends StatelessWidget {
         CategoryRestaurant(
           image: Media.restaurant1,
           title: 'Le Festin du Chef',
-          description: 'Délices africains servis avec passion.',
+          description:
+              'Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu\'il vous faut !',
           time: '20-25 mins',
           distance: '7',
           rating: '4.6',

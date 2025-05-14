@@ -15,7 +15,7 @@ class PizzaExtraList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Extra', style: TextStyles.titleSemiBoldTiny.black1),
+        Text('Extras', style: TextStyles.titleSemiBoldTiny.red5),
         const SizedBox(height: 8),
         ...List.generate(provider.extras.length, (index) {
           final extra = provider.extras[index];
@@ -32,15 +32,20 @@ class PizzaExtraList extends StatelessWidget {
                     '59 CFA',
                     style: TextStyles.textMedium.orange5,
                   ),
-                  Checkbox(
-                    value: extra['selected'],
-                    onChanged: (value) => provider.toggleExtra(index, value!),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                  Transform.scale(
+                    scale: 1.2,
+                    child: Checkbox(
+                      value: extra['selected'],
+                      onChanged: (value) => provider.toggleExtra(index, value!),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      side: const BorderSide(
+                        color: Colours.lightThemeOrange5,
+                        width: 2,
+                      ),
+                      activeColor: Colours.lightThemeOrange5,
                     ),
-                    side: const BorderSide(
-                        color: Colours.lightThemeOrange5, width: 2),
-                    activeColor: Colours.lightThemeOrange5,
                   ),
                 ],
               ),

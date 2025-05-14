@@ -41,16 +41,16 @@ class BurgerSuggestion extends StatelessWidget {
               Gap(15),
               Text(
                 name,
-                style: TextStyles.textMediumtiny.white1,
+                style: TextStyles.textMediumTiny.white1,
               ),
               Text(
                 description,
-                style: TextStyles.textMediumtiny.white1,
+                style: TextStyles.textMediumTiny.white1,
               ),
               Gap(15),
               Text(
                 price,
-                style: TextStyles.textMediumtiny.white1,
+                style: TextStyles.textMediumTiny.white1,
               ),
             ],
           ),

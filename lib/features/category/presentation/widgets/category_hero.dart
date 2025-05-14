@@ -117,7 +117,7 @@ class _CategoryHeroState extends State<CategoryHero> {
                   ),
                 ),
               ),
-              Gap(40),
+              Gap(15),
               SizedBox(
                 width: context.width * 0.38,
                 child: ElevatedButton(
@@ -147,42 +147,45 @@ class _CategoryHeroState extends State<CategoryHero> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: List.generate(categoryImages.length, (index) {
-                  return Column(
-                    children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () => onCategorySelected(index),
-                          splashColor: Colours.lightThemeGrey1.withAlpha(25),
-                          customBorder: const CircleBorder(),
-                          child: Image.asset(
-                            categoryImages[index],
-                            width: context.width * 0.18,
-                            height: context.height * 0.1,
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: Column(
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () => onCategorySelected(index),
+                            splashColor: Colours.lightThemeGrey1.withAlpha(25),
+                            customBorder: const CircleBorder(),
+                            child: Image.asset(
+                              categoryImages[index],
+                              width: context.width * 0.15,
+                              height: context.height * 0.07,
+                            ),
                           ),
                         ),
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeInOut,
-                        width: context.width * 0.12,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: selectedIndex == index
-                              ? categoryColors[index]
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                          width: context.width * 0.12,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: selectedIndex == index
+                                ? categoryColors[index]
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 }),
-              ),
+              )
             ],
           ),
           Positioned(
-            right: 20,
-            top: context.height * 0.1,
+            right: 0,
+            top: context.width * 0.2,
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 600),
               transitionBuilder: (child, animation) {
@@ -192,8 +195,8 @@ class _CategoryHeroState extends State<CategoryHero> {
                 );
               },
               child: Container(
-                width: context.width * 0.4,
-                height: context.width * 0.4,
+                width: context.width * 0.42,
+                height: context.width * 0.42,
                 key: ValueKey<int>(selectedIndex!),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(

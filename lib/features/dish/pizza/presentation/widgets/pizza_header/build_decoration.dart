@@ -25,39 +25,21 @@ class BuildDecoration extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: context.height * 0.2,
-          left: 0,
-          child: Image(
-            height: context.height * 0.25,
-            width: context.width * 0.25,
-            image: AssetImage(Media.spinach),
-          ),
-        ),
-        Positioned(
-          top: context.height * 0.1,
-          right: 0,
-          child: Image(
-            height: context.height * 0.25,
-            width: context.width * 0.25,
-            image: AssetImage(Media.spinach2),
-          ),
-        ),
-        Positioned(
-          top: context.height * 0.35,
-          right: 0,
-          child: Image(
-            height: context.height * 0.3,
-            width: context.width * 0.3,
-            image: AssetImage(Media.pepper),
-          ),
-        ),
-        Positioned(
-          bottom: context.height * 0.12,
+          bottom: context.width * 0.36,
           right: context.width * 0.05,
           child: Image(
             height: context.height * 0.85,
             width: context.width * 0.85,
             image: AssetImage(Media.woodenPlate),
+          ),
+        ),
+        Positioned(
+          top: context.width * -0.2,
+          left: context.width * 0.05,
+          child: Image(
+            height: context.height * 0.9,
+            width: context.width * 0.9,
+            image: AssetImage(Media.dishDecoration),
           ),
         ),
       ],

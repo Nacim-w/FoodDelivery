@@ -4,10 +4,8 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_add_to_cart.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_drinks_list.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_extra_list.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_selector.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_supplement.dart';
 
 class PizzaDetailsSheet extends StatelessWidget {
   const PizzaDetailsSheet({super.key});
@@ -31,7 +29,6 @@ class PizzaDetailsSheet extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _DragHandle(),
               Padding(
                 padding: EdgeInsets.all(16),
                 child: Text(
@@ -43,30 +40,8 @@ class PizzaDetailsSheet extends StatelessWidget {
               PizzaSelector(),
               Gap(26),
               Padding(
-                padding: EdgeInsets.all(16),
-                child: Text(
-                  'Suppléments',
-                  style: TextStyles.titleSemiBold.black1,
-                ),
-              ),
-              PizzaSupplement(),
-              Gap(26),
-              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: PizzaExtraList(),
-              ),
-              Gap(16),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: PizzaDrinkList(),
-              ),
-              Gap(12),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  '12.00 CFA',
-                  style: TextStyles.titleMediumSmallest.orange5,
-                ),
               ),
               Gap(24),
               Padding(
@@ -75,25 +50,6 @@ class PizzaDetailsSheet extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _DragHandle extends StatelessWidget {
-  const _DragHandle();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 40,
-        height: 4,
-        margin: const EdgeInsets.only(bottom: 12),
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(4),
         ),
       ),
     );

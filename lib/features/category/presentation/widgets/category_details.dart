@@ -45,9 +45,8 @@ class _CategoryDetailsState extends State<CategoryDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Gap(20),
                 CategoryHero(),
-                Gap(10),
+                Gap(15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
@@ -55,52 +54,41 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     style: TextStyles.text900fs24.brown5,
                   ),
                 ),
-                Gap(20),
+                Gap(5),
                 SizedBox(
-                    height: context.height * 0.3,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: InkWell(
-                            onTap: () => context.go(
-                              '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
-                            ),
-                            child: PopularDish(
-                                image: categoryTitles[
-                                    context.watch<CategoryProvider>().index *
-                                            2 +
-                                        1]),
-                          ),
+                  height: context.height * 0.32,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      InkWell(
+                        onTap: () => context.go(
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: InkWell(
-                            onTap: () => context.go(
-                              '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
-                            ),
-                            child: PopularDish(
-                                image: categoryTitles[
-                                    context.watch<CategoryProvider>().index *
-                                        2]),
-                          ),
+                        child: PopularDish(
+                            image: categoryTitles[
+                                context.watch<CategoryProvider>().index * 2 +
+                                    1]),
+                      ),
+                      InkWell(
+                        onTap: () => context.go(
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: InkWell(
-                            onTap: () => context.go(
-                              '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
-                            ),
-                            child: PopularDish(
-                                image: categoryTitles[
-                                    context.watch<CategoryProvider>().index *
-                                            2 +
-                                        1]),
-                          ),
+                        child: PopularDish(
+                            image: categoryTitles[
+                                context.watch<CategoryProvider>().index * 2]),
+                      ),
+                      InkWell(
+                        onTap: () => context.go(
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
                         ),
-                      ],
-                    )),
+                        child: PopularDish(
+                            image: categoryTitles[
+                                context.watch<CategoryProvider>().index * 2 +
+                                    1]),
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: PopularRestaurant(),

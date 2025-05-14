@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:legy/core/res/media.dart';
 
 class PizzaDetailsProvider with ChangeNotifier {
   int quantity = 1;
@@ -15,13 +14,6 @@ class PizzaDetailsProvider with ChangeNotifier {
     {'name': 'Œuf frit', 'selected': false},
     {'name': 'Champignons', 'selected': false},
     {'name': 'Oignons caramélisés', 'selected': false},
-  ];
-
-  List<Map<String, dynamic>> drinks = [
-    {'image': Media.cocacola, 'name': 'Coca-Cola', 'selected': false},
-    {'image': Media.sprite, 'name': 'Pepsi', 'selected': false},
-    {'image': Media.pepsi, 'name': 'Sprite', 'selected': false},
-    {'image': Media.fanta, 'name': 'Fanta', 'selected': false},
   ];
 
   void increment() {
@@ -55,11 +47,6 @@ class PizzaDetailsProvider with ChangeNotifier {
 
   void toggleExtra(int index, bool value) {
     extras[index]['selected'] = value;
-    notifyListeners();
-  }
-
-  void toggleDrinks(int index, bool value) {
-    drinks[index]['selected'] = value;
     notifyListeners();
   }
 

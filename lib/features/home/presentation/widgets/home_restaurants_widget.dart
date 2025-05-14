@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -52,8 +50,8 @@ class HomeRestaurants extends StatelessWidget {
           Row(
             children: [
               Container(
-                height: context.height * 0.115,
-                width: context.width * 0.25,
+                height: context.width * 0.23,
+                width: context.width * 0.23,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
@@ -62,31 +60,34 @@ class HomeRestaurants extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              Gap(20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyles.textMediumSmall.brown5),
+                  Gap(8),
+                  Text(title, style: TextStyles.textSemiBoldSmall.brown5),
                   Gap(5),
                   SizedBox(
-                    width: context.width * 0.55,
-                    child: AutoSizeText(
+                    width: context.width * 0.48,
+                    height: context.height * 0.04,
+                    child: Text(
                       description,
-                      style: TextStyles.textRegularTiny.black1,
-                      maxLines: 3,
+                      style: TextStyles.textSemiBoldTiny.grey5,
                     ),
                   ),
-                  Gap(10),
+                  Gap(5),
                   Row(
                     children: [
                       SvgPicture.asset(Media.homeClock),
                       Gap(3),
                       Text(time, style: TextStyles.textMediumSmall.red5),
-                      Gap(38),
-                      SvgPicture.asset(Media.ratingStar),
+                      Gap(32),
+                      SvgPicture.asset(Media.ratingStar,
+                          colorFilter: ColorFilter.mode(
+                              Colours.lightThemeYellow0, BlendMode.srcIn)),
                       Gap(3),
                       Text(rating, style: TextStyles.textMediumSmall.red5),
-                      Gap(38),
+                      Gap(32),
                       SvgPicture.asset(Media.dot),
                       Gap(3),
                       Text(distance, style: TextStyles.textMediumSmall.red5),

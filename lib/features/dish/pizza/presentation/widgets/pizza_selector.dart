@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/dish/pizza/presentation/app/pizza_details_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,8 @@ class PizzaSelector extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: pizzas.length,
         itemBuilder: (context, index) {
+          final isSelected = provider.selectedPizzaIndex == index;
+
           return Padding(
             padding: const EdgeInsets.all(4),
             child: Material(
@@ -35,11 +39,15 @@ class PizzaSelector extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   width: MediaQuery.of(context).size.width * 0.22,
                   decoration: BoxDecoration(
-                    color: Colours.lightThemeOrange1,
-                    borderRadius: BorderRadius.circular(12),
+                    color: isSelected
+                        ? Colours.lightThemeOrange1
+                        : Colours.lightThemeOrange1.withAlpha(50),
+                    borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                      color: Colours.lightThemeOrange0,
-                      width: 1.0,
+                      color: isSelected
+                          ? Colours.lightThemeOrange0
+                          : Colors.transparent,
+                      width: 1.5,
                     ),
                   ),
                   child: Column(
@@ -59,7 +67,7 @@ class PizzaSelector extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         pizzas[index]['name'] as String,
-                        style: const TextStyle(fontSize: 12),
+                        style: TextStyles.textRegularSmall.black1,
                       ),
                     ],
                   ),

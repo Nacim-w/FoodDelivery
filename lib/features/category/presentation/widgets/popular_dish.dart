@@ -19,84 +19,84 @@ class PopularDish extends StatefulWidget {
 class _PopularDishState extends State<PopularDish> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Gap(60),
-        Container(
-          width: context.width * 0.35,
-          height: context.height * 0.2,
-          decoration: BoxDecoration(
-              color: Colours.lightThemeWhite4,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colours.lightThemeBlack1.withAlpha(50),
-                  blurRadius: 2,
-                  spreadRadius: 0.1,
-                ),
-              ]),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                top: context.height * -0.05,
-                left: context.width * 0.05,
-                child: Container(
-                  width: context.width * 0.25,
-                  height: context.width * 0.25,
-
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(widget.image),
-                      fit: BoxFit.cover
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          Gap(60),
+          Container(
+            width: context.width * 0.37,
+            height: context.height * 0.21,
+            decoration: BoxDecoration(
+                color: Colours.lightThemeWhite4,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colours.lightThemeBlack1.withAlpha(70),
+                    blurRadius: 2,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 2),
+                  ),
+                ]),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  top: context.width * -0.15,
+                  left: context.width * 0.055,
+                  child: Container(
+                    width: context.width * 0.25,
+                    height: context.width * 0.25,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(widget.image), fit: BoxFit.cover),
                     ),
                   ),
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Gap(context.height * 0.08),
-                  SizedBox(
-                    width: context.width * 0.3,
-                    child: AutoSizeText(
-                      "Cheddar et coquilettes",
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      style: TextStyles.textSemiBold.brown5,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Gap(context.width * 0.12),
+                    SizedBox(
+                      width: context.width * 0.3,
+                      child: AutoSizeText(
+                        "cheddar et coquilettes",
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        style: TextStyles.textSemiBold.brown5,
+                      ),
                     ),
-                  ),
-                  Gap(5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(Media.categoryScooter),
-                      Gap(2),
-                      Text(
-                        '30mins',
-                        style: TextStyles.textMediumSmall.brown5,
-                      ),
-                      Gap(2),
-                      SvgPicture.asset(Media.categoryStar),
-                      Gap(2),
-                      Text(
-                        '3.5',
-                        style: TextStyles.textMediumSmall.brown5,
-                      ),
-                    ],
-                  ),
-                  Gap(8),
-                  Text(
-                    '40.50 CFA',
-                    style: TextStyles.textMediumLarge.brown5,
-                  ),
-                ],
-              ),
-            ],
+                    Gap(10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(Media.categoryScooter),
+                        Gap(2),
+                        Text(
+                          '30mins ',
+                          style: TextStyles.textMediumSmall.brown5,
+                        ),
+                        Gap(2),
+                        SvgPicture.asset(Media.categoryStar),
+                        Gap(2),
+                        Text(
+                          '3.5',
+                          style: TextStyles.textMediumSmall.brown5,
+                        ),
+                      ],
+                    ),
+                    Gap(10),
+                    Text(
+                      '40.50 CFA',
+                      style: TextStyles.textMediumLarge.brown5,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

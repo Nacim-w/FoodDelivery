@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: context.height * 0.4),
+            padding: EdgeInsets.only(top: context.height * 0.39),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -86,10 +86,21 @@ class _HomeState extends State<Home> {
                           children: [
                             Text('Catégories',
                                 style: TextStyles.textSemiBoldLarge.black3),
+                            TextButton(
+                              onPressed: () {
+                                context
+                                    .read<CategoryProvider>()
+                                    .changeIndex(newIndex: 0);
+                                context.push(
+                                    '${HomePage.routePath}/${CategoryDetails.routePath}');
+                              },
+                              child: Text('Tout voir',
+                                  style: TextStyles.textSemiBoldSmall.orange5),
+                            ),
                           ],
                         ),
                       ),
-                      Gap(20),
+                      Gap(15),
                       SizedBox(
                         height: context.height * 0.15,
                         child: ListView(
@@ -188,7 +199,7 @@ class _HomeState extends State<Home> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('Restaurants près de vous',
-                                    style: TextStyles.textSemiBoldLarge.black3),
+                                    style: TextStyles.textSemiBoldLarge.black1),
                                 TextButton(
                                   onPressed: () => context.push(
                                       '${HomePage.routePath}/${AllRestaurantsView.routePath}'),
@@ -198,6 +209,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ],
                             ),
+                            Gap(10),
                             BlocBuilder<HomeCubit, HomeState>(
                               builder: (context, state) {
                                 if (state.isLoadingRestaurants) {
@@ -223,7 +235,7 @@ class _HomeState extends State<Home> {
                                               image: restaurant.logo,
                                               title: restaurant.nom,
                                               description:
-                                                  "Description goes here",
+                                                  "Que vous aimiez la cuisine traditionnelle ou de nouvelles saveurs, nous avons ce qu'il vous faut !",
                                               time: "20-25 mins",
                                               rating:
                                                   '${restaurant.averageRating}',

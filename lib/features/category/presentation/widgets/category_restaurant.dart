@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -63,21 +62,22 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              Gap(20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.title, style: TextStyles.textMediumSmall.brown5),
-                  Gap(5),
+                  Gap(10),
+                  Text(widget.title,
+                      style: TextStyles.textSemiBoldSmall.brown5),
+                  Gap(3),
                   SizedBox(
-                    width: context.width * 0.55,
-                    child: AutoSizeText(
+                    width: context.width * 0.48,
+                    child: Text(
                       widget.description,
-                      style: TextStyles.textRegularTiny.black1,
-                      maxLines: 3,
+                      style: TextStyles.textSemiBoldTiny.black1,
                     ),
                   ),
-                  Gap(10),
+                  Gap(5),
                   Row(
                     children: [
                       SvgPicture.asset(Media.homeClock),
@@ -85,7 +85,7 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
                       Text(widget.time,
                           style: TextStyles.textMediumSmall
                               .copyWith(color: widget.accentColor)),
-                      Gap(25),
+                      Gap(28),
                       SvgPicture.asset(
                         Media.ratingStar,
                         colorFilter: ColorFilter.mode(
@@ -95,7 +95,7 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
                       Text(widget.rating,
                           style: TextStyles.textMediumSmall
                               .copyWith(color: widget.accentColor)),
-                      Gap(20),
+                      Gap(28),
                       SvgPicture.asset(Media.dot),
                       Gap(3),
                       Text('${widget.distance} km',
