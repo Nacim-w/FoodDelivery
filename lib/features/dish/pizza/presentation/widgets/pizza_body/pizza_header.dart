@@ -28,7 +28,7 @@ class _PizzaHeaderState extends State<PizzaHeader> {
       clipBehavior: Clip.none,
       children: [
         BackgroundLayer(),
-        BuildDecoration(),
+        const IgnorePointer(child: BuildDecoration()),
         PizzaCarousel(),
         BuildNameControls()
       ],

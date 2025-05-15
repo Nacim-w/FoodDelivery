@@ -15,25 +15,28 @@ class _BuildHeaderBarState extends State<BuildHeaderBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: Colours.lightThemeOrange0),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        Text('Pizza Varities', style: TextStyles.textMediumLarge.white1),
-        IconButton(
-          icon: Icon(
-            isFavorited
-                ? Icons.favorite_rounded
-                : Icons.favorite_border_rounded,
-            color: Colours.lightThemeOrange0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back_ios,
+                color: Colours.lightThemeOrange0),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          onPressed: () => setState(() => isFavorited = !isFavorited),
-        ),
-      ],
+          Text('Pizza Varities', style: TextStyles.textMediumLarge.white1),
+          IconButton(
+            icon: Icon(
+              isFavorited
+                  ? Icons.favorite_rounded
+                  : Icons.favorite_border_rounded,
+              color: Colours.lightThemeOrange0,
+            ),
+            onPressed: () => setState(() => isFavorited = !isFavorited),
+          ),
+        ],
+      ),
     );
   }
 }

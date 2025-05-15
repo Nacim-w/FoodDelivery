@@ -195,13 +195,8 @@ abstract class Media {
   static const pizza3 = '$_baseImage/pizza3.png';
   static const pizza4 = '$_baseImage/pizza4.png';
   static const woodenPlate = '$_baseImage/woodenPlate.png';
+  static const pizzaDecoration = '$_baseImage/pizzaDecoration.png';
 
-  static const cocacola = '$_baseImage/cocacola.png';
-  static const pepsi = '$_baseImage/pepsi.png';
-  static const sprite = '$_baseImage/sprite.png';
-  static const fanta = '$_baseImage/fanta.png';
-  static const nuggets = '$_baseImage/nuggets.png';
-  static const chips = '$_baseImage/chips.png';
   static const fries = '$_baseImage/fries.png';
 
   static const ingrediant = '$_baseImage/ingrediant.png';

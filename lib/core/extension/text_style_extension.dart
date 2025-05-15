@@ -11,6 +11,7 @@ extension TextStyleExt on TextStyle {
   TextStyle get orange5 => copyWith(color: Colours.lightThemeOrange5);
 
   // Red shades
+  TextStyle get red0 => copyWith(color: Colours.lightThemeRed0);
   TextStyle get red1 => copyWith(color: Colours.lightThemeRed1);
   TextStyle get red2 => copyWith(color: Colours.lightThemeRed2);
   TextStyle get red3 => copyWith(color: Colours.lightThemeRed3);

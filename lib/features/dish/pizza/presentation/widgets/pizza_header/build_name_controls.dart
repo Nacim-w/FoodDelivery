@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -11,15 +12,14 @@ class BuildNameControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: MediaQuery.of(context).size.height * 0.45,
+      top: context.width * 1.15,
       left: 16,
       right: 16,
       child: Row(
-        children: [
-          Text('Margherita', style: TextStyles.titleMediumSmall.white1),
-          const Spacer(),
-          ...['S', 'M', 'L'].map((size) => _buildSizeButton(context, size)),
-        ],
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: ['S', 'M', 'L']
+            .map((size) => _buildSizeButton(context, size))
+            .toList(),
       ),
     );
   }
@@ -32,16 +32,19 @@ class BuildNameControls extends StatelessWidget {
       onPressed: () => provider.setSize(sizeLabel),
       style: OutlinedButton.styleFrom(
         shape: const CircleBorder(),
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(14),
         backgroundColor:
             isSelected ? Colours.lightThemeOrange0 : Colors.transparent,
         side: BorderSide(
-          color:
-              isSelected ? Colours.lightThemeOrange0 : Colours.lightThemeWhite1,
+          color: Colours.lightThemeOrange0,
         ),
-        foregroundColor: Colours.lightThemeWhite1,
       ),
-      child: Text(sizeLabel),
+      child: Text(sizeLabel,
+          style: TextStyles.textMediumLarge.white1.copyWith(
+            color: isSelected
+                ? Colours.lightThemeWhite1
+                : Colours.lightThemeOrange0,
+          )),
     );
   }
 }

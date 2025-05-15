@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legy/features/dish/pizza/presentation/app/pizza_details_provider.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_details_sheet.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_header.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_details_sheet.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_header.dart';
 import 'package:provider/provider.dart';
 
 class PizzaDetails extends StatelessWidget {

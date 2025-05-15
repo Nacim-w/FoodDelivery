@@ -11,7 +11,7 @@ import 'package:legy/features/category/presentation/widgets/category_appbar.dart
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_details.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -66,15 +66,6 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                         ),
                         child: PopularDish(
                             image: categoryTitles[
-                                context.watch<CategoryProvider>().index * 2 +
-                                    1]),
-                      ),
-                      InkWell(
-                        onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
-                        ),
-                        child: PopularDish(
-                            image: categoryTitles[
                                 context.watch<CategoryProvider>().index * 2]),
                       ),
                       InkWell(
@@ -85,6 +76,14 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                             image: categoryTitles[
                                 context.watch<CategoryProvider>().index * 2 +
                                     1]),
+                      ),
+                      InkWell(
+                        onTap: () => context.go(
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
+                        ),
+                        child: PopularDish(
+                            image: categoryTitles[
+                                context.watch<CategoryProvider>().index * 2]),
                       ),
                     ],
                   ),
