@@ -36,6 +36,8 @@ class AuthService {
       final data = jsonDecode(response.body);
       final userResponse = LoginResponseModel.fromJson(data);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
+      await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
+
       return userResponse;
     } on ServerException {
       rethrow;
@@ -91,6 +93,32 @@ class AuthService {
         message:
             "Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard.",
       );
+    }
+  }
+
+  Future<bool> refreshToken() async {
+    final refreshToken = sl<CacheHelper>().getRefreshToken();
+    if (refreshToken == null) return false;
+
+    final uri = Uri.parse('${NetworkConstants.baseUrl}/api/auth/refresh');
+    final response = await http.post(
+      uri,
+      headers: NetworkConstants.headers,
+      body: jsonEncode({'refreshToken': refreshToken}),
+    );
+
+    if (response.statusCode == 200) {
+      print('Token refreshed successfully');
+      final data = jsonDecode(response.body);
+      await sl<CacheHelper>().cacheSessionToken(data['token']);
+      if (data.containsKey('refreshToken')) {
+        await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
+      }
+      return true;
+    } else {
+      await sl<CacheHelper>().resetSession();
+      await sl<CacheHelper>().resetRefreshToken();
+      return false;
     }
   }
 }

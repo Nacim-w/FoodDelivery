@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
+import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/search/model/search_model.dart';
 
 const SEARCH_ENDPOINT = '/search';
@@ -24,10 +25,17 @@ class SearchService {
           HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       );
-      //
-      // final uri = NetworkConstants.baseUrl.startsWith('https')
-      //     ? Uri.https(NetworkConstants.developAuthority, endpoint, queryParams)
-      //     : Uri.http(NetworkConstants.localAuthority, endpoint, queryParams);
+
+      if (response.statusCode == 401) {
+        // Token expired, try refreshing
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await search(query); // retry
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
@@ -38,7 +46,7 @@ class SearchService {
       final searchResults =
           data.map((item) => SearchModel.fromJson(item)).toList();
       return searchResults;
-    } on ServerException {
+    } on TokenExpiredException {
       rethrow;
     } catch (e) {
       throw const ServerException(

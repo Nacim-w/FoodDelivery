@@ -36,4 +36,24 @@ class CacheHelper {
   }
 
   bool isFirstTime() => _prefs.getBool(_firstTimerKey) ?? true;
+
+  //refresh token
+  static const _refreshTokenKey = 'user-refresh-token';
+
+  String? getRefreshToken() {
+    final refreshToken = _prefs.getString(_refreshTokenKey);
+    return refreshToken;
+  }
+
+  Future<bool> cacheRefreshToken(String token) async {
+    try {
+      return await _prefs.setString(_refreshTokenKey, token);
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<void> resetRefreshToken() async {
+    await _prefs.remove(_refreshTokenKey);
+  }
 }
