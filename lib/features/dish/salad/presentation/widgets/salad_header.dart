@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
@@ -19,14 +20,15 @@ class SaladHeader extends StatefulWidget {
 class _SaladHeaderState extends State<SaladHeader> {
   bool isFavorited = false;
 
+  final List<Map<String, String>> salads = [
+    {'image': Media.salad1},
+    {'image': Media.salad2},
+    {'image': Media.salad3},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SaladDetailsProvider>(context);
-    final salads = [
-      {'image': Media.salad1},
-      {'image': Media.salad2},
-      {'image': Media.salad3},
-    ];
 
     return Stack(
       clipBehavior: Clip.none,
@@ -39,74 +41,45 @@ class _SaladHeaderState extends State<SaladHeader> {
               height: context.height,
               child: Column(
                 children: [
-                  Gap(30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                            color: Colours.lightThemeGreen5),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                      Text(
-                        'La table verte',
-                        style: TextStyles.titleMediumSmall.green5,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          isFavorited
-                              ? Icons.favorite_rounded
-                              : Icons.favorite_border_rounded,
-                          color: Colours.lightThemeGreen5,
+                  context.adaptiveGap,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                              color: Colours.lightThemeGreen5),
+                          onPressed: () => Navigator.of(context).pop(),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isFavorited = !isFavorited;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Sélectionnez votre favori',
-                    style: TextStyles.textMediumLarge.white1,
-                  ),
-                  Gap(50),
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    switchInCurve: Curves.easeOut,
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(1.0, 0.0),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    layoutBuilder: (Widget? currentChild, List<Widget> _) {
-                      return currentChild ?? const SizedBox.shrink();
-                    },
-                    child: Container(
-                      key: ValueKey<int>(provider.selectedSaladIndex),
-                      width: context.width * 0.5,
-                      height: context.width * 0.5,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage(
-                              salads[provider.selectedSaladIndex]['image']!),
+                        Text(
+                          'La table verte',
+                          style: TextStyles.titleMediumSmall.green5,
                         ),
-                      ),
+                        IconButton(
+                          icon: Icon(
+                            isFavorited
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: Colours.lightThemeGreen5,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isFavorited = !isFavorited;
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
+                  const Gap(50),
                 ],
               ),
             ),
           ],
         ),
+
+        // Background SVG decoration
         Positioned(
           top: context.height * -0.3,
           right: context.width * -0.4,
@@ -114,18 +87,55 @@ class _SaladHeaderState extends State<SaladHeader> {
             child: SvgPicture.asset(
               Media.bgLight,
               colorFilter: ColorFilter.mode(
-                  Colours.lightThemeYellow3.withAlpha(127), BlendMode.srcIn),
+                Colours.lightThemeYellow3.withAlpha(127),
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
+
+        // Dish Decoration Image
         Positioned(
-          top: context.height * 0.04,
-          right: context.width * 0.12,
-          child: Image(
-            height: context.height * 0.6,
-            width: context.width * 0.8,
-            image: AssetImage(
-              Media.dishDecoration,
+          top: context.width * -0.28,
+          left: 0,
+          child: IgnorePointer(
+            child: Image(
+              height: context.height * 1,
+              width: context.width * 1,
+              image: AssetImage(Media.pizzaDecoration),
+            ),
+          ),
+        ),
+
+        // Salad carousel
+        Positioned(
+          right: 0,
+          left: 0,
+          top: context.width * 0.4,
+          child: SizedBox(
+            width: context.width,
+            height: context.width * 0.6,
+            child: PageView.builder(
+              controller: provider.pageController,
+              itemCount: salads.length,
+              onPageChanged: (index) {
+                provider.selectSalad(index);
+              },
+              itemBuilder: (context, index) {
+                return Center(
+                  child: Container(
+                    width: context.width * 0.6,
+                    height: context.width * 0.6,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(salads[index]['image']!),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ),
