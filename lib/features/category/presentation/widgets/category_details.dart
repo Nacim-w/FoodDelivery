@@ -11,7 +11,9 @@ import 'package:legy/features/category/presentation/widgets/category_appbar.dart
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
+import 'package:legy/features/dish/burger/presentation/widgets/burger_details.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_details.dart';
+import 'package:legy/features/dish/salad/presentation/widgets/salad_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -32,9 +34,18 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     Media.categoryDish5,
     Media.categoryDish6,
   ];
+  final List<String> categoryRoutes = [
+    BurgerDetails.routePath, // index 0
+    PizzaDetails.routePath, // index 1
+    SaladDetails.routePath, // index 2
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final index = context.watch<CategoryProvider>().index;
+    final selectedRoute = categoryRoutes.asMap().containsKey(index)
+        ? categoryRoutes[index]
+        : BurgerDetails.routePath;
     return Column(
       children: [
         Gap(60),
@@ -62,28 +73,22 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     children: [
                       InkWell(
                         onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/$selectedRoute',
                         ),
-                        child: PopularDish(
-                            image: categoryTitles[
-                                context.watch<CategoryProvider>().index * 2]),
+                        child: PopularDish(image: categoryTitles[index * 2]),
                       ),
                       InkWell(
                         onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/$selectedRoute',
                         ),
-                        child: PopularDish(
-                            image: categoryTitles[
-                                context.watch<CategoryProvider>().index * 2 +
-                                    1]),
+                        child:
+                            PopularDish(image: categoryTitles[index * 2 + 1]),
                       ),
                       InkWell(
                         onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
+                          '${HomePage.routePath}/${CategoryDetails.routePath}/$selectedRoute',
                         ),
-                        child: PopularDish(
-                            image: categoryTitles[
-                                context.watch<CategoryProvider>().index * 2]),
+                        child: PopularDish(image: categoryTitles[index * 2]),
                       ),
                     ],
                   ),
