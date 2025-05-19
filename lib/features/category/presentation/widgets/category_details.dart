@@ -9,6 +9,7 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_appbar.dart';
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
+import 'package:legy/features/category/presentation/widgets/cuisine_filters.dart';
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
 import 'package:legy/features/dish/burger/presentation/widgets/burger_details.dart';
@@ -58,13 +59,15 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               children: [
                 CategoryHero(),
                 Gap(15),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    'Plats populaires',
-                    style: TextStyles.text900fs24.brown5,
-                  ),
-                ),
+                index == 1
+                    ? CuisineFilters()
+                    : Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'Plats populaires',
+                          style: TextStyles.text900fs24.brown5,
+                        ),
+                      ),
                 Gap(5),
                 SizedBox(
                   height: context.height * 0.32,

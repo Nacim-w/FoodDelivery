@@ -7,6 +7,7 @@ import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/burger_customization/presentation/views/begin_customization.dart';
 import 'package:legy/features/category/presentation/views/category_view.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
+import 'package:legy/features/categoryDessert/presentation/widgets/category_dessert_details.dart';
 import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/dashboard.dart';
 import 'package:legy/features/auth/presentation/views/change_password_view.dart';

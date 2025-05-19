@@ -181,6 +181,13 @@ abstract class Media {
   static const dessert4 = '$_baseImage/dessert4.png';
   static const blueCherry = '$_baseImage/blueCherry.png';
   static const redCherry = '$_baseImage/redCherry.png';
+  static const dessertHero = '$_baseImage/dessertHero.png';
+  static const dessertPopular1 = '$_baseImage/dessertPopular1.png';
+  static const dessertPopular2 = '$_baseImage/dessertPopular2.png';
+  static const dessertIcon1 = '$_baseIcon/dessertIcon1.svg';
+  static const dessertIcon2 = '$_baseIcon/dessertIcon2.svg';
+  static const dessertIcon3 = '$_baseIcon/dessertIcon3.svg';
+
   //burger page
   static const burger1 = '$_baseImage/burger1.png';
   static const burger2 = '$_baseImage/burger2.png';

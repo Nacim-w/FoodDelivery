@@ -108,7 +108,6 @@ class AuthService {
     );
 
     if (response.statusCode == 200) {
-      print('Token refreshed successfully');
       final data = jsonDecode(response.body);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
       if (data.containsKey('refreshToken')) {

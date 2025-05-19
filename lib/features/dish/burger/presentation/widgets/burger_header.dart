@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
@@ -48,7 +49,7 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               height: context.height,
               child: Column(
                 children: [
-                  Gap(30),
+                  context.adaptiveGap,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -75,11 +76,6 @@ class _BurgerHeaderState extends State<BurgerHeader> {
                         },
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Sélectionnez votre favori',
-                    style: TextStyles.textMediumLarge.grey1,
                   ),
                   Gap(50),
                 ],
@@ -132,7 +128,7 @@ class _BurgerHeaderState extends State<BurgerHeader> {
         ),
         // Burger carousel
         Positioned(
-          top: context.height * 0.25,
+          top: context.height * 0.2,
           child: SizedBox(
             width: context.width,
             height: context.width * 0.6,
@@ -145,8 +141,8 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               itemBuilder: (context, index) {
                 return Center(
                   child: Container(
-                    width: context.width * 0.6,
-                    height: context.width * 0.6,
+                    width: context.width * 0.8,
+                    height: context.width * 0.8,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(

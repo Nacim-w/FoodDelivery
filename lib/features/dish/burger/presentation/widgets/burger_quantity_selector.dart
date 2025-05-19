@@ -44,8 +44,15 @@ class QuantitySelector extends StatelessWidget {
           ),
           onPressed: provider.decrement,
         ),
-        Text(provider.quantity.toString(),
-            style: TextStyles.textMediumLargest.orange0),
+        SizedBox(
+          width: 20,
+          child: Center(
+            child: Text(
+              provider.quantity.toString(),
+              style: TextStyles.textMediumLargest.orange0,
+            ),
+          ),
+        ),
         IconButton(
           icon: Container(
             decoration: BoxDecoration(

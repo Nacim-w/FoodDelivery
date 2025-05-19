@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
@@ -46,41 +47,39 @@ class _DessertHeaderState extends State<DessertHeader> {
             Container(
               color: Colours.lightThemeBlack0,
               width: context.width,
-              height: context.height,
+              height: context.height * 0.8,
               child: Column(
                 children: [
-                  Gap(30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                            color: Colours.lightThemeWhite1),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                      Text(
-                        'Aux Fins Palais',
-                        style: TextStyles.textMediumLarge.white1,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          isFavorited
-                              ? Icons.favorite_rounded
-                              : Icons.favorite_border_rounded,
-                          color: Colours.lightThemeWhite1,
+                  context.adaptiveGap,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                              color: Colours.lightThemeWhite1),
+                          onPressed: () => Navigator.of(context).pop(),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isFavorited = !isFavorited;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Sélectionnez votre favori',
-                    style: TextStyles.textMediumLarge.grey1,
+                        Text(
+                          'Aux Fins Palais',
+                          style: TextStyles.textMediumLarge.white1,
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            isFavorited
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: Colours.lightThemeWhite1,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isFavorited = !isFavorited;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   Gap(50),
                 ],
@@ -137,10 +136,10 @@ class _DessertHeaderState extends State<DessertHeader> {
         ),
         Positioned(
           top: context.height * 0.25,
-          right: context.width * 0.3,
+          left: 0,
           child: SizedBox(
             width: context.width,
-            height: context.width * 0.5,
+            height: context.width * 0.7,
             child: PageView.builder(
               controller: provider.pageController,
               itemCount: desserts.length,
@@ -148,13 +147,13 @@ class _DessertHeaderState extends State<DessertHeader> {
                 provider.setSelectedDessertIndex(index);
               },
               itemBuilder: (context, index) {
-                return Center(
-                  // center the small image
+                return Align(
+                  alignment:
+                      Alignment.centerLeft, // Align the image to the left
                   child: Container(
-                    width: context.width * 0.5,
-                    height: context.width * 0.5,
+                    width: context.width * 0.7,
+                    height: context.width * 0.7,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
                       image: DecorationImage(
                         image: AssetImage(desserts[index]['image']!),
                         fit: BoxFit.cover,

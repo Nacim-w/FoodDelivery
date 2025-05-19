@@ -89,16 +89,22 @@ final router = GoRouter(
                   ],
                 ),
                 GoRoute(
+                  path: CategoryDessertDetails.routePath,
+                  builder: (context, state) => const CategoryDessertDetails(),
+                  routes: [
+                    GoRoute(
+                      path: DessertDetails.routePath,
+                      builder: (context, state) => const DessertDetails(),
+                    ),
+                  ],
+                ),
+                GoRoute(
                   path: CategoryDetails.routePath,
                   builder: (context, state) => const CategoryView(),
                   routes: [
                     GoRoute(
                       path: SaladDetails.routePath,
                       builder: (context, state) => const SaladDetails(),
-                    ),
-                    GoRoute(
-                      path: DessertDetails.routePath,
-                      builder: (context, state) => const DessertDetails(),
                     ),
                     GoRoute(
                       path: BurgerDetails.routePath,

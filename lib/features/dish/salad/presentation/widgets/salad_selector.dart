@@ -12,6 +12,7 @@ class SaladSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SaladDetailsProvider>(context);
+
     final salads = [
       {'name': 'Salade 1', 'image': Media.salad1},
       {'name': 'Salade 2', 'image': Media.salad2},
@@ -71,7 +72,7 @@ class SaladSelector extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         salads[index]['name']!,
-                        style: TextStyles.textRegularSmall.black1,
+                        style: TextStyles.textMediumSmall.black1,
                       ),
                     ],
                   ),

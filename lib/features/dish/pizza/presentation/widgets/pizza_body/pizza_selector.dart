@@ -66,7 +66,7 @@ class PizzaSelector extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       pizzas[index]['name'] as String,
-                      style: TextStyles.textRegularSmall.black1,
+                      style: TextStyles.textMediumSmall.black1,
                     ),
                   ],
                 ),
