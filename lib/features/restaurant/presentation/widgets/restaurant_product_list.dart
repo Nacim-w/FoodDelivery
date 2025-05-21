@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/skeletonize_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_product_container.dart';
+import 'package:legy/features/restaurant/presentation/widgets/product_skeleton_card.dart'; // Add this
 
 class RestaurantProductList extends StatelessWidget {
   const RestaurantProductList({super.key});
@@ -17,27 +19,33 @@ class RestaurantProductList extends StatelessWidget {
           previous.products != current.products ||
           previous.isLoadingProducts != current.isLoadingProducts,
       builder: (context, state) {
-        if (state.isLoadingProducts) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
+        final isLoading = state.isLoadingProducts;
         final products = state.products ?? [];
 
-        if (products.isEmpty) {
+        final restaurant = state.selectedRestaurant;
+
+        if (!isLoading && products.isEmpty) {
           return const Center(child: Text('Aucun produit disponible.'));
         }
 
-        final restaurant = state.selectedRestaurant!;
+        final itemCount = isLoading ? 5 : products.length;
+
         return ListView.separated(
-          itemCount: products.length,
+          itemCount: itemCount,
           separatorBuilder: (_, __) => const Gap(12),
           itemBuilder: (context, i) {
+            if (isLoading) {
+              return const ProductSkeletonCard();
+            }
+
             final product = products[i];
             return InkWell(
               onTap: () {
-                context.go(
-                  '/home/restaurants/restaurant/${restaurant.id}/product',
-                );
+                if (restaurant != null) {
+                  context.go(
+                    '/home/restaurants/restaurant/${restaurant.id}/product',
+                  );
+                }
               },
               borderRadius: BorderRadius.circular(16),
               splashColor: Colours.lightThemeOrange5.withAlpha(60),
@@ -51,7 +59,7 @@ class RestaurantProductList extends StatelessWidget {
               ),
             );
           },
-        );
+        ).skeletonize(isLoading); // Apply shimmer across entire list
       },
     );
   }
