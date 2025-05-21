@@ -58,15 +58,26 @@ class RestaurantCubit extends Cubit<RestaurantState> {
     try {
       final categories =
           await restaurantsService.getRestaurantCategoriesById(restaurantId);
-      emit(state.copyWith(
-        isLoadingCategories: false,
-        categories: categories,
-      ));
+
+      categories.sort((a, b) {
+        if (a.name.toLowerCase() == 'other') return 1;
+        if (b.name.toLowerCase() == 'other') return -1;
+        return a.name.compareTo(b.name);
+      });
+
+      if (!isClosed) {
+        emit(state.copyWith(
+          isLoadingCategories: false,
+          categories: categories,
+        ));
+      }
     } catch (e) {
-      emit(state.copyWith(
-        isLoadingCategories: false,
-        categoriesError: e.toString(),
-      ));
+      if (!isClosed) {
+        emit(state.copyWith(
+          isLoadingCategories: false,
+          categoriesError: e.toString(),
+        ));
+      }
     }
   }
 

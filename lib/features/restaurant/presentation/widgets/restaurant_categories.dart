@@ -25,10 +25,13 @@ class RestaurantCategories extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8.0),
             child: OutlinedButton(
               onPressed: () {
-                context.read<RestaurantCubit>().selectCategory(
-                      state.selectedRestaurant!.id,
-                      cat.id,
-                    );
+                // to not reload when selecting same one
+                if (cat.id != selectedId) {
+                  context.read<RestaurantCubit>().selectCategory(
+                        state.selectedRestaurant!.id,
+                        cat.id,
+                      );
+                }
               },
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: Colours.lightThemeOrange5),
