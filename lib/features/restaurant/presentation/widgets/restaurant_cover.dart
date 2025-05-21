@@ -16,7 +16,7 @@ class RestaurantCover extends StatelessWidget {
     return Image.memory(
       imageBytes,
       fit: BoxFit.cover,
-      height: context.height * 0.3,
+      height: context.height * 0.4,
       width: double.infinity,
     );
   }

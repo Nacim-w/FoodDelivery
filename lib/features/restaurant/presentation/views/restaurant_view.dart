@@ -21,7 +21,11 @@ class _RestaurantViewState extends State<RestaurantView> {
   @override
   void initState() {
     super.initState();
-    context.read<RestaurantCubit>().loadRestaurantById(widget.restaurantId);
+    final cubit = context.read<RestaurantCubit>();
+    cubit.loadRestaurantById(widget.restaurantId);
+    cubit.loadCategoriesByRestaurantId(widget.restaurantId);
+    cubit.loadProductsByRestaurantId(
+        widget.restaurantId, '6811fcb650511129755f0b5b');
   }
 
   @override
@@ -31,12 +35,33 @@ class _RestaurantViewState extends State<RestaurantView> {
         ChangeNotifierProvider(create: (_) => RestaurantProductProvider()),
       ],
       child: Scaffold(
-        body: BlocBuilder<RestaurantCubit, RestaurantState>(
+        body: BlocConsumer<RestaurantCubit, RestaurantState>(
+          listener: (context, state) {
+            if (state.restaurantError != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Erreur : ${state.restaurantError}')),
+              );
+            }
+            if (state.categoriesError != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Erreur : ${state.categoriesError}')),
+              );
+            }
+          },
           builder: (context, state) {
-            if (state is RestaurantsLoading) {
+            if (state.isLoadingRestaurantById || state.isLoadingCategories) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is RestaurantLoaded) {
-              final restaurant = state.restaurant;
+            }
+
+            final restaurant = state.selectedRestaurant;
+            if (restaurant != null) {
+              final categories = state.categories ?? [];
+              final sortedCategories = [...categories];
+              sortedCategories.sort((a, b) {
+                if (a.name.toLowerCase() == 'other') return 1;
+                if (b.name.toLowerCase() == 'other') return -1;
+                return a.name.compareTo(b.name);
+              });
 
               return Stack(
                 children: [
@@ -47,9 +72,10 @@ class _RestaurantViewState extends State<RestaurantView> {
                   ),
                   Positioned(
                     child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 35, left: 16, right: 16),
-                        child: RestaurantAppbar()),
+                      padding:
+                          const EdgeInsets.only(top: 35, left: 16, right: 16),
+                      child: RestaurantAppbar(),
+                    ),
                   ),
                   Positioned(
                     bottom: 0,
@@ -64,14 +90,27 @@ class _RestaurantViewState extends State<RestaurantView> {
                           topRight: Radius.circular(63),
                         ),
                       ),
-                      child: RestaurantMiddleSection(restaurant: restaurant),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: RestaurantMiddleSection(
+                              restaurant: restaurant,
+                              categories: sortedCategories,
+                            ),
+                          ),
+                          if (state.categoriesError != null)
+                            Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Text("Erreur : ${state.categoriesError!}"),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               );
-            } else if (state is RestaurantsError) {
-              return Center(child: Text(state.message));
             }
+
             return const Center(child: Text('Restaurant not found.'));
           },
         ),

@@ -1,38 +1,83 @@
 import 'package:equatable/equatable.dart';
+import 'package:legy/features/restaurant/model/restaurant_category_model.dart';
 import 'package:legy/features/restaurant/model/restaurant_model.dart';
+import 'package:legy/features/restaurant/model/restaurant_product_model.dart';
 
-abstract class RestaurantState extends Equatable {
+class RestaurantState extends Equatable {
+  final List<RestaurantModel>? restaurants;
+  final RestaurantModel? selectedRestaurant;
+  final List<RestaurantCategoryModel>? categories;
+  final List<RestaurantProductModel>? products;
+
+  final bool isLoadingRestaurants;
+  final bool isLoadingRestaurantById;
+  final bool isLoadingCategories;
+  final bool isLoadingProducts;
+
+  final String? restaurantsError;
+  final String? restaurantError;
+  final String? categoriesError;
+  final String? productsError;
+
+  const RestaurantState({
+    this.restaurants,
+    this.selectedRestaurant,
+    this.categories,
+    this.products,
+    this.isLoadingRestaurants = false,
+    this.isLoadingRestaurantById = false,
+    this.isLoadingCategories = false,
+    this.isLoadingProducts = false,
+    this.restaurantsError,
+    this.restaurantError,
+    this.categoriesError,
+    this.productsError,
+  });
+
+  RestaurantState copyWith({
+    List<RestaurantModel>? restaurants,
+    RestaurantModel? selectedRestaurant,
+    List<RestaurantCategoryModel>? categories,
+    List<RestaurantProductModel>? products,
+    bool? isLoadingRestaurants,
+    bool? isLoadingRestaurantById,
+    bool? isLoadingCategories,
+    bool? isLoadingProducts,
+    String? restaurantsError,
+    String? restaurantError,
+    String? categoriesError,
+    String? productsError,
+  }) {
+    return RestaurantState(
+      restaurants: restaurants ?? this.restaurants,
+      selectedRestaurant: selectedRestaurant ?? this.selectedRestaurant,
+      categories: categories ?? this.categories,
+      products: products ?? this.products,
+      isLoadingRestaurants: isLoadingRestaurants ?? this.isLoadingRestaurants,
+      isLoadingRestaurantById:
+          isLoadingRestaurantById ?? this.isLoadingRestaurantById,
+      isLoadingProducts: isLoadingProducts ?? this.isLoadingProducts,
+      isLoadingCategories: isLoadingCategories ?? this.isLoadingCategories,
+      restaurantsError: restaurantsError ?? this.restaurantsError,
+      restaurantError: restaurantError ?? this.restaurantError,
+      categoriesError: categoriesError ?? this.categoriesError,
+      productsError: productsError ?? this.productsError,
+    );
+  }
+
   @override
-  List<Object> get props => [];
-}
-
-class RestaurantsInitial extends RestaurantState {}
-
-class RestaurantsLoading extends RestaurantState {}
-
-class RestaurantsLoaded extends RestaurantState {
-  final List<RestaurantModel> restaurants;
-
-  RestaurantsLoaded({required this.restaurants});
-
-  @override
-  List<Object> get props => [restaurants];
-}
-
-class RestaurantLoaded extends RestaurantState {
-  final RestaurantModel restaurant;
-
-  RestaurantLoaded({required this.restaurant});
-
-  @override
-  List<Object> get props => [restaurant];
-}
-
-class RestaurantsError extends RestaurantState {
-  final String message;
-
-  RestaurantsError({required this.message});
-
-  @override
-  List<Object> get props => [message];
+  List<Object?> get props => [
+        restaurants,
+        selectedRestaurant,
+        categories,
+        products,
+        isLoadingRestaurants,
+        isLoadingRestaurantById,
+        isLoadingCategories,
+        isLoadingProducts,
+        restaurantsError,
+        restaurantError,
+        categoriesError,
+        productsError,
+      ];
 }

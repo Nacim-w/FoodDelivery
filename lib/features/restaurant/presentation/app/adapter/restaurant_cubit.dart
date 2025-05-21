@@ -5,45 +5,90 @@ import 'package:legy/features/restaurant/service/restaurant_service.dart';
 class RestaurantCubit extends Cubit<RestaurantState> {
   final RestaurantService restaurantsService;
 
-  // Flag to track if the cubit is closed
-  bool _isClosed = false;
-
   RestaurantCubit({required this.restaurantsService})
-      : super(RestaurantsInitial());
-
-  @override
-  Future<void> close() {
-    _isClosed = true;
-    return super.close();
-  }
-
-  // Check if the cubit is closed before emitting
-  void _safeEmit(RestaurantState state) {
-    if (!_isClosed) {
-      emit(state);
-    }
-  }
+      : super(const RestaurantState());
 
   Future<void> loadRestaurants() async {
-    _safeEmit(RestaurantsLoading());
+    emit(state.copyWith(
+      isLoadingRestaurants: true,
+      restaurantsError: null,
+    ));
 
     try {
       final restaurants = await restaurantsService.getRestaurants();
-      _safeEmit(RestaurantsLoaded(restaurants: restaurants));
+      emit(state.copyWith(
+        isLoadingRestaurants: false,
+        restaurants: restaurants,
+      ));
     } catch (e) {
-      _safeEmit(RestaurantsError(message: e.toString()));
+      emit(state.copyWith(
+        isLoadingRestaurants: false,
+        restaurantsError: e.toString(),
+      ));
     }
   }
 
   Future<void> loadRestaurantById(String restaurantId) async {
-    _safeEmit(RestaurantsLoading());
+    emit(state.copyWith(
+      isLoadingRestaurantById: true,
+      restaurantError: null,
+    ));
 
     try {
       final restaurant =
           await restaurantsService.getRestaurantById(restaurantId);
-      _safeEmit(RestaurantLoaded(restaurant: restaurant));
+      emit(state.copyWith(
+        isLoadingRestaurantById: false,
+        selectedRestaurant: restaurant,
+      ));
     } catch (e) {
-      _safeEmit(RestaurantsError(message: e.toString()));
+      emit(state.copyWith(
+        isLoadingRestaurantById: false,
+        restaurantError: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> loadCategoriesByRestaurantId(String restaurantId) async {
+    emit(state.copyWith(
+      isLoadingCategories: true,
+      categoriesError: null,
+    ));
+
+    try {
+      final categories =
+          await restaurantsService.getRestaurantCategoriesById(restaurantId);
+      emit(state.copyWith(
+        isLoadingCategories: false,
+        categories: categories,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        isLoadingCategories: false,
+        categoriesError: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> loadProductsByRestaurantId(
+      String restaurantId, String categoryId) async {
+    emit(state.copyWith(
+      isLoadingProducts: true,
+      products: null,
+    ));
+
+    try {
+      final products = await restaurantsService.getRestaurantProducts(
+          restaurantId, categoryId);
+      emit(state.copyWith(
+        isLoadingProducts: false,
+        products: products,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        isLoadingProducts: false,
+        productsError: e.toString(),
+      ));
     }
   }
 }

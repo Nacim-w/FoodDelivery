@@ -10,7 +10,8 @@ import 'package:legy/features/home/model/top_category_model.dart';
 const CATEGORIES_ENDPOINT = '/categories';
 const RESTAURANT_ENDPOINT = '/restaurant';
 const TOP_CATEGORIES_ENDPOINT = '$CATEGORIES_ENDPOINT/top';
-const NEARBY_RESTAURANT_ENDPOINT = '$RESTAURANT_ENDPOINT/nearby';
+const NEARBY_RESTAURANT_ENDPOINT =
+    '$RESTAURANT_ENDPOINT/get-nearby-restaurants';
 
 class HomeService {
   HomeService();
@@ -68,12 +69,10 @@ class HomeService {
         'maxDistanceKm': maxDistanceKm.toString(),
         'limit': limit.toString(),
       });
-
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
-
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';

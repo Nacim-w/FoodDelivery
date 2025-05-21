@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/core/extension/skeletonize_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -105,8 +106,7 @@ class _HomeState extends State<Home> {
                         height: context.height * 0.15,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16), // Optional outer padding
+                          padding: EdgeInsets.symmetric(horizontal: 16),
                           children: [
                             GestureDetector(
                               onTap: () {
@@ -213,12 +213,26 @@ class _HomeState extends State<Home> {
                             BlocBuilder<HomeCubit, HomeState>(
                               builder: (context, state) {
                                 if (state.isLoadingRestaurants) {
-                                  return const Center(
-                                      child: CircularProgressIndicator());
+                                  return Column(
+                                    children: List.generate(3, (index) {
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 16.0),
+                                        child: HomeRestaurants(
+                                          image: '',
+                                          title: 'Loading title',
+                                          description: 'Loading description...',
+                                          time: '...',
+                                          rating: '...',
+                                          distance: '...',
+                                        ).skeletonize(true),
+                                      );
+                                    }),
+                                  );
                                 } else if (state.restaurantsError != null) {
                                   return Center(
                                       child: Text(state.restaurantsError!));
-                                } else if (state.categories != null) {
+                                } else if (state.restaurants != null) {
                                   return SingleChildScrollView(
                                     child: Column(
                                       children:

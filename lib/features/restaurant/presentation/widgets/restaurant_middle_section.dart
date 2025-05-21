@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/features/restaurant/model/restaurant_category_model.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_product_provider.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_categories.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_description.dart';
@@ -10,16 +11,15 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_product_container.dart';
 
 class RestaurantMiddleSection extends StatelessWidget {
-  const RestaurantMiddleSection({super.key, required this.restaurant});
+  const RestaurantMiddleSection(
+      {super.key, required this.restaurant, required this.categories});
   final RestaurantModel restaurant;
-
-  final categories = const ['Petit Déjeuner', 'pizzas', 'Plats'];
+  final List<RestaurantCategoryModel> categories;
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<RestaurantProductProvider>();
     final products = provider.products;
-
     return Container(
       decoration: const BoxDecoration(
         color: Colours.lightThemeWhite4,
@@ -37,7 +37,7 @@ class RestaurantMiddleSection extends StatelessWidget {
             restaurant: restaurant,
           ),
           const Gap(16),
-          RestaurantCategories(),
+          RestaurantCategories(categories: categories),
           const Gap(16),
           Expanded(
             child: ListView.separated(

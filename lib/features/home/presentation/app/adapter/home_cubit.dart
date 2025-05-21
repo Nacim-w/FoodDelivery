@@ -27,9 +27,10 @@ class HomeCubit extends Cubit<HomeState> {
         longitude: 73.4447,
         latitude: 44.6928,
         maxDistanceKm: 10000,
-        limit: 10000,
+        limit: 10,
       );
-      emit(state.copyWith(restaurants: restaurants, isLoadingRestaurants: false));
+      emit(state.copyWith(
+          restaurants: restaurants, isLoadingRestaurants: false));
     } catch (e) {
       emit(state.copyWith(
         restaurantsError: 'Failed to load restaurants: $e',
