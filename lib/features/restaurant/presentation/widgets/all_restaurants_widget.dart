@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:legy/core/extension/skeletonize_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
-import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/product/presentation/widgets/product_container.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
+import 'package:legy/features/restaurant/presentation/widgets/skeleton_card.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class AllRestaurantsWidget extends StatefulWidget {
   const AllRestaurantsWidget({super.key});
@@ -55,8 +56,7 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
                 return const Center(child: Text('Aucun restaurant trouvé.'));
               }
 
-              final displayList =
-                  isLoading ? List.generate(6, (_) => null) : restaurants;
+              final itemCount = isLoading ? 6 : restaurants.length;
 
               return GridView.builder(
                 shrinkWrap: true,
@@ -67,71 +67,27 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
                   mainAxisSpacing: 16.0,
                   childAspectRatio: 3 / 4,
                 ),
-                itemCount: displayList.length,
+                itemCount: itemCount,
                 itemBuilder: (context, index) {
-                  final restaurant = displayList[index];
+                  if (isLoading) {
+                    return const SkeletonCard();
+                  }
+
+                  final restaurant = restaurants[index];
+
                   return GestureDetector(
-                    onTap: restaurant != null
-                        ? () => context.push(
-                            '/home/restaurants/restaurant/${restaurant.id}')
-                        : null,
-                    child: Card(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 50,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colours.lightThemeGrey2.withAlpha(100),
-                                image: restaurant?.logo != null
-                                    ? DecorationImage(
-                                        image: NetworkImage(restaurant!.logo),
-                                        fit: BoxFit.cover,
-                                      )
-                                    : null,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              restaurant?.nom ?? 'Nom du restaurant',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                const Icon(Icons.star,
-                                    color: Colors.orange, size: 16),
-                                const SizedBox(width: 4),
-                                Text(
-                                  restaurant?.averageRating
-                                          .toStringAsFixed(1) ??
-                                      '0.0',
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    onTap: () => context
+                        .push('/home/restaurants/restaurant/${restaurant.id}'),
+                    child: RestaurantContainer(
+                      image: restaurant.logo,
+                      name: restaurant.nom,
+                      rating: restaurant.averageRating,
                     ),
                   );
                 },
-              ).skeletonize(isLoading);
+              );
             },
-          ),
+          )
         ],
       ),
     );
