@@ -8,7 +8,6 @@ import 'package:legy/features/product/presentation/widgets/product_container.dar
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/skeleton_card.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class AllRestaurantsWidget extends StatefulWidget {
   const AllRestaurantsWidget({super.key});

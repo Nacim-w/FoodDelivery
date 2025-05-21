@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_product_provider.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_appbar.dart';
-import 'package:provider/provider.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_cover.dart';
@@ -24,96 +22,108 @@ class _RestaurantViewState extends State<RestaurantView> {
     final cubit = context.read<RestaurantCubit>();
     cubit.loadRestaurantById(widget.restaurantId);
     cubit.loadCategoriesByRestaurantId(widget.restaurantId);
-    cubit.loadProductsByRestaurantId(
-        widget.restaurantId, '6811fcb650511129755f0b5b');
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => RestaurantProductProvider()),
-      ],
-      child: Scaffold(
-        body: BlocConsumer<RestaurantCubit, RestaurantState>(
-          listener: (context, state) {
-            if (state.restaurantError != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Erreur : ${state.restaurantError}')),
-              );
-            }
-            if (state.categoriesError != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Erreur : ${state.categoriesError}')),
-              );
-            }
-          },
-          builder: (context, state) {
-            if (state.isLoadingRestaurantById || state.isLoadingCategories) {
-              return const Center(child: CircularProgressIndicator());
-            }
+    return Scaffold(
+      body: BlocConsumer<RestaurantCubit, RestaurantState>(
+        listenWhen: (previous, current) {
+          return previous.categories == null &&
+              current.categories != null &&
+              current.categories!.isNotEmpty;
+        },
+        listener: (context, state) {
+          if (state.categories != null && state.categories!.isNotEmpty) {
+            final firstCategoryId = state.categories!.first.id;
+            context.read<RestaurantCubit>().selectCategory(
+                  widget.restaurantId,
+                  firstCategoryId,
+                );
+          }
 
-            final restaurant = state.selectedRestaurant;
-            if (restaurant != null) {
-              final categories = state.categories ?? [];
-              final sortedCategories = [...categories];
-              sortedCategories.sort((a, b) {
-                if (a.name.toLowerCase() == 'other') return 1;
-                if (b.name.toLowerCase() == 'other') return -1;
-                return a.name.compareTo(b.name);
-              });
+          if (state.restaurantError != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Erreur : ${state.restaurantError}')),
+            );
+          }
+          if (state.categoriesError != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Erreur : ${state.categoriesError}')),
+            );
+          }
+          if (state.productsError != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Erreur : ${state.productsError}')),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state.isLoadingRestaurantById || state.isLoadingCategories) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-              return Stack(
-                children: [
-                  Column(
-                    children: [
-                      RestaurantCover(restaurant: restaurant),
-                    ],
+          final restaurant = state.selectedRestaurant;
+
+          if (restaurant != null) {
+            final categories = state.categories ?? [];
+            final sortedCategories = [...categories];
+            sortedCategories.sort((a, b) {
+              if (a.name.toLowerCase() == 'other') return 1;
+              if (b.name.toLowerCase() == 'other') return -1;
+              return a.name.compareTo(b.name);
+            });
+
+            return Stack(
+              children: [
+                Column(
+                  children: [
+                    RestaurantCover(restaurant: restaurant),
+                  ],
+                ),
+                Positioned(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 35, left: 16, right: 16),
+                    child: RestaurantAppbar(),
                   ),
-                  Positioned(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 35, left: 16, right: 16),
-                      child: RestaurantAppbar(),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: MediaQuery.of(context).size.height * 0.6,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(63),
-                          topRight: Radius.circular(63),
-                        ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(63),
+                        topRight: Radius.circular(63),
                       ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: RestaurantMiddleSection(
-                              restaurant: restaurant,
-                              categories: sortedCategories,
-                            ),
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: RestaurantMiddleSection(
+                            restaurant: restaurant,
+                            categories: sortedCategories,
                           ),
-                          if (state.categoriesError != null)
-                            Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Text("Erreur : ${state.categoriesError!}"),
-                            ),
-                        ],
-                      ),
+                        ),
+                        if (state.categoriesError != null)
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Text("Erreur : ${state.categoriesError!}"),
+                          ),
+                      ],
                     ),
                   ),
-                ],
-              );
-            }
+                ),
+              ],
+            );
+          }
 
-            return const Center(child: Text('Restaurant not found.'));
-          },
-        ),
+          return const Center(child: Text('Restaurant not found.'));
+        },
       ),
     );
   }

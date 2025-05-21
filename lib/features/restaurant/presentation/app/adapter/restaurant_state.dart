@@ -18,6 +18,7 @@ class RestaurantState extends Equatable {
   final String? restaurantError;
   final String? categoriesError;
   final String? productsError;
+  final String? selectedCategoryId;
 
   const RestaurantState({
     this.restaurants,
@@ -32,6 +33,7 @@ class RestaurantState extends Equatable {
     this.restaurantError,
     this.categoriesError,
     this.productsError,
+    this.selectedCategoryId,
   });
 
   RestaurantState copyWith({
@@ -47,6 +49,7 @@ class RestaurantState extends Equatable {
     String? restaurantError,
     String? categoriesError,
     String? productsError,
+    String? selectedCategoryId,
   }) {
     return RestaurantState(
       restaurants: restaurants ?? this.restaurants,
@@ -62,6 +65,7 @@ class RestaurantState extends Equatable {
       restaurantError: restaurantError ?? this.restaurantError,
       categoriesError: categoriesError ?? this.categoriesError,
       productsError: productsError ?? this.productsError,
+      selectedCategoryId: selectedCategoryId ?? this.selectedCategoryId,
     );
   }
 
@@ -79,5 +83,6 @@ class RestaurantState extends Equatable {
         restaurantError,
         categoriesError,
         productsError,
+        selectedCategoryId,
       ];
 }

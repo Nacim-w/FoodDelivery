@@ -33,7 +33,6 @@ class RestaurantService {
         throw ServerException(message: errorMessage);
       }
       final data = jsonDecode(response.body);
-
       if (data is List) {
         List<RestaurantModel> restaurants = data
             .map((categoryJson) => RestaurantModel.fromJson(categoryJson))
@@ -70,6 +69,8 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
+      debugPrint('Data: $data');
+
       if (data is Map) {
         return RestaurantModel.fromJson(data as Map<String, dynamic>);
       } else {
@@ -104,6 +105,8 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
+      debugPrint('Data: $data');
+
       if (data is List) {
         return data
             .map((categoryJson) =>

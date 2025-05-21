@@ -70,6 +70,29 @@ class RestaurantCubit extends Cubit<RestaurantState> {
     }
   }
 
+  void selectCategory(String restaurantId, String categoryId) async {
+    emit(state.copyWith(
+      selectedCategoryId: categoryId,
+      isLoadingProducts: true,
+      productsError: null,
+      products: null,
+    ));
+
+    try {
+      final products = await restaurantsService.getRestaurantProducts(
+          restaurantId, categoryId);
+      emit(state.copyWith(
+        isLoadingProducts: false,
+        products: products,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        isLoadingProducts: false,
+        productsError: e.toString(),
+      ));
+    }
+  }
+
   Future<void> loadProductsByRestaurantId(
       String restaurantId, String categoryId) async {
     emit(state.copyWith(
