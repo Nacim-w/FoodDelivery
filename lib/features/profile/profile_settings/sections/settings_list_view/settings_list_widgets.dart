@@ -41,20 +41,20 @@ class BuiltListView extends StatelessWidget {
         BuildListTile(
           icon: Media.favorites,
           title: "Mes favoris",
-          onTap: () => context.push(
-              '${ProfileSettingsPage.routePath}/${FavoriteView.routePath}'),
+          onTap: () => context
+              .go('${ProfileSettingsPage.routePath}/${FavoriteView.routePath}'),
         ),
         BuildListTile(
           icon: Media.helpCenter,
           title: "Centre d’aide",
-          onTap: () => context.push(
+          onTap: () => context.go(
               '${ProfileSettingsPage.routePath}/${HelpCenterPage.routePath}'),
         ),
         BuildListTile(
           icon: Media.parametre,
           title: "Paramètre",
           onTap: () => context
-              .push('${ProfileSettingsPage.routePath}/${ParamsView.routePath}'),
+              .go('${ProfileSettingsPage.routePath}/${ParamsView.routePath}'),
         ),
         BuildListTile(
             icon: Media.logOut,

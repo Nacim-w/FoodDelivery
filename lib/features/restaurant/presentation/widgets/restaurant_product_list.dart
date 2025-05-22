@@ -43,8 +43,7 @@ class RestaurantProductList extends StatelessWidget {
               onTap: () {
                 if (restaurant != null) {
                   context.go(
-                    '/home/restaurants/restaurant/${restaurant.id}/product',
-                    extra: product,
+                    '/home/restaurant/${restaurant.id}/product/${product.id}',
                   );
                 }
               },

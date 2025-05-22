@@ -72,9 +72,13 @@ final router = GoRouter(
                   },
                   routes: [
                     GoRoute(
-                      path: ProductView.routePath,
+                      path: 'product/:productId',
                       builder: (context, state) {
-                        return ProductView();
+                        final productId = state.pathParameters['productId']!;
+                        return BlocProvider(
+                          create: (_) => sl<ProductCubit>(),
+                          child: ProductView(productId: productId),
+                        );
                       },
                     ),
                   ],
@@ -100,9 +104,14 @@ final router = GoRouter(
                       },
                       routes: [
                         GoRoute(
-                          path: ProductView.routePath,
+                          path: 'restaurant/:productId',
                           builder: (context, state) {
-                            return ProductView();
+                            final productId =
+                                state.pathParameters['restaurantId']!;
+                            return BlocProvider(
+                              create: (_) => sl<ProductCubit>(),
+                              child: ProductView(productId: productId),
+                            );
                           },
                         ),
                       ],
@@ -185,17 +194,18 @@ final router = GoRouter(
                   builder: (context, state) => const FavoriteView(),
                 ),
                 GoRoute(
-                    path: ParamsView.routePath,
-                    builder: (context, state) => const ParamsView(),
-                    routes: [
-                      GoRoute(
-                        path: TermsServiceView.routePath,
-                        builder: (context, state) => const TermsServiceView(),
-                      ),
-                    ]),
-                GoRoute(
-                  path: PersonalDataPage.routePath,
-                  builder: (context, state) => const PersonalDataPage(),
+                  path: ParamsView.routePath,
+                  builder: (context, state) => const ParamsView(),
+                  routes: [
+                    GoRoute(
+                      path: TermsServiceView.routePath,
+                      builder: (context, state) => const TermsServiceView(),
+                    ),
+                    GoRoute(
+                      path: PersonalDataPage.routePath,
+                      builder: (context, state) => const PersonalDataPage(),
+                    ),
+                  ],
                 ),
               ],
             ),

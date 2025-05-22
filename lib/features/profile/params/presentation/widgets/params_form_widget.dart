@@ -6,6 +6,7 @@ import 'package:legy/features/profile/params/presentation/views/params_view.dart
 import 'package:legy/features/profile/params/presentation/views/terms_service_view.dart';
 import 'package:legy/features/profile/params/presentation/widgets/param_appbar.dart';
 import 'package:legy/features/profile/params/presentation/widgets/params_tile.dart';
+import 'package:legy/features/profile/personal_data/personal_data_page.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
 
 class ParamsForm extends StatefulWidget {
@@ -33,7 +34,8 @@ class _ParamsFormState extends State<ParamsForm> {
         ParamsTile(
           icon: Media.paramProfileDetails,
           title: 'Modifier le profil',
-          onTap: () {},
+          onTap: () => context.go(
+              '${ProfileSettingsPage.routePath}/${ParamsView.routePath}/${PersonalDataPage.routePath}'),
         ),
         ParamsTile(
           icon: Media.paramTos,

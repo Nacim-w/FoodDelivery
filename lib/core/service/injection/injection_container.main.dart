@@ -7,6 +7,7 @@ Future<void> init() async {
   await _homeInit();
   await _restaurantInit();
   await _searchInit();
+  await _productInit();
   await _cacheInit();
 }
 
@@ -40,4 +41,10 @@ Future<void> _searchInit() async {
   sl
     ..registerFactory(() => SearchCubit(searchService: sl()))
     ..registerLazySingleton(() => SearchService(sl()));
+}
+
+Future<void> _productInit() async {
+  sl
+    ..registerFactory(() => ProductCubit(productService: sl()))
+    ..registerLazySingleton(() => ProductService());
 }

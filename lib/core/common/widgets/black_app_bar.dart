@@ -16,7 +16,7 @@ class BlackAppBar extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () => onTap,
+          onTap: onTap,
           borderRadius: BorderRadius.circular(100),
           child: Container(
             width: context.width * 0.1,

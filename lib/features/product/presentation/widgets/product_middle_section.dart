@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/product/presentation/widgets/add_to_cart.dart';
 import 'package:legy/features/product/presentation/widgets/product_description.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/product/presentation/widgets/product_recommanded.dart';
-import 'package:legy/features/restaurant/model/restaurant_product_model.dart';
 
 class ProductMiddleSection extends StatelessWidget {
   const ProductMiddleSection({super.key, required this.product});
-  final RestaurantProductModel product;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

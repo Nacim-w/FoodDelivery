@@ -3,21 +3,21 @@ import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/restaurant/model/restaurant_product_model.dart';
+import 'package:legy/features/product/model/product_model.dart';
 
 class ProductDescription extends StatelessWidget {
-  const ProductDescription({super.key, required this.product});
-  final RestaurantProductModel product;
+  const ProductDescription({super.key, this.product});
+  final ProductModel? product;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(product.name, style: TextStyles.titleMediumTiny.black1),
+        Text('product.name', style: TextStyles.titleMediumTiny.black1),
         const Gap(5),
         Text(
-          '${product.price} CFA',
+          ' CFA',
           style: TextStyles.textBoldLargest.orange0,
         ),
         Gap(5),
@@ -33,7 +33,7 @@ class ProductDescription extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'CFA',
+                    '${product?.pricePostCom} CFA',
                     style: TextStyles.text800fs15.orange5,
                   ),
                   const SizedBox(width: 8),
@@ -81,7 +81,7 @@ class ProductDescription extends StatelessWidget {
               Text('Description', style: TextStyles.titleMediumTiny.black1),
               const Gap(5),
               Text(
-                product.description,
+                product?.description ?? '',
                 style: TextStyles.textRegular.grey1,
               ),
             ],
