@@ -39,6 +39,7 @@ class _OtpFormState extends State<OtpForm> {
         Gap(40),
         Center(
           child: Pinput(
+            length: 6,
             defaultPinTheme: defaultPinTheme,
             focusedPinTheme: focusedPinTheme,
           ),
@@ -77,10 +78,9 @@ final focusedPinTheme = defaultPinTheme.copyDecorationWith(
 String maskEmail(String email) {
   final RegExp regex = RegExp(r"^(.{2,4})(.*)(@.*)$");
   return email.replaceAllMapped(regex, (match) {
-    String start = match.group(1)!; // First 2 to 4 characters
-    String masked =
-        '*' * match.group(2)!.length; // Replace middle part with '*'
-    String domain = match.group(3)!; // Domain part
+    String start = match.group(1)!;
+    String masked = '*' * match.group(2)!.length;
+    String domain = match.group(3)!;
     return "$start$masked$domain";
   });
 }

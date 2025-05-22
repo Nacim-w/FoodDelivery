@@ -13,6 +13,7 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/utils/core_utils.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seperator_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
@@ -127,7 +128,8 @@ class _SignInFormState extends State<SignInForm> {
       width: context.width * 0.9,
       height: 44,
       child: GestureDetector(
-        onTap: () => context.go(ForgotPasswordPage.routePath),
+        onTap: () => context
+            .push('${SignInPage.routePath}/${ForgotPasswordView.routePath}'),
         child: Text(
           "Mot de passe oublié?",
           textAlign: TextAlign.right,

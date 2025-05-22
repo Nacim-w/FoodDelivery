@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/auth/presentation/views/sign_up_page.dart';
 
 class SuggestRegister extends StatelessWidget {
@@ -17,7 +18,8 @@ class SuggestRegister extends StatelessWidget {
           style: TextStyles.textMedium,
         ),
         GestureDetector(
-          onTap: () => context.go(SignUpPage.routePath),
+          onTap: () =>
+              context.push('${SignInPage.routePath}/${SignUpPage.routePath}'),
           child: Text(
             "S'inscrire",
             style: TextStyles.textMedium.orange5,

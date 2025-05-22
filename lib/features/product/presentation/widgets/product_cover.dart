@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/decode_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
-import 'package:legy/core/res/media.dart';
 
 class ProductCover extends StatelessWidget {
-  const ProductCover({super.key});
+  const ProductCover({super.key, required this.image});
+  final String image;
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      Media.restaurant1,
-      fit: BoxFit.cover,
+    return Container(
       height: context.height * 0.3,
       width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: MemoryImage(image.decodeImage()),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

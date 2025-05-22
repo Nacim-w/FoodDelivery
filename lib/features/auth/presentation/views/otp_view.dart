@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/opt/otp_form_widget.dart';
 
-class OtpPage extends StatefulWidget {
-  static const routePath = '/otpPage';
+class OtpView extends StatefulWidget {
+  static const routePath = 'OtpView';
 
-  const OtpPage({super.key});
+  const OtpView({super.key});
 
   @override
-  State<OtpPage> createState() => OtpPageState();
+  State<OtpView> createState() => OtpViewState();
 }
 
-class OtpPageState extends State<OtpPage> {
+class OtpViewState extends State<OtpView> {
   int remainingSeconds = 600;
   Timer? timer;
   bool canResend = false;

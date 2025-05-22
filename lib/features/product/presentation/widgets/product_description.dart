@@ -3,19 +3,21 @@ import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/restaurant/model/restaurant_product_model.dart';
 
 class ProductDescription extends StatelessWidget {
-  const ProductDescription({super.key});
+  const ProductDescription({super.key, required this.product});
+  final RestaurantProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Menu Petit Déjeuner', style: TextStyles.titleMediumTiny.black1),
+        Text(product.name, style: TextStyles.titleMediumTiny.black1),
         const Gap(5),
         Text(
-          '12,230 CFA',
+          '${product.price} CFA',
           style: TextStyles.textBoldLargest.orange0,
         ),
         Gap(5),
@@ -41,8 +43,6 @@ class ProductDescription extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // Center: Timer Icon + Text
               Row(
                 children: [
                   Icon(
@@ -57,8 +57,6 @@ class ProductDescription extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // Right: Star Icon + Rating
               Row(
                 children: [
                   Icon(
@@ -83,7 +81,7 @@ class ProductDescription extends StatelessWidget {
               Text('Description', style: TextStyles.titleMediumTiny.black1),
               const Gap(5),
               Text(
-                'Un petit déjeuner complet, parfait pour bien commencer la journée avec énergie et bonne humeur !',
+                product.description,
                 style: TextStyles.textRegular.grey1,
               ),
             ],

@@ -243,7 +243,7 @@ class _HomeState extends State<Home> {
                                           child: GestureDetector(
                                             onTap: () {
                                               context.push(
-                                                  '/home/restaurants/restaurant/${restaurant.id}');
+                                                  '/home/restaurant/${restaurant.id}');
                                             },
                                             child: HomeRestaurants(
                                               image: restaurant.logo,

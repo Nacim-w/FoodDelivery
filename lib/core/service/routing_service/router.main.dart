@@ -62,6 +62,24 @@ final router = GoRouter(
                   builder: (context, state) => const NotificationView(),
                 ),
                 GoRoute(
+                  path: 'restaurant/:restaurantId',
+                  builder: (context, state) {
+                    final restaurantId = state.pathParameters['restaurantId']!;
+                    return BlocProvider(
+                      create: (_) => sl<RestaurantCubit>(),
+                      child: RestaurantView(restaurantId: restaurantId),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      path: ProductView.routePath,
+                      builder: (context, state) {
+                        return ProductView();
+                      },
+                    ),
+                  ],
+                ),
+                GoRoute(
                   path: AllRestaurantsView.routePath,
                   builder: (context, state) {
                     return BlocProvider(
@@ -71,21 +89,24 @@ final router = GoRouter(
                   },
                   routes: [
                     GoRoute(
-                        path: 'restaurant/:restaurantId',
-                        builder: (context, state) {
-                          final restaurantId =
-                              state.pathParameters['restaurantId']!;
-                          return BlocProvider(
-                            create: (_) => sl<RestaurantCubit>(),
-                            child: RestaurantView(restaurantId: restaurantId),
-                          );
-                        },
-                        routes: [
-                          GoRoute(
-                            path: ProductView.routePath,
-                            builder: (context, state) => const ProductView(),
-                          ),
-                        ]),
+                      path: 'restaurant/:restaurantId',
+                      builder: (context, state) {
+                        final restaurantId =
+                            state.pathParameters['restaurantId']!;
+                        return BlocProvider(
+                          create: (_) => sl<RestaurantCubit>(),
+                          child: RestaurantView(restaurantId: restaurantId),
+                        );
+                      },
+                      routes: [
+                        GoRoute(
+                          path: ProductView.routePath,
+                          builder: (context, state) {
+                            return ProductView();
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 GoRoute(
@@ -183,34 +204,38 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
-      path: SignInPage.routePath,
-      builder: (context, state) {
-        return BlocProvider(
-          create: (_) => sl<AuthCubit>(),
-          child: SignInPage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: SignUpPage.routePath,
-      builder: (context, state) {
-        return BlocProvider(
-          create: (_) => sl<AuthCubit>(),
-          child: SignUpPage(),
-        );
-      },
-    ),
-    GoRoute(
-      path: ForgotPasswordPage.routePath,
-      builder: (context, state) => const ForgotPasswordPage(),
-    ),
-    GoRoute(
-      path: ChangePasswordPage.routePath,
-      builder: (context, state) => const ChangePasswordPage(),
-    ),
-    GoRoute(
-      path: OtpPage.routePath,
-      builder: (context, state) => const OtpPage(),
-    ),
+        path: SignInPage.routePath,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (_) => sl<AuthCubit>(),
+            child: SignInPage(),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: SignUpPage.routePath,
+            builder: (context, state) {
+              return BlocProvider(
+                create: (_) => sl<AuthCubit>(),
+                child: SignUpPage(),
+              );
+            },
+          ),
+          GoRoute(
+            path: ForgotPasswordView.routePath,
+            builder: (context, state) => const ForgotPasswordView(),
+            routes: [
+              GoRoute(
+                  path: OtpView.routePath,
+                  builder: (context, state) => const OtpView(),
+                  routes: [
+                    GoRoute(
+                      path: ChangePasswordPage.routePath,
+                      builder: (context, state) => const ChangePasswordPage(),
+                    ),
+                  ]),
+            ],
+          ),
+        ]),
   ],
 );

@@ -44,6 +44,7 @@ class RestaurantProductList extends StatelessWidget {
                 if (restaurant != null) {
                   context.go(
                     '/home/restaurants/restaurant/${restaurant.id}/product',
+                    extra: product,
                   );
                 }
               },

@@ -7,11 +7,11 @@ import 'package:legy/features/restaurant/model/restaurant_model.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_product_list.dart';
 
-class RestaurantMiddleSection extends StatelessWidget {
+class RestaurantSheet extends StatelessWidget {
   final RestaurantModel restaurant;
   final List<RestaurantCategoryModel> categories;
 
-  const RestaurantMiddleSection({
+  const RestaurantSheet({
     super.key,
     required this.restaurant,
     required this.categories,

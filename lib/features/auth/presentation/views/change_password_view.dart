@@ -3,7 +3,7 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/change_password/change_pass_form_widget.dart';
 
 class ChangePasswordPage extends StatefulWidget {
-  static const routePath = '/changePasswordPage';
+  static const routePath = 'changePasswordPage';
 
   const ChangePasswordPage({super.key});
 

@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
 import 'package:legy/features/auth/presentation/views/otp_view.dart';
@@ -33,7 +35,8 @@ class ForgotPasswordForm extends StatelessWidget {
         BuildLogInAndRegButton(
           "Continue",
           "forgotPassword",
-          () => context.go(OtpPage.routePath),
+          () => context.go(
+              '${SignInPage.routePath}/${ForgotPasswordView.routePath}/${OtpView.routePath}'),
         )
       ],
     );

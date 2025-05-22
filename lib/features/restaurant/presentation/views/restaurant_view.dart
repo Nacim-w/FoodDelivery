@@ -4,7 +4,7 @@ import 'package:legy/features/restaurant/presentation/widgets/restaurant_appbar.
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_cover.dart';
-import 'package:legy/features/restaurant/presentation/widgets/restaurant_middle_section.dart';
+import 'package:legy/features/restaurant/presentation/widgets/restaurant_sheet.dart';
 
 class RestaurantView extends StatefulWidget {
   final String restaurantId;
@@ -26,7 +26,7 @@ class _RestaurantViewState extends State<RestaurantView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RestaurantCubit, RestaurantState>(
+    return BlocConsumer<RestaurantCubit, RestaurantState>(
       listenWhen: (previous, current) {
         return previous.categories == null &&
             current.categories != null &&
@@ -41,9 +41,11 @@ class _RestaurantViewState extends State<RestaurantView> {
               );
         }
       },
-      child: Scaffold(
-        body: _buildContent(context),
-      ),
+      builder: (context, state) {
+        return Scaffold(
+          body: _buildContent(context),
+        );
+      },
     );
   }
 
@@ -96,7 +98,7 @@ class _RestaurantViewState extends State<RestaurantView> {
             child: Column(
               children: [
                 Expanded(
-                  child: RestaurantMiddleSection(
+                  child: RestaurantSheet(
                     restaurant: restaurant,
                     categories: sortedCategories,
                   ),
