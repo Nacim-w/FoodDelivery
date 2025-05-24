@@ -6,6 +6,8 @@ import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/service/home_service.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/service/product_service.dart';
+import 'package:legy/features/profile/params/presentation/app/profile_cubit.dart';
+import 'package:legy/features/profile/params/service/profile_service.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/service/restaurant_service.dart';
 import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';

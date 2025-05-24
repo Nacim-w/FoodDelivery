@@ -3,12 +3,13 @@ part of 'injection_container.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  await _cacheInit();
   await _authInit();
   await _homeInit();
   await _restaurantInit();
   await _searchInit();
   await _productInit();
-  await _cacheInit();
+  await _profileInit();
 }
 
 Future<void> _cacheInit() async {
@@ -47,4 +48,10 @@ Future<void> _productInit() async {
   sl
     ..registerFactory(() => ProductCubit(productService: sl()))
     ..registerLazySingleton(() => ProductService());
+}
+
+Future<void> _profileInit() async {
+  sl
+    ..registerFactory(() => ProfileCubit(profileService: sl()))
+    ..registerLazySingleton(() => ProfileService(sl()));
 }

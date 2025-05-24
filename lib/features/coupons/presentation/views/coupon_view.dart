@@ -38,13 +38,13 @@ class CouponView extends StatelessWidget {
                   name: 'Soirée Burger',
                   discription:
                       ' Chaque jeudi, profitez de n\'importe quel burger gourmet à moitié prix.',
-                  couponCode: 'BURGER10',
+                  couponCode: 'BURGER1',
                 ),
                 CouponContainer(
                   name: 'Repas Familial',
                   discription:
                       'Pizza familiale, pain à l\'ail et soda 2L pour 29,99 CFA.',
-                  couponCode: 'FAMILY29',
+                  couponCode: 'FAMIL29',
                 ),
                 CouponContainer(
                   name: 'Combo Déjeuner',
@@ -56,13 +56,13 @@ class CouponView extends StatelessWidget {
                   name: 'Réduction Étudiant de 10%',
                   discription:
                       'Montrez votre carte et bénéficiez de 10% de réduction.',
-                  couponCode: 'STUDENT10',
+                  couponCode: 'STUDE10',
                 ),
                 CouponContainer(
                   name: 'Première commande - Remise',
                   discription:
                       'Nouveau sur notre plateforme ? -10 CFA  sur votre première commande.',
-                  couponCode: 'WELCOME10',
+                  couponCode: 'WELCO10',
                 ),
               ],
             ),

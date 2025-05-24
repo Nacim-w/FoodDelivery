@@ -208,7 +208,12 @@ final router = GoRouter(
                     ),
                     GoRoute(
                       path: PersonalDataPage.routePath,
-                      builder: (context, state) => const PersonalDataPage(),
+                      builder: (context, state) {
+                        return BlocProvider(
+                          create: (_) => sl<ProfileCubit>(),
+                          child: PersonalDataPage(),
+                        );
+                      },
                     ),
                   ],
                 ),

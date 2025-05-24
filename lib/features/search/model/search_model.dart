@@ -10,13 +10,12 @@ class SearchModel {
     required this.type,
     required this.id,
   });
-
   factory SearchModel.fromJson(Map<String, dynamic> json) {
     return SearchModel(
-      title: json['title'],
-      description: json['description'],
-      type: json['type'],
-      id: json['id'],
+      title: json['title']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      type: json['type']?.toString() ?? '',
+      id: json['id']?.toString() ?? '',
     );
   }
 

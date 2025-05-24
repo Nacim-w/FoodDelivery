@@ -64,26 +64,30 @@ class CouponContainer extends StatelessWidget {
                         maxLines: 2,
                       ),
                     ),
-                    DottedBorder(
-                      borderType: BorderType.RRect,
-                      color: Colours.lightThemeGrey1,
-                      radius: Radius.circular(7),
-                      child: Row(
-                        children: [
-                          Text('Utiliser le code'),
-                          Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            size: 16,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colours.lightThemeYellow5,
+                    SizedBox(
+                      width: context.width * 0.6,
+                      child: DottedBorder(
+                        borderType: BorderType.RRect,
+                        color: Colours.lightThemeGrey1,
+                        radius: Radius.circular(7),
+                        child: Row(
+                          children: [
+                            Text('Utiliser le code'),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 16,
                             ),
-                            child: Text(couponCode,
-                                style: TextStyles.textRegularSmall),
-                          )
-                        ],
+                            Gap(30),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                color: Colours.lightThemeYellow5,
+                              ),
+                              child: Text(couponCode,
+                                  style: TextStyles.textRegularSmall),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
