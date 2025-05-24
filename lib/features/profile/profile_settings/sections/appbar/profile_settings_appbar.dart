@@ -6,6 +6,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class ProfileSettingsAppbar extends StatelessWidget {
   const ProfileSettingsAppbar({super.key});
@@ -15,7 +16,14 @@ class ProfileSettingsAppbar extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () => context.pop(),
+          onTap: () {
+            if (Navigator.canPop(context)) {
+              context.pop();
+            } else {
+              context.go(
+                  HomePage.routePath); // replace with your homepage route path
+            }
+          },
           borderRadius: BorderRadius.circular(100),
           child: Container(
             width: context.width * 0.1,

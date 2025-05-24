@@ -5,8 +5,8 @@ import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
-import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
 import 'package:legy/features/order/order_page.dart';
+import 'package:legy/features/payment/payment_page.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
 
@@ -108,7 +108,7 @@ class HomeDrawer extends StatelessWidget {
             DrawerItem(
                 leading: Media.paymentDrawer,
                 title: 'Paiement',
-                routing: '${HomePage.routePath}/${FullCart.routePath}'),
+                routing: '${HomePage.routePath}/${PaymentPage.routePath}'),
             const SizedBox(height: 8.0),
             DrawerItem(
               leading: Media.locationDrawer,

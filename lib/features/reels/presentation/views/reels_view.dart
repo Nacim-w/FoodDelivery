@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ReelsView extends StatefulWidget {
@@ -10,7 +11,8 @@ class ReelsView extends StatefulWidget {
   State<ReelsView> createState() => _ReelsViewState();
 }
 
-class _ReelsViewState extends State<ReelsView> {
+class _ReelsViewState extends State<ReelsView>
+    with WidgetsBindingObserver, AutomaticKeepAliveClientMixin {
   final List<String> youtubeUrls = [
     'https://www.youtube.com/shorts/Wo0smJajSuM',
     'https://www.youtube.com/shorts/zPxQjuFoUBc',
@@ -22,10 +24,16 @@ class _ReelsViewState extends State<ReelsView> {
   late PageController _pageController;
   YoutubePlayerController? _currentController;
   int _currentIndex = 0;
+  bool _isPaused = false;
+  bool _isLoved = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     _pageController = PageController();
     _initializeControllerForIndex(_currentIndex);
@@ -48,10 +56,12 @@ class _ReelsViewState extends State<ReelsView> {
   void _disposeController() {
     _currentController?.pause();
     _currentController?.dispose();
+    _currentController = null;
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _disposeController();
     _pageController.dispose();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -59,7 +69,48 @@ class _ReelsViewState extends State<ReelsView> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final currentLocation = GoRouterState.of(context).uri.toString();
+    if (!currentLocation.contains(ReelsView.routePath)) {
+      _currentController?.pause();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) {
+      _currentController?.pause();
+    }
+  }
+
+  void _toggleVideoPlayback() {
+    setState(() {
+      _isPaused = !_isPaused;
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_currentController != null && _currentController!.value.isReady) {
+        if (_isPaused) {
+          _currentController!.pause();
+        } else {
+          _currentController!.play();
+        }
+      }
+    });
+  }
+
+  void _toggleLove() {
+    setState(() {
+      _isLoved = !_isLoved;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context); // for AutomaticKeepAliveClientMixin
+
     return Scaffold(
       body: PageView.builder(
         controller: _pageController,
@@ -69,6 +120,8 @@ class _ReelsViewState extends State<ReelsView> {
           _disposeController();
           setState(() {
             _currentIndex = index;
+            _isPaused = false;
+            _isLoved = false;
             _initializeControllerForIndex(index);
           });
         },
@@ -79,8 +132,13 @@ class _ReelsViewState extends State<ReelsView> {
                     controller: _currentController!,
                     showVideoProgressIndicator: false,
                   ),
-                  builder: (context, player) =>
-                      _buildVideoOverlay(player, index),
+                  builder: (context, player) => _buildVideoOverlay(
+                    GestureDetector(
+                      onTap: _toggleVideoPlayback,
+                      child: player,
+                    ),
+                    index,
+                  ),
                 )
               : const Center(child: CircularProgressIndicator());
         },
@@ -130,7 +188,22 @@ class _ReelsViewState extends State<ReelsView> {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _buildAction(Icons.favorite, '1.2K'),
+                        GestureDetector(
+                          onTap: _toggleLove,
+                          child: Column(
+                            children: [
+                              Icon(
+                                _isLoved
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: _isLoved ? Colors.red : Colors.white,
+                                size: 32,
+                              ),
+                              const Text('1.2K',
+                                  style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                        ),
                         const SizedBox(height: 16),
                         _buildAction(Icons.comment, '120'),
                         const SizedBox(height: 16),

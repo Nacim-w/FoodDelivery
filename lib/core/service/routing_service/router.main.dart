@@ -36,10 +36,6 @@ final router = GoRouter(
                   builder: (context, state) => const BeginCustomization(),
                 ),
                 GoRoute(
-                  path: PaymentPage.routePath,
-                  builder: (context, state) => const PaymentPage(),
-                ),
-                GoRoute(
                   path: FullCart.routePath,
                   builder: (context, state) {
                     // Retrieve the product and supplements data from state.extra
@@ -57,6 +53,10 @@ final router = GoRouter(
                 GoRoute(
                   path: MapPage.routePath,
                   builder: (context, state) => const MapPage(),
+                ),
+                GoRoute(
+                  path: PaymentPage.routePath,
+                  builder: (context, state) => const PaymentPage(),
                 ),
                 GoRoute(
                   path: CouponView.routePath,
