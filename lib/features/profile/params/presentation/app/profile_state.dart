@@ -21,6 +21,13 @@ class ProfileUpdated extends ProfileState {
   List<Object?> get props => [profile];
 }
 
+class PasswordChanged extends ProfileState {
+  const PasswordChanged();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class ProfileError extends ProfileState {
   final String message;
 

@@ -203,6 +203,15 @@ final router = GoRouter(
                   builder: (context, state) => const ParamsView(),
                   routes: [
                     GoRoute(
+                      path: ChangePasswordView.routePath,
+                      builder: (context, state) {
+                        return BlocProvider(
+                          create: (_) => sl<ProfileCubit>(),
+                          child: ChangePasswordView(),
+                        );
+                      },
+                    ),
+                    GoRoute(
                       path: TermsServiceView.routePath,
                       builder: (context, state) => const TermsServiceView(),
                     ),

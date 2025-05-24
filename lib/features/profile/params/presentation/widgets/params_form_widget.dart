@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/features/profile/params/presentation/views/change_password_view.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
 import 'package:legy/features/profile/params/presentation/views/terms_service_view.dart';
 import 'package:legy/features/profile/params/presentation/widgets/param_appbar.dart';
@@ -29,19 +30,20 @@ class _ParamsFormState extends State<ParamsForm> {
         ParamsTile(
           icon: Media.paramChangePassword,
           title: 'Gestionnaire de mots de passe',
-          onTap: () {},
+          onTap: () => context.push(
+              '${ProfileSettingsPage.routePath}/${ParamsView.routePath}/${ChangePasswordView.routePath}'),
         ),
         ParamsTile(
           icon: Media.paramProfileDetails,
           title: 'Modifier le profil',
-          onTap: () => context.go(
+          onTap: () => context.push(
               '${ProfileSettingsPage.routePath}/${ParamsView.routePath}/${PersonalDataPage.routePath}'),
         ),
         ParamsTile(
           icon: Media.paramTos,
           title: 'Politique de confidentialité',
           onTap: () {
-            context.go(
+            context.push(
                 '${ProfileSettingsPage.routePath}/${ParamsView.routePath}/${TermsServiceView.routePath}');
           },
         ),
