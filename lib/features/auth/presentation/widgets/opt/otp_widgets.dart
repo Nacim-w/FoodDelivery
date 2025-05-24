@@ -5,15 +5,20 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
+// resend_otp_widgets.dart
+
 Widget resendOtpText(
-    bool canResend, int remainingSeconds, VoidCallback startTimer) {
+  bool canResend,
+  int remainingSeconds,
+  VoidCallback onResendPressed,
+) {
   return Column(
     children: [
       Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           GestureDetector(
-            onTap: canResend ? startTimer : null,
+            onTap: canResend ? onResendPressed : null,
             child: RichText(
               text: TextSpan(
                 children: [
@@ -27,7 +32,7 @@ Widget resendOtpText(
                         ? TextStyles.textSemiBold.orange5
                         : TextStyles.textSemiBold.grey1,
                     recognizer: TapGestureRecognizer()
-                      ..onTap = canResend ? startTimer : null,
+                      ..onTap = canResend ? onResendPressed : null,
                   ),
                 ],
               ),

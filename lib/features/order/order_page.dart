@@ -27,7 +27,10 @@ class _CartPageState extends State<CartPage> {
           },
         ),
       ),
-      body: FullCart(),
+      body: FullCart(
+        products: [],
+        supplements: [],
+      ),
     );
   }
 }

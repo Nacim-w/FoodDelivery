@@ -32,10 +32,9 @@ class _SignInFormState extends State<SignInForm> {
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  bool isPasswordVisible = true; // Moved to class level
+  bool isPasswordVisible = true;
 
   void _togglePasswordVisibility() {
-    // Moved to class level
     setState(() {
       isPasswordVisible = !isPasswordVisible;
     });

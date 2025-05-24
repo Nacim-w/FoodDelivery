@@ -1,8 +1,6 @@
 part of 'router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
-final RouteObserver<ModalRoute<void>> routeObserver =
-    RouteObserver<ModalRoute<void>>();
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -43,15 +41,22 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: FullCart.routePath,
-                  builder: (context, state) => const FullCart(),
+                  builder: (context, state) {
+                    // Retrieve the product and supplements data from state.extra
+                    final data = state.extra as Map<String, dynamic>;
+                    final List<ProductModel> products = data['products'] ?? [];
+                    final List<Supplement> supplements =
+                        data['supplements'] ?? [];
+
+                    return FullCart(
+                      products: products,
+                      supplements: supplements,
+                    );
+                  },
                 ),
                 GoRoute(
                   path: MapPage.routePath,
                   builder: (context, state) => const MapPage(),
-                ),
-                GoRoute(
-                  path: EmptyCart.routePath,
-                  builder: (context, state) => const FullCart(),
                 ),
                 GoRoute(
                   path: CouponView.routePath,
@@ -233,15 +238,30 @@ final router = GoRouter(
           ),
           GoRoute(
             path: ForgotPasswordView.routePath,
-            builder: (context, state) => const ForgotPasswordView(),
+            builder: (context, state) {
+              return BlocProvider(
+                create: (_) => sl<AuthCubit>(),
+                child: ForgotPasswordView(),
+              );
+            },
             routes: [
               GoRoute(
                   path: OtpView.routePath,
-                  builder: (context, state) => const OtpView(),
+                  builder: (context, state) {
+                    return BlocProvider(
+                      create: (_) => sl<AuthCubit>(),
+                      child: OtpView(),
+                    );
+                  },
                   routes: [
                     GoRoute(
                       path: ChangePasswordPage.routePath,
-                      builder: (context, state) => const ChangePasswordPage(),
+                      builder: (context, state) {
+                        return BlocProvider(
+                          create: (_) => sl<AuthCubit>(),
+                          child: ChangePasswordPage(),
+                        );
+                      },
                     ),
                   ]),
             ],

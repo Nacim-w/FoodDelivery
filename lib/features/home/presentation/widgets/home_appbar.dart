@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_location.dart';
+import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -36,17 +39,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: CurrentLocationButton(),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colours.lightThemeGrey0,
-                  width: 2,
+            GestureDetector(
+              onTap: () {
+                context.push('${HomePage.routePath}/${FullCart.routePath}');
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colours.lightThemeGrey0,
+                    width: 2,
+                  ),
                 ),
-              ),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundImage: const AssetImage(Media.homeAvatar),
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundImage: const AssetImage(Media.homeAvatar),
+                ),
               ),
             ),
           ],

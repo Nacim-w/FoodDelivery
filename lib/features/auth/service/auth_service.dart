@@ -5,6 +5,7 @@ import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/utils/network_constants.dart';
+import 'package:legy/features/auth/model/forgot_password_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
 
@@ -12,6 +13,9 @@ const REQUEST_MAPPING = '/api/auth';
 const USER_MAPPING = '/api/users';
 const LOGIN_ENDPOINT = '$REQUEST_MAPPING/login';
 const REGISTER_ENDPOINT = '$USER_MAPPING/register-client';
+const FORGOT_PASSWORD_ENDPOINT = '$REQUEST_MAPPING/request-reset';
+const VERIFY_RESET_CODE_ENDPOINT = '$REQUEST_MAPPING/verify-reset-code';
+const RESET_PASSWORD_ENDPOINT = '$REQUEST_MAPPING/reset-password';
 
 class AuthService {
   AuthService();
@@ -118,6 +122,101 @@ class AuthService {
       await sl<CacheHelper>().resetSession();
       await sl<CacheHelper>().resetRefreshToken();
       return false;
+    }
+  }
+
+  Future<ForgotPasswordModel> sendResetCode({
+    required String email,
+  }) async {
+    try {
+      final uri =
+          Uri.parse('${NetworkConstants.baseUrl}$FORGOT_PASSWORD_ENDPOINT');
+      final response = await http.post(
+        uri,
+        body: jsonEncode({'email': email, 'channel': 'email'}),
+        headers: NetworkConstants.headers,
+      );
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        throw ServerException(message: errorMessage);
+      }
+      final data = jsonDecode(response.body);
+      final userResponse = ForgotPasswordModel.fromJson(data);
+      return userResponse;
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite : ce n'est pas votre faute, c'est la nôtre",
+      );
+    }
+  }
+
+  Future<bool> verifyResetCode({
+    required String email,
+    required String code,
+  }) async {
+    try {
+      final uri =
+          Uri.parse('${NetworkConstants.baseUrl}$VERIFY_RESET_CODE_ENDPOINT');
+      final response = await http.post(
+        uri,
+        body: jsonEncode({'email': email, 'code': code}),
+        headers: NetworkConstants.headers,
+      );
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        throw ServerException(message: errorMessage);
+      }
+
+      final data = jsonDecode(response.body);
+
+      return data['valid'] as bool;
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite : ce n'est pas votre faute, c'est la nôtre",
+      );
+    }
+  }
+
+  Future<String> resetPassword({
+    required String email,
+    required String code,
+    required String newPassword,
+  }) async {
+    try {
+      final uri =
+          Uri.parse('${NetworkConstants.baseUrl}$RESET_PASSWORD_ENDPOINT');
+      final response = await http.post(
+        uri,
+        body: jsonEncode({
+          "email": email,
+          "code": code,
+          "newPassword": newPassword,
+        }),
+        headers: NetworkConstants.headers,
+      );
+
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        throw ServerException(message: errorMessage);
+      }
+      final data = jsonDecode(response.body);
+      return data['message'];
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite : ce n'est pas votre faute, c'est la nôtre",
+      );
     }
   }
 }

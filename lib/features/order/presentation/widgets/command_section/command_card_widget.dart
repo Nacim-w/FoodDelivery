@@ -1,32 +1,67 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/product/model/product_model.dart';
 
 class CommandCardWidget extends StatefulWidget {
-  final String name;
-  final double price;
-  final String image;
-  final double discounted;
-  const CommandCardWidget(
-      {super.key,
-      required this.name,
-      required this.price,
-      required this.image,
-      required this.discounted});
+  final ProductModel product;
+  final List<Supplement> supplements;
+
+  const CommandCardWidget({
+    super.key,
+    required this.product,
+    required this.supplements,
+  });
 
   @override
   State<CommandCardWidget> createState() => _CommandCardWidgetState();
 }
 
 class _CommandCardWidgetState extends State<CommandCardWidget> {
+  late int productQuantity;
+
+  @override
+  void initState() {
+    super.initState();
+    productQuantity = widget.product.quantity; // Initialize quantity
+  }
+
+  void increment() {
+    setState(() {
+      productQuantity++;
+    });
+  }
+
+  void decrement() {
+    if (productQuantity > 1) {
+      setState(() {
+        productQuantity--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final base64Str = widget.product.imageUrl.split(',').last;
+    Uint8List imageBytes = base64Decode(base64Str);
+
+    // Filter supplements to only show those with quantity > 0
+    final activeSupplements = widget.supplements
+        .where((supplement) =>
+            supplement.quantity != null && supplement.quantity! > 0)
+        .toList();
+
+    // Calculate product total price
+    double productTotal = productQuantity * widget.product.pricePostCom;
+
     return Container(
       padding: EdgeInsets.all(10),
-      width: context.width,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite1,
         borderRadius: BorderRadius.circular(20),
@@ -40,36 +75,48 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
       ),
       child: Column(
         children: [
+          // Product Details
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(widget.image),
               Gap(10),
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                    image: MemoryImage(imageBytes),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Gap(30),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.name,
+                    widget.product.name,
                     style: TextStyles.textMediumSmall.black1,
                   ),
                   Gap(10),
                   Row(
                     children: [
                       Text(
-                        '${widget.price} CFA ',
+                        '${widget.product.pricePostCom} CFA ',
                         style: TextStyles.textMediumLarge.copyWith(
                           decoration: TextDecoration.lineThrough,
                           color: Colours.lightThemeGrey1,
                         ),
                       ),
                       Text(
-                        '${widget.discounted} CFA ',
+                        '$productTotal CFA', // Adjusted product price based on quantity
                         style: TextStyles.textMediumLarge.red5,
                       ),
                     ],
                   ),
                   Gap(10),
+                  // Quantity Controls for Product
                   Row(
                     children: [
                       Center(
@@ -83,13 +130,14 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                           child: IconButton(
                             icon: const Icon(Icons.remove),
                             color: Colours.lightThemeOrange5,
-                            onPressed: () {},
+                            onPressed: decrement,
                             iconSize: 12,
                           ),
                         ),
                       ),
                       Gap(10),
-                      Text("1", style: TextStyles.textMediumLarge.orange5),
+                      Text(productQuantity.toString(),
+                          style: TextStyles.textMediumLarge.orange5),
                       Gap(10),
                       Center(
                         child: Container(
@@ -102,28 +150,12 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                           child: IconButton(
                             icon: const Icon(Icons.add),
                             color: Colours.lightThemeOrange5,
-                            onPressed: () {},
+                            onPressed: increment,
                             iconSize: 12,
                           ),
                         ),
                       ),
                     ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    color: Colours.lightThemeGrey1,
-                    onPressed: () {},
-                    iconSize: 16,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    color: Colours.lightThemeGrey1,
-                    onPressed: () {},
-                    iconSize: 16,
                   ),
                 ],
               ),
@@ -135,23 +167,20 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
             endIndent: 5,
             indent: 5,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Ajouter du fromage",
-                  style: TextStyles.textMediumSmall.black1),
-              Text("0.50 CFA", style: TextStyles.textMediumSmall.red5),
-            ],
-          ),
+
+          // Supplements with Quantity > 0
+          for (var supp in activeSupplements)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("${supp.name} x${supp.quantity}",
+                    style: TextStyles.textMediumSmall
+                        .black1), // Show supplement name and quantity
+                Text("${supp.price * supp.quantity!} CFA",
+                    style: TextStyles.textMediumSmall.red5),
+              ],
+            ),
           Gap(20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Ajouter de la viande",
-                  style: TextStyles.textMediumSmall.black1),
-              Text("0.50 CFA", style: TextStyles.textMediumSmall.red5),
-            ],
-          ),
         ],
       ),
     );

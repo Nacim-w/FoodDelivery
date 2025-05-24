@@ -5,27 +5,34 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
+import 'package:legy/features/product/model/product_model.dart';
+import 'package:go_router/go_router.dart'; // Add GoRouter import
 
 class AddToCart extends StatefulWidget {
-  const AddToCart({super.key});
+  final ProductModel product;
+  final List<Supplement> supplements;
+
+  const AddToCart(
+      {super.key, required this.product, required this.supplements});
 
   @override
   State<AddToCart> createState() => _AddToCartState();
 }
 
 class _AddToCartState extends State<AddToCart> {
-  int quantity = 1;
-
+  // Increment and decrement logic for product quantity
   void increment() {
     setState(() {
-      quantity++;
+      widget.product.quantity++; // Update the product's quantity directly
     });
   }
 
   void decrement() {
-    if (quantity > 1) {
+    if (widget.product.quantity > 1) {
       setState(() {
-        quantity--;
+        widget.product.quantity--; // Update the product's quantity directly
       });
     }
   }
@@ -52,7 +59,7 @@ class _AddToCartState extends State<AddToCart> {
           ),
         ),
         Text(
-          '$quantity',
+          '${widget.product.quantity}', // Display product quantity
           style: TextStyles.textSemiBoldLargest.black1,
         ),
         Container(
@@ -73,7 +80,16 @@ class _AddToCartState extends State<AddToCart> {
         ),
         RoundedButton(
           text: '',
-          onPressed: () {},
+          onPressed: () {
+            // Send product and supplements to another page
+            context.push(
+              '${HomePage.routePath}/${FullCart.routePath}', // The target route
+              extra: {
+                'products': [widget.product],
+                'supplements': widget.supplements, // Supplements data
+              },
+            );
+          },
           width: context.width * 0.55,
           height: 50,
           widgetContentButton: Row(

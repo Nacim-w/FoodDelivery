@@ -6,6 +6,7 @@ import 'package:legy/features/product/presentation/widgets/add_to_cart.dart';
 import 'package:legy/features/product/presentation/widgets/product_description.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/product/presentation/widgets/product_recommanded.dart';
+import 'package:legy/features/product/presentation/widgets/supplement_selector.dart';
 
 class ProductMiddleSection extends StatelessWidget {
   const ProductMiddleSection({super.key, required this.product});
@@ -23,24 +24,34 @@ class ProductMiddleSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(20),
-                ProductDescription(product: product),
-                const Gap(16),
-                ProductRecommanded(),
-              ],
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Gap(20),
+                  ProductDescription(product: product),
+                  const Gap(16),
+                  SupplementsSelector(
+                    supplements: product.supplements,
+                  ),
+                  const Gap(16),
+                  ProductRecommanded(),
+                ],
+              ),
             ),
           ),
-          const Spacer(),
+
+          // Pass the product and supplements to AddToCart widget
           Container(
             height: context.height * 0.14,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             color: Colours.lightThemeWhite1,
-            child: AddToCart(),
+            child: AddToCart(
+              product: product,
+              supplements: product.supplements, // Send supplements here
+            ),
           ),
         ],
       ),

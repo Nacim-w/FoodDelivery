@@ -3,10 +3,10 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/order/presentation/widgets/command_section/cancel_order_widget.dart';
 
 class PaymentButtonWidget extends StatelessWidget {
-  const PaymentButtonWidget({super.key});
+  const PaymentButtonWidget({super.key, required this.totalPrice});
+  final double totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class PaymentButtonWidget extends StatelessWidget {
         color: Colours.lightThemeWhite1,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.3),
+            color: Colors.grey.withAlpha(100),
             spreadRadius: 1,
             blurRadius: 1,
             offset: Offset(0, 2), // changes position of shadow
@@ -27,14 +27,17 @@ class PaymentButtonWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("25.20 CFA", style: TextStyles.titleMediumSmallest),
+          Text('$totalPrice CFA', style: TextStyles.titleMediumSmallest),
           GestureDetector(
-            onTap: () => showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return CancelOrderWidget();
-              },
-            ),
+            onTap: () {
+              // Show the snackbar after pressing the button
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Commande effectuée avec succès !"),
+                  duration: Duration(seconds: 2), // Customize the duration
+                ),
+              );
+            },
             child: Container(
               width: context.width * 0.5,
               height: 50,

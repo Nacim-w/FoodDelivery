@@ -8,17 +8,20 @@ class ProductModel {
   final List<dynamic>? ingredients;
   final String imageUrl;
   final double pricePostCom;
+  int quantity; // Added quantity to track the quantity of each product
 
-  ProductModel(
-      {required this.id,
-      required this.restaurantId,
-      required this.name,
-      required this.description,
-      required this.categoryId,
-      required this.supplements,
-      this.ingredients,
-      required this.imageUrl,
-      required this.pricePostCom});
+  ProductModel({
+    required this.id,
+    required this.restaurantId,
+    required this.name,
+    required this.description,
+    required this.categoryId,
+    required this.supplements,
+    this.ingredients,
+    required this.imageUrl,
+    required this.pricePostCom,
+    this.quantity = 1, // Initialize with 1 as the default value
+  });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
@@ -35,6 +38,8 @@ class ProductModel {
       pricePostCom: json['pricePostCom'] != null
           ? double.parse(json['pricePostCom'].toString())
           : 0.0,
+      quantity:
+          json['quantity'] ?? 1, // Assign quantity if present, default to 1
     );
   }
 
@@ -49,6 +54,7 @@ class ProductModel {
       'ingredients': ingredients,
       'imageUrl': imageUrl,
       'pricePostCom': pricePostCom,
+      'quantity': quantity, // Include quantity in the product data
     };
   }
 }
@@ -58,6 +64,7 @@ class Supplement {
   final String name;
   final String description;
   final num price;
+  int? quantity;
   final dynamic createdby;
 
   Supplement({
@@ -65,6 +72,7 @@ class Supplement {
     required this.name,
     required this.description,
     required this.price,
+    this.quantity,
     this.createdby,
   });
 
@@ -74,6 +82,7 @@ class Supplement {
       name: json['name'],
       description: json['description'],
       price: json['price'],
+      quantity: json['quantity'],
       createdby: json['createdby'],
     );
   }
@@ -84,6 +93,7 @@ class Supplement {
       'name': name,
       'description': description,
       'price': price,
+      'quantity': quantity,
       'createdby': createdby,
     };
   }

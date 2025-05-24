@@ -60,11 +60,7 @@ class OtpViewState extends State<OtpView> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
-          child: OtpForm(
-            canResend: canResend,
-            remainingSeconds: remainingSeconds,
-            startTimer: startTimer,
-          ),
+          child: OtpForm(),
         ),
       ),
     );

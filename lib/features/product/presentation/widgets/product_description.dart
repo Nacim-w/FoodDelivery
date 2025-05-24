@@ -14,10 +14,10 @@ class ProductDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('product.name', style: TextStyles.titleMediumTiny.black1),
+        Text(product!.name, style: TextStyles.titleMediumTiny.black1),
         const Gap(5),
         Text(
-          ' CFA',
+          '${product?.pricePostCom} CFA',
           style: TextStyles.textBoldLargest.orange0,
         ),
         Gap(5),
@@ -33,7 +33,7 @@ class ProductDescription extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '${product?.pricePostCom} CFA',
+                    'CFA',
                     style: TextStyles.text800fs15.orange5,
                   ),
                   const SizedBox(width: 8),
@@ -74,6 +74,7 @@ class ProductDescription extends StatelessWidget {
             ],
           ),
         ),
+        const Gap(30),
         SizedBox(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +83,7 @@ class ProductDescription extends StatelessWidget {
               const Gap(5),
               Text(
                 product?.description ?? '',
-                style: TextStyles.textRegular.grey1,
+                style: TextStyles.textMedium.grey1,
               ),
             ],
           ),

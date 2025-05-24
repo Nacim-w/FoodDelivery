@@ -2,27 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
-import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/order/presentation/widgets/command_section/order_card__full_widget.dart';
-import 'package:legy/features/order/presentation/widgets/command_section/order_card_empty_widget.dart';
 import 'package:legy/features/order/presentation/widgets/cancel_order_content.dart';
+import 'package:legy/features/order/presentation/widgets/command_section/command_card_widget.dart';
+import 'package:legy/features/product/model/product_model.dart';
 
-class Command extends StatefulWidget {
-  const Command({super.key});
+class CartDetails extends StatelessWidget {
+  final List<ProductModel> products; // Accepting a list of products
+  final List<Supplement> supplements; // Accepting the supplements list
 
-  @override
-  State<Command> createState() => _CommandState();
-}
+  const CartDetails({
+    super.key,
+    required this.products,
+    required this.supplements,
+  });
 
-class _CommandState extends State<Command> {
   @override
   Widget build(BuildContext context) {
+    // Filter supplements to only show those with quantity > 0
+    final chosenSupplements = supplements
+        .where((supplement) =>
+            supplement.quantity != null && supplement.quantity! > 0)
+        .toList();
+
     return Container(
       padding: EdgeInsets.all(15),
       child: Column(
         children: [
+          // Title Row with cancel button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -45,33 +53,30 @@ class _CommandState extends State<Command> {
             ],
           ),
           Gap(20),
+
+          // Display the number of chosen supplements
+          Text(
+            "Supplements choisis: ${chosenSupplements.length}",
+            style: TextStyles.textMediumSmall.black1,
+          ),
+          Gap(20),
+
+          // Cart Items (Product + Supplements)
           SizedBox(
             height: context.height * 0.55,
             child: ListView(
               children: [
-                CommandCardWidget(
-                  name: "chicken burger",
-                  price: 10.00,
-                  image: Media.burger,
-                  discounted: 6.00,
-                ),
+                // Loop through products and pass data to CommandCardWidget
+                for (var product in products)
+                  CommandCardWidget(
+                    product: product, // Pass product data
+                    supplements:
+                        chosenSupplements, // Pass only supplements with quantity > 0
+                  ),
                 Gap(20),
-                CommandCardEmpty(
-                  name: "Ramen Noodles",
-                  price: 22.00,
-                  image: Media.ramenNoodles,
-                  discounted: 15.0,
-                ),
-                Gap(20),
-                CommandCardEmpty(
-                  name: "Ramen Noodles",
-                  price: 22.00,
-                  image: Media.ramenNoodles,
-                  discounted: 15.0,
-                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

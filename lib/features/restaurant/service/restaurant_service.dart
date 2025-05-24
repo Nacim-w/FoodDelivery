@@ -1,8 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
@@ -69,7 +67,6 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
-      debugPrint('Data: $data');
 
       if (data is Map) {
         return RestaurantModel.fromJson(data as Map<String, dynamic>);
@@ -105,7 +102,6 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
-      debugPrint('Data: $data');
 
       if (data is List) {
         return data
@@ -143,13 +139,10 @@ class RestaurantService {
               '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
               queryParams,
             );
-      debugPrint('URI: $uri');
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
-
-      debugPrint('Response: ${response.body}');
 
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);

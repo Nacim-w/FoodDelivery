@@ -6,7 +6,9 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/order/presentation/widgets/payment_section/payment_button_widget.dart';
 
 class PaymentWidget extends StatefulWidget {
-  const PaymentWidget({super.key});
+  final double totalPrice;
+
+  const PaymentWidget({super.key, required this.totalPrice});
 
   @override
   State<PaymentWidget> createState() => _PaymentWidgetState();
@@ -28,7 +30,7 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                 style: TextStyles.textMediumLarge.black2,
               ),
               Text(
-                "31.50 CFA",
+                "${widget.totalPrice} CFA",
                 style: TextStyles.textMediumLarge.black2,
               ),
             ],
@@ -73,13 +75,13 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                 style: TextStyles.textMediumLargest,
               ),
               Text(
-                "25.20 CFA",
+                "${widget.totalPrice - 6.30} CFA", // Applying the discount
                 style: TextStyles.textMediumLargest,
               )
             ],
           ),
           Gap(10),
-          PaymentButtonWidget(),
+          PaymentButtonWidget(totalPrice: widget.totalPrice - 6.30),
         ],
       ),
     );
