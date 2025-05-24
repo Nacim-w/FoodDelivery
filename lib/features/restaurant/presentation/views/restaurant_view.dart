@@ -79,7 +79,7 @@ class _RestaurantViewState extends State<RestaurantView> {
         Positioned(
           child: Padding(
             padding: const EdgeInsets.only(top: 35, left: 16, right: 16),
-            child: RestaurantAppbar(),
+            child: RestaurantAppbar(restaurantId: restaurant.id),
           ),
         ),
         Positioned(

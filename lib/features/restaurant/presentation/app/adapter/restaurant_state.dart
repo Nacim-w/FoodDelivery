@@ -13,6 +13,7 @@ class RestaurantState extends Equatable {
   final bool isLoadingRestaurantById;
   final bool isLoadingCategories;
   final bool isLoadingProducts;
+  final bool isSelectedRestaurantFavorite;
 
   final String? restaurantsError;
   final String? restaurantError;
@@ -29,6 +30,7 @@ class RestaurantState extends Equatable {
     this.isLoadingRestaurantById = false,
     this.isLoadingCategories = false,
     this.isLoadingProducts = false,
+    this.isSelectedRestaurantFavorite = false,
     this.restaurantsError,
     this.restaurantError,
     this.categoriesError,
@@ -45,6 +47,7 @@ class RestaurantState extends Equatable {
     bool? isLoadingRestaurantById,
     bool? isLoadingCategories,
     bool? isLoadingProducts,
+    bool? isSelectedRestaurantFavorite,
     String? restaurantsError,
     String? restaurantError,
     String? categoriesError,
@@ -66,6 +69,8 @@ class RestaurantState extends Equatable {
       categoriesError: categoriesError ?? this.categoriesError,
       productsError: productsError ?? this.productsError,
       selectedCategoryId: selectedCategoryId ?? this.selectedCategoryId,
+      isSelectedRestaurantFavorite:
+          isSelectedRestaurantFavorite ?? this.isSelectedRestaurantFavorite,
     );
   }
 
@@ -84,5 +89,6 @@ class RestaurantState extends Equatable {
         categoriesError,
         productsError,
         selectedCategoryId,
+        isSelectedRestaurantFavorite,
       ];
 }

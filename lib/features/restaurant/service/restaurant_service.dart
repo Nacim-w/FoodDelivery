@@ -1,9 +1,13 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
+import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/restaurant/model/restaurant_category_model.dart';
 import 'package:legy/features/restaurant/model/restaurant_model.dart';
 import 'package:legy/features/restaurant/model/restaurant_product_model.dart';
@@ -15,7 +19,9 @@ const CATEGORIES_ENDPOINT = '/categories';
 const PRODUCT_CATEGORY_ENDPOINT = '/products';
 
 class RestaurantService {
-  RestaurantService();
+  final CacheHelper _cacheHelper;
+
+  RestaurantService(this._cacheHelper);
 
   Future<List<RestaurantModel>> getRestaurants() async {
     try {
@@ -166,6 +172,110 @@ class RestaurantService {
       throw const ServerException(
         message:
             "Une erreur s'est produite lors de la récupération des Produits. Veuillez réessayer plus tard.",
+      );
+    }
+  }
+
+  Future<void> addFavorite({
+    required String restaurantId,
+  }) async {
+    try {
+      final uri =
+          Uri.parse('${NetworkConstants.baseUrl}/favorites/$restaurantId');
+      final token = _cacheHelper.getSessionToken();
+      final refreshToken = _cacheHelper.getRefreshToken();
+
+      debugPrint('Token: $token');
+      debugPrint('Refresh Token: $refreshToken');
+      debugPrint('Restaurant ID: $restaurantId');
+      debugPrint('URI: $uri');
+
+      final response = await http.post(
+        uri,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await addFavorite(restaurantId: restaurantId);
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage =
+            errorJson['error'] ?? 'Une erreur est survenue (add favorite).';
+        throw ServerException(message: errorMessage);
+      }
+
+      // Success: no return value needed.
+    } on TokenExpiredException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite lors de l'ajout aux favoris. Veuillez réessayer plus tard.",
+      );
+    }
+  }
+
+  Future<void> removeFavorite({
+    required String restaurantId,
+  }) async {
+    try {
+      final uri =
+          Uri.parse('${NetworkConstants.baseUrl}/favorites/$restaurantId');
+      final token = _cacheHelper.getSessionToken();
+      final refreshToken = _cacheHelper.getRefreshToken();
+
+      debugPrint('Token: $token');
+      debugPrint('Refresh Token: $refreshToken');
+      debugPrint('Restaurant ID: $restaurantId');
+      debugPrint('URI: $uri');
+
+      final response = await http.delete(
+        uri,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await removeFavorite(restaurantId: restaurantId);
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage =
+            errorJson['error'] ?? 'Une erreur est survenue (remove favorite).';
+        throw ServerException(message: errorMessage);
+      }
+
+      // Success: no return value needed.
+    } on TokenExpiredException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite lors de la suppression des favoris. Veuillez réessayer plus tard.",
       );
     }
   }

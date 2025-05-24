@@ -125,4 +125,20 @@ class RestaurantCubit extends Cubit<RestaurantState> {
       ));
     }
   }
+
+  Future<void> toggleFavoriteStatus(String restaurantId) async {
+    try {
+      final isCurrentlyFavorite = state.isSelectedRestaurantFavorite;
+
+      if (isCurrentlyFavorite) {
+        await restaurantsService.removeFavorite(restaurantId: restaurantId);
+      } else {
+        await restaurantsService.addFavorite(restaurantId: restaurantId);
+      }
+
+      emit(state.copyWith(isSelectedRestaurantFavorite: !isCurrentlyFavorite));
+    } catch (e) {
+      // Optionally handle error
+    }
+  }
 }
