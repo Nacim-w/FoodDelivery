@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,8 +21,8 @@ class FavoriteRestaurantContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final base64Str = image.split(',').last;
-    //Uint8List imageBytes = base64Decode(base64Str);
+    final base64Str = image.split(',').last;
+    Uint8List imageBytes = base64Decode(base64Str);
 
     return Stack(
       children: [
@@ -30,12 +32,9 @@ class FavoriteRestaurantContainer extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-            ), /*DecorationImage(
               image: MemoryImage(imageBytes),
               fit: BoxFit.cover,
-            ),*/
+            ),
           ),
         ),
         Positioned.fill(

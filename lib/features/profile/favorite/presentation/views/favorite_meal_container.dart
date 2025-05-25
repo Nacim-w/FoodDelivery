@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -25,6 +28,8 @@ class FavoriteMealContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final base64Str = image.split(',').last;
+    Uint8List imageBytes = base64Decode(base64Str);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7),
@@ -47,7 +52,7 @@ class FavoriteMealContainer extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: AssetImage(image),
+                        image: MemoryImage(imageBytes),
                         fit: BoxFit.cover,
                       ),
                     ),

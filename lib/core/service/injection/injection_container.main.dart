@@ -10,6 +10,7 @@ Future<void> init() async {
   await _searchInit();
   await _productInit();
   await _profileInit();
+  await _favoriteInit();
 }
 
 Future<void> _cacheInit() async {
@@ -54,4 +55,10 @@ Future<void> _profileInit() async {
   sl
     ..registerFactory(() => ProfileCubit(profileService: sl()))
     ..registerLazySingleton(() => ProfileService(sl()));
+}
+
+Future<void> _favoriteInit() async {
+  sl
+    ..registerFactory(() => FavoriteCubit(favoriteService: sl()))
+    ..registerLazySingleton(() => FavoriteService(sl()));
 }

@@ -31,6 +31,7 @@ import 'package:legy/features/payment/payment_page.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/presentation/views/product_view.dart';
+import 'package:legy/features/profile/favorite/presentation/app/favorite_cubit.dart';
 import 'package:legy/features/profile/favorite/presentation/views/favorite_view.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
 import 'package:legy/features/profile/params/presentation/app/profile_cubit.dart';

@@ -196,7 +196,12 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: FavoriteView.routePath,
-                  builder: (context, state) => const FavoriteView(),
+                  builder: (context, state) {
+                    return BlocProvider(
+                      create: (_) => sl<FavoriteCubit>(),
+                      child: FavoriteView(),
+                    );
+                  },
                 ),
                 GoRoute(
                   path: ParamsView.routePath,
