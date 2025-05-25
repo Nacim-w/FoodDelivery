@@ -16,7 +16,7 @@ class ProfileSettingsForm extends StatelessWidget {
         Gap(40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ProfileSettingsAppbar(),
+          child: ProfileSettingsAppbar(title: 'Paramètres du profil'),
         ),
         Gap(20),
         Expanded(

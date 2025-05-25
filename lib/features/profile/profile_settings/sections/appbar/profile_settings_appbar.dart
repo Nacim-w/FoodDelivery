@@ -9,7 +9,8 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class ProfileSettingsAppbar extends StatelessWidget {
-  const ProfileSettingsAppbar({super.key});
+  const ProfileSettingsAppbar({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +49,7 @@ class ProfileSettingsAppbar extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: Text('Paramètres du profil',
-                style: TextStyles.textMediumLarge.black1),
+            child: Text(title, style: TextStyles.textMediumLarge.black1),
           ),
         ),
         SizedBox(width: context.width * 0.1),

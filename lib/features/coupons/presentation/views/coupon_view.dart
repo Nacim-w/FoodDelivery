@@ -16,7 +16,7 @@ class CouponView extends StatelessWidget {
         const Gap(40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ProfileSettingsAppbar(),
+          child: ProfileSettingsAppbar(title: 'Offres'),
         ),
         Gap(30),
         Expanded(

@@ -17,9 +17,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       final productFuture = favoriteService.getFavoriteProduct();
 
       final restaurantResponse = await restaurantFuture;
-      print('Restaurant Response: $restaurantResponse');
       final productResponse = await productFuture;
-      print('Product Response: $productResponse');
 
       final decodedRestaurantJson = jsonDecode(restaurantResponse);
       final restaurantListJson =
@@ -34,8 +32,6 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       final productList = productListJson
           .map((json) => FavoriteProductModel.fromJson(json))
           .toList();
-      print('Decoded Restaurant List: $restaurantList');
-      print('Decoded Product List: $productList');
       emit(FavoriteLoaded(
         favoriteRestaurants: restaurantList,
         favoriteProducts: productList,

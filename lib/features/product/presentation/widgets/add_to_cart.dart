@@ -47,26 +47,43 @@ class _AddToCartState extends State<AddToCart> {
 
     // Get current cart data
     final currentProducts = cacheHelper.getCartProducts();
-    final currentSupplements = cacheHelper.getCartSupplements();
 
-    // Add the new product (if not already in the cart, or update quantity if it is)
-    final existingProductIndex =
+    // Prepare product with selected supplements
+    final productWithSelectedSupplements = widget.product.copyWith(
+      supplements: widget.supplements,
+    );
+
+    // Check if product already exists
+    final existingIndex =
         currentProducts.indexWhere((p) => p.id == widget.product.id);
 
-    if (existingProductIndex >= 0) {
-      currentProducts[existingProductIndex].quantity += widget.product.quantity;
-    } else {
-      currentProducts.add(widget.product);
-    }
+    if (existingIndex >= 0) {
+      // Update quantity + merge supplements
+      final existingProduct = currentProducts[existingIndex];
+      final updatedQuantity =
+          existingProduct.quantity + widget.product.quantity;
 
-    // Add the supplements (naively appending; you may want to merge quantities if needed)
-    currentSupplements.addAll(widget.supplements);
+      // Combine supplements (optional: handle duplicates more smartly)
+      final updatedSupplements = [
+        ...existingProduct.supplements,
+        ...widget.supplements,
+      ];
+
+      final updatedProduct = existingProduct.copyWith(
+        quantity: updatedQuantity,
+        supplements: updatedSupplements,
+      );
+
+      currentProducts[existingIndex] = updatedProduct;
+    } else {
+      currentProducts.add(productWithSelectedSupplements);
+    }
 
     // Save back to cache
     await cacheHelper.cacheCartProducts(currentProducts);
-    await cacheHelper.cacheCartSupplements(currentSupplements);
 
     // Navigate to cart page
+    // ignore: use_build_context_synchronously
     context.push('${HomePage.routePath}/${FullCart.routePath}');
   }
 

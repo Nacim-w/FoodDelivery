@@ -19,7 +19,6 @@ class FullCart extends StatefulWidget {
 
 class _FullCartWidgetState extends State<FullCart> {
   List<ProductModel> products = [];
-  List<Supplement> supplements = [];
 
   @override
   void initState() {
@@ -32,24 +31,9 @@ class _FullCartWidgetState extends State<FullCart> {
     final cacheHelper = CacheHelper(prefs);
 
     final loadedProducts = cacheHelper.getCartProducts();
-    final loadedSupplements = cacheHelper.getCartSupplements();
-
-    // Debug print statements
-    print('=== Loaded Products from Cache ===');
-    for (var product in loadedProducts) {
-      print(
-          'Product ID: ${product.id}, Name: ${product.name}, Quantity: ${product.quantity}');
-    }
-
-    print('=== Loaded Supplements from Cache ===');
-    for (var supplement in loadedSupplements) {
-      print(
-          'Supplement ID: ${supplement.id}, Name: ${supplement.name}, Quantity: ${supplement.quantity}');
-    }
 
     setState(() {
       products = loadedProducts;
-      supplements = loadedSupplements;
     });
   }
 
@@ -57,11 +41,10 @@ class _FullCartWidgetState extends State<FullCart> {
     double total = 0;
 
     for (var product in products) {
-      total += product.pricePostCom * (product.quantity);
-    }
-
-    for (var supplement in supplements) {
-      total += supplement.price * (supplement.quantity ?? 1);
+      total += product.pricePostCom * product.quantity;
+      for (var supplement in product.supplements) {
+        total += supplement.price * (supplement.quantity ?? 1);
+      }
     }
 
     return total;
@@ -76,7 +59,7 @@ class _FullCartWidgetState extends State<FullCart> {
         Gap(40),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ProfileSettingsAppbar(),
+          child: ProfileSettingsAppbar(title: 'Mon Panier'),
         ),
         Expanded(
           child: SingleChildScrollView(
@@ -87,7 +70,7 @@ class _FullCartWidgetState extends State<FullCart> {
                     padding: const EdgeInsets.all(16.0),
                     child: CommandCardWidget(
                       product: product,
-                      supplements: supplements,
+                      supplements: product.supplements, // linked supplements
                     ),
                   );
                 }),
