@@ -70,7 +70,11 @@ class _FullCartWidgetState extends State<FullCart> {
                     padding: const EdgeInsets.all(16.0),
                     child: CommandCardWidget(
                       product: product,
-                      supplements: product.supplements, // linked supplements
+                      supplements: product.supplements,
+                      onRemoved: () {
+                        // Reload the cart when a product is removed
+                        loadCart();
+                      }, // linked supplements
                     ),
                   );
                 }),
