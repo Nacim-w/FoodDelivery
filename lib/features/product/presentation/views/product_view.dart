@@ -31,11 +31,9 @@ class _ProductViewState extends State<ProductView> {
       builder: (context, state) {
         ProductModel? product;
 
-        if (state is ProductLoaded) {
-          product = state.product;
-        }
+        product = state.product;
 
-        if (product == null) {
+        if (state.isLoading || product == null) {
           return const Center(child: CircularProgressIndicator());
         }
 
@@ -45,7 +43,7 @@ class _ProductViewState extends State<ProductView> {
             Positioned(
               child: Padding(
                 padding: const EdgeInsets.only(top: 35, left: 16, right: 16),
-                child: ProductAppbar(),
+                child: ProductAppbar(productId: product.id),
               ),
             ),
             Positioned(

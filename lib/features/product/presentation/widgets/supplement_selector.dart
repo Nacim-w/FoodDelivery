@@ -16,9 +16,10 @@ class SupplementsSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
-        if (state is ProductLoaded) {
-          final product = state.product;
+        final product = state.product;
 
+        // Check that loading is complete and product is not null
+        if (!state.isLoading && product != null) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -66,7 +67,7 @@ class SupplementsSelector extends StatelessWidget {
                           ),
                           Text(
                             '${supp.quantity ?? 0}',
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                           IconButton(
                             icon: const Icon(Icons.add),
@@ -87,10 +88,10 @@ class SupplementsSelector extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          width: 80, // Fixed width for price text
+                          width: 80,
                           child: Text(
                             '\$${(supp.price * (supp.quantity ?? 1)).toStringAsFixed(2)}',
-                            textAlign: TextAlign.right, // Align to the right
+                            textAlign: TextAlign.right,
                           ),
                         ),
                       ),
@@ -101,6 +102,8 @@ class SupplementsSelector extends StatelessWidget {
             ],
           );
         }
+
+        // Return empty widget if loading or product is null
         return const SizedBox.shrink();
       },
     );

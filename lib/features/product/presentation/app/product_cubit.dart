@@ -1,69 +1,61 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/product/presentation/app/product_state.dart';
 import 'package:legy/features/product/service/product_service.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  ProductCubit({required this.productService}) : super(ProductInitial());
-
   final ProductService productService;
 
+  ProductCubit({required this.productService}) : super(const ProductState());
+
   Future<void> loadProductById(String id) async {
-    emit(ProductLoading());
+    emit(state.copyWith(isLoading: true, error: null));
     try {
       final product = await productService.getProductById(id);
-      // Ensure quantity is initialized
-      product.quantity = product.quantity; // Default to 1 if not initialized
-      emit(ProductLoaded(product));
+      product.quantity = product.quantity;
+      emit(state.copyWith(isLoading: false, product: product));
     } catch (e) {
-      emit(ProductError(e.toString()));
+      emit(state.copyWith(isLoading: false, error: e.toString()));
     }
   }
 
-  // Method to update the quantity of supplements
   void updateSupplementQuantity(String supplementId, int quantity) {
-    if (state is ProductLoaded) {
-      final product = (state as ProductLoaded).product;
-
-      // Update the supplement list
+    final product = state.product;
+    if (product != null) {
       final updatedSupplements = product.supplements.map((supplement) {
         if (supplement.id == supplementId) {
-          supplement.quantity = quantity; // Update quantity
+          supplement.quantity = quantity;
         }
         return supplement;
       }).toList();
 
-      // Emit the new state with the updated list of supplements
-      emit(ProductLoaded(
-        ProductModel(
-          id: product.id,
-          restaurantId: product.restaurantId,
-          name: product.name,
-          description: product.description,
-          categoryId: product.categoryId,
-          supplements: updatedSupplements, // New list of supplements
-          ingredients: product.ingredients,
-          imageUrl: product.imageUrl,
-          pricePostCom: product.pricePostCom,
-          quantity:
-              product.quantity, // Ensure product quantity is passed as well
-        ),
-      ));
+      final updatedProduct = product.copyWith(supplements: updatedSupplements);
+      emit(state.copyWith(product: updatedProduct));
     }
   }
 
-  // Method to update product quantity
   void updateProductQuantity(String productId, int quantity) {
-    if (state is ProductLoaded) {
-      final product = (state as ProductLoaded).product;
+    final product = state.product;
+    if (product != null &&
+        product.id == productId &&
+        product.quantity != quantity) {
+      final updatedProduct = product.copyWith(quantity: quantity);
+      emit(state.copyWith(product: updatedProduct));
+    }
+  }
 
-      if (product.id == productId) {
-        // Only emit the new state if the quantity actually changes
-        if (product.quantity != quantity) {
-          product.quantity = quantity; // Update quantity
-          emit(ProductLoaded(product)); // Emit the updated product
-        }
+  Future<void> toggleFavoriteStatus(String productId) async {
+    try {
+      final isCurrentlyFavorite = state.isFavorite;
+
+      if (isCurrentlyFavorite) {
+        await productService.removeFavorite(productId: productId);
+      } else {
+        await productService.addFavorite(productId: productId);
       }
+
+      emit(state.copyWith(isFavorite: !isCurrentlyFavorite));
+    } catch (e) {
+      emit(state.copyWith(error: 'Failed to update favorite status'));
     }
   }
 }

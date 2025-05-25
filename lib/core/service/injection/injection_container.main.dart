@@ -47,7 +47,7 @@ Future<void> _searchInit() async {
 Future<void> _productInit() async {
   sl
     ..registerFactory(() => ProductCubit(productService: sl()))
-    ..registerLazySingleton(() => ProductService());
+    ..registerLazySingleton(() => ProductService(sl()));
 }
 
 Future<void> _profileInit() async {

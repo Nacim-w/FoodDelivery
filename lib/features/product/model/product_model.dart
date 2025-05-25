@@ -8,7 +8,7 @@ class ProductModel {
   final List<dynamic>? ingredients;
   final String imageUrl;
   final double pricePostCom;
-  int quantity; // Added quantity to track the quantity of each product
+  int quantity;
 
   ProductModel({
     required this.id,
@@ -20,7 +20,7 @@ class ProductModel {
     this.ingredients,
     required this.imageUrl,
     required this.pricePostCom,
-    this.quantity = 1, // Initialize with 1 as the default value
+    this.quantity = 1,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -38,8 +38,7 @@ class ProductModel {
       pricePostCom: json['pricePostCom'] != null
           ? double.parse(json['pricePostCom'].toString())
           : 0.0,
-      quantity:
-          json['quantity'] ?? 1, // Assign quantity if present, default to 1
+      quantity: json['quantity'] ?? 1,
     );
   }
 
@@ -54,8 +53,34 @@ class ProductModel {
       'ingredients': ingredients,
       'imageUrl': imageUrl,
       'pricePostCom': pricePostCom,
-      'quantity': quantity, // Include quantity in the product data
+      'quantity': quantity,
     };
+  }
+
+  ProductModel copyWith({
+    String? id,
+    String? restaurantId,
+    String? name,
+    String? description,
+    String? categoryId,
+    List<Supplement>? supplements,
+    List<dynamic>? ingredients,
+    String? imageUrl,
+    double? pricePostCom,
+    int? quantity,
+  }) {
+    return ProductModel(
+      id: id ?? this.id,
+      restaurantId: restaurantId ?? this.restaurantId,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      categoryId: categoryId ?? this.categoryId,
+      supplements: supplements ?? this.supplements,
+      ingredients: ingredients ?? this.ingredients,
+      imageUrl: imageUrl ?? this.imageUrl,
+      pricePostCom: pricePostCom ?? this.pricePostCom,
+      quantity: quantity ?? this.quantity,
+    );
   }
 }
 
@@ -96,5 +121,23 @@ class Supplement {
       'quantity': quantity,
       'createdby': createdby,
     };
+  }
+
+  Supplement copyWith({
+    String? id,
+    String? name,
+    String? description,
+    num? price,
+    int? quantity,
+    dynamic createdby,
+  }) {
+    return Supplement(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+      createdby: createdby ?? this.createdby,
+    );
   }
 }

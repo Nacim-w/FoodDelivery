@@ -1,31 +1,33 @@
 import 'package:equatable/equatable.dart';
 import 'package:legy/features/product/model/product_model.dart';
 
-abstract class ProductState extends Equatable {
-  const ProductState();
+class ProductState extends Equatable {
+  final bool isLoading;
+  final ProductModel? product;
+  final String? error;
+  final bool isFavorite;
+
+  const ProductState({
+    this.isLoading = false,
+    this.product,
+    this.error,
+    this.isFavorite = false,
+  });
+
+  ProductState copyWith({
+    bool? isLoading,
+    ProductModel? product,
+    String? error,
+    bool? isFavorite,
+  }) {
+    return ProductState(
+      isLoading: isLoading ?? this.isLoading,
+      product: product ?? this.product,
+      error: error,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 
   @override
-  List<Object?> get props => [];
-}
-
-class ProductInitial extends ProductState {}
-
-class ProductLoading extends ProductState {}
-
-class ProductLoaded extends ProductState {
-  final ProductModel product; // single product
-
-  const ProductLoaded(this.product);
-
-  @override
-  List<Object?> get props => [product];
-}
-
-class ProductError extends ProductState {
-  final String message;
-
-  const ProductError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [isLoading, product, error, isFavorite];
 }
