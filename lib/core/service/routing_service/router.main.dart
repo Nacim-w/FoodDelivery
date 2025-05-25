@@ -38,16 +38,7 @@ final router = GoRouter(
                 GoRoute(
                   path: FullCart.routePath,
                   builder: (context, state) {
-                    // Retrieve the product and supplements data from state.extra
-                    final data = state.extra as Map<String, dynamic>;
-                    final List<ProductModel> products = data['products'] ?? [];
-                    final List<Supplement> supplements =
-                        data['supplements'] ?? [];
-
-                    return FullCart(
-                      products: products,
-                      supplements: supplements,
-                    );
+                    return FullCart();
                   },
                 ),
                 GoRoute(

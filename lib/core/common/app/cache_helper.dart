@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:legy/core/common/singletons/cache.dart';
+import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -7,6 +10,8 @@ class CacheHelper {
   final SharedPreferences _prefs;
   static const _firstTimerKey = 'is-user-first-timer';
   static const _sessionTokenKey = 'user-session-token';
+  static const _cartProductsKey = 'cart-products';
+  static const _cartSupplementsKey = 'cart-supplements';
 
   String? getSessionToken() {
     final sessionToken = _prefs.getString(_sessionTokenKey);
@@ -55,5 +60,40 @@ class CacheHelper {
 
   Future<void> resetRefreshToken() async {
     await _prefs.remove(_refreshTokenKey);
+  }
+
+  Future<void> cacheCartProducts(List<ProductModel> products) async {
+    final productListJson =
+        jsonEncode(products.map((p) => p.toJson()).toList());
+    await _prefs.setString(_cartProductsKey, productListJson);
+  }
+
+  // Get cart products from cache
+  List<ProductModel> getCartProducts() {
+    final productListString = _prefs.getString(_cartProductsKey);
+    if (productListString == null) return [];
+    final List<dynamic> productListJson = jsonDecode(productListString);
+    return productListJson.map((json) => ProductModel.fromJson(json)).toList();
+  }
+
+  // Save cart supplements to cache
+  Future<void> cacheCartSupplements(List<Supplement> supplements) async {
+    final supplementListJson =
+        jsonEncode(supplements.map((s) => s.toJson()).toList());
+    await _prefs.setString(_cartSupplementsKey, supplementListJson);
+  }
+
+  // Get cart supplements from cache
+  List<Supplement> getCartSupplements() {
+    final supplementListString = _prefs.getString(_cartSupplementsKey);
+    if (supplementListString == null) return [];
+    final List<dynamic> supplementListJson = jsonDecode(supplementListString);
+    return supplementListJson.map((json) => Supplement.fromJson(json)).toList();
+  }
+
+  // Clear cart
+  Future<void> clearCart() async {
+    await _prefs.remove(_cartProductsKey);
+    await _prefs.remove(_cartSupplementsKey);
   }
 }

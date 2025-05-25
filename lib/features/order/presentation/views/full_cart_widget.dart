@@ -1,38 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/features/order/presentation/widgets/command_section/command_card_widget.dart';
 import 'package:legy/features/order/presentation/widgets/details_section/details_widget.dart';
 import 'package:legy/features/order/presentation/widgets/payment_section/payment_widget.dart';
 import 'package:legy/features/profile/profile_settings/sections/appbar/profile_settings_appbar.dart';
 import 'package:legy/features/product/model/product_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FullCart extends StatefulWidget {
   static const routePath = 'fullCart';
 
-  final List<ProductModel> products;
-  final List<Supplement> supplements;
-
-  const FullCart({
-    super.key,
-    required this.products,
-    required this.supplements,
-  });
+  const FullCart({super.key});
 
   @override
   State<FullCart> createState() => _FullCartWidgetState();
 }
 
 class _FullCartWidgetState extends State<FullCart> {
+  List<ProductModel> products = [];
+  List<Supplement> supplements = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadCart();
+  }
+
+  Future<void> loadCart() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheHelper = CacheHelper(prefs);
+
+    final loadedProducts = cacheHelper.getCartProducts();
+    final loadedSupplements = cacheHelper.getCartSupplements();
+
+    // Debug print statements
+    print('=== Loaded Products from Cache ===');
+    for (var product in loadedProducts) {
+      print(
+          'Product ID: ${product.id}, Name: ${product.name}, Quantity: ${product.quantity}');
+    }
+
+    print('=== Loaded Supplements from Cache ===');
+    for (var supplement in loadedSupplements) {
+      print(
+          'Supplement ID: ${supplement.id}, Name: ${supplement.name}, Quantity: ${supplement.quantity}');
+    }
+
+    setState(() {
+      products = loadedProducts;
+      supplements = loadedSupplements;
+    });
+  }
+
   double calculateTotalPrice() {
     double total = 0;
 
-    // Calculate price for products
-    for (var product in widget.products) {
+    for (var product in products) {
       total += product.pricePostCom * (product.quantity);
     }
 
-    // Calculate price for supplements
-    for (var supplement in widget.supplements) {
+    for (var supplement in supplements) {
       total += supplement.price * (supplement.quantity ?? 1);
     }
 
@@ -54,12 +82,12 @@ class _FullCartWidgetState extends State<FullCart> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ...widget.products.map((product) {
+                ...products.map((product) {
                   return Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: CommandCardWidget(
                       product: product,
-                      supplements: widget.supplements,
+                      supplements: supplements,
                     ),
                   );
                 }),
