@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/order/presentation/views/empty_cart_view.dart';
 import 'package:legy/features/order/presentation/widgets/command_section/command_card_widget.dart';
 import 'package:legy/features/order/presentation/widgets/details_section/details_widget.dart';
 import 'package:legy/features/order/presentation/widgets/payment_section/payment_widget.dart';
@@ -8,16 +11,16 @@ import 'package:legy/features/profile/profile_settings/sections/appbar/profile_s
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FullCart extends StatefulWidget {
+class FullCartView extends StatefulWidget {
   static const routePath = 'fullCart';
 
-  const FullCart({super.key});
+  const FullCartView({super.key});
 
   @override
-  State<FullCart> createState() => _FullCartWidgetState();
+  State<FullCartView> createState() => _FullCartWidgetState();
 }
 
-class _FullCartWidgetState extends State<FullCart> {
+class _FullCartWidgetState extends State<FullCartView> {
   List<ProductModel> products = [];
 
   @override
@@ -31,6 +34,11 @@ class _FullCartWidgetState extends State<FullCart> {
     final cacheHelper = CacheHelper(prefs);
 
     final loadedProducts = cacheHelper.getCartProducts();
+    if (loadedProducts.isEmpty) {
+      // ignore: use_build_context_synchronously
+      context.go('${HomePage.routePath}/${EmptyCartView.routePath}');
+      return;
+    }
 
     setState(() {
       products = loadedProducts;

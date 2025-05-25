@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
+import 'package:legy/features/order/presentation/views/full_cart_view.dart';
 
 class CartPage extends StatefulWidget {
   static const routePath = '/orders';
@@ -27,7 +27,7 @@ class _CartPageState extends State<CartPage> {
           },
         ),
       ),
-      body: FullCart(),
+      body: FullCartView(),
     );
   }
 }

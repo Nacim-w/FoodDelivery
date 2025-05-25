@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:legy/core/common/singletons/cache.dart';
+import 'package:legy/features/home/model/home_profile_model.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +12,7 @@ class CacheHelper {
   static const _firstTimerKey = 'is-user-first-timer';
   static const _sessionTokenKey = 'user-session-token';
   static const _cartProductsKey = 'cart-products';
+  static const _userProfileKey = 'user-profile';
 
   String? getSessionToken() {
     final sessionToken = _prefs.getString(_sessionTokenKey);
@@ -76,5 +78,21 @@ class CacheHelper {
 
   Future<void> clearCart() async {
     await _prefs.remove(_cartProductsKey);
+  }
+
+  Future<void> cacheUserProfile(HomeProfileModel profile) async {
+    final profileJson = jsonEncode(profile.toJson());
+    await _prefs.setString(_userProfileKey, profileJson);
+  }
+
+  HomeProfileModel? getCachedUserProfile() {
+    final profileString = _prefs.getString(_userProfileKey);
+    if (profileString == null) return null;
+    final profileJson = jsonDecode(profileString);
+    return HomeProfileModel.fromJson(profileJson);
+  }
+
+  Future<void> clearUserProfile() async {
+    await _prefs.remove(_userProfileKey);
   }
 }

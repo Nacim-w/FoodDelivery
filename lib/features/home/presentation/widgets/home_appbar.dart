@@ -6,7 +6,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_location.dart';
-import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
+import 'package:legy/features/order/presentation/views/full_cart_view.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             GestureDetector(
               onTap: () {
-                context.push('${HomePage.routePath}/${FullCart.routePath}');
+                context.push('${HomePage.routePath}/${FullCartView.routePath}');
               },
               child: Container(
                 decoration: BoxDecoration(

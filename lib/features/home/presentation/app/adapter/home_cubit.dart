@@ -38,4 +38,21 @@ class HomeCubit extends Cubit<HomeState> {
       ));
     }
   }
+
+  Future<void> loadProfile() async {
+    emit(state.copyWith(
+        isLoadingCategories: true)); // reuse loading flag if needed
+    try {
+      final profile = await homeService.getProfile();
+
+      // No need to save to cache here → already done inside service
+
+      emit(state.copyWith(profile: profile, isLoadingCategories: false));
+    } catch (e) {
+      emit(state.copyWith(
+        categoriesError: 'Failed to load profile: $e',
+        isLoadingCategories: false,
+      ));
+    }
+  }
 }

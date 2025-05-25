@@ -7,7 +7,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/order/presentation/views/full_cart_widget.dart';
+import 'package:legy/features/order/presentation/views/full_cart_view.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -135,7 +135,7 @@ class _AddToCartState extends State<AddToCart> {
 
     // Navigate to cart page
     // ignore: use_build_context_synchronously
-    context.push('${HomePage.routePath}/${FullCart.routePath}');
+    context.push('${HomePage.routePath}/${FullCartView.routePath}');
   }
 
   @override

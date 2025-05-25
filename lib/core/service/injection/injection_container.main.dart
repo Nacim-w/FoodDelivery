@@ -30,7 +30,7 @@ Future<void> _authInit() async {
 Future<void> _homeInit() async {
   sl
     ..registerFactory(() => HomeCubit(homeService: sl()))
-    ..registerLazySingleton(() => HomeService());
+    ..registerLazySingleton(() => HomeService(sl()));
 }
 
 Future<void> _restaurantInit() async {

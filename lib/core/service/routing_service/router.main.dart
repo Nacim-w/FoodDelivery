@@ -36,9 +36,15 @@ final router = GoRouter(
                   builder: (context, state) => const BeginCustomization(),
                 ),
                 GoRoute(
-                  path: FullCart.routePath,
+                  path: FullCartView.routePath,
                   builder: (context, state) {
-                    return FullCart();
+                    return FullCartView();
+                  },
+                ),
+                GoRoute(
+                  path: EmptyCartView.routePath,
+                  builder: (context, state) {
+                    return const EmptyCartView();
                   },
                 ),
                 GoRoute(
