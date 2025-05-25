@@ -39,11 +39,13 @@ class _FullCartWidgetState extends State<FullCart> {
 
   double calculateTotalPrice() {
     double total = 0;
-
     for (var product in products) {
+      print(product.pricePostCom);
+
       total += product.pricePostCom * product.quantity;
       for (var supplement in product.supplements) {
-        total += supplement.price * (supplement.quantity ?? 1);
+        print(supplement.price);
+        total += supplement.price * (supplement.quantity ?? 0);
       }
     }
 

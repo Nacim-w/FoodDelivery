@@ -45,8 +45,61 @@ class _AddToCartState extends State<AddToCart> {
     final prefs = await SharedPreferences.getInstance();
     final cacheHelper = CacheHelper(prefs);
 
-    // Get current cart data
     final currentProducts = cacheHelper.getCartProducts();
+    final newProductRestaurantId = widget.product.restaurantId;
+
+    bool shouldClearCart = false;
+
+    if (currentProducts.isNotEmpty) {
+      final existingRestaurantId = currentProducts.first.restaurantId;
+      if (existingRestaurantId != newProductRestaurantId) {
+        // Show confirmation dialog
+        final confirmClear = await showDialog<bool>(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: Colours.lightThemeWhite1,
+            title: Text(
+              'Changer de restaurant ?',
+              style: TextStyles.textBoldLarge.black1,
+            ),
+            content: Text(
+              'Votre panier contient des articles d\'un autre restaurant. '
+              'Voulez-vous vider le panier et continuer ?',
+              style: TextStyles.textMedium.black1,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: Text(
+                  'Annuler',
+                  style: TextStyles.textMedium.black1,
+                ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(true),
+                child: Text(
+                  'Oui, vider',
+                  style: TextStyles.textMedium.orange5,
+                ),
+              ),
+            ],
+          ),
+        );
+
+        if (confirmClear == true) {
+          shouldClearCart = true;
+        } else {
+          // User cancelled → do nothing
+          return;
+        }
+      }
+    }
+
+    if (shouldClearCart) {
+      await cacheHelper.clearCart();
+      currentProducts.clear();
+    }
 
     // Prepare product with selected supplements
     final productWithSelectedSupplements = widget.product.copyWith(
@@ -58,12 +111,10 @@ class _AddToCartState extends State<AddToCart> {
         currentProducts.indexWhere((p) => p.id == widget.product.id);
 
     if (existingIndex >= 0) {
-      // Update quantity + merge supplements
       final existingProduct = currentProducts[existingIndex];
       final updatedQuantity =
           existingProduct.quantity + widget.product.quantity;
 
-      // Combine supplements (optional: handle duplicates more smartly)
       final updatedSupplements = [
         ...existingProduct.supplements,
         ...widget.supplements,

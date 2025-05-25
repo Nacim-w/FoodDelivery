@@ -125,7 +125,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                       Row(
                         children: [
                           Text(
-                            '${widget.product.pricePostCom} CFA ',
+                            '$productTotal CFA ',
                             style: TextStyles.textMediumLarge.copyWith(
                               decoration: TextDecoration.lineThrough,
                               color: Colours.lightThemeGrey1,
