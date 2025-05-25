@@ -4,6 +4,8 @@ import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/service/home_service.dart';
+import 'package:legy/features/order/presentation/app/order_cubit.dart';
+import 'package:legy/features/order/service/order_service.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/service/product_service.dart';
 import 'package:legy/features/profile/favorite/presentation/app/favorite_cubit.dart';

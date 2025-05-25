@@ -4,11 +4,14 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/order/presentation/widgets/payment_section/payment_button_widget.dart';
+import 'package:legy/features/product/model/product_model.dart';
 
 class PaymentWidget extends StatefulWidget {
   final double totalPrice;
+  final List<ProductModel> products;
 
-  const PaymentWidget({super.key, required this.totalPrice});
+  const PaymentWidget(
+      {super.key, required this.totalPrice, required this.products});
 
   @override
   State<PaymentWidget> createState() => _PaymentWidgetState();
@@ -81,7 +84,10 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             ],
           ),
           Gap(10),
-          PaymentButtonWidget(totalPrice: widget.totalPrice - 6.30),
+          OrderButtonWidget(
+            totalPrice: widget.totalPrice - 6.30,
+            products: widget.products,
+          ),
         ],
       ),
     );

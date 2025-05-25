@@ -38,7 +38,10 @@ final router = GoRouter(
                 GoRoute(
                   path: FullCartView.routePath,
                   builder: (context, state) {
-                    return FullCartView();
+                    return BlocProvider(
+                      create: (_) => sl<OrderCubit>(),
+                      child: FullCartView(),
+                    );
                   },
                 ),
                 GoRoute(

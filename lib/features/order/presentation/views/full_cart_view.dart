@@ -90,7 +90,7 @@ class _FullCartWidgetState extends State<FullCartView> {
                 }),
                 Gap(20),
                 DetailsWidget(),
-                PaymentWidget(totalPrice: totalPrice),
+                PaymentWidget(totalPrice: totalPrice, products: products),
                 Gap(20),
               ],
             ),
