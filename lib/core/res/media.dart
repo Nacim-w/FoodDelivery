@@ -4,9 +4,13 @@ abstract class Media {
   static const _baseImage = 'assets/images';
   //static const _baseLottie = 'assets/lottie';
   static const _baseIcon = 'assets/icons';
+  static const _baseAR = 'assets/ar';
 
   //Common
   static const arrowBack = '$_baseIcon/arrowBack.svg';
+
+  //3d assets
+  static const pizza3d = '$_baseAR/pizza.glb';
 
   //auth
   static const facebook = '$_baseIcon/facebook.png';
