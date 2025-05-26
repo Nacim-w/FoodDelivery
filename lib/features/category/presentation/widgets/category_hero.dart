@@ -197,6 +197,7 @@ class _CategoryHeroState extends State<CategoryHero> {
               child: Container(
                 width: context.width * 0.42,
                 height: context.width * 0.42,
+                // when the key changes the spin will be animated
                 key: ValueKey<int>(selectedIndex!),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(

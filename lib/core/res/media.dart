@@ -11,6 +11,9 @@ abstract class Media {
 
   //3d assets
   static const pizza3d = '$_baseAR/pizza.glb';
+  static const burger3d = '$_baseAR/burger.glb';
+  static const salad3d = '$_baseAR/salad.glb';
+  static const cake3d = '$_baseAR/cake.glb';
 
   //auth
   static const facebook = '$_baseIcon/facebook.png';

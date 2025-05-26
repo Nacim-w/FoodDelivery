@@ -39,21 +39,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: CurrentLocationButton(),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                context.push('${HomePage.routePath}/${FullCartView.routePath}');
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colours.lightThemeGrey0,
-                    width: 2,
-                  ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colours.lightThemeWhite1,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colours.lightThemeGrey0,
+                  width: 0.5,
                 ),
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundImage: const AssetImage(Media.homeAvatar),
+              ),
+              child: Center(
+                child: IconButton(
+                  onPressed: () {
+                    context.push(
+                        '${HomePage.routePath}/${FullCartView.routePath}');
+                  },
+                  icon: SvgPicture.asset(Media.cart),
+                  iconSize: context.width * 0.06,
                 ),
               ),
             ),
