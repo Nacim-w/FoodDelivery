@@ -31,6 +31,7 @@ class RestaurantProductList extends StatelessWidget {
         final itemCount = isLoading ? 5 : products.length;
 
         return ListView.separated(
+          padding: EdgeInsets.zero,
           itemCount: itemCount,
           separatorBuilder: (_, __) => const Gap(12),
           itemBuilder: (context, i) {

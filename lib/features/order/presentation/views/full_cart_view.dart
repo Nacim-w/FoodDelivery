@@ -48,7 +48,7 @@ class _FullCartWidgetState extends State<FullCartView> {
   double calculateTotalPrice() {
     double total = 0;
     for (var product in products) {
-      print(product.pricePostCom);
+      debugPrint("${product.pricePostCom}");
 
       total += product.pricePostCom * product.quantity;
       for (var supplement in product.supplements) {

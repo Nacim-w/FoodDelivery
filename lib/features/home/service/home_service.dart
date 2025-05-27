@@ -84,13 +84,14 @@ class HomeService {
       );
       debugPrint('Response status: ${response.statusCode}');
       debugPrint('Response body: ${response.body}');
+
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
         throw ServerException(message: errorMessage);
       }
-
-      final List data = jsonDecode(response.body);
+      final responseBody = utf8.decode(response.bodyBytes); // Decode UTF-8
+      final List data = jsonDecode(responseBody);
 
       List<NearbyRestaurantModel> restaurants = data
           .map((restaurantJson) =>

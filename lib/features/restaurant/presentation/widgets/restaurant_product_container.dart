@@ -70,7 +70,8 @@ class RestaurantProduct extends StatelessWidget {
                     child: AutoSizeText(
                       description,
                       style: TextStyles.textRegularTiny.black1,
-                      maxLines: 3,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Spacer(),
