@@ -78,7 +78,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
             supplement.quantity != null && supplement.quantity! > 0)
         .toList();
 
-    double productTotal = productQuantity * widget.product.pricePostCom;
+    double productTotal = productQuantity * widget.product.pricePreCom;
 
     return Stack(
       children: [

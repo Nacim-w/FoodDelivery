@@ -158,8 +158,8 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: OrderHistoryPage.routePath,
-              builder: (context, state) => const EmptyHistoryView(),
+              path: OrderHistoryView.routePath,
+              builder: (context, state) => const OrderHistoryView(),
             ),
           ],
         ),

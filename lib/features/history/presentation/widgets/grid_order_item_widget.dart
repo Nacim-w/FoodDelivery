@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/order/presentation/widgets/order_grid/comment_content_widget.dart';
+import 'package:legy/features/history/presentation/widgets/comment_content_widget.dart';
 
 class GridOrderItem extends StatelessWidget {
   final String pic;

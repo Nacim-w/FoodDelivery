@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/gap_extension.dart';
-import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/profile/personal_data/widgets/personal_data_form_widget.dart';
 import 'package:legy/features/profile/profile_settings/sections/appbar/profile_settings_appbar.dart';
 

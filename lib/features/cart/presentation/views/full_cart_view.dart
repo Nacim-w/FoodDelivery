@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/order/presentation/views/empty_cart_view.dart';
-import 'package:legy/features/order/presentation/widgets/command_section/command_card_widget.dart';
-import 'package:legy/features/order/presentation/widgets/details_section/details_widget.dart';
-import 'package:legy/features/order/presentation/widgets/payment_section/payment_widget.dart';
+import 'package:legy/features/cart/presentation/views/empty_cart_view.dart';
+import 'package:legy/features/cart/presentation/widgets/command_section/command_card_widget.dart';
+import 'package:legy/features/cart/presentation/widgets/details_section/details_widget.dart';
+import 'package:legy/features/cart/presentation/widgets/payment_section/payment_widget.dart';
 import 'package:legy/features/profile/profile_settings/sections/appbar/profile_settings_appbar.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,9 +49,9 @@ class _FullCartWidgetState extends State<FullCartView> {
   double calculateTotalPrice() {
     double total = 0;
     for (var product in products) {
-      debugPrint("${product.pricePostCom}");
+      debugPrint("${product.pricePreCom}");
 
-      total += product.pricePostCom * product.quantity;
+      total += product.pricePreCom * product.quantity;
       for (var supplement in product.supplements) {
         total += supplement.price * (supplement.quantity ?? 0);
       }

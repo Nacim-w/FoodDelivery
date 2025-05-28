@@ -5,8 +5,8 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
-import 'package:legy/features/order/presentation/app/order_cubit.dart';
-import 'package:legy/features/order/presentation/app/order_state.dart';
+import 'package:legy/features/cart/presentation/app/order_cubit.dart';
+import 'package:legy/features/cart/presentation/app/order_state.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

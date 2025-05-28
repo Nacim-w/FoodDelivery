@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legy/features/order/presentation/app/order_state.dart';
+import 'package:legy/features/cart/presentation/app/order_state.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
-import 'package:legy/features/order/service/order_service.dart';
+import 'package:legy/features/cart/service/order_service.dart';
 
 class OrderCubit extends Cubit<OrderState> {
   final OrderService orderService;
@@ -16,10 +16,11 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(isLoading: true, error: null, success: false));
 
     try {
+      print(profile.address);
       await orderService.createOrder(
         products: products,
         restaurantId: products.first.restaurantId,
-        deliveryAddress: profile.address,
+        deliveryAddress: profile.address ?? 'the other value is null',
         paymentMethod: 'CASH',
       );
 

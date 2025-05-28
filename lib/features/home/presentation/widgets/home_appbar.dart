@@ -6,7 +6,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_location.dart';
-import 'package:legy/features/order/presentation/views/full_cart_view.dart';
+import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});

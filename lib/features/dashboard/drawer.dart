@@ -5,7 +5,7 @@ import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
-import 'package:legy/features/order/order_page.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/payment/payment_page.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
