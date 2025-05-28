@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
@@ -8,6 +9,7 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/utils/core_utils.dart';
 import 'package:legy/features/profile/params/presentation/app/profile_cubit.dart';
 import 'package:legy/features/profile/params/presentation/app/profile_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalDataForm extends StatefulWidget {
   const PersonalDataForm({super.key});
@@ -31,6 +33,27 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
     _phoneController.dispose();
     _addressController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCachedProfile();
+  }
+
+  Future<void> _loadCachedProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheHelper = CacheHelper(prefs);
+    final cachedProfile = cacheHelper.getCachedUserProfile();
+
+    if (cachedProfile != null) {
+      setState(() {
+        _firstnameController.text = cachedProfile.firstname;
+        _lastnameController.text = cachedProfile.lastname;
+        _phoneController.text = cachedProfile.phoneNumber;
+        _addressController.text = cachedProfile.address;
+      });
+    }
   }
 
   void _submit(BuildContext context) {

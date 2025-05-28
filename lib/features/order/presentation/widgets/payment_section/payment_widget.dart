@@ -61,7 +61,7 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                 style: TextStyles.textMediumLarge.black2,
               ),
               Text(
-                "-6.30 CFA",
+                "0 CFA",
                 style: TextStyles.textMediumLarge.black2,
               ),
             ],
@@ -78,14 +78,14 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                 style: TextStyles.textMediumLargest,
               ),
               Text(
-                "${widget.totalPrice - 6.30} CFA", // Applying the discount
+                "${widget.totalPrice} CFA", // Applying the discount
                 style: TextStyles.textMediumLargest,
               )
             ],
           ),
           Gap(10),
           OrderButtonWidget(
-            totalPrice: widget.totalPrice - 6.30,
+            totalPrice: widget.totalPrice,
             products: widget.products,
           ),
         ],

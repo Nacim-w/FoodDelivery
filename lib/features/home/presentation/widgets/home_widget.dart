@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/skeletonize_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -21,7 +20,6 @@ import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.
 import 'package:legy/features/home/presentation/widgets/home_story_widget.dart';
 import 'package:legy/features/burger_customization/presentation/views/burger_customization.dart';
 import 'package:legy/features/restaurant/presentation/views/all_restaurants_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -37,19 +35,6 @@ class _HomeState extends State<Home> {
     context.read<HomeCubit>().loadCategories();
     context.read<HomeCubit>().loadRestaurants();
     context.read<HomeCubit>().loadProfile();
-    Future.microtask(() async {
-      final prefs = await SharedPreferences.getInstance();
-      final cacheHelper = CacheHelper(prefs);
-
-      final cachedProfile = cacheHelper.getCachedUserProfile();
-
-      if (cachedProfile != null) {
-        print('✅ Cached profile loaded in view: ${cachedProfile.username}');
-        print('Full cached profile: ${cachedProfile.toJson()}');
-      } else {
-        print('⚠ No cached profile found in view.');
-      }
-    });
   }
 
   @override
