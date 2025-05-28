@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/presentation/app/product_state.dart';
 import 'package:legy/features/product/presentation/widgets/product_appbar.dart';
-
 import 'package:legy/features/product/presentation/widgets/product_cover.dart';
 import 'package:legy/features/product/presentation/widgets/product_middle_section.dart';
 
@@ -31,17 +29,18 @@ class _ProductViewState extends State<ProductView> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
-        ProductModel? product;
-
-        product = state.product;
-
-        if (state.isLoading || product == null) {
+        if (state.isLoading || state.product == null) {
           return const Center(child: CircularProgressIndicator());
         }
-
+        final product = state.product!;
         return Stack(
           children: [
-            ProductCover(image: product.imageUrl),
+            BlocSelector<ProductCubit, ProductState, String>(
+              selector: (state) => state.product!.imageUrl,
+              builder: (context, imageUrl) {
+                return ProductCover(image: imageUrl);
+              },
+            ),
             Positioned(
               child: Padding(
                 padding: EdgeInsets.only(

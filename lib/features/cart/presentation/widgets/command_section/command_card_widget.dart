@@ -28,11 +28,26 @@ class CommandCardWidget extends StatefulWidget {
 
 class _CommandCardWidgetState extends State<CommandCardWidget> {
   late int productQuantity;
+  late Uint8List imageBytes;
 
   @override
   void initState() {
     super.initState();
     productQuantity = widget.product.quantity;
+    _decodeImage();
+  }
+
+  @override
+  void didUpdateWidget(covariant CommandCardWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.product.imageUrl != oldWidget.product.imageUrl) {
+      _decodeImage();
+    }
+  }
+
+  void _decodeImage() {
+    final base64Str = widget.product.imageUrl.split(',').last;
+    imageBytes = base64Decode(base64Str);
   }
 
   void increment() {
@@ -70,12 +85,9 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final base64Str = widget.product.imageUrl.split(',').last;
-    Uint8List imageBytes = base64Decode(base64Str);
-
     final activeSupplements = widget.supplements
         .where((supplement) =>
-            supplement.quantity != null && supplement.quantity! > 0)
+    supplement.quantity != null && supplement.quantity! > 0)
         .toList();
 
     double productTotal = productQuantity * widget.product.pricePreCom;
@@ -83,7 +95,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: Colours.lightThemeWhite1,
@@ -101,7 +113,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Gap(10),
+                  const Gap(10),
                   Container(
                     width: 60,
                     height: 60,
@@ -113,7 +125,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                       ),
                     ),
                   ),
-                  Gap(30),
+                  const Gap(30),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -121,7 +133,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                         widget.product.name,
                         style: TextStyles.textMediumSmall.black1,
                       ),
-                      Gap(10),
+                      const Gap(10),
                       Row(
                         children: [
                           Text(
@@ -137,7 +149,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                           ),
                         ],
                       ),
-                      Gap(10),
+                      const Gap(10),
                       Row(
                         children: [
                           Center(
@@ -145,9 +157,12 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1, color: Colours.lightThemeGrey2),
-                                  shape: BoxShape.circle),
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colours.lightThemeGrey2,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
                               child: IconButton(
                                 icon: const Icon(Icons.remove),
                                 color: Colours.lightThemeOrange5,
@@ -156,18 +171,23 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                               ),
                             ),
                           ),
-                          Gap(10),
-                          Text(productQuantity.toString(),
-                              style: TextStyles.textMediumLarge.orange5),
-                          Gap(10),
+                          const Gap(10),
+                          Text(
+                            productQuantity.toString(),
+                            style: TextStyles.textMediumLarge.orange5,
+                          ),
+                          const Gap(10),
                           Center(
                             child: Container(
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1, color: Colours.lightThemeGrey2),
-                                  shape: BoxShape.circle),
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colours.lightThemeGrey2,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
                               child: IconButton(
                                 icon: const Icon(Icons.add),
                                 color: Colours.lightThemeOrange5,
@@ -192,29 +212,35 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${supp.name} x${supp.quantity}",
-                        style: TextStyles.textMediumSmall.black1),
-                    Text("${supp.price * supp.quantity!} CFA",
-                        style: TextStyles.textMediumSmall.red5),
+                    Text(
+                      "${supp.name} x${supp.quantity}",
+                      style: TextStyles.textMediumSmall.black1,
+                    ),
+                    Text(
+                      "${supp.price * supp.quantity!} CFA",
+                      style: TextStyles.textMediumSmall.red5,
+                    ),
                   ],
                 ),
-              Gap(20),
+              const Gap(20),
             ],
           ),
         ),
-        // Positioned X button
         Positioned(
           top: 15,
           right: 15,
           child: GestureDetector(
             onTap: removeProductFromCart,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.transparent,
               ),
-              child: const Icon(Icons.close,
-                  size: 16, color: Colours.lightThemeGrey0),
+              child: const Icon(
+                Icons.close,
+                size: 16,
+                color: Colours.lightThemeGrey0,
+              ),
             ),
           ),
         ),

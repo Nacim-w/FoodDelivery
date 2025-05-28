@@ -8,9 +8,9 @@ class ProductSkeletonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardHeight = context.height * 0.115;
+    final cardHeight = context.height * 0.1;
     final imageWidth = context.width * 0.25;
-    final textWidth = context.width * 0.55;
+    final textWidth = context.width * 0.52;
 
     return Container(
       height: cardHeight,
