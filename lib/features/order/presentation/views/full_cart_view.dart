@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/order/presentation/views/empty_cart_view.dart';
 import 'package:legy/features/order/presentation/widgets/command_section/command_card_widget.dart';
@@ -52,7 +53,6 @@ class _FullCartWidgetState extends State<FullCartView> {
 
       total += product.pricePostCom * product.quantity;
       for (var supplement in product.supplements) {
-        print(supplement.price);
         total += supplement.price * (supplement.quantity ?? 0);
       }
     }
@@ -66,9 +66,10 @@ class _FullCartWidgetState extends State<FullCartView> {
 
     return Column(
       children: [
-        Gap(40),
+        context.adaptiveGap,
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 16.0).copyWith(bottom: 16),
           child: ProfileSettingsAppbar(title: 'Mon Panier'),
         ),
         Expanded(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/features/profile/params/presentation/views/change_password_view.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
@@ -22,9 +22,10 @@ class _ParamsFormState extends State<ParamsForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Gap(30),
+        context.adaptiveGap,
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0)
+              .copyWith(bottom: 16.0),
           child: ParamAppbar(),
         ),
         ParamsTile(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/search/presentation/widgets/recent_orders_widget.dart';
 import 'package:legy/features/search/presentation/widgets/recent_search_widget.dart';
@@ -53,7 +54,7 @@ class _SearchViewState extends State<SearchView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(40),
+            context.adaptiveGap,
             SearchBarWidget(
               onSearch: addRecentSearch,
               onSearchTyping: updateSearching,

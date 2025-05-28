@@ -55,6 +55,7 @@ class OrderButtonWidget extends StatelessWidget {
                         final profile = await _getCachedProfile();
 
                         if (profile == null) {
+                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 content: Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/widgets/black_app_bar.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 
@@ -12,9 +13,14 @@ class TermsServiceView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlackAppBar(
-          title: 'Rendez-vous personnel',
-          onTap: context.pop,
+        context.adaptiveGap,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0)
+              .copyWith(bottom: 16.0),
+          child: BlackAppBar(
+            title: 'Rendez-vous personnel',
+            onTap: context.pop,
+          ),
         ),
         Expanded(
           child: SingleChildScrollView(

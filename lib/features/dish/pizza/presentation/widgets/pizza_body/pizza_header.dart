@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legy/core/res/media.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/3d_page.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/threed_page.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_header/background_layer.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_header/build_decoration.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_header/build_name_controls.dart';

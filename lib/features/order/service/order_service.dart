@@ -46,9 +46,6 @@ class OrderService {
       "status": "PENDING"
     };
 
-    print('➡ Sending order request: ${jsonEncode(orderBody)}');
-    print('➡ Request URI: $uri');
-    print('➡ Authorization Token: $token');
     final response = await http.post(
       uri,
       headers: {
@@ -58,11 +55,7 @@ class OrderService {
       body: jsonEncode(orderBody),
     );
 
-    print('⬅ Response status: ${response.statusCode}');
-    print('⬅ Response body: ${response.body}');
-
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('✅ Order placed successfully!');
     } else {
       final errorJson = jsonDecode(response.body);
       final errorMessage = errorJson['error'] ?? 'Unknown error occurred';

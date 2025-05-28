@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/profile/profile_settings/sections/appbar/profile_settings_appbar.dart';
 import 'package:legy/features/profile/profile_settings/sections/order_card/order_card_widgets.dart';
@@ -13,7 +14,7 @@ class ProfileSettingsForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Gap(40),
+        context.adaptiveGap,
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ProfileSettingsAppbar(title: 'Paramètres du profil'),

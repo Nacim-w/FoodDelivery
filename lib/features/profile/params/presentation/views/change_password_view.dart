@@ -53,14 +53,20 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             context.adaptiveGap,
             GreenAppBar(
               title: 'Gestionnaire de mots de passe',
-              onTap: context.pop,
+              onTap: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.go(HomePage.routePath);
+                }
+              },
             ),
             const Gap(20),
             BlocConsumer<ProfileCubit, ProfileState>(

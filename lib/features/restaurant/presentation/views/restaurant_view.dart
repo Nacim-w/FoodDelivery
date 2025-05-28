@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_appbar.dart';
@@ -78,7 +80,8 @@ class _RestaurantViewState extends State<RestaurantView> {
         ),
         Positioned(
           child: Padding(
-            padding: const EdgeInsets.only(top: 35, left: 16, right: 16),
+            padding: EdgeInsets.only(
+                top: Platform.isAndroid ? 30 : 60, left: 16, right: 16),
             child: RestaurantAppbar(restaurantId: restaurant.id),
           ),
         ),

@@ -17,7 +17,7 @@ class GreenAppBar extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () => onTap,
+          onTap: onTap,
           borderRadius: BorderRadius.circular(100),
           child: Container(
             width: context.width * 0.1,
@@ -45,7 +45,6 @@ class GreenAppBar extends StatelessWidget {
             child: Text(title, style: TextStyles.textBoldLarge.green5),
           ),
         ),
-        SizedBox(width: context.width * 0.1),
       ],
     );
   }

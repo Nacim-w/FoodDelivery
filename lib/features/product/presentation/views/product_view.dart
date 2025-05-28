@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/product/model/product_model.dart';
@@ -42,7 +44,8 @@ class _ProductViewState extends State<ProductView> {
             ProductCover(image: product.imageUrl),
             Positioned(
               child: Padding(
-                padding: const EdgeInsets.only(top: 35, left: 16, right: 16),
+                padding: EdgeInsets.only(
+                    top: Platform.isAndroid ? 30 : 60, left: 16, right: 16),
                 child: ProductAppbar(productId: product.id),
               ),
             ),

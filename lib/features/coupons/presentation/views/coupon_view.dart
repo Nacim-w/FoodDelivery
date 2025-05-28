@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/coupons/presentation/widgets/coupon_container.dart';
@@ -13,7 +14,7 @@ class CouponView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Gap(40),
+        context.adaptiveGap,
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ProfileSettingsAppbar(title: 'Offres'),
