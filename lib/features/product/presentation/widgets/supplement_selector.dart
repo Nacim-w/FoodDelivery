@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -52,6 +53,7 @@ class SupplementsSelector extends StatelessWidget {
 
                       // Quantity Selector (from 0 to 99)
                       Row(
+                        mainAxisSize: MainAxisSize.max,
                         children: [
                           IconButton(
                             icon: const Icon(Icons.remove),
@@ -65,9 +67,21 @@ class SupplementsSelector extends StatelessWidget {
                               }
                             },
                           ),
-                          Text(
-                            '${supp.quantity ?? 0}',
-                            style: const TextStyle(fontSize: 16),
+                          SizedBox(
+                            width: context.width * 0.08,
+                            child: Center(
+                              // Center aligns the number
+                              child: Text(
+                                '${supp.quantity ?? 0}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFeatures: [
+                                    FontFeature.tabularFigures()
+                                  ], // Monospaced digits
+                                ),
+                              ),
+                            ),
                           ),
                           IconButton(
                             icon: const Icon(Icons.add),
