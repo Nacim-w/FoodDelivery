@@ -16,11 +16,10 @@ class OrderCubit extends Cubit<OrderState> {
     emit(state.copyWith(isLoading: true, error: null, success: false));
 
     try {
-      print(profile.address);
       await orderService.createOrder(
         products: products,
         restaurantId: products.first.restaurantId,
-        deliveryAddress: profile.address ?? 'the other value is null',
+        deliveryAddress: profile.address,
         paymentMethod: 'CASH',
       );
 

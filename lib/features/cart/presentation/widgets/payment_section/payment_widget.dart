@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/cart/presentation/widgets/payment_section/payment_button_widget.dart';
+import 'package:legy/features/cart/presentation/widgets/payment_section/order_button_widget.dart';
 import 'package:legy/features/product/model/product_model.dart';
 
 class PaymentWidget extends StatefulWidget {

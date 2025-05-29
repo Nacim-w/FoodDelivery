@@ -1,26 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
+import 'package:legy/features/home/model/home_profile_model.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';
 import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/payment/payment_page.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeDrawer extends StatelessWidget {
+class HomeDrawer extends StatefulWidget {
   const HomeDrawer({super.key});
+
+  @override
+  State<HomeDrawer> createState() => _HomeDrawerState();
+}
+
+class _HomeDrawerState extends State<HomeDrawer> {
+  HomeProfileModel? cachedProfile;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCachedProfile();
+  }
+
+  Future<void> _loadCachedProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheHelper = CacheHelper(prefs);
+    final profile = cacheHelper.getCachedUserProfile();
+
+    if (mounted) {
+      setState(() {
+        cachedProfile = profile;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: ListView(
           children: [
-            Gap(30),
+            const Gap(30),
             Row(
               children: [
                 IconButton(
@@ -47,13 +75,13 @@ class HomeDrawer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Mariama Sow',
-                        style: TextStyle(
+                      Text(
+                        cachedProfile?.firstname ?? 'Nom utilisateur',
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Mariama.sow.example.com',
+                        cachedProfile?.email ?? 'email@exemple.com',
                         style: TextStyle(
                             fontSize: 14, color: Colors.grey.shade600),
                       ),

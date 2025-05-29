@@ -19,6 +19,7 @@ import 'package:legy/features/dish/burger/presentation/widgets/burger_details.da
 import 'package:legy/features/dish/dessert/presentation/widgets/dessert_details.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_details.dart';
 import 'package:legy/features/dish/salad/presentation/widgets/salad_details.dart';
+import 'package:legy/features/history/presentation/app/history_cubit.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/maps/map_page.dart';

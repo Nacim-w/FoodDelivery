@@ -159,7 +159,12 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: OrderHistoryView.routePath,
-              builder: (context, state) => const OrderHistoryView(),
+              builder: (context, state) {
+                return BlocProvider(
+                  create: (_) => sl<HistoryCubit>(),
+                  child: OrderHistoryView(),
+                );
+              },
             ),
           ],
         ),
