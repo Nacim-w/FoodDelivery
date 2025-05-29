@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/presentation/app/product_state.dart';
 import 'package:legy/features/product/presentation/widgets/product_appbar.dart';
