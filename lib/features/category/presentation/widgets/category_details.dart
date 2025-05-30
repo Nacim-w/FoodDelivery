@@ -36,9 +36,9 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     Media.categoryDish6,
   ];
   final List<String> categoryRoutes = [
-    BurgerDetails.routePath, // index 0
-    PizzaDetails.routePath, // index 1
-    SaladDetails.routePath, // index 2
+    BurgerDetails.routePath,
+    PizzaDetails.routePath,
+    SaladDetails.routePath,
   ];
 
   @override

@@ -11,9 +11,6 @@ abstract class Media {
 
   //3d assets
   static const pizza3d = '$_baseAR/pizza.glb';
-  static const burger3d = '$_baseAR/burger.glb';
-  static const salad3d = '$_baseAR/salad.glb';
-  static const cake3d = '$_baseAR/cake.glb';
 
   //auth
   static const facebook = '$_baseIcon/facebook.png';
@@ -65,9 +62,6 @@ abstract class Media {
   //order history
   static const bestSeller = '$_baseImage/bestSeller.png';
   static const order1 = '$_baseImage/order1.png';
-  static const order2 = '$_baseImage/order2.png';
-  static const order3 = '$_baseImage/order3.png';
-  static const order4 = '$_baseImage/order4.png';
   static const clock = '$_baseIcon/clock.svg';
   // comment page
   static const activeStar = '$_baseIcon/activeStar.svg';
@@ -135,24 +129,28 @@ abstract class Media {
   //burger contruction page
   static const burgerBackground = '$_baseImage/burgerBackground.png';
   static const helperArrow = '$_baseIcon/helperArrow.svg';
-  static const burgerItem1 = '$_baseImage/burgerItem1.png';
-  static const burgerItem2 = '$_baseImage/burgerItem2.png';
-  static const burgerItem3 = '$_baseImage/burgerItem3.png';
-  static const burgerItem4 = '$_baseImage/burgerItem4.png';
-  static const burgerItem5 = '$_baseImage/burgerItem5.png';
-  static const bun1 = '$_baseImage/bun1.png';
-  static const bun2 = '$_baseImage/bun2.png';
-  static const bun3 = '$_baseImage/bun3.png';
-  static const bun4 = '$_baseImage/bun4.png';
-  static const bun5 = '$_baseImage/bun5.png';
-  static const burgerFilling1 = '$_baseImage/burgerFilling1.png';
-  static const burgerFilling2 = '$_baseImage/burgerFilling2.png';
-  static const burgerFilling3 = '$_baseImage/burgerFilling3.png';
-  static const burgerFilling4 = '$_baseImage/burgerFilling4.png';
-  static const burgerFilling5 = '$_baseImage/burgerFilling5.png';
-  static const burgerFilling6 = '$_baseImage/burgerFilling6.png';
-  static const burgerFilling7 = '$_baseImage/burgerFilling7.png';
-  static const burgerFilling8 = '$_baseImage/burgerFilling8.png';
+  static const burgerBun1 = '$_baseImage/burgerBun1.png';
+  static const burgerBun2 = '$_baseImage/burgerBun2.png';
+  static const burgerBun3 = '$_baseImage/burgerBun3.png';
+  static const burgerBun4 = '$_baseImage/burgerBun4.png';
+  static const burgerBun5 = '$_baseImage/burgerBun5.png';
+  static const burgerCheese = '$_baseImage/burgerCheese.png';
+  static const burgerLettuce = '$_baseImage/burgerLettuce.png';
+  static const burgerPickles = '$_baseImage/burgerPickles.png';
+  static const burgerBacon = '$_baseImage/burgerBacon.png';
+  static const burgerMeat1 = '$_baseImage/burgerMeat1.png';
+  static const burgerMeat2 = '$_baseImage/burgerMeat2.png';
+  static const burgerMeat3 = '$_baseImage/burgerMeat3.png';
+  static const burgerMeat4 = '$_baseImage/burgerMeat4.png';
+  static const burgerBottomBun = '$_baseImage/burgerBottomBun.png';
+  static const burgerTopBun = '$_baseImage/burgerTopBun.png';
+  static const burgerPlacedBacon = '$_baseImage/burgerPlacedBacon.png';
+  static const burgerPlacedCheese = '$_baseImage/burgerPlacedCheese.png';
+  static const burgerPlacedLettuce = '$_baseImage/burgerPlacedLettuce.png';
+  static const burgerPlacedMeat = '$_baseImage/burgerPlacedMeat.png';
+  static const burgerPlacedPickle = '$_baseImage/burgerPlacedPickle.png';
+  static const burgerPlacedTomato = '$_baseImage/burgerPlacedTomato.png';
+
   //categories
   static const categorySwap1 = '$_baseImage/categorySwap1.png';
   static const categorySwap2 = '$_baseImage/categorySwap2.png';
@@ -210,19 +208,12 @@ abstract class Media {
   static const pizza4 = '$_baseImage/pizza4.png';
   static const woodenPlate = '$_baseImage/woodenPlate.png';
   static const pizzaDecoration = '$_baseImage/pizzaDecoration.png';
-
-  static const fries = '$_baseImage/fries.png';
-
   static const ingrediant = '$_baseImage/ingrediant.png';
 
   //order page
   static const emptyActiveOrder = '$_baseIcon/emptyActiveOrder.svg';
   static const emptyCanceledOrder = '$_baseIcon/emptyCanceledOrder.svg';
   static const emptyCompletedOrder = '$_baseIcon/emptyCompletedOrder.svg';
-
-  static const burgerMeat1 = '$_baseImage/burgerMeat1.png';
-  static const burgerMeat2 = '$_baseImage/burgerMeat2.png';
-  static const burgerMeat3 = '$_baseImage/burgerMeat3.png';
 
   static const resetPasswordSuccess = '$_baseImage/resetPasswordSuccess.png';
   static const profileAvatar = '$_baseImage/profileAvatar.png';

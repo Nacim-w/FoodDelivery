@@ -39,8 +39,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final double fixedHeight = context.height * 0.18;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -52,7 +50,7 @@ class _HomeState extends State<Home> {
               ),
               color: Colours.lightThemeOrange0,
             ),
-            height: context.height * 0.24,
+            height: context.height * 0.19,
             child: Column(
               children: [
                 Gap(20),
@@ -66,21 +64,21 @@ class _HomeState extends State<Home> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: fixedHeight - 10),
-            child: GestureDetector(
-              onTap: () => context.go(
-                  '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
-              child: HomeCaroussal(),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: context.height * 0.39),
+            padding: EdgeInsets.only(top: context.height * 0.19),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 0),
+                        child: GestureDetector(
+                          onTap: () => context.go(
+                              '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
+                          child: HomeCaroussal(),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(

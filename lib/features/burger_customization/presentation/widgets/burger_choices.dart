@@ -15,11 +15,41 @@ class BurgerChoices extends StatefulWidget {
 class _BurgerChoicesState extends State<BurgerChoices> {
   String selectedCategory = 'Pains';
 
+  // Map of categories to ingredient items
+  final Map<String, List<Map<String, String>>> choicesByCategory = {
+    'Pains': [
+      {'image': Media.burgerBun1, 'label': 'Pain classique'},
+      {'image': Media.burgerBun2, 'label': 'Pain sésame'},
+      {'image': Media.burgerBun3, 'label': 'Pain brioché'},
+      {'image': Media.burgerBun4, 'label': 'Pain complet'},
+      {'image': Media.burgerBun5, 'label': 'Pain keto'},
+    ],
+    'Galette': [
+      {'image': Media.burgerMeat1, 'label': 'Boeuf classique'},
+      {'image': Media.burgerMeat2, 'label': 'Poulet grillé'},
+      {'image': Media.burgerMeat3, 'label': 'Double steak'},
+      {'image': Media.burgerMeat4, 'label': 'Galette végétarienne'},
+    ],
+    'Garnitures': [
+      {'image': Media.burgerCheese, 'label': 'Fromage'},
+      {'image': Media.burgerBacon, 'label': 'Bacon'},
+      {'image': Media.burgerPickles, 'label': 'Cornichons'},
+      {'image': Media.burgerLettuce, 'label': 'Laitue'},
+      {'image': Media.burgerBun2, 'label': 'Tomate'},
+    ],
+    'Sauces': [
+      {'image': Media.burgerBun3, 'label': 'Ketchup'}, // placeholder
+      {'image': Media.burgerBun4, 'label': 'Mayonnaise'}, // placeholder
+      {'image': Media.burgerBun5, 'label': 'Barbecue'}, // placeholder
+      {'image': Media.burgerBun1, 'label': 'Moutarde'}, // placeholder
+    ],
+  };
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      height: context.height * 0.15,
+      height: context.height * 0.25,
       padding: const EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite1,
@@ -31,30 +61,28 @@ class _BurgerChoicesState extends State<BurgerChoices> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Ingredient list
           SizedBox(
-            height: context.height * 0.14,
+            height: context.height * 0.12,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              children: [
-                _bunItem(Media.bun1, "Pain classique"),
-                _bunItem(Media.bun4, "Pain complet"),
-                _bunItem(Media.bun3, "Pain brioché"),
-                _bunItem(Media.bun2, "Pain sésame"),
-                _bunItem(Media.bun5, "Pain keto"),
-              ],
+              children: choicesByCategory[selectedCategory]!
+                  .map(
+                      (item) => _ingredientItem(item['image']!, item['label']!))
+                  .toList(),
             ),
           ),
+          const SizedBox(height: 8),
+          // Category buttons
           SizedBox(
             height: context.height * 0.06,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
-                _categoryButton('Pains'),
-                _categoryButton('Galette'),
-                _categoryButton('Garnitures'),
-                _categoryButton('Sauces'),
-              ],
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              children: choicesByCategory.keys
+                  .map((category) => _categoryButton(category))
+                  .toList(),
             ),
           ),
         ],
@@ -62,21 +90,15 @@ class _BurgerChoicesState extends State<BurgerChoices> {
     );
   }
 
-  Widget _bunItem(String imagePath, String label) {
+  Widget _ingredientItem(String imagePath, String label) {
     return Container(
       margin: const EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            width: context.width * 0.25,
+            width: context.width * 0.18,
             height: context.height * 0.08,
-            child: Image.asset(
-              imagePath,
-            ),
+            child: Image.asset(imagePath),
           ),
           Text(
             label,

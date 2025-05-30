@@ -9,7 +9,6 @@ import 'package:legy/features/history/presentation/app/history_cubit.dart';
 import 'package:legy/features/history/presentation/app/history_state.dart';
 import 'package:legy/features/history/presentation/widgets/current_order_widget.dart';
 import 'package:legy/features/history/presentation/widgets/order_grid_widget.dart';
-import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class OrderHistoryView extends StatefulWidget {
   static const routePath = '/orders';

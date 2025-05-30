@@ -13,10 +13,10 @@ class DessertSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<DessertDetailsProvider>(context);
     final desserts = [
-      {'name': 'Dessert 1', 'image': Media.dessert1},
+      {'name': 'Dessert 1', 'image': Media.dessert4},
       {'name': 'Dessert 2', 'image': Media.dessert2},
       {'name': 'Dessert 3', 'image': Media.dessert3},
-      {'name': 'Dessert 4', 'image': Media.dessert4},
+      {'name': 'Dessert 4', 'image': Media.dessert1},
     ];
 
     return SizedBox(

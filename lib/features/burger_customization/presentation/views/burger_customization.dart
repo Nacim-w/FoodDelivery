@@ -116,22 +116,9 @@ class _BurgerCustomizationScreenState extends State<BurgerCustomizationScreen> {
               child: Row(
                 children: <Widget>[
                   // Ingredient buttons for adding items to the burger
-                  _buildIngredientButton(
-                      Media.burgerMeat1, Media.burgerFilling1),
-                  _buildIngredientButton(
-                      Media.burgerMeat2, Media.burgerFilling2),
-                  _buildIngredientButton(
-                      Media.burgerMeat3, Media.burgerFilling3),
-                  _buildIngredientButton(
-                      Media.burgerItem4, Media.burgerFilling4),
-                  _buildIngredientButton(
-                      Media.burgerItem3, Media.burgerFilling5),
-                  _buildIngredientButton(
-                      Media.burgerItem3, Media.burgerFilling6),
-                  _buildIngredientButton(
-                      Media.burgerItem3, Media.burgerFilling7),
-                  _buildIngredientButton(
-                      Media.burgerItem3, Media.burgerFilling8),
+                  _buildIngredientButton(Media.burgerMeat1, Media.burgerMeat1),
+                  _buildIngredientButton(Media.burgerMeat2, Media.burgerMeat2),
+                  _buildIngredientButton(Media.burgerMeat3, Media.burgerMeat3),
                 ],
               ),
             ),

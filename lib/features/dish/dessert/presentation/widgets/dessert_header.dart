@@ -22,10 +22,10 @@ class _DessertHeaderState extends State<DessertHeader> {
   final PageController _pageController = PageController(initialPage: 0);
 
   final List<Map<String, String>> desserts = [
-    {'image': Media.dessert1},
+    {'image': Media.dessert4},
     {'image': Media.dessert2},
     {'image': Media.dessert3},
-    {'image': Media.dessert4},
+    {'image': Media.dessert1},
   ];
 
   @override
@@ -135,7 +135,7 @@ class _DessertHeaderState extends State<DessertHeader> {
           ),
         ),
         Positioned(
-          top: context.height * 0.25,
+          top: context.height * 0.26,
           left: 0,
           child: SizedBox(
             width: context.width,

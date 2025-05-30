@@ -59,6 +59,7 @@ class OrderButtonWidget extends StatelessWidget {
                         final profile = await _getCachedProfile();
 
                         if (profile == null) {
+                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -71,6 +72,7 @@ class OrderButtonWidget extends StatelessWidget {
                         }
 
                         try {
+                          // ignore: use_build_context_synchronously
                           await context
                               .read<OrderCubit>()
                               .placeOrder(products: products, profile: profile);
@@ -79,6 +81,7 @@ class OrderButtonWidget extends StatelessWidget {
                           cacheHelper.clearCart();
 
                           // SUCCESS snackbar
+                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('✅ Commande passée avec succès!'),
@@ -89,6 +92,7 @@ class OrderButtonWidget extends StatelessWidget {
                           context.go(HomePage.routePath);
                         } catch (e) {
                           // FAILURE snackbar
+                          // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(

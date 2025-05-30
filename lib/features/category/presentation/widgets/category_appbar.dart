@@ -6,7 +6,9 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CategoryAppBar({super.key});
@@ -52,14 +54,27 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           Container(
+            width: context.width * 0.10,
+            height: context.width * 0.10,
             decoration: BoxDecoration(
+              color: Colours.lightThemeWhite1,
               shape: BoxShape.circle,
-              border: Border.all(color: Colours.lightThemeGrey0, width: 1),
+              border: Border.all(
+                color: Colours.lightThemeGrey0,
+                width: 0.5,
+              ),
             ),
-            child: CircleAvatar(
-              backgroundImage: AssetImage(Media.homeAvatar),
+            child: Center(
+              child: IconButton(
+                onPressed: () {
+                  context
+                      .push('${HomePage.routePath}/${FullCartView.routePath}');
+                },
+                icon: SvgPicture.asset(Media.cart),
+                iconSize: context.width * 0.06,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
