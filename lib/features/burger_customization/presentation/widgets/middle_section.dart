@@ -52,7 +52,7 @@ class _MiddleSectionState extends State<MiddleSection>
         children: [
           Container(
             width: context.width * 0.7,
-            height: context.height * 0.35,
+            height: context.height * 0.3,
             decoration: BoxDecoration(
               color: Colours.lightThemeOrange5,
               borderRadius: BorderRadius.circular(40),
@@ -106,7 +106,7 @@ class _MiddleSectionState extends State<MiddleSection>
             ),
           ),
           Positioned(
-            bottom: context.height * 0.035,
+            bottom: context.height * -0.03,
             left: context.width * 0.05,
             child: Image.asset(
               Media.burgerBackground,

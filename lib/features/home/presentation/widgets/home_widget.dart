@@ -8,6 +8,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/burger_customization/presentation/views/begin_customization.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/categoryDessert/presentation/widgets/category_dessert_details.dart';
@@ -18,7 +19,6 @@ import 'package:legy/features/home/presentation/widgets/home_caroussel_widget.da
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_restaurants_widget.dart';
 import 'package:legy/features/home/presentation/widgets/home_story_widget.dart';
-import 'package:legy/features/burger_customization/presentation/views/burger_customization.dart';
 import 'package:legy/features/restaurant/presentation/views/all_restaurants_view.dart';
 
 class Home extends StatefulWidget {
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
                         padding: EdgeInsets.only(top: 0),
                         child: GestureDetector(
                           onTap: () => context.go(
-                              '${HomePage.routePath}/${BurgerCustomizationScreen.routePath}'),
+                              '${HomePage.routePath}/${BeginCustomization.routePath}'),
                           child: HomeCaroussal(),
                         ),
                       ),

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:legy/core/common/widgets/green_app_bar.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/features/burger_customization/presentation/views/burger_final_screen.dart';
 import 'package:legy/features/burger_customization/presentation/widgets/suggestion_listview.dart';
 import 'package:legy/features/burger_customization/presentation/widgets/middle_section.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class BeginCustomization extends StatefulWidget {
+  static const routePath = "burger_customization";
+
   const BeginCustomization({super.key});
 
   @override
@@ -27,7 +34,7 @@ class _BeginCustomizationState extends State<BeginCustomization> {
     Media.burgerMeat2: Media.burgerPlacedMeat,
     Media.burgerMeat3: Media.burgerPlacedMeat,
     Media.burgerMeat4: Media.burgerPlacedMeat,
-    Media.burgerBun2: Media.burgerPlacedTomato, // placeholder if needed
+    Media.burgerBun2: Media.burgerPlacedTomato,
   };
 
   void addIngredient(String imagePath) {
@@ -50,12 +57,28 @@ class _BeginCustomizationState extends State<BeginCustomization> {
     });
   }
 
+  void onContinue() {
+    context.push(
+        '${HomePage.routePath}/${BeginCustomization.routePath}/${BurgerFinalScreen.routePath}',
+        extra: selectedIngredients);
+  }
+
+  bool get hasBuns =>
+      selectedIngredients.contains(Media.burgerBottomBun) &&
+      selectedIngredients.contains(Media.burgerTopBun);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colours.lightThemeBlack0,
-      body: Column(
+    return Container(
+      color: Colours.lightThemeBlack1,
+      child: Column(
         children: [
+          context.adaptiveGap,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0)
+                .copyWith(bottom: 16),
+            child: GreenAppBar(title: 'Burger', onTap: context.pop),
+          ),
           if (selectedIngredients.isEmpty) ...[
             const SuggestionListview(),
             const Gap(20),
@@ -65,7 +88,7 @@ class _BeginCustomizationState extends State<BeginCustomization> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                width: context.width * 0.7,
+                width: context.width * 0.6,
                 child: Stack(
                   clipBehavior: Clip.none,
                   alignment: Alignment.bottomCenter,
@@ -104,6 +127,49 @@ class _BeginCustomizationState extends State<BeginCustomization> {
               ),
             ),
           ),
+
+          // Show the row ONLY if both buns are present
+          if (hasBuns)
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Tu as fini ?",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Gap(10),
+                  ElevatedButton(
+                    onPressed: onContinue,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colours.lightThemeOrange5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                    ),
+                    child: const Row(
+                      children: [
+                        Text(
+                          "Continue",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        SizedBox(width: 5),
+                        Icon(Icons.arrow_forward, color: Colors.white),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
           BurgerChoices(
             onIngredientSelected: addIngredient,
           ),
@@ -161,7 +227,7 @@ class _BurgerChoicesState extends State<BurgerChoices> {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      height: context.height * 0.25,
+      height: context.height * 0.2,
       padding: const EdgeInsets.only(top: 16),
       decoration: BoxDecoration(
         color: Colours.lightThemeWhite1,
@@ -174,7 +240,7 @@ class _BurgerChoicesState extends State<BurgerChoices> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: context.height * 0.12,
+            height: context.height * 0.1,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -186,7 +252,7 @@ class _BurgerChoicesState extends State<BurgerChoices> {
           ),
           const SizedBox(height: 8),
           SizedBox(
-            height: context.height * 0.06,
+            height: context.height * 0.05,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -210,8 +276,8 @@ class _BurgerChoicesState extends State<BurgerChoices> {
         child: Column(
           children: [
             SizedBox(
-              width: context.width * 0.18,
-              height: context.height * 0.08,
+              width: context.width * 0.12,
+              height: context.height * 0.06,
               child: Image.asset(imagePath),
             ),
             Text(

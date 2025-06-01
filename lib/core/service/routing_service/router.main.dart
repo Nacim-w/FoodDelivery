@@ -36,8 +36,16 @@ final router = GoRouter(
                   builder: (context, state) => const OrderTrackingMapView(),
                 ),
                 GoRoute(
-                  path: BurgerCustomizationScreen.routePath,
+                  path: BeginCustomization.routePath,
                   builder: (context, state) => const BeginCustomization(),
+                  routes: [
+                    GoRoute(
+                        path: BurgerFinalScreen.routePath,
+                        builder: (context, state) {
+                          final ingredients = state.extra as List<String>;
+                          return BurgerFinalScreen(ingredients: ingredients);
+                        }),
+                  ],
                 ),
                 GoRoute(
                   path: FullCartView.routePath,
