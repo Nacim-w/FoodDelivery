@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
@@ -57,9 +58,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
                     Navigator.of(context).pop();
                   },
                 ),
+                Gap(20),
                 Image.asset(
                   Media.legyDrawer,
-                  height: 24,
+                  height: context.width * 0.3,
+                  width: context.width * 0.5,
                 ),
               ],
             ),
@@ -84,28 +87,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         cachedProfile?.email ?? 'email@exemple.com',
                         style: TextStyle(
                             fontSize: 14, color: Colors.grey.shade600),
-                      ),
-                      const SizedBox(height: 4),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(Icons.star,
-                                size: 16, color: Colors.orange),
-                            const SizedBox(width: 4),
-                            const Text(
-                              'Premium',
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
                       ),
                     ],
                   ),

@@ -13,6 +13,7 @@ Future<void> init() async {
   await _favoriteInit();
   await _historyInit();
   await _orderInit();
+  await _categoryInit();
 }
 
 Future<void> _cacheInit() async {
@@ -75,4 +76,10 @@ Future<void> _historyInit() async {
   sl
     ..registerFactory(() => HistoryCubit(historyService: sl()))
     ..registerLazySingleton(() => HistoryService(sl()));
+}
+
+Future<void> _categoryInit() async {
+  sl
+    ..registerFactory(() => CategoryCubit(categoryService: sl()))
+    ..registerLazySingleton(() => CategoryService());
 }

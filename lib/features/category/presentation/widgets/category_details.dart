@@ -6,6 +6,7 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_appbar.dart';
 import 'package:legy/features/category/presentation/widgets/category_hero.dart';
@@ -42,6 +43,13 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    final index = context.read<CategoryProvider>().index;
+    context.read<CategoryCubit>().fetchPopularRestaurants(index);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final index = context.watch<CategoryProvider>().index;
     final selectedRoute = categoryRoutes.asMap().containsKey(index)
@@ -62,7 +70,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                 index == 1
                     ? CuisineFilters()
                     : Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           'Plats populaires',
                           style: TextStyles.text900fs24.brown5,
@@ -75,22 +83,43 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       InkWell(
-                        onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/$selectedRoute',
-                        ),
+                        onTap: () {
+                          final targetRoute =
+                              categoryTitles[index * 2] == Media.categoryDish3
+                                  ? BurgerDetails.routePath
+                                  : selectedRoute;
+
+                          context.go(
+                            '${HomePage.routePath}/${CategoryDetails.routePath}/$targetRoute',
+                          );
+                        },
                         child: PopularDish(image: categoryTitles[index * 2]),
                       ),
                       InkWell(
-                        onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/$selectedRoute',
-                        ),
+                        onTap: () {
+                          final targetRoute = categoryTitles[index * 2 + 1] ==
+                                  Media.categoryDish3
+                              ? BurgerDetails.routePath
+                              : selectedRoute;
+
+                          context.go(
+                            '${HomePage.routePath}/${CategoryDetails.routePath}/$targetRoute',
+                          );
+                        },
                         child:
                             PopularDish(image: categoryTitles[index * 2 + 1]),
                       ),
                       InkWell(
-                        onTap: () => context.go(
-                          '${HomePage.routePath}/${CategoryDetails.routePath}/$selectedRoute',
-                        ),
+                        onTap: () {
+                          final targetRoute =
+                              categoryTitles[index * 2] == Media.categoryDish3
+                                  ? BurgerDetails.routePath
+                                  : selectedRoute;
+
+                          context.go(
+                            '${HomePage.routePath}/${CategoryDetails.routePath}/$targetRoute',
+                          );
+                        },
                         child: PopularDish(image: categoryTitles[index * 2]),
                       ),
                     ],

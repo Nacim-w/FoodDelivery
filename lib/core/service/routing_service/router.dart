@@ -5,6 +5,8 @@ import 'package:legy/core/common/singletons/cache.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/burger_customization/presentation/views/begin_customization.dart';
+import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';
+import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/views/category_view.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/categoryDessert/presentation/widgets/category_dessert_details.dart';

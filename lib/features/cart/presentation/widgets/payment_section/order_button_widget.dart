@@ -5,6 +5,7 @@ import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
 import 'package:legy/features/cart/presentation/app/order_cubit.dart';
 import 'package:legy/features/cart/presentation/app/order_state.dart';
@@ -89,7 +90,8 @@ class OrderButtonWidget extends StatelessWidget {
                             ),
                           );
                           // ignore: use_build_context_synchronously
-                          context.go(HomePage.routePath);
+                          context.go(
+                              '${HomePage.routePath}/${OrderTrackingMapView.routePath}');
                         } catch (e) {
                           // FAILURE snackbar
                           // ignore: use_build_context_synchronously

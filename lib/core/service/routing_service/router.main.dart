@@ -32,6 +32,10 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
+                  path: OrderTrackingMapView.routePath,
+                  builder: (context, state) => const OrderTrackingMapView(),
+                ),
+                GoRoute(
                   path: BurgerCustomizationScreen.routePath,
                   builder: (context, state) => const BeginCustomization(),
                 ),
@@ -135,7 +139,12 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: CategoryDetails.routePath,
-                  builder: (context, state) => const CategoryView(),
+                  builder: (context, state) {
+                    return BlocProvider(
+                      create: (_) => sl<CategoryCubit>(),
+                      child: CategoryView(),
+                    );
+                  },
                   routes: [
                     GoRoute(
                       path: SaladDetails.routePath,

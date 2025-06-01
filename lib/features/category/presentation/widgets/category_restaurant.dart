@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -34,6 +37,8 @@ class CategoryRestaurant extends StatefulWidget {
 class _CategoryRestaurantState extends State<CategoryRestaurant> {
   @override
   Widget build(BuildContext context) {
+    final base64Str = widget.image.split(',').last;
+    Uint8List imageBytes = base64Decode(base64Str);
     return Container(
       height: context.height * 0.115,
       decoration: BoxDecoration(
@@ -57,7 +62,7 @@ class _CategoryRestaurantState extends State<CategoryRestaurant> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: AssetImage(widget.image),
+                    image: MemoryImage(imageBytes),
                     fit: BoxFit.cover,
                   ),
                 ),

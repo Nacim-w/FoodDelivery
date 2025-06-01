@@ -22,7 +22,10 @@ class EmptyCartView extends StatelessWidget {
     return Column(
       children: [
         context.adaptiveGap,
-        BlackAppBar(title: 'Mon Panier', onTap: context.pop),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: BlackAppBar(title: 'Mon Panier', onTap: context.pop),
+        ),
         Gap(100),
         Image.asset(Media.emptyCart),
         Gap(40),
