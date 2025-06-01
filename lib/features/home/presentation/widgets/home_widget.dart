@@ -55,10 +55,7 @@ class _HomeState extends State<Home> {
               children: [
                 Gap(20),
                 Expanded(
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: stories,
-                  ),
+                  child: HomeStoryWidget(),
                 ),
               ],
             ),

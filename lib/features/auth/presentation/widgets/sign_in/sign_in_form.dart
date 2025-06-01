@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
@@ -57,7 +58,7 @@ class _SignInFormState extends State<SignInForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(60),
+              context.adaptiveGap,
               buildAutoSizeText('Connectez-vous à votre compte.'),
               Text(
                 "Veuillez vous connecter à votre compte",

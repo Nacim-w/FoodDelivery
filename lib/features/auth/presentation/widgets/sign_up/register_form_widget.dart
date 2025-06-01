@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -101,7 +102,7 @@ class _RegisterFormState extends State<RegisterForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(60),
+              context.adaptiveGap,
               buildAutoSizeText("Créez votre nouveau compte"),
               Text(
                 "Créez un compte pour commencer à chercher les plats que vous aimez.",

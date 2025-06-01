@@ -1,58 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:legy/core/extension/media_extension.dart';
-import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
-import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/home/model/story_model.dart';
+import 'package:legy/features/home/presentation/widgets/story_viewer.dart';
 
-class HomeStory extends StatefulWidget {
-  final String image;
-  final String username;
-  const HomeStory({
-    super.key,
-    required this.image,
-    required this.username,
-  });
+class HomeStoryWidget extends StatelessWidget {
+  final List<StoryItemModel> stories = [
+    StoryItemModel(username: 'Alice', imageUrls: [
+      'https://picsum.photos/500/800?1',
+      'https://picsum.photos/500/800?2',
+      Media.story1,
+    ]),
+    StoryItemModel(username: 'Bob', imageUrls: [
+      'https://picsum.photos/500/800?3',
+      'https://picsum.photos/500/800?4',
+      Media.story2,
+    ]),
+    StoryItemModel(username: 'Charlie', imageUrls: [
+      'https://picsum.photos/500/800?5',
+      'https://picsum.photos/500/800?6',
+      Media.story3,
+    ]),
+    StoryItemModel(username: 'Alex', imageUrls: [
+      'https://picsum.photos/500/800?5',
+      'https://picsum.photos/500/800?6',
+      Media.story4,
+    ]),
+    StoryItemModel(username: 'Sydney', imageUrls: [
+      'https://picsum.photos/500/800?5',
+      'https://picsum.photos/500/800?6',
+      Media.story5,
+    ]),
+  ];
 
-  @override
-  State<HomeStory> createState() => _HomeStoryState();
-}
-
-class _HomeStoryState extends State<HomeStory> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: 0.045 * context.width, top: 0.03 * context.width),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () => {},
-            child: Container(
-              width: context.width * 0.19,
-              height: context.width * 0.19,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: CircleAvatar(
-                radius: context.width * 0.075,
-                backgroundImage: AssetImage(widget.image),
+    return SizedBox(
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: stories.length,
+        itemBuilder: (context, index) {
+          final story = stories[index];
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => MultiUserStoryViewer(stories: stories),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.orange, width: 3),
+                    ),
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage(story.imageUrls.last),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    story.username,
+                    style: TextStyle(fontSize: 12, color: Colors.black),
+                  ),
+                ],
               ),
             ),
-          ),
-          Text(
-            widget.username,
-            style: TextStyles.textMediumSmall.white1,
-          ),
-        ],
+          );
+        },
       ),
     );
   }
 }
-
-List<Widget> stories = [
-  HomeStory(username: 'Votre Story', image: Media.story1),
-  HomeStory(username: 'Votre Story', image: Media.story4),
-  HomeStory(username: 'Votre Story', image: Media.story2),
-  HomeStory(username: 'Votre Story', image: Media.story3),
-  HomeStory(username: 'Votre Story', image: Media.story5),
-];
