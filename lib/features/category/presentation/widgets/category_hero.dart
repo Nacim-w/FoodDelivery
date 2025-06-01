@@ -7,6 +7,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 
 class CategoryHero extends StatefulWidget {
@@ -79,6 +80,9 @@ class _CategoryHeroState extends State<CategoryHero> {
         .read<CategoryProvider>()
         .changeColor(newColor: categoryColors[index]);
     context.read<CategoryProvider>().changeIndex(newIndex: index);
+
+    // 🚨 ADD THIS: tell the Cubit to refetch the restaurants
+    context.read<CategoryCubit>().fetchPopularRestaurants(index);
 
     widget.onCategoryChanged?.call(index);
   }
