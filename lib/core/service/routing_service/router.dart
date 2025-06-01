@@ -33,6 +33,7 @@ import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
 import 'package:legy/features/history/presentation/views/order_history_view.dart';
 import 'package:legy/features/error/error_page.dart';
 import 'package:legy/features/payment/payment_page.dart';
+import 'package:legy/features/preferences/presentation/view/preferences_view.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/presentation/views/product_view.dart';
 import 'package:legy/features/profile/favorite/presentation/app/favorite_cubit.dart';

@@ -36,7 +36,7 @@ class _MultiUserStoryViewerState extends State<MultiUserStoryViewer> {
     }
   }
 
-  void _goToPreviousUser() {
+  /* void _goToPreviousUser() {
     if (_pageController.page! > 0) {
       _pageController.previousPage(
           duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
@@ -44,7 +44,7 @@ class _MultiUserStoryViewerState extends State<MultiUserStoryViewer> {
       Navigator.pop(context);
     }
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return PageView.builder(

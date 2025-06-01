@@ -115,6 +115,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w500,
     fontSize: 8,
   );
+  static const TextStyle titleRegularSmallest = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 20,
+  );
   static const TextStyle textRegularLarge = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 16,

@@ -201,6 +201,21 @@ abstract class Media {
   static const spinach = '$_baseImage/spinach.png';
   static const spinach2 = '$_baseImage/spinach2.png';
   static const pepper = '$_baseImage/pepper.png';
+
+  //preferences page
+  static const pref1 = '$_baseIcon/pref1.svg';
+  static const pref2 = '$_baseIcon/pref2.svg';
+  static const pref3 = '$_baseIcon/pref3.svg';
+  static const pref4 = '$_baseIcon/pref4.svg';
+  static const pref5 = '$_baseIcon/pref5.svg';
+  static const pref6 = '$_baseIcon/pref6.svg';
+  static const pref7 = '$_baseIcon/pref7.svg';
+  static const pref8 = '$_baseIcon/pref8.svg';
+  static const pref9 = '$_baseIcon/pref9.svg';
+  static const pref10 = '$_baseIcon/pref10.svg';
+  static const pref11 = '$_baseIcon/pref11.svg';
+  static const pref12 = '$_baseIcon/pref12.svg';
+  static const pref13 = '$_baseIcon/pref13.svg';
   //pizza page
   static const pizza1 = '$_baseImage/pizza1.png';
   static const pizza2 = '$_baseImage/pizza2.png';

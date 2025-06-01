@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
 import 'package:legy/core/extension/gap_extension.dart';
@@ -11,6 +12,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/utils/core_utils.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
@@ -20,6 +22,7 @@ import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seper
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_in/suggest_register_widget.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/preferences/presentation/view/preferences_view.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -49,7 +52,12 @@ class _SignInFormState extends State<SignInForm> {
           showToast(message: message, success: false);
         }
         if (state is LoggedIn) {
-          context.go(HomePage.routePath);
+          final isFirstTime = sl<CacheHelper>().isFirstTime();
+          if (isFirstTime) {
+            context.go('${HomePage.routePath}/${PreferencesView.routePath}');
+          } else {
+            context.go(HomePage.routePath);
+          }
         }
       },
       builder: (context, state) {

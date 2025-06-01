@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/model/story_model.dart';
 import 'package:legy/features/home/presentation/widgets/story_viewer.dart';
 
@@ -67,7 +69,7 @@ class HomeStoryWidget extends StatelessWidget {
                   SizedBox(height: 5),
                   Text(
                     story.username,
-                    style: TextStyle(fontSize: 12, color: Colors.black),
+                    style: TextStyles.textMediumSmall.white1,
                   ),
                 ],
               ),

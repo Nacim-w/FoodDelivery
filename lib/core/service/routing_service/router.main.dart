@@ -32,6 +32,10 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
+                  path: PreferencesView.routePath,
+                  builder: (context, state) => const PreferencesView(),
+                ),
+                GoRoute(
                   path: OrderTrackingMapView.routePath,
                   builder: (context, state) => const OrderTrackingMapView(),
                 ),
