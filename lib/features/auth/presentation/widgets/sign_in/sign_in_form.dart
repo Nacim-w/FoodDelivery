@@ -119,6 +119,12 @@ class _SignInFormState extends State<SignInForm> {
                   }
                 },
               ).loading(state is AuthLoading),
+              const Gap(10),
+              RoundedButton(
+                backgroundColour: Colours.lightThemeGrey0.withAlpha(100),
+                text: "Continuer en tant qu’invité ",
+                onPressed: () => context.go(HomePage.routePath),
+              ),
               const Gap(20),
               const BuildSeperater(),
               const BuildThirdPartyLogin(),

@@ -64,10 +64,8 @@ class OrderService {
       debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
-        // Token expired, try refreshing
         final refreshed = await AuthService().refreshToken();
         if (refreshed) {
-          // Retry with new token
           token = cacheHelper.getSessionToken();
           response = await http.post(
             uri,
@@ -78,7 +76,8 @@ class OrderService {
             body: jsonEncode(orderBody),
           );
         } else {
-          throw const TokenExpiredException(message: "Session expirée.");
+          throw const ForceLogoutException(
+              message: "Session expirée, veuillez vous reconnecter.");
         }
       }
 
@@ -89,7 +88,7 @@ class OrderService {
       }
 
       // Order placed successfully
-    } on TokenExpiredException {
+    } on ForceLogoutException {
       rethrow;
     } catch (e) {
       throw const ServerException(

@@ -103,7 +103,12 @@ class AuthService {
 
   Future<bool> refreshToken() async {
     final refreshToken = sl<CacheHelper>().getRefreshToken();
-    if (refreshToken == null) return false;
+    if (refreshToken == null) {
+      await sl<CacheHelper>().resetSession();
+      await sl<CacheHelper>().resetRefreshToken();
+      throw const ForceLogoutException(
+          message: "Session expirée, veuillez vous reconnecter.");
+    }
 
     final uri = Uri.parse('${NetworkConstants.baseUrl}/api/auth/refresh');
     final response = await http.post(
@@ -111,6 +116,7 @@ class AuthService {
       headers: NetworkConstants.headers,
       body: jsonEncode({'refreshToken': refreshToken}),
     );
+
     debugPrint('Refresh Token Response: ${response.body}');
     debugPrint('Refresh Token Response: refreshToken: $refreshToken');
     debugPrint('Refresh Token Response: statusCode: ${response.statusCode}');
@@ -126,7 +132,8 @@ class AuthService {
     } else {
       await sl<CacheHelper>().resetSession();
       await sl<CacheHelper>().resetRefreshToken();
-      return false;
+      throw const ForceLogoutException(
+          message: "Session expirée, veuillez vous reconnecter.");
     }
   }
 

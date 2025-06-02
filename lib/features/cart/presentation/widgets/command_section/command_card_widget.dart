@@ -134,20 +134,9 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                         style: TextStyles.textMediumSmall.black1,
                       ),
                       const Gap(10),
-                      Row(
-                        children: [
-                          Text(
-                            '$productTotal CFA ',
-                            style: TextStyles.textMediumLarge.copyWith(
-                              decoration: TextDecoration.lineThrough,
-                              color: Colours.lightThemeGrey1,
-                            ),
-                          ),
-                          Text(
-                            '$productTotal CFA',
-                            style: TextStyles.textMediumLarge.red5,
-                          ),
-                        ],
+                      Text(
+                        '${productTotal.toInt()}  CFA',
+                        style: TextStyles.textMediumLarge.red5,
                       ),
                       const Gap(10),
                       Row(

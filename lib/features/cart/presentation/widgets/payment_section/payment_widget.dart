@@ -33,7 +33,7 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                 style: TextStyles.textMediumLarge.black2,
               ),
               Text(
-                "${widget.totalPrice} CFA",
+                "${widget.totalPrice.toInt()} CFA",
                 style: TextStyles.textMediumLarge.black2,
               ),
             ],
@@ -78,7 +78,7 @@ class _PaymentWidgetState extends State<PaymentWidget> {
                 style: TextStyles.textMediumLargest,
               ),
               Text(
-                "${widget.totalPrice} CFA", // Applying the discount
+                "${widget.totalPrice.toInt()} CFA", // Applying the discount
                 style: TextStyles.textMediumLargest,
               )
             ],

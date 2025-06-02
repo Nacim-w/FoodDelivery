@@ -19,7 +19,7 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 32,
   );
-  static const TextStyle titleBoldy = TextStyle(
+  static const TextStyle titleBold = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 24,
   );

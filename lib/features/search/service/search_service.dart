@@ -35,11 +35,16 @@ class SearchService {
 
       if (response.statusCode == 401) {
         // Token expired, try refreshing
-        final refreshed = await AuthService().refreshToken();
-        if (refreshed) {
-          return await search(query); // retry
-        } else {
-          throw const TokenExpiredException(message: "Session expirée.");
+        try {
+          final refreshed = await AuthService().refreshToken();
+          if (refreshed) {
+            return await search(query); // retry
+          } else {
+            throw const ForceLogoutException(
+                message: "Session expirée, veuillez vous reconnecter.");
+          }
+        } on ForceLogoutException {
+          rethrow;
         }
       }
 
@@ -53,7 +58,7 @@ class SearchService {
       final searchResults =
           data.map((item) => SearchModel.fromJson(item)).toList();
       return searchResults;
-    } on TokenExpiredException {
+    } on ForceLogoutException {
       rethrow;
     } catch (e) {
       throw const ServerException(
