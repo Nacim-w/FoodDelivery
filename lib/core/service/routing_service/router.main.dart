@@ -79,10 +79,6 @@ final router = GoRouter(
                   builder: (context, state) => const CouponView(),
                 ),
                 GoRoute(
-                  path: NotificationView.routePath,
-                  builder: (context, state) => const NotificationView(),
-                ),
-                GoRoute(
                   path: 'restaurant/:restaurantId',
                   builder: (context, state) {
                     final restaurantId = state.pathParameters['restaurantId']!;
@@ -221,6 +217,10 @@ final router = GoRouter(
               path: ProfileSettingsPage.routePath,
               builder: (context, state) => const ProfileSettingsPage(),
               routes: [
+                GoRoute(
+                  path: NotificationView.routePath,
+                  builder: (context, state) => const NotificationView(),
+                ),
                 GoRoute(
                   path: HelpCenterPage.routePath,
                   builder: (context, state) => const HelpCenterPage(),

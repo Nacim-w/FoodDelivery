@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/profile/favorite/presentation/views/favorite_view.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
@@ -20,19 +21,20 @@ class BuiltListView extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SettingsCategorieWidget(
-                icon: Media.orders,
-                text: "Ordres",
-              ),
               SettingsCategorieWidget(
                 icon: Media.location,
                 text: "Adresses",
               ),
-              SettingsCategorieWidget(
-                icon: Media.notification,
-                text: "Notification",
+              Gap(20),
+              GestureDetector(
+                onTap: () => context.go(
+                    '${ProfileSettingsPage.routePath}/${NotificationView.routePath}'),
+                child: SettingsCategorieWidget(
+                  icon: Media.notification,
+                  text: "Notification",
+                ),
               ),
             ],
           ),

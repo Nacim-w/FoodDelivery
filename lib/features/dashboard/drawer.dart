@@ -62,7 +62,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 Image.asset(
                   Media.legyDrawer,
                   height: context.width * 0.3,
-                  width: context.width * 0.5,
+                  width: context.width * 0.38,
                 ),
               ],
             ),
