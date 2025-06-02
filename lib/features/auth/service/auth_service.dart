@@ -76,6 +76,8 @@ class AuthService {
           'password': password,
           'phoneNumber': phoneNumber,
           'address': address,
+          "longitude": 0.1,
+          "latitude": 0.1
         }),
         headers: NetworkConstants.headers,
       );

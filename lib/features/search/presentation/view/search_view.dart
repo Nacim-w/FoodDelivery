@@ -1,12 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
+import 'package:legy/features/category/presentation/widgets/category_details.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/search/presentation/widgets/recent_orders_widget.dart';
 import 'package:legy/features/search/presentation/widgets/recent_search_widget.dart';
 import 'package:legy/features/search/presentation/widgets/search_bar_widget.dart';
@@ -117,9 +121,32 @@ class _SearchViewState extends State<SearchView> {
                 'Mes commandes récentes',
                 style: TextStyles.textMediumLarge,
               ),
-              const RecentOrdersWidget(),
-              const RecentOrdersWidget(),
-              const RecentOrdersWidget(),
+              GestureDetector(
+                onTap: () => context
+                    .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+                child: const RecentOrdersWidget(
+                  image: Media.restaurant1,
+                  title: 'La Table des Délices',
+                  Description: 'Burger Restaurant',
+                ),
+              ),
+              GestureDetector(
+                onTap: () => context
+                    .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+                child: const RecentOrdersWidget(
+                    image: Media.search2,
+                    title: 'L\'Art de la Pizza',
+                    Description: 'Pizza Restaurant'),
+              ),
+              GestureDetector(
+                onTap: () => context
+                    .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+                child: const RecentOrdersWidget(
+                  image: Media.search3,
+                  title: 'Au Bon Appétit',
+                  Description: 'Restaurant',
+                ),
+              ),
             ],
           ],
         ),

@@ -8,28 +8,28 @@ import 'package:legy/features/home/presentation/widgets/story_viewer.dart';
 class HomeStoryWidget extends StatelessWidget {
   final List<StoryItemModel> stories = [
     StoryItemModel(username: 'Alice', imageUrls: [
-      'https://picsum.photos/500/800?1',
-      'https://picsum.photos/500/800?2',
+      'https://picsum.photos/id/1080/500/800',
+      'https://picsum.photos/id/292/500/800',
       Media.story1,
     ]),
     StoryItemModel(username: 'Bob', imageUrls: [
-      'https://picsum.photos/500/800?3',
-      'https://picsum.photos/500/800?4',
+      'https://picsum.photos/id/429/500/800',
+      'https://picsum.photos/id/431/500/800',
       Media.story2,
     ]),
     StoryItemModel(username: 'Charlie', imageUrls: [
-      'https://picsum.photos/500/800?5',
-      'https://picsum.photos/500/800?6',
+      'https://picsum.photos/id/674/500/800',
+      'https://picsum.photos/id/755/500/800',
       Media.story3,
     ]),
     StoryItemModel(username: 'Alex', imageUrls: [
-      'https://picsum.photos/500/800?5',
-      'https://picsum.photos/500/800?6',
+      'https://picsum.photos/id/835/500/800',
+      'https://picsum.photos/id/889/500/800',
       Media.story4,
     ]),
     StoryItemModel(username: 'Sydney', imageUrls: [
-      'https://picsum.photos/500/800?5',
-      'https://picsum.photos/500/800?6',
+      'https://picsum.photos/id/766/500/800',
+      'https://picsum.photos/id/785/500/800',
       Media.story5,
     ]),
   ];

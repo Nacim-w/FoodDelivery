@@ -8,7 +8,14 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
 class RecentOrdersWidget extends StatefulWidget {
-  const RecentOrdersWidget({super.key});
+  const RecentOrdersWidget(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.Description});
+  final String image;
+  final String title;
+  final String Description;
 
   @override
   State<RecentOrdersWidget> createState() => _RecentOrdersWidgetState();
@@ -31,7 +38,7 @@ class _RecentOrdersWidgetState extends State<RecentOrdersWidget> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
-                  Media.restaurant1,
+                  widget.image,
                   height: context.height * 0.08,
                   width: context.width * 0.2,
                   fit: BoxFit.cover,
@@ -43,11 +50,11 @@ class _RecentOrdersWidgetState extends State<RecentOrdersWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Ordinary Burgers",
+                    widget.title,
                     style: TextStyles.textMediumLarge.black1,
                   ),
                   Text(
-                    "Burger Restaurant",
+                    widget.Description,
                     style: TextStyles.textMediumSmall.grey1,
                   ),
                   Row(
