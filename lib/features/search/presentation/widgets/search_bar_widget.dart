@@ -30,7 +30,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   void _openSearchSettingsSheet() {
     showModalBottomSheet(
-      isScrollControlled: true, // Important to allow full screen height
+      isScrollControlled: true,
       useRootNavigator: true,
       showDragHandle: true,
       enableDrag: true,
@@ -169,6 +169,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                         _controller.clear();
                       });
                       widget.onSearchTyping(false);
+                      context.push('/home/restaurant/${searchResult.id}');
                     },
                   );
                 },
