@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/app/category_cubit.dart';
@@ -33,16 +34,20 @@ class PopularRestaurant extends StatelessWidget {
                 children: displayedRestaurants.map((r) {
                   return Column(
                     children: [
-                      CategoryRestaurant(
-                        image: r.logoUrl,
-                        title: r.nom,
-                        description:
-                            'Note moyenne: ${r.averageRating.toStringAsFixed(1)} ★',
-                        time:
-                            '15-20 mins', // You can adjust or fetch real values
-                        distance: '3 km', // You can adjust or fetch real values
-                        rating: r.averageRating.toStringAsFixed(1),
-                        accentColor: accentColor,
+                      GestureDetector(
+                        onTap: () => context.push('/home/restaurant/${r.id}'),
+                        child: CategoryRestaurant(
+                          image: r.logoUrl,
+                          title: r.nom,
+                          description:
+                              'Note moyenne: ${r.averageRating.toStringAsFixed(1)} ★',
+                          time:
+                              '15-20 mins', // You can adjust or fetch real values
+                          distance:
+                              '3 km', // You can adjust or fetch real values
+                          rating: r.averageRating.toStringAsFixed(1),
+                          accentColor: accentColor,
+                        ),
                       ),
                       Gap(15),
                     ],
