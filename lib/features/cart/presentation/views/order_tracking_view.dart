@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' as gmaps;
+import 'package:legy/core/res/media.dart';
+import 'package:lottie/lottie.dart';
 
 class OrderTrackingMapView extends StatefulWidget {
   static const routePath = 'orderTracking';
@@ -13,15 +15,24 @@ class OrderTrackingMapView extends StatefulWidget {
 }
 
 class _OrderTrackingMapViewState extends State<OrderTrackingMapView> {
-  final LatLng userLocation = LatLng(14.6928, -17.4467); // Dakar
-  LatLng restaurantLocation = LatLng(14.7000, -17.4500); // Start point
+  final gmaps.LatLng userLocation = gmaps.LatLng(14.6928, -17.4467); // Dakar
+  gmaps.LatLng restaurantLocation =
+      gmaps.LatLng(14.7000, -17.4500); // Start point
 
   Timer? _movementTimer;
+  bool showAnimation = true; // <-- FLAG TO CONTROL ANIMATION
 
   @override
   void initState() {
     super.initState();
-    _startMovingRestaurant();
+
+    // Show animation for 30 seconds, then show map
+    Timer(Duration(seconds: 30), () {
+      setState(() {
+        showAnimation = false;
+      });
+      _startMovingRestaurant();
+    });
   }
 
   @override
@@ -47,7 +58,7 @@ class _OrderTrackingMapViewState extends State<OrderTrackingMapView> {
           currentStep / steps);
 
       setState(() {
-        restaurantLocation = LatLng(newLat, newLng);
+        restaurantLocation = gmaps.LatLng(newLat, newLng);
       });
 
       // Check distance
@@ -65,7 +76,7 @@ class _OrderTrackingMapViewState extends State<OrderTrackingMapView> {
     return start + (end - start) * t;
   }
 
-  double calculateDistance(LatLng start, LatLng end) {
+  double calculateDistance(gmaps.LatLng start, gmaps.LatLng end) {
     const earthRadius = 6371; // in km
 
     final dLat = _degreesToRadians(end.latitude - start.latitude);
@@ -106,6 +117,14 @@ class _OrderTrackingMapViewState extends State<OrderTrackingMapView> {
 
   @override
   Widget build(BuildContext context) {
+    if (showAnimation) {
+      return Scaffold(
+        body: Center(
+          child: Lottie.asset(Media.cooking), // <-- PUT YOUR PATH HERE
+        ),
+      );
+    }
+
     final distance = calculateDistance(userLocation, restaurantLocation);
 
     return Scaffold(
@@ -114,26 +133,26 @@ class _OrderTrackingMapViewState extends State<OrderTrackingMapView> {
       ),
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
+          gmaps.GoogleMap(
+            initialCameraPosition: gmaps.CameraPosition(
               target: userLocation,
               zoom: 14,
             ),
             markers: {
-              Marker(
-                markerId: MarkerId('user'),
+              gmaps.Marker(
+                markerId: gmaps.MarkerId('user'),
                 position: userLocation,
-                infoWindow: InfoWindow(title: 'Vous'),
+                infoWindow: gmaps.InfoWindow(title: 'Vous'),
               ),
-              Marker(
-                markerId: MarkerId('restaurant'),
+              gmaps.Marker(
+                markerId: gmaps.MarkerId('restaurant'),
                 position: restaurantLocation,
-                infoWindow: InfoWindow(title: 'Restaurant'),
+                infoWindow: gmaps.InfoWindow(title: 'Restaurant'),
               ),
             },
             polylines: {
-              Polyline(
-                polylineId: PolylineId('route'),
+              gmaps.Polyline(
+                polylineId: gmaps.PolylineId('route'),
                 points: [userLocation, restaurantLocation],
                 color: Colors.blue,
                 width: 4,

@@ -59,7 +59,7 @@ class OrderModel {
       deliveryMode: json['deliveryMode'],
       paymentStatus: json['paymentStatus'],
       paymentMethod: json['paymentMethod'],
-      orderStatus: json['orderstatus'],
+      orderStatus: json['orderStatus'],
     );
   }
 
@@ -266,6 +266,7 @@ class RestaurantModel {
   final double commission;
   final double latitude;
   final double longitude;
+  final String logo;
 
   RestaurantModel({
     required this.restaurantId,
@@ -275,6 +276,7 @@ class RestaurantModel {
     required this.commission,
     required this.latitude,
     required this.longitude,
+    required this.logo,
   });
 
   factory RestaurantModel.empty() {
@@ -286,19 +288,20 @@ class RestaurantModel {
       commission: 0.0,
       latitude: 0.0,
       longitude: 0.0,
+      logo: '',
     );
   }
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
     return RestaurantModel(
-      restaurantId: json['restaurantId'],
-      name: json['name'],
-      phone: json['phone'],
-      address: json['address'],
-      commission: (json['commission'] as num).toDouble(),
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-    );
+        restaurantId: json['restaurantId'],
+        name: json['name'],
+        phone: json['phone'],
+        address: json['address'],
+        commission: (json['commission'] as num).toDouble(),
+        latitude: (json['latitude'] as num).toDouble(),
+        longitude: (json['longitude'] as num).toDouble(),
+        logo: json['logo']);
   }
 
   RestaurantModel copyWith({
@@ -309,6 +312,7 @@ class RestaurantModel {
     double? commission,
     double? latitude,
     double? longitude,
+    String? logo,
   }) {
     return RestaurantModel(
       restaurantId: restaurantId ?? this.restaurantId,
@@ -318,6 +322,7 @@ class RestaurantModel {
       commission: commission ?? this.commission,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
+      logo: logo ?? this.logo,
     );
   }
 }

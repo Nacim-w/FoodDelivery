@@ -2,7 +2,7 @@ abstract class Media {
   const Media();
 
   static const _baseImage = 'assets/images';
-  //static const _baseLottie = 'assets/lottie';
+  static const _baseLottie = 'assets/lotties';
   static const _baseIcon = 'assets/icons';
   static const _baseAR = 'assets/ar';
 
@@ -11,6 +11,9 @@ abstract class Media {
 
   //3d assets
   static const pizza3d = '$_baseAR/pizza.glb';
+
+  //delivery
+  static const cooking = '$_baseLottie/cooking.json';
 
   //auth
   static const facebook = '$_baseIcon/facebook.png';
