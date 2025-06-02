@@ -15,7 +15,7 @@ class FavoriteMealContainer extends StatelessWidget {
   final String name;
   final double rating;
   final double reviews;
-  final String price;
+  final double price;
 
   const FavoriteMealContainer({
     super.key,
@@ -84,7 +84,7 @@ class FavoriteMealContainer extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  price,
+                  price.toInt().toString(),
                   style: TextStyles.textBoldSmallest.orange0,
                 ),
               ],

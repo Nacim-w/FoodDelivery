@@ -69,16 +69,20 @@ class _FavoriteViewState extends State<FavoriteView> {
                 itemBuilder: (_, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 16.0),
-                    child: FavoriteRestaurantContainer(
-                      image: state is FavoriteLoading
-                          ? ''
-                          : restaurants[index].logo,
-                      name: state is FavoriteLoading
-                          ? 'Loading...'
-                          : restaurants[index].nom,
-                      rating: state is FavoriteLoading
-                          ? 0
-                          : restaurants[index].averageRating,
+                    child: GestureDetector(
+                      onTap: () => context
+                          .push('/home/restaurant/${restaurants[index].id}'),
+                      child: FavoriteRestaurantContainer(
+                        image: state is FavoriteLoading
+                            ? ''
+                            : restaurants[index].logo,
+                        name: state is FavoriteLoading
+                            ? 'Loading...'
+                            : restaurants[index].nom,
+                        rating: state is FavoriteLoading
+                            ? 0
+                            : restaurants[index].averageRating,
+                      ),
                     ),
                   );
                 },
@@ -114,8 +118,8 @@ class _FavoriteViewState extends State<FavoriteView> {
                     return FavoriteMealContainer(
                       reviews: 0,
                       price: state is FavoriteLoading
-                          ? 'Loading...'
-                          : '${products[index].price} CFA',
+                          ? 0.0
+                          : products[index].price,
                       image: state is FavoriteLoading
                           ? ''
                           : products[index].imageUrl,

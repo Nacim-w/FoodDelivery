@@ -104,7 +104,7 @@ class SupplementsSelector extends StatelessWidget {
                         child: SizedBox(
                           width: 80,
                           child: Text(
-                            '\$${(supp.price * (supp.quantity ?? 1)).toStringAsFixed(2)}',
+                            '${(supp.price * (supp.quantity ?? 1)).toStringAsFixed(2)} CFA',
                             textAlign: TextAlign.right,
                           ),
                         ),
