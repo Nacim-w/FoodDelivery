@@ -8,6 +8,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/dish/dessert/presentation/app/dessert_details_provider.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/threed_page.dart';
 import 'package:provider/provider.dart';
 
 class DessertHeader extends StatefulWidget {
@@ -135,7 +136,7 @@ class _DessertHeaderState extends State<DessertHeader> {
           ),
         ),
         Positioned(
-          top: context.height * 0.26,
+          top: context.height * 0.28,
           left: 0,
           child: SizedBox(
             width: context.width,
@@ -162,6 +163,39 @@ class _DessertHeaderState extends State<DessertHeader> {
                   ),
                 );
               },
+            ),
+          ),
+        ),
+        Positioned(
+          top: context.width * 1.1,
+          right: 16,
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => My3DViewer(
+                    asset: (provider.selectedDessertIndex == 1 ||
+                            provider.selectedDessertIndex == 3)
+                        ? Media.cupcake3d // show cupcake 3D if index 4
+                        : Media
+                            .croissant3d, // replace this with your alternative
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.threed_rotation),
+            style: IconButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colours.lightThemeWhite1,
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  color: Colours.lightThemeBrown3,
+                  width: 2,
+                ),
+              ),
             ),
           ),
         ),

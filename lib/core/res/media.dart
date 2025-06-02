@@ -11,6 +11,10 @@ abstract class Media {
 
   //3d assets
   static const pizza3d = '$_baseAR/pizza.glb';
+  static const burger3d = '$_baseAR/hamburger.glb';
+  static const croissant3d = '$_baseAR/croissant.glb';
+  static const cupcake3d = '$_baseAR/cupcake.glb';
+  static const salad3d = '$_baseAR/salad.glb';
 
   //delivery
   static const cooking = '$_baseLottie/cooking.json';

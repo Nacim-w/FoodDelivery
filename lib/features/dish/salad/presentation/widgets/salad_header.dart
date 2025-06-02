@@ -148,7 +148,7 @@ class _SaladHeaderState extends State<SaladHeader> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => My3DViewer(asset: Media.pizza3d),
+                  builder: (context) => My3DViewer(asset: Media.salad3d),
                 ),
               );
             },

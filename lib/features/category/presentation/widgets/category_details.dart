@@ -84,10 +84,16 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     children: [
                       InkWell(
                         onTap: () {
-                          final targetRoute =
-                              categoryTitles[index * 2] == Media.categoryDish3
+                          final isSaladDish = categoryTitles[index * 2] ==
+                                  Media.categoryDish1 ||
+                              categoryTitles[index * 2] == Media.categoryDish2;
+
+                          final targetRoute = isSaladDish
+                              ? SaladDetails.routePath
+                              : (categoryTitles[index * 2] ==
+                                      Media.categoryDish3
                                   ? BurgerDetails.routePath
-                                  : selectedRoute;
+                                  : selectedRoute);
 
                           context.go(
                             '${HomePage.routePath}/${CategoryDetails.routePath}/$targetRoute',
@@ -97,10 +103,17 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       ),
                       InkWell(
                         onTap: () {
-                          final targetRoute = categoryTitles[index * 2 + 1] ==
-                                  Media.categoryDish3
-                              ? BurgerDetails.routePath
-                              : selectedRoute;
+                          final isSaladDish = categoryTitles[index * 2 + 1] ==
+                                  Media.categoryDish1 ||
+                              categoryTitles[index * 2 + 1] ==
+                                  Media.categoryDish2;
+
+                          final targetRoute = isSaladDish
+                              ? SaladDetails.routePath
+                              : (categoryTitles[index * 2 + 1] ==
+                                      Media.categoryDish3
+                                  ? BurgerDetails.routePath
+                                  : selectedRoute);
 
                           context.go(
                             '${HomePage.routePath}/${CategoryDetails.routePath}/$targetRoute',
@@ -111,10 +124,16 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       ),
                       InkWell(
                         onTap: () {
-                          final targetRoute =
-                              categoryTitles[index * 2] == Media.categoryDish3
+                          final isSaladDish = categoryTitles[index * 2] ==
+                                  Media.categoryDish1 ||
+                              categoryTitles[index * 2] == Media.categoryDish2;
+
+                          final targetRoute = isSaladDish
+                              ? SaladDetails.routePath
+                              : (categoryTitles[index * 2] ==
+                                      Media.categoryDish3
                                   ? BurgerDetails.routePath
-                                  : selectedRoute;
+                                  : selectedRoute);
 
                           context.go(
                             '${HomePage.routePath}/${CategoryDetails.routePath}/$targetRoute',
