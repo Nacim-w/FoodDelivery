@@ -10,7 +10,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future<void> fetchPopularRestaurants(int selectedIndex) async {
     emit(CategoryLoading());
 
-    final mainValues = ['SENEGALESE', 'INTERNATIONALE', 'SAINE'];
+    final mainValues = ['SENEGALESE', 'INTERNATIONALE', 'SAINE', 'DESSERT'];
     final selectedMain = mainValues[selectedIndex];
 
     try {

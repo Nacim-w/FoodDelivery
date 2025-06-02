@@ -141,7 +141,12 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: CategoryDessertDetails.routePath,
-                  builder: (context, state) => const CategoryDessertDetails(),
+                  builder: (context, state) {
+                    return BlocProvider(
+                      create: (_) => sl<CategoryCubit>(),
+                      child: CategoryDessertDetails(),
+                    );
+                  },
                   routes: [
                     GoRoute(
                       path: DessertDetails.routePath,

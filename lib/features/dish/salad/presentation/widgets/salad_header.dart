@@ -7,6 +7,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/threed_page.dart';
 import 'package:legy/features/dish/salad/presentation/app/salad_details_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -136,6 +137,33 @@ class _SaladHeaderState extends State<SaladHeader> {
                   ),
                 );
               },
+            ),
+          ),
+        ),
+        Positioned(
+          top: context.width * 1.1,
+          left: 16,
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => My3DViewer(asset: Media.pizza3d),
+                ),
+              );
+            },
+            icon: const Icon(Icons.threed_rotation),
+            style: IconButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colours.lightThemeWhite1,
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  color: Colours.lightThemeGreen5,
+                  width: 2,
+                ),
+              ),
             ),
           ),
         ),

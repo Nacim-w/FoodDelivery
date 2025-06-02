@@ -7,7 +7,7 @@ class ProductModel {
   final List<Supplement> supplements;
   final List<dynamic>? ingredients;
   final String imageUrl;
-  final double pricePreCom;
+  final double pricePostCom;
   int quantity;
 
   ProductModel({
@@ -19,7 +19,7 @@ class ProductModel {
     required this.supplements,
     this.ingredients,
     required this.imageUrl,
-    required this.pricePreCom,
+    required this.pricePostCom,
     this.quantity = 1,
   });
 
@@ -35,8 +35,8 @@ class ProductModel {
           .toList(),
       ingredients: json['ingredients'],
       imageUrl: json['imageUrl'],
-      pricePreCom: json['pricePreCom'] != null
-          ? double.parse(json['pricePreCom'].toString())
+      pricePostCom: json['pricePostCom'] != null
+          ? double.parse(json['pricePostCom'].toString())
           : 0.0,
       quantity: json['quantity'] ?? 1,
     );
@@ -52,7 +52,7 @@ class ProductModel {
       'supplements': supplements.map((s) => s.toJson()).toList(),
       'ingredients': ingredients,
       'imageUrl': imageUrl,
-      'pricePreCom': pricePreCom,
+      'pricePostCom': pricePostCom,
       'quantity': quantity,
     };
   }
@@ -66,7 +66,7 @@ class ProductModel {
     List<Supplement>? supplements,
     List<dynamic>? ingredients,
     String? imageUrl,
-    double? pricePreCom,
+    double? pricePostCom,
     int? quantity,
   }) {
     return ProductModel(
@@ -78,7 +78,7 @@ class ProductModel {
       supplements: supplements ?? this.supplements,
       ingredients: ingredients ?? this.ingredients,
       imageUrl: imageUrl ?? this.imageUrl,
-      pricePreCom: pricePreCom ?? this.pricePreCom,
+      pricePostCom: pricePostCom ?? this.pricePostCom,
       quantity: quantity ?? this.quantity,
     );
   }

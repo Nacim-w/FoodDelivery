@@ -87,10 +87,10 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
   Widget build(BuildContext context) {
     final activeSupplements = widget.supplements
         .where((supplement) =>
-    supplement.quantity != null && supplement.quantity! > 0)
+            supplement.quantity != null && supplement.quantity! > 0)
         .toList();
 
-    double productTotal = productQuantity * widget.product.pricePreCom;
+    double productTotal = productQuantity * widget.product.pricePostCom;
 
     return Stack(
       children: [

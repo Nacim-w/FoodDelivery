@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
 import 'package:legy/features/categoryDessert/presentation/widgets/category_dessert_hero.dart';
 import 'package:legy/features/categoryDessert/presentation/widgets/dessert_category_appbar.dart';
@@ -23,6 +25,12 @@ class CategoryDessertDetails extends StatefulWidget {
 }
 
 class _CategoryDessertDetailsState extends State<CategoryDessertDetails> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<CategoryCubit>().fetchPopularRestaurants(3);
+  }
+
   final List<String> dessertTitles = [
     Media.dessertPopular2,
     Media.dessertPopular1,

@@ -17,7 +17,7 @@ class ProductDescription extends StatelessWidget {
         Text(product!.name, style: TextStyles.titleMediumTiny.black1),
         const Gap(5),
         Text(
-          '${product?.pricePreCom} CFA',
+          '${product?.pricePostCom} CFA',
           style: TextStyles.textBoldLargest.orange0,
         ),
         Gap(5),

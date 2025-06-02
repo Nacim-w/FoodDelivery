@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class My3DViewer extends StatelessWidget {
-  const My3DViewer({super.key});
+  const My3DViewer({super.key, required this.asset});
+  final String asset;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class My3DViewer extends StatelessWidget {
         ),
         child: Center(
           child: ModelViewer(
-            src: Media.pizza3d,
+            src: asset,
             alt: "A 3D model of a pizza",
             ar: true,
             autoRotate: true,
