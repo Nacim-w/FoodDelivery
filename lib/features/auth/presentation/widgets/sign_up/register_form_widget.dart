@@ -93,6 +93,13 @@ class _RegisterFormState extends State<RegisterForm> {
           showToast(message: message, success: false);
         }
         if (state is Registered) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Inscription réussie ! Veuillez vous connecter.'),
+              backgroundColor: Colors.green,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
           context.go(SignInPage.routePath);
         }
       },

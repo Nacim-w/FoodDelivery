@@ -97,12 +97,6 @@ class OrderButtonWidget extends StatelessWidget {
 
                           cacheHelper.clearCart();
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('✅ Commande passée avec succès!'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
                           context.go(
                               '${HomePage.routePath}/${OrderTrackingMapView.routePath}');
                         } on ForceLogoutException catch (_) {

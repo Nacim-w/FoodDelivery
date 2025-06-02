@@ -14,6 +14,7 @@ abstract class Media {
 
   //delivery
   static const cooking = '$_baseLottie/cooking.json';
+  static const delivery = '$_baseLottie/delivery.json';
 
   //auth
   static const facebook = '$_baseIcon/facebook.png';
