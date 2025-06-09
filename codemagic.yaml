@@ -2,7 +2,7 @@ workflows:
   flutter-android:
     name: Firebase CI/CD (APK) + Shorebird OTA
     environment:
-      flutter: stable
+      flutter: 3.29.3
       vars:
         FIREBASE_TOKEN: Encrypted(...)       
         SHOREBIRD_TOKEN: Encrypted(...)   
