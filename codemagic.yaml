@@ -1,0 +1,42 @@
+workflows:
+  flutter-android:
+    name: Firebase CI/CD (APK) + Shorebird OTA
+    environment:
+      flutter: stable
+      vars:
+        FIREBASE_TOKEN: Encrypted(...)       
+        SHOREBIRD_TOKEN: Encrypted(...)   
+    groups:
+      - testers
+    scripts:
+      - name: Install CLI tools
+        script: |
+          npm install -g firebase-tools
+
+      - name: Build Flutter APK
+        script: |
+          flutter clean
+          flutter pub get
+          flutter build apk --release
+
+      - name: Shorebird OTA Release
+        script: |
+          shorebird login --api-token $SHOREBIRD_TOKEN
+          shorebird release android
+
+      - name: Distribute via Firebase App Distribution
+        script: |
+          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk ^
+            --app 1:540049131134:android:74e974643a939bc2317a2f ^
+            --token $FIREBASE_TOKEN ^
+            --groups "testers"
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+
+    publishing:
+      email:
+        recipients:
+          - msallemnacim@gmail.com
+        notify:
+          success: true
+          failure: true
