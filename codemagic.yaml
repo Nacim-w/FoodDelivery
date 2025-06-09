@@ -6,8 +6,6 @@ workflows:
       vars:
         FIREBASE_TOKEN: Encrypted(...)       
         SHOREBIRD_TOKEN: Encrypted(...)   
-    groups:
-      - testers
     scripts:
       - name: Install CLI tools
         script: |
