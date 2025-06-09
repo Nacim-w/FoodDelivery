@@ -4,8 +4,6 @@ workflows:
     environment:
       flutter: 3.29.3
       vars:
-        FIREBASE_TOKEN: Encrypted(...)       
-        SHOREBIRD_TOKEN: Encrypted(...)   
     groups:
       - testers
     scripts:
