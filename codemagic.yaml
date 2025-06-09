@@ -3,9 +3,8 @@ workflows:
     name: Firebase CI/CD (APK) + Shorebird OTA
     environment:
       flutter: 3.29.3
-      vars:
-    groups:
-      - testers
+      groups:
+        - testers
     scripts:
       - name: Install CLI tools
         script: |
