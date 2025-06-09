@@ -1,4 +1,4 @@
-package com.example.legy
+package com.bramasquare.legy
 
 import io.flutter.embedding.android.FlutterActivity
 

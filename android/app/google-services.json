@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "540049131134",
+    "project_id": "legy-79c27",
+    "storage_bucket": "legy-79c27.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540049131134:android:74e974643a939bc2317a2f",
+        "android_client_info": {
+          "package_name": "com.bramasquare.legy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk32zfjCf8FAN8T2Xyc6yXwFx9W8roa5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540049131134:android:62bff370888fe890317a2f",
+        "android_client_info": {
+          "package_name": "com.bramasquare.legy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk32zfjCf8FAN8T2Xyc6yXwFx9W8roa5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

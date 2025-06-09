@@ -58,6 +58,7 @@ flutter:
     - assets/icons/
     - assets/ar/
     - assets/lotties/
+    - shorebird.yaml
   fonts:
     - family: Montserrat
       fonts:

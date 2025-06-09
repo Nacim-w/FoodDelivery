@@ -238,7 +238,7 @@ class _OrderTrackingMapViewState extends State<OrderTrackingMapView>
                 if (currentStage == DeliveryStage.cooking ||
                     currentStage == DeliveryStage.pickup)
                   Container(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withAlpha(200),
                     child: Center(
                       child: Lottie.asset(
                         currentStage == DeliveryStage.cooking
