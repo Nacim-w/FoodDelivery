@@ -6,10 +6,6 @@ workflows:
       groups:
         - testers
     scripts:
-      - name: Install CLI tools
-        script: |
-          npm install -g firebase-tools
-
       - name: Build Flutter APK
         script: |
           flutter clean
