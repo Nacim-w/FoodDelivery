@@ -38,6 +38,10 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+    println("Loaded storeFile: " + keystoreProperties["storeFile"])
+    println("Loaded keyAlias: " + keystoreProperties["keyAlias"])
+    println("Loaded keyPassword: " + keystoreProperties["keyPassword"])
+    println("Loaded storePassword: " + keystoreProperties["storePassword"])
     signingConfigs {
         release {
             keyAlias = keystoreProperties["keyAlias"]
