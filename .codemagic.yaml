@@ -18,6 +18,6 @@ workflows:
       - name: Firebase App Distribution
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk ^
-            --app legy-79c27 ^
+            --app 1:540049131134:android:74e974643a939bc2317a2f ^
             --token $FIREBASE_TOKEN ^
             --groups "testers"
