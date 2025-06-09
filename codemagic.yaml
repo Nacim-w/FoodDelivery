@@ -3,6 +3,8 @@ workflows:
     name: Firebase CI/CD (APK) + Shorebird OTA
     environment:
       flutter: 3.29.3
+      groups:
+        - testers
       vars:
         FIREBASE_TOKEN: Encrypted(...)       
         SHOREBIRD_TOKEN: Encrypted(...)   
