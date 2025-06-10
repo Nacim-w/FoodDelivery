@@ -29,23 +29,12 @@ workflows:
         script: |
           flutter build appbundle --release
 
-      - name: Build Flutter APK
-        script: |
-          flutter clean
-          flutter pub get
-          flutter build apk --release
-
-      - name: Shorebird OTA Release
-        script: |
-          shorebird login --api-token $SHOREBIRD_TOKEN
-          shorebird release android
-
       - name: Distribute via Firebase App Distribution
         script: |
-          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-            --app 1:540049131134:android:74e974643a939bc2317a2f \
-            --token $FIREBASE_TOKEN \
-            --groups "testers"
+                firebase appdistribution:distribute build/app/outputs/bundle/release/app-release.aab \
+                  --app 1:540049131134:android:74e974643a939bc2317a2f \
+                  --token $FIREBASE_TOKEN \
+                  --groups "testers"
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
