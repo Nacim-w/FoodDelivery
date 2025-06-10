@@ -6,21 +6,25 @@ workflows:
       groups:
         - testers
     scripts:
-
       - name: Setup the keystore
         script: |
           echo $CM_KEYSTORE_PATH | base64 --decode > /tmp/keystore.jks
-          cat >> "$CM_BUILD_DIR/android/key.properties" << EOF
+          cat >> "$CM_BUILD_DIR/android/key.properties" <<EOF
           storePassword=$CM_KEYSTORE_PASSWORD
           keyPassword=$CM_KEY_PASSWORD
           keyAlias=$CM_KEY_ALIAS
           storeFile=/tmp/keystore.jks
           EOF
-      - name: Build AAB
+
+      - name: Get Flutter packages
         script: |
           cd $CM_BUILD_DIR
           flutter pub get
+
+      - name: Build AAB
+        script: |
           flutter build appbundle --release
+
       - name: Build Flutter APK
         script: |
           flutter clean
@@ -34,10 +38,11 @@ workflows:
 
       - name: Distribute via Firebase App Distribution
         script: |
-          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk ^
-            --app 1:540049131134:android:74e974643a939bc2317a2f ^
-            --token $FIREBASE_TOKEN ^
+          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+            --app 1:540049131134:android:74e974643a939bc2317a2f \
+            --token $FIREBASE_TOKEN \
             --groups "testers"
+
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
 
