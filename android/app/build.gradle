@@ -42,6 +42,12 @@ android {
     println("Loaded keyAlias: " + keystoreProperties["keyAlias"])
     println("Loaded keyPassword: " + keystoreProperties["keyPassword"])
     println("Loaded storePassword: " + keystoreProperties["storePassword"])
+
+    println("CI environment: " + System.getenv()["CI"])
+    println("CM_KEYSTORE_PATH: " + System.getenv()["CM_KEYSTORE_PATH"])
+    println("CM_KEYSTORE_PASSWORD: " + System.getenv()["CM_KEYSTORE_PASSWORD"])
+    println("CM_KEY_ALIAS: " + System.getenv()["CM_KEY_ALIAS"])
+    println("CM_KEY_PASSWORD: " + System.getenv()["CM_KEY_PASSWORD"])
     signingConfigs {
         release {
             if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
@@ -62,7 +68,7 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
 }
