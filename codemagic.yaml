@@ -25,26 +25,21 @@ workflows:
           cd $CM_BUILD_DIR
           flutter pub get
 
-      - name: Build AAB
-        script: |
-          flutter build appbundle --release
-
-      - name: Build Flutter APK
+      - name: Build APK
         script: |
           flutter clean
           flutter pub get
           flutter build apk --release
 
-      - name: Shorebird OTA Release
+      - name: Authenticate Firebase CLI
         script: |
-          shorebird login --api-token $SHOREBIRD_TOKEN
-          shorebird release android
+          echo $FIREBASE_SERVICE_ACCOUNT | base64 --decode > /tmp/firebase-service-account.json
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-service-account.json
 
       - name: Distribute via Firebase App Distribution
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
             --app 1:540049131134:android:74e974643a939bc2317a2f \
-            --token $FIREBASE_TOKEN \
             --groups "testers"
 
     artifacts:
