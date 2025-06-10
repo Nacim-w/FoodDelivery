@@ -44,14 +44,14 @@ android {
     println("Loaded storePassword: " + keystoreProperties["storePassword"])
 
     println("CI environment: " + System.getenv()["CI"])
-    println("CM_KEYSTORE_PATH: " + System.getenv()["CM_KEYSTORE_PATH"])
+    println("CM_KEYSTORE: " + System.getenv()["CM_KEYSTORE"])
     println("CM_KEYSTORE_PASSWORD: " + System.getenv()["CM_KEYSTORE_PASSWORD"])
     println("CM_KEY_ALIAS: " + System.getenv()["CM_KEY_ALIAS"])
     println("CM_KEY_PASSWORD: " + System.getenv()["CM_KEY_PASSWORD"])
     signingConfigs {
         release {
             if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
-                storeFile file(System.getenv()["CM_KEYSTORE_PATH"])
+                storeFile file(System.getenv()["CM_KEYSTORE"])
                 storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
                 keyAlias System.getenv()["CM_KEY_ALIAS"]
                 keyPassword System.getenv()["CM_KEY_PASSWORD"]
