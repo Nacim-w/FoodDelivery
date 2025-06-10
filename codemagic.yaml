@@ -5,6 +5,10 @@ workflows:
       flutter: 3.29.3
       groups:
         - testers
+    cache:
+      cache_paths:
+        - $HOME/.gradle/caches
+        - $HOME/.gradle/wrapper  
     scripts:
       - name: Setup the keystore
         script: |
