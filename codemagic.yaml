@@ -21,6 +21,7 @@ workflows:
           EOF
       - name: Bump versionCode and versionName
         script: |
+          cd $CM_BUILD_DIR
           VERSION_CODE=$(date +%s)
           MAJOR=1
           MINOR=1
