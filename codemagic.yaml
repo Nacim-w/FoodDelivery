@@ -38,7 +38,6 @@ workflows:
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
             --app 1:540049131134:android:74e974643a939bc2317a2f \
-            --project legy-79c27 \
             --groups "testers"
 
     artifacts:
