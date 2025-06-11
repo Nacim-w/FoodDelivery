@@ -40,7 +40,7 @@ class HomeCategory extends StatelessWidget {
           Gap(15),
           Text(
             name,
-            style: TextStyles.textBoldSmall.black3.copyWith(),
+            style: TextStyles.textSemiBoldSmall.black3.copyWith(),
           ),
         ],
       ),

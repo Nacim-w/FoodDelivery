@@ -31,6 +31,20 @@ class _SearchViewState extends State<SearchView> {
 
   List<String> recentSearches = [];
   bool isSearching = false;
+  bool _heroAnimationFinished = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Wait one frame after Hero transition finishes before building SearchBarWidget
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        setState(() {
+          _heroAnimationFinished = true;
+        });
+      }
+    });
+  }
 
   void addRecentSearch(String search) async {
     try {
@@ -93,62 +107,69 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            context.adaptiveGap,
-            SearchBarWidget(
-              onSearch: addRecentSearch,
-              onSearchTyping: updateSearching,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          context.adaptiveGap,
+          Hero(
+            tag: 'searchBarHero',
+            child: Material(
+              color: Colors.transparent,
+              child: _heroAnimationFinished
+                  ? SearchBarWidget(
+                      onSearch: addRecentSearch,
+                      onSearchTyping: updateSearching,
+                    )
+                  : const SizedBox(height: 40), // Placeholder until ready
             ),
-            if (!isSearching) ...[
-              const Gap(20),
-              RecentSearchWidget(
-                recentSearches: recentSearches,
-                onRemoveSearch: removeSearch,
-                onClearAll: clearAllSearches,
+          ),
+          if (!isSearching && _heroAnimationFinished) ...[
+            const Gap(20),
+            RecentSearchWidget(
+              recentSearches: recentSearches,
+              onRemoveSearch: removeSearch,
+              onClearAll: clearAllSearches,
+            ),
+            Divider(
+              color: Colors.grey.shade300,
+              thickness: 1.0,
+              indent: 10,
+              endIndent: 10,
+            ),
+            Text(
+              'Mes commandes récentes',
+              style: TextStyles.textMediumLarge,
+            ),
+            GestureDetector(
+              onTap: () => context
+                  .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+              child: const RecentOrdersWidget(
+                image: Media.restaurant1,
+                title: 'La Table des Délices',
+                Description: 'Burger Restaurant',
               ),
-              Divider(
-                color: Colors.grey.shade300,
-                thickness: 1.0,
-                indent: 10,
-                endIndent: 10,
+            ),
+            GestureDetector(
+              onTap: () => context
+                  .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+              child: const RecentOrdersWidget(
+                image: Media.search2,
+                title: 'L\'Art de la Pizza',
+                Description: 'Pizza Restaurant',
               ),
-              Text(
-                'Mes commandes récentes',
-                style: TextStyles.textMediumLarge,
+            ),
+            GestureDetector(
+              onTap: () => context
+                  .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+              child: const RecentOrdersWidget(
+                image: Media.search3,
+                title: 'Au Bon Appétit',
+                Description: 'Restaurant',
               ),
-              GestureDetector(
-                onTap: () => context
-                    .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
-                child: const RecentOrdersWidget(
-                  image: Media.restaurant1,
-                  title: 'La Table des Délices',
-                  Description: 'Burger Restaurant',
-                ),
-              ),
-              GestureDetector(
-                onTap: () => context
-                    .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
-                child: const RecentOrdersWidget(
-                    image: Media.search2,
-                    title: 'L\'Art de la Pizza',
-                    Description: 'Pizza Restaurant'),
-              ),
-              GestureDetector(
-                onTap: () => context
-                    .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
-                child: const RecentOrdersWidget(
-                  image: Media.search3,
-                  title: 'Au Bon Appétit',
-                  Description: 'Restaurant',
-                ),
-              ),
-            ],
+            ),
           ],
-        ),
+        ],
       ),
     );
   }

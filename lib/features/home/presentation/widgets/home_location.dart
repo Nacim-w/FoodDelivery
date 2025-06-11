@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/colours.dart';
 
 class CurrentLocationButton extends StatefulWidget {
   const CurrentLocationButton({super.key});
@@ -52,26 +53,41 @@ class _CurrentLocationButtonState extends State<CurrentLocationButton> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _getCurrentLocation,
+    return FilledButton(
+      style: FilledButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        backgroundColor: Colours.lightThemeWhite1, // or your desired color
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      onPressed: _getCurrentLocation,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(Media.homePin),
+          SvgPicture.asset(
+            Media.homePin,
+            colorFilter: ColorFilter.mode(
+              Colours.lightThemeOrange5,
+              BlendMode.srcIn,
+            ),
+          ),
+          const SizedBox(width: 8),
           _loading
               ? const SizedBox(
                   width: 14,
                   height: 14,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: Colors.white,
+                    color: Colours.lightThemeOrange5,
                   ),
                 )
               : Text(
                   _location,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Colours.lightThemeBlack0,
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
                   ),

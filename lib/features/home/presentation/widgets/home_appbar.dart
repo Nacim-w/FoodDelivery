@@ -8,8 +8,8 @@ import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_location.dart';
 import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () => Scaffold.of(context).openDrawer(),
                 icon: SvgPicture.asset(
                   Media.sidebar,
-                  width: context.width * 0.03,
-                  height: context.height * 0.03,
+                  width: 14,
+                  height: 14,
                   colorFilter: ColorFilter.mode(
                     Colours.lightThemeWhite1,
                     BlendMode.srcIn,
@@ -41,12 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colours.lightThemeWhite1,
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colours.lightThemeGrey0,
-                  width: 0.5,
-                ),
               ),
               child: Center(
                 child: IconButton(
@@ -54,7 +49,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     context.push(
                         '${HomePage.routePath}/${FullCartView.routePath}');
                   },
-                  icon: SvgPicture.asset(Media.cart),
+                  icon: SvgPicture.asset(
+                    Media.cart,
+                    colorFilter: ColorFilter.mode(
+                      Colours.lightThemeWhite1,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                   iconSize: context.width * 0.06,
                 ),
               ),
