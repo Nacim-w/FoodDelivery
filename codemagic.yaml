@@ -19,7 +19,16 @@ workflows:
           keyAlias=$CM_KEY_ALIAS
           storeFile=/tmp/keystore.jks
           EOF
-
+      - name: Bump versionCode and versionName
+        script: |
+          VERSION_CODE=$(date +%s)
+          MAJOR=1
+          MINOR=1
+          PATCH=$CM_BUILD_ID
+          VERSION_NAME="$MAJOR.$MINOR.$PATCH"
+          echo "Setting versionCode=$VERSION_CODE and versionName=$VERSION_NAME"
+          sed -i.bak -E "s/versionCode [0-9]+/versionCode $VERSION_CODE/" android/app/build.gradle
+          sed -i.bak -E "s/versionName \".*\"/versionName \"$VERSION_NAME\"/" android/app/build.gradle
       - name: Get Flutter packages
         script: |
           cd $CM_BUILD_DIR
@@ -39,6 +48,7 @@ workflows:
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
             --app 1:540049131134:android:74e974643a939bc2317a2f \
             --groups "testers"
+            --release-notes-file android/release_notes.txt
 
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
