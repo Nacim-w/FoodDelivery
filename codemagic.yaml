@@ -6,7 +6,7 @@ trigger:
       include: true
 workflows:
   flutter-android:
-    name: Firebase CI/CD (APK) + Shorebird OTA
+    name: Firebase CI/CD (APK)
     environment:
       flutter: 3.29.3
       groups:
