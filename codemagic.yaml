@@ -1,3 +1,9 @@
+trigger:
+  events:
+    - push
+  branch_patterns:
+    - pattern: main
+      include: true
 workflows:
   flutter-android:
     name: Firebase CI/CD (APK) + Shorebird OTA
@@ -25,7 +31,7 @@ workflows:
           VERSION_CODE=$(date +%s)
           MAJOR=1
           MINOR=1
-          PATCH=7
+          PATCH=8
           VERSION_NAME="$MAJOR.$MINOR.$PATCH"
           echo "Setting versionCode=$VERSION_CODE and versionName=$VERSION_NAME"
           sed -i.bak -E "s/versionCode [0-9]+/versionCode $VERSION_CODE/" android/app/build.gradle

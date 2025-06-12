@@ -114,6 +114,7 @@ class _SearchViewState extends State<SearchView> {
           context.adaptiveGap,
           Hero(
             tag: 'searchBarHero',
+            key: const ValueKey('searchBarHeroKey'),
             child: Material(
               color: Colors.transparent,
               child: _heroAnimationFinished
@@ -121,7 +122,7 @@ class _SearchViewState extends State<SearchView> {
                       onSearch: addRecentSearch,
                       onSearchTyping: updateSearching,
                     )
-                  : const SizedBox(height: 40), // Placeholder until ready
+                  : _SearchHeroPlaceholder(),
             ),
           ),
           if (!isSearching && _heroAnimationFinished) ...[
@@ -169,6 +170,36 @@ class _SearchViewState extends State<SearchView> {
               ),
             ),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SearchHeroPlaceholder extends StatelessWidget {
+  const _SearchHeroPlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 44,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(
+          color: Colours.lightThemeGrey1,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.search, color: Colours.lightThemeOrange0),
+          const Gap(10),
+          Text(
+            'Rechercher dans Restaurants',
+            style: TextStyles.textMediumSmall,
+          ),
         ],
       ),
     );

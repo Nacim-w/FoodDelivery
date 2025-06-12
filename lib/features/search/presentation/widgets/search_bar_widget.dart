@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -110,7 +111,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     },
                   ),
                   hintText: "Rechercher dans Restaurants",
-                  hintStyle: TextStyles.textMediumSmall,
+                  hintStyle: TextStyles.textMediumSmall.grey3,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
