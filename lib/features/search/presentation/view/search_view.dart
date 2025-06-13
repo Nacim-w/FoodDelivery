@@ -81,9 +81,7 @@ class _SearchViewState extends State<SearchView> {
           ),
         );
       }
-    } catch (e) {
-      debugPrint('Search error: $e');
-    }
+    } catch (e) {}
   }
 
   void removeSearch(String search) {

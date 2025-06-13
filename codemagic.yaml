@@ -4,9 +4,10 @@ trigger:
   branch_patterns:
     - pattern: main
       include: true
+
 workflows:
   flutter-android:
-    name: Firebase CI/CD (APK)
+    name: Firebase CI/CD (APK + Shorebird)
     environment:
       flutter: 3.29.3
       groups:
@@ -14,8 +15,19 @@ workflows:
     cache:
       cache_paths:
         - $HOME/.gradle/caches
-        - $HOME/.gradle/wrapper  
+        - $HOME/.gradle/wrapper
+
     scripts:
+      - name: Install Shorebird CLI
+        script: |
+          curl https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
+          echo 'export PATH="$HOME/.shorebird/bin:$PATH"' >> $CM_ENV_DIR/custom_env.sh
+
+      - name: Authenticate Shorebird
+        script: |
+          source $CM_ENV_DIR/custom_env.sh
+          echo "$SHOREBIRD_ACCESS_TOKEN" | shorebird auth login --access-token-stdin
+
       - name: Setup the keystore
         script: |
           echo $CM_KEYSTORE | base64 --decode > /tmp/keystore.jks
@@ -25,25 +37,29 @@ workflows:
           keyAlias=$CM_KEY_ALIAS
           storeFile=/tmp/keystore.jks
           EOF
+
       - name: Bump versionCode and versionName
         script: |
           cd $CM_BUILD_DIR
           VERSION_CODE=$(date +%s)
           MAJOR=1
           MINOR=1
-          PATCH=8
+          PATCH=9
           VERSION_NAME="$MAJOR.$MINOR.$PATCH"
           echo "Setting versionCode=$VERSION_CODE and versionName=$VERSION_NAME"
           sed -i.bak -E "s/versionCode [0-9]+/versionCode $VERSION_CODE/" android/app/build.gradle
           sed -i.bak -E "s/versionName \".*\"/versionName \"$VERSION_NAME\"/" android/app/build.gradle
+
       - name: Get Flutter packages
         script: |
           cd $CM_BUILD_DIR
           flutter pub get
 
-      - name: Build APK
+      - name: Build APK with Shorebird
         script: |
-          flutter build apk --release
+          source $CM_ENV_DIR/custom_env.sh
+          cd $CM_BUILD_DIR
+          shorebird release android --artifact=apk --flavor=release
 
       - name: Authenticate Firebase CLI
         script: |

@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/history/presentation/widgets/comment_content_widget.dart';
 
 class GridOrderItem extends StatelessWidget {
   final String pic;
@@ -19,6 +19,8 @@ class GridOrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final base64Str = pic.split(',').last;
+    var imageBytes = base64Decode(base64Str);
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -33,8 +35,8 @@ class GridOrderItem extends StatelessWidget {
         children: [
           Expanded(
             flex: 8,
-            child: Image.asset(
-              pic,
+            child: Image.memory(
+              imageBytes,
               fit: BoxFit.contain,
             ),
           ),
@@ -62,14 +64,14 @@ class GridOrderItem extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: TextButton(
-                onPressed: () => showCommentModal(context),
+                onPressed: () {},
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                   minimumSize: Size(50, 30),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
-                  "Commentaire",
+                  "Signaler",
                   style: TextStyles.textRegularSmallest.orange5,
                 ),
               ),
@@ -79,18 +81,4 @@ class GridOrderItem extends StatelessWidget {
       ),
     );
   }
-}
-
-void showCommentModal(BuildContext context) {
-  showModalBottomSheet(
-    showDragHandle: true,
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (BuildContext context) {
-      return const CommentContentWidget();
-    },
-  );
 }

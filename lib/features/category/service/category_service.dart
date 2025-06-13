@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
@@ -22,13 +21,10 @@ class CategoryService {
               .replace(queryParameters: {
         'main': main,
       });
-      debugPrint('Request URI: $uri');
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);

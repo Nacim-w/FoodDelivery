@@ -34,7 +34,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     Media.categoryDish3,
     Media.categoryDish4,
     Media.categoryDish5,
-    Media.categoryDish6,
+    Media.categoryDish2,
   ];
   final List<String> categoryRoutes = [
     BurgerDetails.routePath,

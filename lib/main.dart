@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/service/routing_service/router.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colours.lightThemeRed5),
           brightness: Brightness.light,
           fontFamily: 'Montserrat',
         ),

@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -23,9 +22,6 @@ class ProfileService {
       final uri =
           Uri.parse('${NetworkConstants.baseUrl}$PROFILE_UPDATE_ENDPOINT');
       final token = _cacheHelper.getSessionToken();
-      final refreshToken = _cacheHelper.getRefreshToken();
-      debugPrint('Token: $token');
-      debugPrint('Refresh Token: $refreshToken');
 
       final response = await http.put(
         uri,
@@ -35,9 +31,6 @@ class ProfileService {
         },
         body: jsonEncode(profile.toJson()),
       );
-
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
@@ -74,12 +67,6 @@ class ProfileService {
       final uri =
           Uri.parse('${NetworkConstants.baseUrl}$CHANGE_PASSWORD_ENDPOINT');
       final token = _cacheHelper.getSessionToken();
-      final refreshToken = _cacheHelper.getRefreshToken();
-      debugPrint('Token: $token');
-      debugPrint('Refresh Token: $refreshToken');
-      debugPrint('Current Password: $currentPassword');
-      debugPrint('New Password: $newPassword');
-      debugPrint('uri: $uri');
 
       final response = await http.put(
         uri.replace(queryParameters: {'Authorization ': token}),
@@ -92,9 +79,6 @@ class ProfileService {
           'newPassword': newPassword,
         }),
       );
-
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();

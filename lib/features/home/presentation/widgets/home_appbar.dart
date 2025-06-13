@@ -39,7 +39,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             SizedBox(
               width: context.width * 0.6,
-              height: 50,
+              height: 35,
               child: Hero(
                 tag: 'searchBarHero',
                 child: Material(
@@ -55,13 +55,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                           filled: true,
                           fillColor: Colours.lightThemeWhite3,
                           contentPadding:
-                              const EdgeInsets.symmetric(vertical: 10.0),
+                              const EdgeInsets.symmetric(vertical: 8.0),
                           prefixIcon: const Icon(
                             Icons.search,
                             color: Colours.lightThemeOrange0,
                           ),
                           suffixIcon: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: SvgPicture.asset(
                               Media.searchSettings,
                               colorFilter: const ColorFilter.mode(

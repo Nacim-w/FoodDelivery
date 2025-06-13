@@ -175,11 +175,7 @@ class _DessertHeaderState extends State<DessertHeader> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => My3DViewer(
-                    asset: (provider.selectedDessertIndex == 1 ||
-                            provider.selectedDessertIndex == 3)
-                        ? Media.cupcake3d // show cupcake 3D if index 4
-                        : Media
-                            .croissant3d, // replace this with your alternative
+                    asset: Media.cupcake3d,
                   ),
                 ),
               );

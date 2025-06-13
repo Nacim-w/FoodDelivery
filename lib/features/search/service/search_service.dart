@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -20,9 +19,6 @@ class SearchService {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$SEARCH_ENDPOINT');
       final token = _cacheHelper.getSessionToken();
-      final refreshToken = _cacheHelper.getRefreshToken();
-      debugPrint('Token: $token');
-      debugPrint('Refresh Token: $refreshToken');
 
       final response = await http.get(
         uri.replace(queryParameters: {'query': query}),
@@ -30,8 +26,6 @@ class SearchService {
           HttpHeaders.authorizationHeader: 'Bearer $token',
         },
       );
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
         // Token expired, try refreshing

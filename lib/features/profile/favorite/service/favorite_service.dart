@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -21,7 +20,6 @@ class FavoriteService {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$FAVORITE_ENDPOINT');
       final token = _cacheHelper.getSessionToken();
-      debugPrint('URI: $uri');
 
       final response = await http.get(
         uri,
@@ -30,9 +28,6 @@ class FavoriteService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
-
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
@@ -66,11 +61,6 @@ class FavoriteService {
       final uri =
           Uri.parse('${NetworkConstants.baseUrl}$FAVORITE_PRODUCT_ENDPOINT');
       final token = _cacheHelper.getSessionToken();
-      final refreshToken = _cacheHelper.getRefreshToken();
-
-      debugPrint('Token: $token');
-      debugPrint('Refresh Token: $refreshToken');
-      debugPrint('URI: $uri');
 
       final response = await http.get(
         uri,
@@ -79,9 +69,6 @@ class FavoriteService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
-
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();

@@ -6,13 +6,16 @@ abstract class Media {
   static const _baseIcon = 'assets/icons';
   static const _baseAR = 'assets/ar';
 
+  //onboarding
+  static const onboarding1 = '$_baseImage/onboarding1.png';
+  static const onboarding2 = '$_baseImage/onboarding2.png';
+  static const onboarding3 = '$_baseImage/onboarding3.png';
+
   //Common
   static const arrowBack = '$_baseIcon/arrowBack.svg';
 
   //3d assets
   static const pizza3d = '$_baseAR/pizza.glb';
-  static const burger3d = '$_baseAR/hamburger.glb';
-  static const croissant3d = '$_baseAR/croissant.glb';
   static const cupcake3d = '$_baseAR/cupcake.glb';
   static const salad3d = '$_baseAR/salad.glb';
 
@@ -172,7 +175,6 @@ abstract class Media {
   static const categoryDish3 = '$_baseImage/categoryDish3.png';
   static const categoryDish4 = '$_baseImage/categoryDish4.png';
   static const categoryDish5 = '$_baseImage/categoryDish5.png';
-  static const categoryDish6 = '$_baseImage/categoryDish6.png';
 
   static const categoryScooter = '$_baseIcon/categoryScooter.svg';
   static const categoryStar = '$_baseIcon/categoryStar.svg';

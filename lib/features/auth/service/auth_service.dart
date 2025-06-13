@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -33,6 +33,8 @@ class AuthService {
         body: jsonEncode({'password': password, 'email': email}),
         headers: NetworkConstants.headers,
       );
+      debugPrint('AuthService login response: ${response.body}');
+      debugPrint('AuthService login status code: ${response.statusCode}');
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
@@ -118,11 +120,6 @@ class AuthService {
       headers: NetworkConstants.headers,
       body: jsonEncode({'refreshToken': refreshToken}),
     );
-
-    debugPrint('Refresh Token Response: ${response.body}');
-    debugPrint('Refresh Token Response: refreshToken: $refreshToken');
-    debugPrint('Refresh Token Response: statusCode: ${response.statusCode}');
-    debugPrint('Refresh Token Response: headers: ${response.headers}');
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

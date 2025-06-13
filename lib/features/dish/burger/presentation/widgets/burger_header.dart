@@ -165,7 +165,7 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => My3DViewer(asset: Media.burger3d),
+                  builder: (context) => My3DViewer(asset: Media.pizza3d),
                 ),
               );
             },

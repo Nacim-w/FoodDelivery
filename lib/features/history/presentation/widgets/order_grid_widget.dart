@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:legy/core/res/media.dart';
 import 'package:legy/features/history/model/history_order_models.dart';
 import 'package:legy/features/history/presentation/widgets/grid_order_item_widget.dart';
 
 class OrderGrid extends StatefulWidget {
+  static const routePath = 'onboarding';
+
   final List<OrderModel> orders;
 
   const OrderGrid({super.key, required this.orders});
@@ -23,7 +24,7 @@ class _OrderGridState extends State<OrderGrid> {
         mainAxisSpacing: 10.0,
         children: widget.orders.map((order) {
           return GridOrderItem(
-            pic: Media.restaurant1, // replace with real image if available
+            pic: order.restaurant.logo, // replace with real image if available
             name: order.items.isNotEmpty
                 ? order.items[0].productName
                 : 'Commande',

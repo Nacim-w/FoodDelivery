@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -22,8 +21,6 @@ class OrderService {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}/api/orders');
       String? token = cacheHelper.getSessionToken();
-      debugPrint('uri: $uri');
-      debugPrint('Token: $token');
 
       final orderBody = {
         "client": {
@@ -59,9 +56,6 @@ class OrderService {
         },
         body: jsonEncode(orderBody),
       );
-
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();

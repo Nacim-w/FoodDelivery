@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -16,8 +16,6 @@ class HistoryService {
   Future<List<OrderModel>> fetchOrders() async {
     final uri = Uri.parse('${NetworkConstants.baseUrl}/api/orders/history');
     String? token = cacheHelper.getSessionToken();
-    debugPrint('Fetching orders with token: $token');
-    debugPrint('Request URI: $uri');
     try {
       final response = await http.get(
         uri,
@@ -27,8 +25,9 @@ class HistoryService {
         },
       );
 
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
+      debugPrint('HistoryService fetchOrders response: ${response.body}');
+      debugPrint(
+          'HistoryService fetchOrders status code: ${response.statusCode}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
@@ -61,7 +60,6 @@ class HistoryService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> decoded = jsonDecode(response.body);
       final List<dynamic> contentList = decoded['content'];
-
       return contentList.map((json) => OrderModel.fromJson(json)).toList();
     } else {
       throw ServerException(message: "Erreur serveur : ${response.body}");
