@@ -21,11 +21,11 @@ workflows:
       - name: Install Shorebird CLI
         script: |
           curl https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
-          echo 'export PATH="$HOME/.shorebird/bin:$PATH"' >> $CM_ENV_DIR/custom_env.sh
+          export PATH="$HOME/.shorebird/bin:$PATH"
 
       - name: Authenticate Shorebird
         script: |
-          source $CM_ENV_DIR/custom_env.sh
+          export PATH="$HOME/.shorebird/bin:$PATH"
           echo "$SHOREBIRD_ACCESS_TOKEN" | shorebird auth login --access-token-stdin
 
       - name: Setup the keystore
@@ -57,7 +57,7 @@ workflows:
 
       - name: Build APK with Shorebird
         script: |
-          source $CM_ENV_DIR/custom_env.sh
+          export PATH="$HOME/.shorebird/bin:$PATH"
           cd $CM_BUILD_DIR
           shorebird release android --artifact=apk --flavor=release
 
