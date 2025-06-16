@@ -20,13 +20,8 @@ workflows:
     scripts:
       - name: Install Shorebird CLI
         script: |
-          curl https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
-          export PATH="$HOME/.shorebird/bin:$PATH"
-
-      - name: Authenticate Shorebird
-        script: |
-          export PATH="$HOME/.shorebird/bin:$PATH"
-          shorebird login:ci --access-token="$SHOREBIRD_ACCESS_TOKEN"
+          curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
+          echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
 
       - name: Setup the keystore
         script: |

@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/product/model/product_model.dart';
+
+const PRODUCT_ENDPOINT = '/products';
 
 class ProductService {
   final CacheHelper _cacheHelper;
@@ -14,12 +17,18 @@ class ProductService {
 
   Future<ProductModel> getProductById(String id) async {
     try {
-      final uri = Uri.parse('${NetworkConstants.baseUrl}/products/$id');
+      final uri = Uri.parse(
+          '${NetworkConstants.baseUrl}$PRODUCT_ENDPOINT/get-product-by-id/$id');
 
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
+      debugPrint('Request URL: ${response.request?.url}');
+      debugPrint('Request method: ${response.request?.method}');
+      debugPrint('Fetching product with ID: $id');
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
