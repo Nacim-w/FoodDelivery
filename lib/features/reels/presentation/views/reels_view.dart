@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/features/reels/presentation/app/adapter/reels_cubit.dart';
+import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ReelsView extends StatefulWidget {
@@ -33,6 +35,8 @@ class _ReelsViewState extends State<ReelsView>
   @override
   void initState() {
     super.initState();
+    context.read<ReelsCubit>().loadReels();
+
     WidgetsBinding.instance.addObserver(this);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     _pageController = PageController();

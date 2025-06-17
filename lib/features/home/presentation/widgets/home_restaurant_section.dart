@@ -20,12 +20,6 @@ class HomeRestaurantSection extends StatefulWidget {
 
 class HomeRestaurantSectionState extends State<HomeRestaurantSection> {
   @override
-  void initState() {
-    super.initState();
-    context.read<HomeCubit>().loadRestaurants();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

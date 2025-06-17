@@ -15,6 +15,7 @@ Future<void> init() async {
   await _orderInit();
   await _categoryInit();
   await _trackingInit();
+  await _reelsInit();
 }
 
 Future<void> _cacheInit() async {
@@ -89,4 +90,10 @@ Future<void> _trackingInit() async {
   sl
     ..registerFactory(() => TrackingCubit(trackingService: sl()))
     ..registerLazySingleton(() => TrackingService());
+}
+
+Future<void> _reelsInit() async {
+  sl
+    ..registerFactory(() => ReelsCubit(reelsService: sl()))
+    ..registerLazySingleton(() => ReelsService());
 }

@@ -45,6 +45,7 @@ import 'package:legy/features/profile/params/presentation/views/params_view.dart
 import 'package:legy/features/profile/params/presentation/views/terms_service_view.dart';
 import 'package:legy/features/profile/personal_data/personal_data_page.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
+import 'package:legy/features/reels/presentation/app/adapter/reels_cubit.dart';
 import 'package:legy/features/reels/presentation/views/reels_view.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/views/restaurant_view.dart';

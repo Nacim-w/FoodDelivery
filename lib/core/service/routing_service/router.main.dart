@@ -218,7 +218,12 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: ReelsView.routePath,
-              builder: (context, state) => const ReelsView(),
+              builder: (context, state) {
+                return BlocProvider(
+                  create: (_) => sl<ReelsCubit>(),
+                  child: ReelsView(),
+                );
+              },
             ),
           ],
         ),

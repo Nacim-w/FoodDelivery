@@ -16,6 +16,8 @@ import 'package:legy/features/profile/favorite/presentation/app/favorite_cubit.d
 import 'package:legy/features/profile/favorite/service/favorite_service.dart';
 import 'package:legy/features/profile/params/presentation/app/profile_cubit.dart';
 import 'package:legy/features/profile/params/service/profile_service.dart';
+import 'package:legy/features/reels/presentation/app/adapter/reels_cubit.dart';
+import 'package:legy/features/reels/service/reels_service.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/service/restaurant_service.dart';
 import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';

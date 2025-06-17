@@ -83,7 +83,9 @@ class HomeService {
         uri,
         headers: NetworkConstants.headers,
       );
-
+      debugPrint('Response uri : ${uri}');
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';

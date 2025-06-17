@@ -36,6 +36,9 @@ class HomeState extends Equatable {
     String? restaurantsError,
     String? storiesError,
     String? profileError,
+    bool? clearRestaurantsError,
+    bool? clearStoriesError,
+    bool? clearProfileError,
   }) {
     return HomeState(
       restaurants: restaurants ?? this.restaurants,
@@ -44,9 +47,13 @@ class HomeState extends Equatable {
       isLoadingRestaurants: isLoadingRestaurants ?? this.isLoadingRestaurants,
       isLoadingStories: isLoadingStories ?? this.isLoadingStories,
       isLoadingProfile: isLoadingProfile ?? this.isLoadingProfile,
-      restaurantsError: restaurantsError ?? this.restaurantsError,
-      storiesError: storiesError ?? this.storiesError,
-      profileError: profileError ?? this.profileError,
+      restaurantsError: clearRestaurantsError == true
+          ? null
+          : restaurantsError ?? this.restaurantsError,
+      storiesError:
+          clearStoriesError == true ? null : storiesError ?? this.storiesError,
+      profileError:
+          clearProfileError == true ? null : profileError ?? this.profileError,
     );
   }
 

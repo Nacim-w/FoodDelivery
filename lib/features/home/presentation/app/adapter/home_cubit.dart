@@ -8,7 +8,16 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit({required this.homeService}) : super(HomeState());
 
   Future<void> loadRestaurants() async {
-    emit(state.copyWith(isLoadingRestaurants: true, restaurantsError: null));
+    print('loadRestaurants called');
+
+    emit(state.copyWith(
+      isLoadingRestaurants: true,
+      clearRestaurantsError: true,
+      restaurants: null,
+    ));
+    print(
+        'After emit loading true & reset error: ${state.restaurantsError}'); // May still be old state because emit is async
+
     try {
       final restaurants = await homeService.getNearbyRestaurants(
         longitude: 73.4447,
@@ -16,9 +25,18 @@ class HomeCubit extends Cubit<HomeState> {
         maxDistanceKm: 10000,
         limit: 10,
       );
+      print('Restaurants fetched: $restaurants');
+
       emit(state.copyWith(
-          restaurants: restaurants, isLoadingRestaurants: false));
+        restaurants: restaurants,
+        isLoadingRestaurants: false,
+        clearRestaurantsError: true,
+      ));
+
+      print('After emit loading false & error null: ${state.restaurantsError}');
     } catch (e) {
+      print('Error caught: $e');
+
       emit(state.copyWith(
         restaurantsError: 'Failed to load restaurants: $e',
         isLoadingRestaurants: false,
