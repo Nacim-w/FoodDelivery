@@ -23,6 +23,7 @@ class _HomeState extends State<Home> {
     super.initState();
     context.read<HomeCubit>().loadRestaurants();
     context.read<HomeCubit>().loadProfile();
+    context.read<HomeCubit>().loadStories();
   }
 
   @override

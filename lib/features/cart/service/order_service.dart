@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -47,7 +48,7 @@ class OrderService {
           };
         }).toList(),
       };
-
+      print('Order body: $orderBody');
       var response = await http.post(
         uri,
         headers: {
@@ -56,6 +57,8 @@ class OrderService {
         },
         body: jsonEncode(orderBody),
       );
+      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('ORDER ID: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
@@ -69,6 +72,7 @@ class OrderService {
             },
             body: jsonEncode(orderBody),
           );
+          print(response);
         } else {
           throw const ForceLogoutException(
               message: "Session expirée, veuillez vous reconnecter.");

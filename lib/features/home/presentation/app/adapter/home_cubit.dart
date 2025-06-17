@@ -7,19 +7,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit({required this.homeService}) : super(HomeState());
 
-  Future<void> loadCategories() async {
-    emit(state.copyWith(isLoadingCategories: true, categoriesError: null));
-    try {
-      final categories = await homeService.getTopCategories();
-      emit(state.copyWith(categories: categories, isLoadingCategories: false));
-    } catch (e) {
-      emit(state.copyWith(
-        categoriesError: 'Failed to load categories: $e',
-        isLoadingCategories: false,
-      ));
-    }
-  }
-
   Future<void> loadRestaurants() async {
     emit(state.copyWith(isLoadingRestaurants: true, restaurantsError: null));
     try {
@@ -40,18 +27,29 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> loadProfile() async {
-    emit(state.copyWith(
-        isLoadingCategories: true)); // reuse loading flag if needed
+    emit(state.copyWith(isLoadingProfile: true));
     try {
       final profile = await homeService.getProfile();
 
-      // No need to save to cache here → already done inside service
-
-      emit(state.copyWith(profile: profile, isLoadingCategories: false));
+      emit(state.copyWith(profile: profile, isLoadingProfile: false));
     } catch (e) {
       emit(state.copyWith(
-        categoriesError: 'Failed to load profile: $e',
-        isLoadingCategories: false,
+        profileError: 'Failed to load profile: $e',
+        isLoadingProfile: false,
+      ));
+    }
+  }
+
+  Future<void> loadStories() async {
+    emit(state.copyWith(isLoadingStories: true));
+    try {
+      final stories = await homeService.getStories();
+
+      emit(state.copyWith(stories: stories, isLoadingStories: false));
+    } catch (e) {
+      emit(state.copyWith(
+        storiesError: 'Failed to load stories: $e',
+        isLoadingStories: false,
       ));
     }
   }

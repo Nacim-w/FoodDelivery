@@ -1,55 +1,65 @@
 import 'package:equatable/equatable.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
 import 'package:legy/features/home/model/nearby_restaurant_model.dart';
-import 'package:legy/features/home/model/top_category_model.dart';
+import 'package:legy/features/home/model/story_model.dart';
 
 class HomeState extends Equatable {
-  final List<TopCategoryModel>? categories;
   final List<NearbyRestaurantModel>? restaurants;
-  final bool isLoadingCategories;
-  final bool isLoadingRestaurants;
-  final String? categoriesError;
-  final String? restaurantsError;
+  final List<StoryItemModel>? stories;
   final HomeProfileModel? profile;
+  final bool isLoadingProfile;
+  final bool isLoadingRestaurants;
+  final bool isLoadingStories;
+  final String? profileError;
+  final String? restaurantsError;
+  final String? storiesError;
 
   const HomeState({
-    this.categories,
     this.restaurants,
-    this.isLoadingCategories = false,
-    this.isLoadingRestaurants = false,
-    this.categoriesError,
-    this.restaurantsError,
+    this.stories,
     this.profile,
+    this.isLoadingRestaurants = false,
+    this.isLoadingStories = false,
+    this.isLoadingProfile = false,
+    this.restaurantsError,
+    this.storiesError,
+    this.profileError,
   });
 
   HomeState copyWith({
-    List<TopCategoryModel>? categories,
     List<NearbyRestaurantModel>? restaurants,
-    bool? isLoadingCategories,
-    bool? isLoadingRestaurants,
-    String? categoriesError,
-    String? restaurantsError,
+    List<StoryItemModel>? stories,
     HomeProfileModel? profile,
+    bool? isLoadingRestaurants,
+    bool? isLoadingStories,
+    bool? isLoadingProfile,
+    String? restaurantsError,
+    String? storiesError,
+    String? profileError,
   }) {
     return HomeState(
-      categories: categories ?? this.categories,
       restaurants: restaurants ?? this.restaurants,
-      isLoadingCategories: isLoadingCategories ?? this.isLoadingCategories,
-      isLoadingRestaurants: isLoadingRestaurants ?? this.isLoadingRestaurants,
-      categoriesError: categoriesError ?? this.categoriesError,
-      restaurantsError: restaurantsError ?? this.restaurantsError,
+      stories: stories ?? this.stories,
       profile: profile ?? this.profile,
+      isLoadingRestaurants: isLoadingRestaurants ?? this.isLoadingRestaurants,
+      isLoadingStories: isLoadingStories ?? this.isLoadingStories,
+      isLoadingProfile: isLoadingProfile ?? this.isLoadingProfile,
+      restaurantsError: restaurantsError ?? this.restaurantsError,
+      storiesError: storiesError ?? this.storiesError,
+      profileError: profileError ?? this.profileError,
     );
   }
 
   @override
   List<Object?> get props => [
-        categories,
         restaurants,
-        isLoadingCategories,
-        isLoadingRestaurants,
-        categoriesError,
-        restaurantsError,
+        stories,
         profile,
+        isLoadingRestaurants,
+        isLoadingStories,
+        isLoadingProfile,
+        restaurantsError,
+        storiesError,
+        profileError,
       ];
 }

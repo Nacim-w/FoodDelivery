@@ -32,6 +32,17 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
+                  path: TrackingView.routePath,
+                  builder: (context, state) {
+                    return BlocProvider(
+                      create: (_) => sl<TrackingCubit>(),
+                      child: TrackingView(
+                        orderId: '',
+                      ),
+                    );
+                  },
+                ),
+                GoRoute(
                   path: PreferencesView.routePath,
                   builder: (context, state) => const PreferencesView(),
                 ),
