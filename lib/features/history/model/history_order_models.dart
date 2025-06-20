@@ -7,7 +7,7 @@ class OrderModel {
   final String? deliveryInfo;
   final String deliveryAddress;
   final String livreurStatus;
-  final String deliveryMode;
+  final String? deliveryMode;
   final String paymentStatus;
   final String paymentMethod;
   final String orderStatus;
@@ -21,7 +21,7 @@ class OrderModel {
     this.deliveryInfo,
     required this.deliveryAddress,
     required this.livreurStatus,
-    required this.deliveryMode,
+    this.deliveryMode,
     required this.paymentStatus,
     required this.paymentMethod,
     required this.orderStatus,
@@ -37,7 +37,7 @@ class OrderModel {
       deliveryInfo: null,
       deliveryAddress: '',
       livreurStatus: '',
-      deliveryMode: '',
+      deliveryMode: null,
       paymentStatus: '',
       paymentMethod: '',
       orderStatus: '',
@@ -46,20 +46,24 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
-      id: json['id'],
-      items: (json['items'] as List)
+      id: json['id'] ?? '',
+      items: (json['items'] as List<dynamic>? ?? [])
           .map((item) => ItemModel.fromJson(item))
           .toList(),
-      total: (json['total'] as num).toDouble(),
-      client: ClientModel.fromJson(json['client']),
-      restaurant: RestaurantModel.fromJson(json['restaurant']),
-      deliveryInfo: json['deliveryInfo'],
-      deliveryAddress: json['deliveryAddress'],
-      livreurStatus: json['livreurStatus'],
-      deliveryMode: json['deliveryMode'],
-      paymentStatus: json['paymentStatus'],
-      paymentMethod: json['paymentMethod'],
-      orderStatus: json['orderStatus'],
+      total: (json['total'] as num?)?.toDouble() ?? 0.0,
+      client: json['client'] != null
+          ? ClientModel.fromJson(json['client'])
+          : ClientModel.empty(),
+      restaurant: json['restaurant'] != null
+          ? RestaurantModel.fromJson(json['restaurant'])
+          : RestaurantModel.empty(),
+      deliveryInfo: json['deliveryInfo'] as String?,
+      deliveryAddress: json['deliveryAddress'] ?? '',
+      livreurStatus: json['livreurStatus'] ?? '',
+      deliveryMode: json['deliveryMode'] as String?,
+      paymentStatus: json['paymentStatus'] ?? '',
+      paymentMethod: json['paymentMethod'] ?? '',
+      orderStatus: json['orderStatus'] ?? '',
     );
   }
 
@@ -126,16 +130,22 @@ class ItemModel {
   }
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
+    final rawSupplements = json['supplements'];
+    List<SupplementModel> parsedSupplements = [];
+    if (rawSupplements != null && rawSupplements is List) {
+      parsedSupplements = rawSupplements
+          .where((e) => e != null)
+          .map((e) => SupplementModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
     return ItemModel(
-      productId: json['productId'],
-      productName: json['productName'],
-      unitPrice: (json['unitPrice'] as num).toDouble(),
-      quantity: json['quantity'],
-      categoryId: json['categoryId'],
-      promotionAmount: (json['promotionAmount'] as num).toDouble(),
-      supplements: (json['supplements'] as List)
-          .map((x) => SupplementModel.fromJson(x))
-          .toList(),
+      productId: json['productId'] ?? '',
+      productName: json['productName'] ?? '',
+      unitPrice: (json['unitPrice'] as num?)?.toDouble() ?? 0.0,
+      quantity: json['quantity'] ?? 0,
+      categoryId: json['categoryId'] ?? '',
+      promotionAmount: (json['promotionAmount'] as num?)?.toDouble() ?? 0.0,
+      supplements: parsedSupplements,
     );
   }
 
@@ -178,8 +188,8 @@ class SupplementModel {
 
   factory SupplementModel.fromJson(Map<String, dynamic> json) {
     return SupplementModel(
-      supplementId: json['supplementId'],
-      quantity: json['quantity'],
+      supplementId: json['supplementId'] ?? '',
+      quantity: json['quantity'] ?? 0,
     );
   }
 
@@ -227,11 +237,11 @@ class ClientModel {
 
   factory ClientModel.fromJson(Map<String, dynamic> json) {
     return ClientModel(
-      clientId: json['clientId'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      phone: json['phone'],
-      address: json['address'],
+      clientId: json['clientId'] ?? '',
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
+      phone: json['phone'] ?? '',
+      address: json['address'] ?? '',
       longitude: (json['longitude'] as num?)?.toDouble(),
       latitude: (json['latitude'] as num?)?.toDouble(),
     );
@@ -294,14 +304,15 @@ class RestaurantModel {
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
     return RestaurantModel(
-        restaurantId: json['restaurantId'],
-        name: json['name'],
-        phone: json['phone'],
-        address: json['address'],
-        commission: (json['commission'] as num).toDouble(),
-        latitude: (json['latitude'] as num).toDouble(),
-        longitude: (json['longitude'] as num).toDouble(),
-        logo: json['logo']);
+      restaurantId: json['restaurantId'] ?? '',
+      name: json['name'] ?? '',
+      phone: json['phone'] ?? '',
+      address: json['address'] ?? '',
+      commission: (json['commission'] as num?)?.toDouble() ?? 0.0,
+      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
+      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
+      logo: json['logo'] ?? '',
+    );
   }
 
   RestaurantModel copyWith({

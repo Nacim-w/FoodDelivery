@@ -2,12 +2,14 @@ class FavoriteProductModel {
   final String id;
   final String name;
   final String imageUrl;
+  final String restaurantId;
   double price;
 
   FavoriteProductModel({
     required this.id,
     required this.name,
     required this.imageUrl,
+    required this.restaurantId,
     required this.price,
   });
   factory FavoriteProductModel.empty() {
@@ -15,6 +17,7 @@ class FavoriteProductModel {
       id: '',
       name: '',
       imageUrl: '',
+      restaurantId: '',
       price: 0.0,
     );
   }
@@ -23,6 +26,7 @@ class FavoriteProductModel {
       id: json['id'],
       name: json['name'],
       imageUrl: json['imageUrl'],
+      restaurantId: json['restaurantId'],
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
     );
   }

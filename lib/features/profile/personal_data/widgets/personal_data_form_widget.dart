@@ -74,7 +74,8 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
         if (state is ProfileUpdated) {
           showToast(message: "Profil mis à jour avec succès!", success: true);
         }
-        if (state case ProfileError(:final message)) {
+        if (state is ProfileError) {
+          final message = state.message;
           showToast(message: message, success: false);
         }
       },

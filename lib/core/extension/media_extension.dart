@@ -5,7 +5,7 @@ extension ContextExt on BuildContext {
 
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
-  Size get size => MediaQuery.sizeOf(this);
+  Size get size => MediaQuery.of(this).size;
 
   double get height => size.height;
 

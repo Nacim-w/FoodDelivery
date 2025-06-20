@@ -74,7 +74,7 @@ class SupplementsSelector extends StatelessWidget {
                               child: Text(
                                 '${supp.quantity ?? 0}',
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
                                   fontFeatures: [
                                     FontFeature.tabularFigures()

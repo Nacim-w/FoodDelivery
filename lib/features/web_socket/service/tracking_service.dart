@@ -25,7 +25,7 @@ class TrackingService {
 
   void _subscribeToLocation(String orderId) {
     _stompClient?.subscribe(
-      destination: '/topic/orders/684bedd9fc8e6c7d572f2e42/location',
+      destination: '/topic/orders/685176b717566c1fd71d8595/location',
       callback: (frame) {
         final data = jsonDecode(frame.body!);
         final update = LocationUpdateModel.fromJson(data);

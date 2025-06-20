@@ -25,18 +25,13 @@ class HomeCubit extends Cubit<HomeState> {
         maxDistanceKm: 10000,
         limit: 10,
       );
-      print('Restaurants fetched: $restaurants');
 
       emit(state.copyWith(
         restaurants: restaurants,
         isLoadingRestaurants: false,
         clearRestaurantsError: true,
       ));
-
-      print('After emit loading false & error null: ${state.restaurantsError}');
     } catch (e) {
-      print('Error caught: $e');
-
       emit(state.copyWith(
         restaurantsError: 'Failed to load restaurants: $e',
         isLoadingRestaurants: false,

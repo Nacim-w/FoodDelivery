@@ -89,8 +89,8 @@ class _RegisterFormState extends State<RegisterForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state case AuthError(:final message)) {
-          showToast(message: message, success: false);
+        if (state is AuthError) {
+          showToast(message: state.message, success: false);
         }
         if (state is Registered) {
           ScaffoldMessenger.of(context).showSnackBar(

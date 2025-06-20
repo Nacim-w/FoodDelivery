@@ -7,6 +7,7 @@ import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/history/model/history_order_models.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
+import 'package:legy/features/history/model/report_model.dart';
 
 class HistoryService {
   final CacheHelper cacheHelper;
@@ -28,6 +29,7 @@ class HistoryService {
       debugPrint('HistoryService fetchOrders response: ${response.body}');
       debugPrint(
           'HistoryService fetchOrders status code: ${response.statusCode}');
+      debugPrint('HistoryService fetchOrders headers: ${response.headers}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
@@ -63,6 +65,58 @@ class HistoryService {
       return contentList.map((json) => OrderModel.fromJson(json)).toList();
     } else {
       throw ServerException(message: "Erreur serveur : ${response.body}");
+    }
+  }
+
+  Future<void> sendReport(ReportModel report) async {
+    final uri =
+        Uri.parse('${NetworkConstants.baseUrl}/api/v1/orders/report-issue');
+    String? token = cacheHelper.getSessionToken();
+    print(uri);
+    try {
+      final response = await http.post(
+        uri,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+        body: jsonEncode(report.toJson()),
+      );
+
+      debugPrint('sendReport response: ${response.body}');
+      debugPrint(' sendReport status: ${response.statusCode}');
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          token = cacheHelper.getSessionToken();
+          final retryResponse = await http.post(
+            uri,
+            headers: {
+              HttpHeaders.authorizationHeader: 'Bearer $token',
+              HttpHeaders.contentTypeHeader: 'application/json',
+            },
+            body: jsonEncode(report.toJson()),
+          );
+          _handleReportResponse(retryResponse);
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      } else {
+        _handleReportResponse(response);
+      }
+    } on TokenExpiredException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message: "Impossible d'envoyer le rapport. Réessayez plus tard.",
+      );
+    }
+  }
+
+  void _handleReportResponse(http.Response response) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
+      throw ServerException(message: "Erreur rapport : ${response.body}");
     }
   }
 }

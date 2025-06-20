@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'exceptions.dart' show CacheException, ServerException;
 
-sealed class Failure extends Equatable {
+class Failure extends Equatable {
   const Failure({required this.message});
 
   final String message;

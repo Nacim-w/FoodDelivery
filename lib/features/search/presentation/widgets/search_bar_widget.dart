@@ -33,7 +33,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     showModalBottomSheet(
       isScrollControlled: true,
       useRootNavigator: true,
-      showDragHandle: true,
       enableDrag: true,
       context: context,
       shape: const RoundedRectangleBorder(

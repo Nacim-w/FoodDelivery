@@ -16,7 +16,7 @@ class CacheHelper {
 
   String? getSessionToken() {
     final sessionToken = _prefs.getString(_sessionTokenKey);
-    if (sessionToken case String()) {
+    if (sessionToken != null) {
       Cache.instance.setSessionToken(sessionToken);
     }
     return sessionToken;

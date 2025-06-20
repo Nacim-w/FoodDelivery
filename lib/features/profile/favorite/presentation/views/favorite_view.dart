@@ -115,18 +115,23 @@ class _FavoriteViewState extends State<FavoriteView> {
                   ),
                   itemCount: state is FavoriteLoading ? 4 : products.length,
                   itemBuilder: (context, index) {
-                    return FavoriteMealContainer(
-                      reviews: 0,
-                      price: state is FavoriteLoading
-                          ? 0.0
-                          : products[index].price,
-                      image: state is FavoriteLoading
-                          ? ''
-                          : products[index].imageUrl,
-                      name: state is FavoriteLoading
-                          ? 'Loading...'
-                          : products[index].name,
-                      rating: 0,
+                    return GestureDetector(
+                      onTap: () => context.go(
+                        '/home/restaurant/${products[index].restaurantId}/product/${products[index].id}',
+                      ),
+                      child: FavoriteMealContainer(
+                        reviews: 0,
+                        price: state is FavoriteLoading
+                            ? 0.0
+                            : products[index].price,
+                        image: state is FavoriteLoading
+                            ? ''
+                            : products[index].imageUrl,
+                        name: state is FavoriteLoading
+                            ? 'Loading...'
+                            : products[index].name,
+                        rating: 0,
+                      ),
                     );
                   },
                 ),

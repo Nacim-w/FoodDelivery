@@ -52,7 +52,6 @@ class CustomModal extends StatelessWidget {
 
 void showCustomModal(BuildContext context) {
   showModalBottomSheet(
-    showDragHandle: true,
     context: context,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(

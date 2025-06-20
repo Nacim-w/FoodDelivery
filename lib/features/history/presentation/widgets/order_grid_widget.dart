@@ -24,7 +24,8 @@ class _OrderGridState extends State<OrderGrid> {
         mainAxisSpacing: 10.0,
         children: widget.orders.map((order) {
           return GridOrderItem(
-            pic: order.restaurant.logo, // replace with real image if available
+            orderid: order.id,
+            pic: order.restaurant.logo,
             name: order.items.isNotEmpty
                 ? order.items[0].productName
                 : 'Commande',

@@ -78,6 +78,7 @@ class OrderService {
               message: "Session expirée, veuillez vous reconnecter.");
         }
       }
+      debugPrint('Response body: ${response.body}');
 
       if (response.statusCode != 200 && response.statusCode != 201) {
         final errorJson = jsonDecode(response.body);

@@ -28,7 +28,6 @@ class CustomListView<T> extends StatelessWidget {
           final isSelected = selectedOption == option;
 
           return ChoiceChip(
-            showCheckmark: false,
             selected: isSelected,
             selectedColor: Colours.lightThemeOrange5,
             backgroundColor: Colours.lightThemeWhite2,

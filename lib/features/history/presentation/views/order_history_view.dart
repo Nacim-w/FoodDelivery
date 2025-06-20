@@ -62,7 +62,7 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
                         "Commandes récentes",
                         style: TextStyles.textSemiBold,
                       ),
-                      OrderGrid(orders: orders), // pass data here!
+                      OrderGrid(orders: orders),
                     ],
                   ),
                 );

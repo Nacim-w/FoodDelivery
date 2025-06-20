@@ -29,3 +29,16 @@ class HistoryError extends HistoryState {
   @override
   List<Object?> get props => [message];
 }
+
+class ReportSubmitting extends HistoryState {}
+
+class ReportSubmitted extends HistoryState {}
+
+class ReportError extends HistoryState {
+  final String message;
+
+  const ReportError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
