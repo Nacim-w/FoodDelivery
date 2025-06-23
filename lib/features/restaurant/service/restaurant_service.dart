@@ -260,4 +260,52 @@ class RestaurantService {
       );
     }
   }
+
+  Future<bool> isFavorite(String restaurantId) async {
+    try {
+      final uri = Uri.parse(
+          '${NetworkConstants.baseUrl}/favorites/$restaurantId/is-favorite');
+      final token = _cacheHelper.getSessionToken();
+
+      final response = await http.get(
+        uri,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await isFavorite(restaurantId);
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage =
+            errorJson['error'] ?? 'Erreur lors de la vérification du favori.';
+        throw ServerException(message: errorMessage);
+      }
+
+      final data = jsonDecode(response.body);
+      if (data is Map<String, dynamic> && data.containsKey('isFavorite')) {
+        return data['isFavorite'] == true;
+      } else {
+        throw ServerException(
+          message: "Réponse invalide pour le statut favori.",
+        );
+      }
+    } on TokenExpiredException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite lors de la vérification du statut favori.",
+      );
+    }
+  }
 }

@@ -71,7 +71,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                     padding: const EdgeInsets.only(left: 16.0),
                     child: GestureDetector(
                       onTap: () => context
-                          .push('/home/restaurant/${restaurants[index].id}'),
+                          .go('/home/restaurant/${restaurants[index].id}'),
                       child: FavoriteRestaurantContainer(
                         image: state is FavoriteLoading
                             ? ''

@@ -37,9 +37,13 @@ class RestaurantCubit extends Cubit<RestaurantState> {
     try {
       final restaurant =
           await restaurantsService.getRestaurantById(restaurantId);
+      final isFavorite =
+          await restaurantsService.isFavorite(restaurantId); // <- NEW
+
       emit(state.copyWith(
         isLoadingRestaurantById: false,
         selectedRestaurant: restaurant,
+        isSelectedRestaurantFavorite: isFavorite, // <- NEW
       ));
     } catch (e) {
       emit(state.copyWith(

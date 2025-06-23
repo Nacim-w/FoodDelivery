@@ -46,6 +46,47 @@ class ProductService {
     }
   }
 
+  Future<bool> isProductFavorite(String productId) async {
+    try {
+      final uri = Uri.parse(
+          '${NetworkConstants.baseUrl}/favorites/products/$productId/is-favorite');
+      final token = _cacheHelper.getSessionToken();
+
+      final response = await http.get(
+        uri,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await isProductFavorite(productId);
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
+      if (response.statusCode != 200) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage =
+            errorJson['error'] ?? 'Erreur lors du chargement du statut favori.';
+        throw ServerException(message: errorMessage);
+      }
+
+      final data = jsonDecode(response.body);
+      return data['isFavorite'] == true;
+    } on TokenExpiredException {
+      rethrow;
+    } catch (_) {
+      throw const ServerException(
+        message: "Impossible de vérifier si le produit est en favori.",
+      );
+    }
+  }
+
   Future<void> addFavorite({
     required String productId,
   }) async {

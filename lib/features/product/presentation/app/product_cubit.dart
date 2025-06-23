@@ -11,8 +11,10 @@ class ProductCubit extends Cubit<ProductState> {
     emit(state.copyWith(isLoading: true, error: null));
     try {
       final product = await productService.getProductById(id);
-      product.quantity = product.quantity;
-      emit(state.copyWith(isLoading: false, product: product));
+      final isFavorite =
+          await productService.isProductFavorite(id); // fetch favorite status
+      emit(state.copyWith(
+          isLoading: false, product: product, isFavorite: isFavorite));
     } catch (e) {
       emit(state.copyWith(isLoading: false, error: e.toString()));
     }
