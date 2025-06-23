@@ -38,6 +38,7 @@ class CacheHelper {
 
   Future<void> resetSession() async {
     await _prefs.remove(_sessionTokenKey);
+    await _prefs.remove(_userProfileKey);
     Cache.instance.resetSession();
   }
 
