@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legy/features/auth/model/client_model.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
@@ -54,6 +56,20 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final response = await authService.sendResetCode(email: email);
       emit(CodeSentSuccessfully(response));
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    emit(AuthLoading());
+    try {
+      final client = await authService.signInWithGoogle();
+      if (client != null) {
+        emit(LoggedInGoogle(client));
+      } else {
+        emit(AuthError("Connexion annulée."));
+      }
     } catch (e) {
       emit(AuthError(e.toString()));
     }

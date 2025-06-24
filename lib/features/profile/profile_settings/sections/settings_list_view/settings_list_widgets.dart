@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/common/widgets/rounded_button.dart';
+import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/profile/favorite/presentation/views/favorite_view.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
@@ -23,9 +28,23 @@ class BuiltListView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SettingsCategorieWidget(
-                icon: Media.location,
-                text: "Adresses",
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    showDragHandle: true,
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20)),
+                    ),
+                    builder: (context) => const _AddressBottomSheet(),
+                  );
+                },
+                child: SettingsCategorieWidget(
+                  icon: Media.location,
+                  text: "Adresses",
+                ),
               ),
               Gap(20),
               GestureDetector(
@@ -69,6 +88,37 @@ class BuiltListView extends StatelessWidget {
                 )),
         Gap(20),
       ],
+    );
+  }
+}
+
+class _AddressBottomSheet extends StatelessWidget {
+  const _AddressBottomSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: SizedBox(
+        width: context.width,
+        height: context.height * 0.2,
+        child: Column(
+          children: [
+            Text('Vos adresses', style: TextStyles.textSemiBoldLarge.black1),
+            SvgPicture.asset(Media.location),
+            Text(
+              'Aucune adresse n\'a encore été ajoutée.',
+              style: TextStyles.textRegularSmall,
+            ),
+            RoundedButton(
+              text: '',
+              widgetContentButton: Row(
+                children: [Icon(Icons.add), Text('Ajoutez votre adresse')],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

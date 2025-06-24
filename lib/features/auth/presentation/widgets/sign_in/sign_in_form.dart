@@ -51,7 +51,7 @@ class _SignInFormState extends State<SignInForm> {
         if (state is AuthError) {
           showToast(message: state.message, success: false);
         }
-        if (state is LoggedIn) {
+        if (state is LoggedIn || state is LoggedInGoogle) {
           final isFirstTime = sl<CacheHelper>().isFirstTime();
           if (isFirstTime) {
             context.go('${HomePage.routePath}/${PreferencesView.routePath}');

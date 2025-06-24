@@ -9,6 +9,7 @@ import 'package:legy/features/history/presentation/app/history_cubit.dart';
 import 'package:legy/features/history/presentation/app/history_state.dart';
 import 'package:legy/features/history/presentation/widgets/current_order_widget.dart';
 import 'package:legy/features/history/presentation/widgets/order_grid_widget.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class OrderHistoryView extends StatefulWidget {
   static const routePath = '/orders';
@@ -33,7 +34,16 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
         context.adaptiveGap,
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: BlackAppBar(title: 'Livraison en cours', onTap: context.pop),
+          child: BlackAppBar(
+            title: 'Livraison en cours',
+            onTap: () {
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.go(HomePage.routePath);
+              }
+            },
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(16),

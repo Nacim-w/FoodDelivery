@@ -12,7 +12,20 @@
           "package_name": "com.bramasquare.legy"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "540049131134-hqon6s0h3t4dl3r80i9q93u9sb2k3619.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bramasquare.legy",
+            "certificate_hash": "03b8b6995a73b46af26c575c1d2da02c1e88eede"
+          }
+        },
+        {
+          "client_id": "540049131134-67rk1psemc9l96htfmrusctrhk3vtmp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAk32zfjCf8FAN8T2Xyc6yXwFx9W8roa5c"
@@ -20,26 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:540049131134:android:62bff370888fe890317a2f",
-        "android_client_info": {
-          "package_name": "com.bramasquare.legy"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAk32zfjCf8FAN8T2Xyc6yXwFx9W8roa5c"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540049131134-67rk1psemc9l96htfmrusctrhk3vtmp7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "540049131134-ei3s8e1m6rik2hba03hl66betstpi845.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bramasquare.legy"
+              }
+            }
+          ]
         }
       }
     }

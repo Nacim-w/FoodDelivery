@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 
 class BuildThirdPartyLogin extends StatelessWidget {
@@ -15,7 +17,14 @@ class BuildThirdPartyLogin extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            reusableIcons(Media.google),
+            GestureDetector(
+              onTap: () {
+                print('Google sign-in tapped'); // <- ADD THIS
+
+                context.read<AuthCubit>().signInWithGoogle();
+              },
+              child: reusableIcons(Media.google),
+            ),
             reusableIcons(Media.facebook),
             reusableIcons(Media.apple),
           ],

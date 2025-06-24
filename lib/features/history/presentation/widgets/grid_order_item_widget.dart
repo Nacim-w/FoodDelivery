@@ -23,6 +23,7 @@ class GridOrderItem extends StatelessWidget {
   final String name;
   final String details;
   final String price;
+
   const GridOrderItem({
     super.key,
     required this.orderid,
@@ -99,14 +100,14 @@ class GridOrderItem extends StatelessWidget {
 
   void _showReportBottomSheet(BuildContext context) {
     showModalBottomSheet(
+      showDragHandle: true,
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (_) => BlocProvider.value(
-        value:
-            context.read<HistoryCubit>(), // 👈 reuses existing cubit instance
+        value: context.read<HistoryCubit>(),
         child: ReportBottomSheet(orderId: orderid),
       ),
     );

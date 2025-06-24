@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/dashboard/drawer.dart';
 import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
+import 'package:legy/features/home/presentation/widgets/get_location.dart';
 import 'package:legy/features/home/presentation/widgets/home_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
     context.read<HomeCubit>().loadRestaurants();
     context.read<HomeCubit>().loadProfile();
     context.read<HomeCubit>().loadStories();
+    getUserLocation();
   }
 
   Future<void> _onRefresh() async {

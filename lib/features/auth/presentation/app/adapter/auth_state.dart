@@ -63,3 +63,11 @@ class AuthError extends AuthState {
   @override
   List<Object> get props => [message];
 }
+
+class LoggedInGoogle extends AuthState {
+  final Client client;
+  const LoggedInGoogle(this.client);
+
+  @override
+  List<Object> get props => [client];
+}

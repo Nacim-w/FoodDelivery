@@ -1,11 +1,14 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/utils/network_constants.dart';
+import 'package:legy/features/auth/model/client_model.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
@@ -101,6 +104,92 @@ class AuthService {
       throw const ServerException(
         message:
             "Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard.",
+      );
+    }
+  }
+
+  Future<Client?> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        scopes: ['email', 'profile'],
+        serverClientId:
+            '540049131134-67rk1psemc9l96htfmrusctrhk3vtmp7.apps.googleusercontent.com',
+      );
+
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        print('Google sign-in was canceled by the user.');
+        return null;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      print('Google Access Token: ${googleAuth.accessToken}');
+      print('Google ID Token: ${googleAuth.idToken}');
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      final user = userCredential.user;
+      if (user == null) return null;
+
+      // Get Firebase ID token here:
+      final firebaseIdToken = await user.getIdToken();
+
+      print('Firebase ID Token: $firebaseIdToken');
+      final client = await _loginWithFirebaseIdToken(firebaseIdToken!);
+
+      // Return the Firebase ID token instead of the user
+      return client;
+    } catch (e) {
+      print('Error during Google sign-in: $e');
+      throw Exception("Erreur lors de la connexion avec Google.");
+    }
+  }
+
+  Future<Client> _loginWithFirebaseIdToken(String firebaseIdToken) async {
+    try {
+      final uri = Uri.parse(
+          'https://api.dev.legy.bramasquare.com/api/auth/firebase/google');
+
+      final response = await http.post(
+        uri,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'idToken': firebaseIdToken,
+        }),
+      );
+      debugPrint(
+          'AuthService _loginWithFirebaseIdToken response: ${response.body}');
+      debugPrint(
+          'AuthService _loginWithFirebaseIdToken status code: ${response.statusCode}');
+
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        throw ServerException(message: errorMessage.toString());
+      }
+
+      final data = jsonDecode(response.body);
+      debugPrint('AuthService _loginWithFirebaseIdToken data: $data');
+      final userResponse = LoginResponseModel.fromJson(data);
+      await sl<CacheHelper>().cacheSessionToken(data['token']);
+      await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
+      return Client.fromJson(data); // Use your actual model
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite lors de la connexion avec Google. Veuillez réessayer.",
       );
     }
   }

@@ -109,19 +109,16 @@ class _CustomTextFieldState extends State<BuildTextField> {
 }
 
 Widget reusableIcons(String url) {
-  return GestureDetector(
-    child: Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: Colours.lightThemeGrey2, width: 2),
-      ),
-      child: Center(
-        child: Image.asset(url, width: 20, height: 20),
-      ),
+  return Container(
+    width: 40,
+    height: 40,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(color: Colours.lightThemeGrey2, width: 2),
     ),
-    onTap: () {},
+    child: Center(
+      child: Image.asset(url, width: 20, height: 20),
+    ),
   );
 }
 

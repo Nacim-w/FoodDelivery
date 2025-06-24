@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -18,7 +17,7 @@ class RecentSearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = (recentSearches.length * 30.0).toDouble();
+    double height = (recentSearches.length * 55.0).toDouble();
 
     return Column(
       children: [
@@ -38,9 +37,8 @@ class RecentSearchWidget extends StatelessWidget {
             ),
           ],
         ),
-        Gap(20),
         SizedBox(
-          height: height < context.height * 0.3 ? height : context.height * 0.3,
+          height: height < context.height * 0.2 ? height : context.height * 0.2,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: recentSearches.length,
