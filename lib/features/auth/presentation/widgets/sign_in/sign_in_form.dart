@@ -20,7 +20,9 @@ import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seperator_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
+import 'package:legy/features/auth/presentation/widgets/sign_in/complete_profile_view.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_in/suggest_register_widget.dart';
+import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/preferences/presentation/view/preferences_view.dart';
 
@@ -47,16 +49,40 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is AuthError) {
           showToast(message: state.message, success: false);
         }
+
         if (state is LoggedIn || state is LoggedInGoogle) {
-          final isFirstTime = sl<CacheHelper>().isFirstTime();
-          if (isFirstTime) {
-            context.go('${HomePage.routePath}/${PreferencesView.routePath}');
-          } else {
-            context.go(HomePage.routePath);
+          try {
+            final token = sl<CacheHelper>().getSessionToken();
+
+            if (token != null) {
+              final profile = await sl<AuthService>().getClientProfile(token);
+              debugPrint("Profile: ${profile.toJson()}");
+              final isProfileIncomplete = profile.phoneNumber.trim().isEmpty ||
+                  profile.address.trim().isEmpty;
+
+              if (isProfileIncomplete) {
+                context.go(
+                    '${SignInPage.routePath}/${CompleteProfileView.routePath}');
+              } else {
+                final isFirstTime = sl<CacheHelper>().isFirstTime();
+                if (isFirstTime) {
+                  context
+                      .go('${HomePage.routePath}/${PreferencesView.routePath}');
+                } else {
+                  context.go(HomePage.routePath);
+                }
+              }
+            } else {
+              showToast(message: "Jeton invalide.", success: false);
+            }
+          } catch (e) {
+            showToast(
+                message: 'Erreur lors de la récupération du profil',
+                success: false);
           }
         }
       },

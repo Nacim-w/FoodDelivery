@@ -11,6 +11,7 @@ import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
+import 'package:legy/features/profile/params/model/client_profile_model.dart';
 
 const REQUEST_MAPPING = '/api/auth';
 const USER_MAPPING = '/api/users';
@@ -107,6 +108,25 @@ class AuthService {
     }
   }
 
+  Future<ClientProfileModel> getClientProfile(String token) async {
+    final uri = Uri.parse('${NetworkConstants.baseUrl}/api/clients/me');
+
+    final response = await http.get(
+      uri,
+      headers: {
+        'Content-Type': 'application/jso1n',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      return ClientProfileModel.fromJson(json);
+    } else {
+      throw Exception('Failed to load profile');
+    }
+  }
+
   Future<LoginResponseModel?> signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn(
@@ -191,6 +211,25 @@ class AuthService {
         message:
             "Une erreur s'est produite lors de la connexion avec Google. Veuillez réessayer.",
       );
+    }
+  }
+
+  Future<void> updatePhoneNumber(String phoneNumber, String token) async {
+    final uri = Uri.parse('${NetworkConstants.baseUrl}/api/clients/me/update');
+
+    final response = await http.put(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({'phoneNumber': phoneNumber}),
+    );
+
+    if (response.statusCode != 200 && response.statusCode != 201) {
+      final errorJson = jsonDecode(response.body);
+      final errorMessage = errorJson['error'] ?? 'Erreur inconnue';
+      throw ServerException(message: errorMessage);
     }
   }
 

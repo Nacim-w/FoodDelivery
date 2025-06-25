@@ -294,6 +294,15 @@ final router = GoRouter(
         },
         routes: [
           GoRoute(
+            path: CompleteProfileView.routePath,
+            builder: (context, state) {
+              return BlocProvider(
+                create: (_) => sl<AuthCubit>(),
+                child: CompleteProfileView(),
+              );
+            },
+          ),
+          GoRoute(
             path: SignUpPage.routePath,
             builder: (context, state) {
               return BlocProvider(

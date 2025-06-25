@@ -73,6 +73,16 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> updatePhoneNumber(String phoneNumber, String token) async {
+    emit(AuthLoading());
+    try {
+      await authService.updatePhoneNumber(phoneNumber, token);
+      emit(PhoneUpdated());
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+
   Future<void> verifyCode(String email, String code) async {
     emit(AuthLoading());
     try {

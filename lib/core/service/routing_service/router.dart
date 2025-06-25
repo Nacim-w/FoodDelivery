@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/singletons/cache.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
+import 'package:legy/features/auth/presentation/widgets/sign_in/complete_profile_view.dart';
 import 'package:legy/features/burger_customization/presentation/views/begin_customization.dart';
 import 'package:legy/features/burger_customization/presentation/views/burger_final_screen.dart';
 import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';

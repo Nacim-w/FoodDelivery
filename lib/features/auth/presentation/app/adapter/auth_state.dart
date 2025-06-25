@@ -71,3 +71,5 @@ class LoggedInGoogle extends AuthState {
   @override
   List<Object> get props => [client];
 }
+
+class PhoneUpdated extends AuthState {}
