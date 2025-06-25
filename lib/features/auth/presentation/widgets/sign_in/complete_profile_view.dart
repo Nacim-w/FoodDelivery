@@ -1,7 +1,7 @@
-// complete_profile_view.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
@@ -22,14 +22,16 @@ class CompleteProfileView extends StatefulWidget {
 
 class _CompleteProfileViewState extends State<CompleteProfileView> {
   final _formKey = GlobalKey<FormState>();
-  final _phoneController = TextEditingController();
+  String? _completePhoneNumber;
 
   @override
   Widget build(BuildContext context) {
     final token = sl<CacheHelper>().getSessionToken();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Compléter le profil")),
+      appBar: AppBar(
+        title: const Text("Compléter le profil"),
+      ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is PhoneUpdated) {
@@ -50,21 +52,25 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
             child: Form(
               key: _formKey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Entrez votre numéro de téléphone',
                     style: TextStyles.textBoldLarge,
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _phoneController,
-                    keyboardType: TextInputType.phone,
+                  IntlPhoneField(
                     decoration: const InputDecoration(
-                      labelText: "Numéro de téléphone",
+                      labelText: 'Numéro de téléphone',
                       border: OutlineInputBorder(),
                     ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
+                    initialCountryCode: 'FR', // or 'TN', 'US', etc.
+                    onChanged: (phone) {
+                      _completePhoneNumber = phone.completeNumber;
+                    },
+                    validator: (phone) {
+                      if (phone == null ||
+                          phone.completeNumber.trim().isEmpty) {
                         return 'Veuillez entrer un numéro valide';
                       }
                       return null;
@@ -76,10 +82,9 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                     text: "Continuer",
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        final phone = _phoneController.text.trim();
                         context
                             .read<AuthCubit>()
-                            .updatePhoneNumber(phone, token!);
+                            .updatePhoneNumber(_completePhoneNumber!, token!);
                       }
                     },
                   ).loading(state is AuthLoading),

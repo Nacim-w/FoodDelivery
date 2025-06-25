@@ -15,6 +15,11 @@ import 'package:legy/features/profile/params/model/client_profile_model.dart';
 
 const REQUEST_MAPPING = '/api/auth';
 const USER_MAPPING = '/api/users';
+const CLIENT_MAPPING = '/api/clients';
+const FIREBASE_Mapping = '$REQUEST_MAPPING/firebase';
+const ME_ENDPOINT = '$CLIENT_MAPPING/me';
+const UPDATE_ENDPOINT = '$ME_ENDPOINT/update';
+const GOOGLE_ENDPOINT = '$FIREBASE_Mapping/google';
 const LOGIN_ENDPOINT = '$REQUEST_MAPPING/login';
 const REGISTER_ENDPOINT = '$USER_MAPPING/register-client';
 const FORGOT_PASSWORD_ENDPOINT = '$REQUEST_MAPPING/request-reset';
@@ -109,7 +114,7 @@ class AuthService {
   }
 
   Future<ClientProfileModel> getClientProfile(String token) async {
-    final uri = Uri.parse('${NetworkConstants.baseUrl}/api/clients/me');
+    final uri = Uri.parse('${NetworkConstants.baseUrl}$ME_ENDPOINT');
 
     final response = await http.get(
       uri,
@@ -175,8 +180,7 @@ class AuthService {
   Future<LoginResponseModel> _loginWithFirebaseIdToken(
       String firebaseIdToken) async {
     try {
-      final uri = Uri.parse(
-          'https://api.dev.legy.bramasquare.com/api/auth/firebase/google');
+      final uri = Uri.parse('${NetworkConstants.baseUrl}$GOOGLE_ENDPOINT');
 
       final response = await http.post(
         uri,
@@ -215,7 +219,7 @@ class AuthService {
   }
 
   Future<void> updatePhoneNumber(String phoneNumber, String token) async {
-    final uri = Uri.parse('${NetworkConstants.baseUrl}/api/clients/me/update');
+    final uri = Uri.parse('${NetworkConstants.baseUrl}$UPDATE_ENDPOINT');
 
     final response = await http.put(
       uri,
