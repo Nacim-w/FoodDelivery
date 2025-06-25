@@ -8,7 +8,6 @@ import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/utils/network_constants.dart';
-import 'package:legy/features/auth/model/client_model.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
@@ -108,7 +107,7 @@ class AuthService {
     }
   }
 
-  Future<Client?> signInWithGoogle() async {
+  Future<LoginResponseModel?> signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn(
         scopes: ['email', 'profile'],
@@ -153,7 +152,8 @@ class AuthService {
     }
   }
 
-  Future<Client> _loginWithFirebaseIdToken(String firebaseIdToken) async {
+  Future<LoginResponseModel> _loginWithFirebaseIdToken(
+      String firebaseIdToken) async {
     try {
       final uri = Uri.parse(
           'https://api.dev.legy.bramasquare.com/api/auth/firebase/google');
@@ -183,7 +183,7 @@ class AuthService {
       final userResponse = LoginResponseModel.fromJson(data);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
       await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
-      return Client.fromJson(data); // Use your actual model
+      return userResponse;
     } on ServerException {
       rethrow;
     } catch (e) {

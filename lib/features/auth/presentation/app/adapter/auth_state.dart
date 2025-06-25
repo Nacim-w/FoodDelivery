@@ -65,7 +65,7 @@ class AuthError extends AuthState {
 }
 
 class LoggedInGoogle extends AuthState {
-  final Client client;
+  final LoginResponseModel client;
   const LoggedInGoogle(this.client);
 
   @override
