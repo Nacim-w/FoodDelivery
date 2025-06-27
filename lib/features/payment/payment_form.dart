@@ -7,7 +7,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/checkbox_widget.dart';
-import 'package:legy/features/maps/widgets/save_button.dart';
+import 'package:legy/features/maps/presentation/widgets/save_button.dart';
 import 'package:legy/features/payment/payment_textfield.dart';
 
 class PaymentForm extends StatefulWidget {

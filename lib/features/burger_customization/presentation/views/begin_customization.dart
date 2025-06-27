@@ -41,20 +41,33 @@ class _BeginCustomizationState extends State<BeginCustomization> {
   };
 
   void addIngredient(String imagePath) {
+    if (selectedIngredients.length >= 10) {
+      // Optional: show a snackbar or some feedback
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Tu ne peux ajouter que 8 ingrédients au maximum."),
+        ),
+      );
+      return;
+    }
+
     setState(() {
       if (imagePath.contains('burgerBun')) {
-        selectedIngredients = [
-          Media.burgerBottomBun,
-          ...selectedIngredients,
-          Media.burgerTopBun,
-        ];
+        // Only add buns if not already present
+        if (!hasBuns) {
+          selectedIngredients = [
+            Media.burgerBottomBun,
+            ...selectedIngredients,
+            Media.burgerTopBun,
+          ];
+        }
       } else {
         String placedImage = placedVersionMap[imagePath] ?? imagePath;
         if (selectedIngredients.isEmpty) {
           selectedIngredients.add(placedImage);
         } else {
           selectedIngredients.insert(
-              selectedIngredients.length - 1, placedImage);
+              selectedIngredients.length - (hasBuns ? 1 : 0), placedImage);
         }
       }
     });

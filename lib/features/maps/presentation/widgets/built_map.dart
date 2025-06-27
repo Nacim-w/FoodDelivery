@@ -56,6 +56,7 @@ class _BuiltMapState extends State<BuiltMap> {
     }
 
     Position position = await Geolocator.getCurrentPosition(
+        // ignore: deprecated_member_use
         desiredAccuracy: LocationAccuracy.high);
     _initialPosition = LatLng(position.latitude, position.longitude);
 

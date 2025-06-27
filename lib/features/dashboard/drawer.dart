@@ -7,7 +7,7 @@ import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/draw_item.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/maps/map_page.dart';
+import 'package:legy/features/maps/presentation/view/map_view.dart';
 import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/payment/payment_page.dart';
 import 'package:legy/features/profile/params/presentation/views/params_view.dart';
@@ -122,7 +122,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             DrawerItem(
               leading: Media.locationDrawer,
               title: 'Adresses',
-              routing: '${HomePage.routePath}/${MapPage.routePath}',
+              routing: '${HomePage.routePath}/${MapView.routePath}',
             ),
             const SizedBox(height: 8.0),
             DrawerItem(

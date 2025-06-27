@@ -119,4 +119,61 @@ class HistoryService {
       throw ServerException(message: "Erreur rapport : ${response.body}");
     }
   }
+
+  Future<String> uploadReportImage(File imageFile) async {
+    final uri =
+        Uri.parse('${NetworkConstants.baseUrl}/api/v1/reports/upload-image');
+    String? token = cacheHelper.getSessionToken();
+
+    try {
+      final request = http.MultipartRequest('POST', uri);
+      request.headers.addAll({
+        HttpHeaders.authorizationHeader: 'Bearer $token',
+      });
+
+      // Add the image file to the request
+      final multipartFile = await http.MultipartFile.fromPath(
+        'image', // Field name expected by backend
+        imageFile.path,
+      );
+      request.files.add(multipartFile);
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      debugPrint('uploadReportImage response: ${response.body}');
+      debugPrint('uploadReportImage status code: ${response.statusCode}');
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await uploadReportImage(imageFile);
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        final imageUrl = data['imageUrl'] ?? data['url'] ?? '';
+        if (imageUrl.isEmpty) {
+          throw const ServerException(
+            message: "URL d'image non retournée par le serveur.",
+          );
+        }
+        return imageUrl;
+      } else {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage =
+            errorJson['error'] ?? 'Erreur lors du téléchargement de l\'image.';
+        throw ServerException(message: errorMessage);
+      }
+    } on TokenExpiredException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message: "Impossible de télécharger l'image. Réessayez plus tard.",
+      );
+    }
+  }
 }

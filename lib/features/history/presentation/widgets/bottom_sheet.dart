@@ -60,9 +60,25 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
       listener: (context, state) {
         if (state is ReportSubmitted) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Rapport envoyé avec succès!'),
+              backgroundColor: Colors.green,
+            ),
+          );
         } else if (state is ReportError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        } else if (state is ImageUploadError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Erreur téléchargement image: ${state.message}'),
+              backgroundColor: Colors.red,
+            ),
           );
         }
       },
@@ -175,29 +191,74 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
                 ],
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colours.lightThemeOrange5,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        final report = ReportModel(
-                          orderId: widget.orderId,
-                          type: _selectedIssue!.name,
-                          description: _descriptionController.text.trim(),
-                          // You can extend ReportModel to handle image path if needed
-                        );
-                        context.read<HistoryCubit>().submitReport(report);
-                      }
+                  child: BlocBuilder<HistoryCubit, HistoryState>(
+                    builder: (context, state) {
+                      final isLoading =
+                          state is ImageUploading || state is ReportSubmitting;
+
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colours.lightThemeOrange5,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  final report = ReportModel(
+                                    orderId: widget.orderId,
+                                    type: _selectedIssue!.name,
+                                    description:
+                                        _descriptionController.text.trim(),
+                                  );
+
+                                  if (_imageFile != null) {
+                                    // Submit with image upload
+                                    context
+                                        .read<HistoryCubit>()
+                                        .submitReportWithImage(
+                                          report: report,
+                                          imageFile: _imageFile!,
+                                        );
+                                  } else {
+                                    // Submit without image
+                                    context
+                                        .read<HistoryCubit>()
+                                        .submitReport(report);
+                                  }
+                                }
+                              },
+                        child: isLoading
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    ),
+                                  ),
+                                  const Gap(8),
+                                  Text(
+                                    state is ImageUploading
+                                        ? 'Téléchargement...'
+                                        : 'Envoi...',
+                                    style: TextStyles.textSemiBoldLarge.white1,
+                                  ),
+                                ],
+                              )
+                            : Text(
+                                'Submit',
+                                style: TextStyles.textSemiBoldLarge.white1,
+                              ),
+                      );
                     },
-                    child: Text(
-                      'Submit',
-                      style: TextStyles.textSemiBoldLarge.white1,
-                    ),
                   ),
                 ),
               ],

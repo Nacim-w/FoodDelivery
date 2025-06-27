@@ -9,7 +9,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/maps/map_page.dart';
+import 'package:legy/features/maps/presentation/view/map_view.dart';
 import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/profile/favorite/presentation/views/favorite_view.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
@@ -126,7 +126,7 @@ class _AddressBottomSheet extends StatelessWidget {
               ),
               backgroundColour: Colours.lightThemeOrange5,
               onPressed: () => context.go(
-                '${HomePage.routePath}/${MapPage.routePath}',
+                '${HomePage.routePath}/${MapView.routePath}',
               ),
             ),
           ],

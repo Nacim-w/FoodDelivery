@@ -32,6 +32,26 @@ class HistoryError extends HistoryState {
 
 class ReportSubmitting extends HistoryState {}
 
+class ImageUploading extends HistoryState {}
+
+class ImageUploadSuccess extends HistoryState {
+  final String imageUrl;
+
+  const ImageUploadSuccess(this.imageUrl);
+
+  @override
+  List<Object?> get props => [imageUrl];
+}
+
+class ImageUploadError extends HistoryState {
+  final String message;
+
+  const ImageUploadError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class ReportSubmitted extends HistoryState {}
 
 class ReportError extends HistoryState {

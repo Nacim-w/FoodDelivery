@@ -78,8 +78,8 @@ final router = GoRouter(
                   },
                 ),
                 GoRoute(
-                  path: MapPage.routePath,
-                  builder: (context, state) => const MapPage(),
+                  path: MapView.routePath,
+                  builder: (context, state) => const MapView(),
                 ),
                 GoRoute(
                   path: PaymentPage.routePath,

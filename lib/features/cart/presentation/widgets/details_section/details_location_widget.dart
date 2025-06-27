@@ -7,7 +7,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/maps/map_page.dart';
+import 'package:legy/features/maps/presentation/view/map_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/features/maps/model/saved_location_model.dart';
@@ -96,7 +96,7 @@ class _DetailsLocationWidgetState extends State<DetailsLocation> {
                         onPressed: () {
                           Navigator.of(context).pop();
                           context
-                              .go('${HomePage.routePath}/${MapPage.routePath}');
+                              .go('${HomePage.routePath}/${MapView.routePath}');
                         },
                         child: Text('Aller à la carte',
                             style: TextStyles.textMediumLarge.white1),
