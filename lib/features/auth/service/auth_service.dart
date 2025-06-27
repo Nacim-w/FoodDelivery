@@ -9,6 +9,7 @@ import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
+import 'package:legy/features/auth/model/google_response_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
 import 'package:legy/features/profile/params/model/client_profile_model.dart';
@@ -132,7 +133,7 @@ class AuthService {
     }
   }
 
-  Future<LoginResponseModel?> signInWithGoogle() async {
+  Future<GoogleResponseModel?> signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn(
         scopes: ['email', 'profile'],
@@ -142,15 +143,15 @@ class AuthService {
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        print('Google sign-in was canceled by the user.');
+        debugPrint('Google sign-in was canceled by the user.');
         return null;
       }
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      print('Google Access Token: ${googleAuth.accessToken}');
-      print('Google ID Token: ${googleAuth.idToken}');
+      debugPrint('Google Access Token: ${googleAuth.accessToken}');
+      debugPrint('Google ID Token: ${googleAuth.idToken}');
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -177,7 +178,7 @@ class AuthService {
     }
   }
 
-  Future<LoginResponseModel> _loginWithFirebaseIdToken(
+  Future<GoogleResponseModel> _loginWithFirebaseIdToken(
       String firebaseIdToken) async {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$GOOGLE_ENDPOINT');
@@ -204,7 +205,7 @@ class AuthService {
 
       final data = jsonDecode(response.body);
       debugPrint('AuthService _loginWithFirebaseIdToken data: $data');
-      final userResponse = LoginResponseModel.fromJson(data);
+      final userResponse = GoogleResponseModel.fromJson(data);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
       await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
       return userResponse;

@@ -13,12 +13,6 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          BuiltMap(),
-        ],
-      ),
-    );
+    return BuiltMap();
   }
 }

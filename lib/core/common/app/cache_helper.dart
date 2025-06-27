@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:legy/core/common/singletons/cache.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
+import 'package:legy/features/maps/model/saved_location_model.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,6 +14,7 @@ class CacheHelper {
   static const _sessionTokenKey = 'user-session-token';
   static const _cartProductsKey = 'cart-products';
   static const _userProfileKey = 'user-profile';
+  static const _savedLocationsKey = 'saved-locations';
 
   String? getSessionToken() {
     final sessionToken = _prefs.getString(_sessionTokenKey);
@@ -95,5 +97,17 @@ class CacheHelper {
 
   Future<void> clearUserProfile() async {
     await _prefs.remove(_userProfileKey);
+  }
+
+  Future<void> cacheSavedLocations(List<SavedLocation> locations) async {
+    final locationsJson = jsonEncode(locations.map((e) => e.toJson()).toList());
+    await _prefs.setString(_savedLocationsKey, locationsJson);
+  }
+
+  List<SavedLocation> getSavedLocations() {
+    final locationsString = _prefs.getString(_savedLocationsKey);
+    if (locationsString == null) return [];
+    final List<dynamic> decoded = jsonDecode(locationsString);
+    return decoded.map((e) => SavedLocation.fromJson(e)).toList();
   }
 }

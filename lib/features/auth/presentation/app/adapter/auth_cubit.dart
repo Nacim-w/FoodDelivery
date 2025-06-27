@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
+import 'package:legy/features/auth/model/google_response_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
 import 'package:legy/features/auth/model/register_response_model.dart';
 import 'package:legy/features/auth/service/auth_service.dart';

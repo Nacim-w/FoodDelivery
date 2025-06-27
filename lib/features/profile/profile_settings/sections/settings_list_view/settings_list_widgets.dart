@@ -6,7 +6,10 @@ import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/maps/map_page.dart';
 import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/profile/favorite/presentation/views/favorite_view.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
@@ -104,16 +107,26 @@ class _AddressBottomSheet extends StatelessWidget {
         height: context.height * 0.2,
         child: Column(
           children: [
-            Text('Vos adresses', style: TextStyles.textSemiBoldLarge.black1),
+            Text('Vos addresses', style: TextStyles.textSemiBoldLarge.black1),
+            Gap(10),
             SvgPicture.asset(Media.location),
             Text(
               'Aucune adresse n\'a encore été ajoutée.',
               style: TextStyles.textRegularSmall,
             ),
+            Gap(15),
             RoundedButton(
               text: '',
               widgetContentButton: Row(
-                children: [Icon(Icons.add), Text('Ajoutez votre adresse')],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add),
+                  Text('Ajoutez votre adresse'),
+                ],
+              ),
+              backgroundColour: Colours.lightThemeOrange5,
+              onPressed: () => context.go(
+                '${HomePage.routePath}/${MapPage.routePath}',
               ),
             ),
           ],
