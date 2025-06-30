@@ -77,7 +77,7 @@ Future<void> _orderInit() async {
 Future<void> _historyInit() async {
   sl
     ..registerFactory(() => HistoryCubit(historyService: sl()))
-    ..registerLazySingleton(() => HistoryService(sl()));
+    ..registerLazySingleton(() => HistoryService());
 }
 
 Future<void> _categoryInit() async {

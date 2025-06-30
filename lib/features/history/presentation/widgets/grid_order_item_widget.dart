@@ -99,6 +99,9 @@ class GridOrderItem extends StatelessWidget {
   }
 
   void _showReportBottomSheet(BuildContext context) {
+    final historyCubit =
+        context.read<HistoryCubit>(); // Safely read cubit outside the builder
+
     showModalBottomSheet(
       showDragHandle: true,
       context: context,
@@ -107,7 +110,7 @@ class GridOrderItem extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (_) => BlocProvider.value(
-        value: context.read<HistoryCubit>(),
+        value: historyCubit,
         child: ReportBottomSheet(orderId: orderid),
       ),
     );

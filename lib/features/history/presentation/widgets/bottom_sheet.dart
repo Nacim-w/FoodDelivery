@@ -224,7 +224,6 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
                                           imageFile: _imageFile!,
                                         );
                                   } else {
-                                    // Submit without image
                                     context
                                         .read<HistoryCubit>()
                                         .submitReport(report);

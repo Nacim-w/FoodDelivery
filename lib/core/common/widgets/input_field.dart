@@ -76,11 +76,21 @@ class InputField extends StatelessWidget {
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(45),
-            borderSide: BorderSide.none,
+            borderSide: const BorderSide(),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(45),
-            borderSide: BorderSide.none,
+            borderSide:
+                const BorderSide(color: Colours.lightThemeOrange0, width: 1.5),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(45),
+            borderSide: const BorderSide(color: Colours.lightThemeRed0),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(45),
+            borderSide:
+                const BorderSide(color: Colours.lightThemeRed0, width: 1.5),
           ),
           hintText: hintText,
           suffixIcon: suffixIcon,
@@ -94,7 +104,7 @@ class InputField extends StatelessWidget {
                 horizontal: 16,
               ),
           filled: true,
-          fillColor: fillColor ?? Colours.lightThemeWhite1,
+          fillColor: fillColor ?? Colours.lightThemeWhite5,
         ),
         inputFormatters: inputFormatters,
         validator: defaultValidation

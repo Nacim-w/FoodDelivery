@@ -14,6 +14,7 @@ import 'package:legy/features/category/presentation/widgets/cuisine_filters.dart
 import 'package:legy/features/category/presentation/widgets/popular_restaurant.dart';
 import 'package:legy/features/category/presentation/widgets/popular_dish.dart';
 import 'package:legy/features/dish/burger/presentation/widgets/burger_details.dart';
+import 'package:legy/features/dish/dessert/presentation/widgets/dessert_details.dart';
 import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_details.dart';
 import 'package:legy/features/dish/salad/presentation/widgets/salad_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
@@ -35,11 +36,14 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     Media.categoryDish4,
     Media.categoryDish5,
     Media.categoryDish2,
+    Media.dessertPopular1,
+    Media.dessertPopular2
   ];
   final List<String> categoryRoutes = [
     BurgerDetails.routePath,
     PizzaDetails.routePath,
     SaladDetails.routePath,
+    DessertDetails.routePath,
   ];
 
   @override

@@ -11,7 +11,6 @@ import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';
 import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/views/category_view.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
-import 'package:legy/features/categoryDessert/presentation/widgets/category_dessert_details.dart';
 import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/dashboard.dart';
 import 'package:legy/features/auth/presentation/views/change_password_view.dart';

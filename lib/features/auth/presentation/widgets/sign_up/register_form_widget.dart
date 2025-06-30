@@ -122,9 +122,19 @@ class _RegisterFormState extends State<RegisterForm> {
                 hintText: "Écrivez votre adresse e-mail",
                 keyboardType: TextInputType.emailAddress,
                 controller: _emailController,
-                validator: (val) => val == null || val.isEmpty
-                    ? "Veuillez entrer votre adresse e-mail"
-                    : null,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Veuillez entrer votre adresse e-mail";
+                  }
+
+                  final emailRegex =
+                      RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+                  if (!emailRegex.hasMatch(val)) {
+                    return "Veuillez entrer une adresse e-mail valide";
+                  }
+
+                  return null;
+                },
               ),
               const Gap(20),
               VerticalLabelField(
@@ -153,9 +163,18 @@ class _RegisterFormState extends State<RegisterForm> {
                 hintText: "Entrez votre numéro de téléphone",
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
-                validator: (val) => val == null || val.isEmpty
-                    ? "Veuillez entrer votre numéro"
-                    : null,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Veuillez entrer votre numéro";
+                  }
+
+                  final phoneRegex = RegExp(r'^\+\d{8,}$');
+                  if (!phoneRegex.hasMatch(val)) {
+                    return "Suivi de chiffres uniquement (ex: +21612345678)";
+                  }
+
+                  return null;
+                },
               ),
               const Gap(20),
               VerticalLabelField(
@@ -180,9 +199,19 @@ class _RegisterFormState extends State<RegisterForm> {
                     isPasswordVisible ? IconlyLight.hide : IconlyLight.show,
                   ),
                 ),
-                validator: (val) => val == null || val.isEmpty
-                    ? "Veuillez entrer un mot de passe"
-                    : null,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Veuillez entrer un mot de passe";
+                  }
+
+                  final passwordRegex = RegExp(
+                      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$');
+                  if (!passwordRegex.hasMatch(val)) {
+                    return "Le mot de passe doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.";
+                  }
+
+                  return null;
+                },
               ),
               const Gap(20),
               VerticalLabelField(

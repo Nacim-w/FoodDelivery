@@ -100,15 +100,22 @@ class _SignInFormState extends State<SignInForm> {
               ),
               const Gap(40),
               VerticalLabelField(
-                label: 'Adresse e-mail',
-                controller: _emailController,
+                defaultValidation: false,
+                label: "Adresse e-mail",
                 hintText: "Écrivez votre adresse e-mail",
                 keyboardType: TextInputType.emailAddress,
-                defaultValidation: false,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
+                controller: _emailController,
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
                     return "Veuillez entrer votre adresse e-mail";
                   }
+
+                  final emailRegex =
+                      RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+                  if (!emailRegex.hasMatch(val)) {
+                    return "Veuillez entrer une adresse e-mail valide";
+                  }
+
                   return null;
                 },
               ),

@@ -7,7 +7,6 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
-import 'package:legy/features/categoryDessert/presentation/widgets/category_dessert_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
 import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
@@ -53,13 +52,8 @@ class HomeCategorySection extends StatelessWidget {
               _categoryItem(context,
                   index: 2, image: Media.category1, name: 'Saine'),
               const Gap(30),
-              GestureDetector(
-                onTap: () {
-                  context.push(
-                      '${HomePage.routePath}/${CategoryDessertDetails.routePath}');
-                },
-                child: HomeCategory(image: Media.category4, name: 'Desserts'),
-              ),
+              _categoryItem(context,
+                  index: 3, image: Media.category4, name: 'Desserts'),
             ],
           ),
         ),

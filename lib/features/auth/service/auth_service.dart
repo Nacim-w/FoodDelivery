@@ -76,7 +76,9 @@ class AuthService {
   }) async {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$REGISTER_ENDPOINT');
-
+      debugPrint('AuthService register uri: $uri');
+      debugPrint(
+          'AuthService register body: $username, $firstname, $lastname, $email, $password, $phoneNumber, $address');
       final response = await http.post(
         uri,
         body: jsonEncode({
@@ -92,7 +94,8 @@ class AuthService {
         }),
         headers: NetworkConstants.headers,
       );
-
+      debugPrint('AuthService register response: ${response.body}');
+      debugPrint('AuthService register status code: ${response.statusCode}');
       if (response.statusCode != 201 && response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';

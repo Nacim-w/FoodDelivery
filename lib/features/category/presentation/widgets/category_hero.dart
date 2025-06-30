@@ -26,36 +26,42 @@ class _CategoryHeroState extends State<CategoryHero> {
     Media.categorie1,
     Media.categorie2,
     Media.categorie3,
+    Media.categorie4,
   ];
 
   final List<String> swapImages = [
     Media.categorySwap1,
     Media.categorySwap2,
     Media.categorySwap3,
+    Media.categorie4,
   ];
 
   final List<Color> categoryColors = [
     Colours.lightThemeRed5,
     Colours.lightThemeOrange5,
     Colours.lightThemeGreen5,
+    Colours.lightThemeBrown5
   ];
 
   final List<String> categoryTitles = [
     'Cuisine Sénégalaise',
     'Cuisine Internationale',
     'Cuisine Saine',
+    'Délices Sucrés',
   ];
 
   final List<String> categorySubtitles = [
     'Dégustez l’authenticité des saveurs sénégalaises !',
     'Saveurs italiennes, asiatiques, libanaises et plus !',
     'Dégustez l’authenticité des saveurs sénégalaises !',
+    'Dégustez les douceurs sucrées de notre sélection !',
   ];
 
   final List<String> categoryButton = [
     'Goûtez Sénégal',
     'Explorez le Monde',
     'Goûtez Saine',
+    'Délices Sucrés'
   ];
 
   @override
