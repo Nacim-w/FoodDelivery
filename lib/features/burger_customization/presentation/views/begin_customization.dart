@@ -1,18 +1,18 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:legy/core/common/widgets/green_app_bar.dart';
 import 'package:legy/core/extension/gap_extension.dart';
+import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/burger_customization/presentation/views/burger_final_screen.dart';
 import 'package:legy/features/burger_customization/presentation/widgets/suggestion_listview.dart';
 import 'package:legy/features/burger_customization/presentation/widgets/middle_section.dart';
-import 'package:legy/core/extension/media_extension.dart';
-import 'package:legy/core/extension/text_style_extension.dart';
-import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class BeginCustomization extends StatefulWidget {
@@ -27,6 +27,7 @@ class BeginCustomization extends StatefulWidget {
 class _BeginCustomizationState extends State<BeginCustomization> {
   List<String> selectedIngredients = [];
   bool isDragging = false;
+  bool isFavorited = false;
 
   final Map<String, String> placedVersionMap = {
     Media.burgerBacon: Media.burgerPlacedBacon,
@@ -42,7 +43,6 @@ class _BeginCustomizationState extends State<BeginCustomization> {
 
   void addIngredient(String imagePath) {
     if (selectedIngredients.length >= 10) {
-      // Optional: show a snackbar or some feedback
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Tu ne peux ajouter que 8 ingrédients au maximum."),
@@ -53,7 +53,6 @@ class _BeginCustomizationState extends State<BeginCustomization> {
 
     setState(() {
       if (imagePath.contains('burgerBun')) {
-        // Only add buns if not already present
         if (!hasBuns) {
           selectedIngredients = [
             Media.burgerBottomBun,
@@ -101,7 +100,74 @@ class _BeginCustomizationState extends State<BeginCustomization> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0)
                     .copyWith(bottom: 16),
-                child: GreenAppBar(title: 'Burger', onTap: context.pop),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Back Button
+                    InkWell(
+                      onTap: () => context.pop(),
+                      child: Container(
+                        width: context.width * 0.1,
+                        height: context.width * 0.1,
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colours.lightThemeGreen5,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colours.lightThemeBlack1.withAlpha(70),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: SvgPicture.asset(Media.categoryArrow),
+                        ),
+                      ),
+                    ),
+
+                    // Title
+                    Text(
+                      'Burger',
+                      style: TextStyles.titleSemiBold.white1,
+                    ),
+
+                    // Favorite Button
+                    Container(
+                      width: context.width * 0.1,
+                      height: context.width * 0.1,
+                      decoration: BoxDecoration(
+                        color: Colours.lightThemeGreen5,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colours.lightThemeBlack1.withAlpha(70),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: IconButton(
+                        icon: Icon(
+                          isFavorited
+                              ? Icons.favorite_rounded
+                              : Icons.favorite_border_rounded,
+                          color: Colours.lightThemeWhite1,
+                          size: context.width * 0.06,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isFavorited = !isFavorited;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               if (selectedIngredients.isEmpty) ...[
                 const SuggestionListview(),
@@ -224,13 +290,14 @@ class _BeginCustomizationState extends State<BeginCustomization> {
                         ),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               "Continue",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),
-                            SizedBox(width: 5),
-                            Icon(Icons.arrow_forward, color: Colors.white),
+                            const SizedBox(width: 5),
+                            const Icon(Icons.arrow_forward,
+                                color: Colors.white),
                           ],
                         ),
                       ),

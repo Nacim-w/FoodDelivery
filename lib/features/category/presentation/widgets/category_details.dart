@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
@@ -61,7 +62,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         : BurgerDetails.routePath;
     return Column(
       children: [
-        Gap(60),
+        context.adaptiveGap,
         CategoryAppBar(),
         Gap(20),
         Expanded(

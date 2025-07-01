@@ -65,7 +65,7 @@ class BurgerSelector extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: AssetImage(burgers[index]['image']!),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                       ),

@@ -51,32 +51,75 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               child: Column(
                 children: [
                   context.adaptiveGap,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                            color: Colours.lightThemeOrange0),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                      Text(
-                        'Le Coin des Burgers',
-                        style: TextStyles.textMediumLarge.white1,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          isFavorited
-                              ? Icons.favorite_rounded
-                              : Icons.favorite_border_rounded,
-                          color: Colours.lightThemeOrange0,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: Container(
+                            width: context.width * 0.1,
+                            height: context.width * 0.1,
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Colours.lightThemeGreen5,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colours.lightThemeBlack1.withAlpha(70),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: SvgPicture.asset(Media.categoryArrow),
+                            ),
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            isFavorited = !isFavorited;
-                          });
-                        },
-                      ),
-                    ],
+
+                        // Title with green text
+                        Text(
+                          'Le Coin des Burgers',
+                          style: TextStyles.textSemiBoldLarge.white1,
+                        ),
+
+                        // Favorite button with green background + shadow
+                        Container(
+                          width: context.width * 0.1,
+                          height: context.width * 0.1,
+                          decoration: BoxDecoration(
+                            color: Colours.lightThemeGreen5,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colours.lightThemeBlack1.withAlpha(70),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorited
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_border_rounded,
+                              color: Colours.lightThemeWhite1,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isFavorited = !isFavorited;
+                              });
+                            },
+                            iconSize: context.width * 0.06,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Gap(50),
                 ],
@@ -142,13 +185,13 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               itemBuilder: (context, index) {
                 return Center(
                   child: Container(
-                    width: context.width * 0.8,
-                    height: context.width * 0.8,
+                    width: context.width * 0.7,
+                    height: context.width * 0.7,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: AssetImage(burgers[index]['image']!),
-                        fit: BoxFit.contain,
+                        fit: BoxFit.scaleDown,
                       ),
                     ),
                   ),
@@ -170,7 +213,6 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               );
             },
             icon: const Icon(Icons.threed_rotation),
-            color: Colours.lightThemeOrange5,
             style: IconButton.styleFrom(
               backgroundColor: Colors.transparent,
               foregroundColor: Colours.lightThemeWhite1,
@@ -178,7 +220,7 @@ class _BurgerHeaderState extends State<BurgerHeader> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide(
-                  color: Colours.lightThemeOrange5,
+                  color: Colours.lightThemeGreen5,
                   width: 2,
                 ),
               ),

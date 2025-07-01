@@ -20,7 +20,6 @@ class DessertHeader extends StatefulWidget {
 
 class _DessertHeaderState extends State<DessertHeader> {
   bool isFavorited = false;
-  final PageController _pageController = PageController(initialPage: 0);
 
   final List<Map<String, String>> desserts = [
     {'image': Media.dessert4},
@@ -30,9 +29,7 @@ class _DessertHeaderState extends State<DessertHeader> {
   ];
 
   @override
-  @override
   void dispose() {
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -57,32 +54,73 @@ class _DessertHeaderState extends State<DessertHeader> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                              color: Colours.lightThemeWhite1),
-                          onPressed: () => Navigator.of(context).pop(),
+                        // Back button styled like SaladHeader / BuildHeaderBar
+                        InkWell(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: Container(
+                            width: context.width * 0.1,
+                            height: context.width * 0.1,
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Colours.lightThemeBrown4,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colours.lightThemeBlack1.withAlpha(70),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: SvgPicture.asset(Media.categoryArrow),
+                            ),
+                          ),
                         ),
+
+                        // Title text with green style
                         Text(
                           'Aux Fins Palais',
-                          style: TextStyles.textMediumLarge.white1,
+                          style: TextStyles.textSemiBoldLarge.white1,
                         ),
-                        IconButton(
-                          icon: Icon(
-                            isFavorited
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border_rounded,
-                            color: Colours.lightThemeWhite1,
+
+                        // Favorite button styled similarly
+                        Container(
+                          width: context.width * 0.1,
+                          height: context.width * 0.1,
+                          decoration: BoxDecoration(
+                            color: Colours.lightThemeBrown4,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colours.lightThemeBlack1.withAlpha(70),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
-                          onPressed: () {
-                            setState(() {
-                              isFavorited = !isFavorited;
-                            });
-                          },
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorited
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_border_rounded,
+                              color: Colours.lightThemeWhite1,
+                              size: context.width * 0.06,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isFavorited = !isFavorited;
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  Gap(50),
+                  const Gap(50),
                 ],
               ),
             ),
@@ -127,15 +165,6 @@ class _DessertHeaderState extends State<DessertHeader> {
           ),
         ),
         Positioned(
-          top: context.height * 0.15,
-          right: 0,
-          child: Image(
-            height: context.height * 0.2,
-            width: context.width * 0.2,
-            image: AssetImage(Media.blueCherry),
-          ),
-        ),
-        Positioned(
           top: context.height * 0.28,
           left: 0,
           child: SizedBox(
@@ -149,8 +178,7 @@ class _DessertHeaderState extends State<DessertHeader> {
               },
               itemBuilder: (context, index) {
                 return Align(
-                  alignment:
-                      Alignment.centerLeft, // Align the image to the left
+                  alignment: Alignment.centerLeft,
                   child: Container(
                     width: context.width * 0.7,
                     height: context.width * 0.7,

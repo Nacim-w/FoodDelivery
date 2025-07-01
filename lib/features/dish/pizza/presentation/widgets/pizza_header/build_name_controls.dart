@@ -14,7 +14,7 @@ class BuildNameControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: context.width * 1.15,
+      top: context.width * 1.2,
       left: 16,
       right: 16,
       child: Row(
@@ -30,7 +30,6 @@ class BuildNameControls extends StatelessWidget {
               );
             },
             icon: const Icon(Icons.threed_rotation),
-            color: Colours.lightThemeOrange5,
             style: IconButton.styleFrom(
               backgroundColor: Colors.transparent,
               foregroundColor: Colours.lightThemeWhite1,
@@ -38,7 +37,7 @@ class BuildNameControls extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide(
-                  color: Colours.lightThemeOrange5,
+                  color: Colours.lightThemeGreen5,
                   width: 2,
                 ),
               ),
@@ -62,16 +61,16 @@ class BuildNameControls extends StatelessWidget {
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(14),
         backgroundColor:
-            isSelected ? Colours.lightThemeOrange0 : Colors.transparent,
+            isSelected ? Colours.lightThemeGreen5 : Colors.transparent,
         side: BorderSide(
-          color: Colours.lightThemeOrange0,
+          color: Colours.lightThemeGreen5,
         ),
       ),
       child: Text(
         sizeLabel,
         style: TextStyles.textMediumLarge.white1.copyWith(
           color:
-              isSelected ? Colours.lightThemeWhite1 : Colours.lightThemeOrange0,
+              isSelected ? Colours.lightThemeWhite1 : Colours.lightThemeGreen5,
         ),
       ),
     );

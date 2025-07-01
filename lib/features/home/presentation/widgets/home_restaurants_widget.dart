@@ -67,8 +67,7 @@ class HomeRestaurants extends StatelessWidget {
                   Gap(8),
                   SizedBox(
                     width: context.width * 0.48,
-                    child:
-                        Text(title, style: TextStyles.textSemiBoldSmall.brown5),
+                    child: Text(title, style: TextStyles.textBoldSmall.brown5),
                   ),
                   Gap(2),
                   SizedBox(

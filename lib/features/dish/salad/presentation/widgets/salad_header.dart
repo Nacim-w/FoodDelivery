@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -48,27 +49,65 @@ class _SaladHeaderState extends State<SaladHeader> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                              color: Colours.lightThemeGreen5),
-                          onPressed: () => Navigator.of(context).pop(),
+                        InkWell(
+                          onTap: () => context.pop(),
+                          child: Container(
+                            width: context.width * 0.1,
+                            height: context.width * 0.1,
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Colours.lightThemeGreen5,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colours.lightThemeBlack1.withAlpha(70),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 2), // shadow position
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: SvgPicture.asset(
+                                Media.categoryArrow,
+                              ),
+                            ),
+                          ),
                         ),
                         Text(
                           'La table verte',
                           style: TextStyles.titleMediumSmall.green5,
                         ),
-                        IconButton(
-                          icon: Icon(
-                            isFavorited
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_border_rounded,
+                        Container(
+                          width: context.width * 0.1,
+                          height: context.width * 0.1,
+                          decoration: BoxDecoration(
                             color: Colours.lightThemeGreen5,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colours.lightThemeBlack1.withAlpha(70),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
-                          onPressed: () {
-                            setState(() {
-                              isFavorited = !isFavorited;
-                            });
-                          },
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorited
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_border_rounded,
+                              color: Colours.lightThemeWhite1,
+                              size: context.width * 0.06,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isFavorited = !isFavorited;
+                              });
+                            },
+                          ),
                         ),
                       ],
                     ),
