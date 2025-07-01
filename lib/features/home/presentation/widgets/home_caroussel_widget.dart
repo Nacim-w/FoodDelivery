@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/home/presentation/widgets/caroussal_items.dart';
 
 class HomeCaroussal extends StatefulWidget {
@@ -64,7 +65,7 @@ class _HomeCaroussalState extends State<HomeCaroussal> {
           decorator: DotsDecorator(
             size: const Size.square(9.0),
             activeSize: const Size(32.0, 9.0),
-            activeColor: const Color.fromARGB(255, 223, 191, 29),
+            activeColor: Colours.lightThemeOrange0,
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
           ),

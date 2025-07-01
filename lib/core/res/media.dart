@@ -177,7 +177,7 @@ abstract class Media {
   static const categoryDish3 = '$_baseImage/categoryDish3.png';
   static const categoryDish4 = '$_baseImage/categoryDish4.png';
   static const categoryDish5 = '$_baseImage/categoryDish5.png';
-
+  static const categoryArrow = '$_baseIcon/categoryArrow.svg';
   static const categoryScooter = '$_baseIcon/categoryScooter.svg';
   static const categoryStar = '$_baseIcon/categoryStar.svg';
   static const backgroundRed = '$_baseIcon/backgroundRed.svg';

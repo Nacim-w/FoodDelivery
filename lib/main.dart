@@ -36,8 +36,7 @@ class MyApp extends StatelessWidget {
           bottomSheetTheme: BottomSheetThemeData(
             dragHandleSize: const Size(
                 60, 3.5), // --> This will change the size of the drag handle
-            dragHandleColor: Colours
-                .lightThemeGrey1, // --> This will change the color of the drag handle
+            dragHandleColor: Colours.lightThemeGrey1,
           ),
           colorScheme:
               ColorScheme.fromSeed(seedColor: Colours.lightThemeOrange5),

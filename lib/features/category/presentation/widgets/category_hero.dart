@@ -97,11 +97,11 @@ class _CategoryHeroState extends State<CategoryHero> {
   Widget build(BuildContext context) {
     if (selectedIndex == null) return const SizedBox();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Stack(
-        children: [
-          Column(
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -113,7 +113,7 @@ class _CategoryHeroState extends State<CategoryHero> {
               ),
               Gap(15),
               SizedBox(
-                width: context.width * 0.5,
+                width: context.width * 0.7,
                 height: context.height * 0.1,
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
@@ -123,7 +123,7 @@ class _CategoryHeroState extends State<CategoryHero> {
                     categorySubtitles[selectedIndex!],
                     key: ValueKey('subtitle_$selectedIndex'),
                     style: TextStyles.textMediumLarge.black1,
-                    maxLines: 3,
+                    maxLines: 2,
                   ),
                 ),
               ),
@@ -135,20 +135,17 @@ class _CategoryHeroState extends State<CategoryHero> {
                   style: ElevatedButton.styleFrom(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    backgroundColor: Colours.lightThemeWhite5,
+                    backgroundColor: context.watch<CategoryProvider>().color,
                     elevation: 2,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
-                      side: BorderSide(
-                        color: context.watch<CategoryProvider>().color,
-                      ),
                     ),
                   ),
                   child: Text(
                     categoryButton[selectedIndex!],
                     key: ValueKey(selectedIndex),
                     style: TextStyles.textSemiBoldSmall.copyWith(
-                      color: context.watch<CategoryProvider>().color,
+                      color: Colours.lightThemeWhite1,
                     ),
                   ),
                 ),
@@ -193,35 +190,35 @@ class _CategoryHeroState extends State<CategoryHero> {
               )
             ],
           ),
-          Positioned(
-            right: 0,
-            top: context.width * 0.2,
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 600),
-              transitionBuilder: (child, animation) {
-                return RotationTransition(
-                  turns: Tween(begin: 0.7, end: 1.0).animate(animation),
-                  child: FadeTransition(opacity: animation, child: child),
-                );
-              },
-              child: Container(
-                width: context.width * 0.42,
-                height: context.width * 0.42,
-                // when the key changes the spin will be animated
-                key: ValueKey<int>(selectedIndex!),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(swapImages[selectedIndex!]),
-                    fit: BoxFit.cover,
-                  ),
+        ),
+        Positioned(
+          right: context.width * -0.18,
+          top: context.width * 0.015,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 600),
+            transitionBuilder: (child, animation) {
+              return RotationTransition(
+                turns: Tween(begin: 0.7, end: 1.0).animate(animation),
+                child: FadeTransition(opacity: animation, child: child),
+              );
+            },
+            child: Container(
+              width: context.width * 0.5,
+              height: context.width * 0.5,
+              // when the key changes the spin will be animated
+              key: ValueKey<int>(selectedIndex!),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage(swapImages[selectedIndex!]),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

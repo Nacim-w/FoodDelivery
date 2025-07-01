@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
@@ -22,47 +23,48 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           InkWell(
             onTap: () => context.pop(),
-            borderRadius: BorderRadius.circular(100),
             child: Container(
-              width: context.width * 0.08,
-              height: context.width * 0.08,
-              padding: const EdgeInsets.all(5.0),
+              width: context.width * 0.1,
+              height: context.width * 0.1,
+              padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 color: context.watch<CategoryProvider>().color,
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colours.lightThemeGrey0,
-                  width: 0.5,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colours.lightThemeBlack1.withAlpha(70),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 2), // shadow position
+                  ),
+                ],
               ),
-              child: SvgPicture.asset(
-                Media.arrowBack,
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: SvgPicture.asset(
+                  Media.categoryArrow,
+                ),
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(Media.homePin,
-                  width: 18,
-                  height: 18,
-                  colorFilter: ColorFilter.mode(
-                      Colours.lightThemeBlack1, BlendMode.srcIn)),
-              Text("phnom penh, Cambodia", style: TextStyles.textSemiBoldSmall),
-              const Icon(Icons.keyboard_arrow_down,
-                  size: 18, color: Colors.black),
-            ],
+          Text(
+            'Catégorie',
+            style: TextStyles.textBoldLarge.brown5,
           ),
           Container(
-            width: context.width * 0.10,
-            height: context.width * 0.10,
+            width: context.width * 0.1,
+            height: context.width * 0.1,
             decoration: BoxDecoration(
-              color: Colours.lightThemeWhite1,
+              color: context.watch<CategoryProvider>().color,
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colours.lightThemeGrey0,
-                width: 0.5,
-              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colours.lightThemeBlack1.withAlpha(70),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Center(
               child: IconButton(
@@ -70,7 +72,14 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
                   context
                       .push('${HomePage.routePath}/${FullCartView.routePath}');
                 },
-                icon: SvgPicture.asset(Media.cart),
+                icon: SvgPicture.asset(
+                  Media.cart,
+                  colorFilter: ColorFilter.mode(
+                    Colours.lightThemeWhite1,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                color: Colours.lightThemeWhite1,
                 iconSize: context.width * 0.06,
               ),
             ),
