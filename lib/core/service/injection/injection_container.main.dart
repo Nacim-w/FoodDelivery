@@ -11,6 +11,7 @@ Future<void> init() async {
   await _productInit();
   await _profileInit();
   await _favoriteInit();
+  await _orderDetailsInit();
   await _historyInit();
   await _orderInit();
   await _categoryInit();
@@ -78,6 +79,12 @@ Future<void> _historyInit() async {
   sl
     ..registerFactory(() => HistoryCubit(historyService: sl()))
     ..registerLazySingleton(() => HistoryService());
+}
+
+Future<void> _orderDetailsInit() async {
+  sl
+    ..registerFactory(() => OrderDetailsCubit(orderDetailsService: sl()))
+    ..registerLazySingleton(() => OrderDetailsService());
 }
 
 Future<void> _categoryInit() async {

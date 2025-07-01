@@ -180,14 +180,25 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: OrderHistoryView.routePath,
-              builder: (context, state) {
-                return BlocProvider(
-                  create: (_) => sl<HistoryCubit>(),
-                  child: OrderHistoryView(),
-                );
-              },
-            ),
+                path: OrderHistoryView.routePath,
+                builder: (context, state) {
+                  return BlocProvider(
+                    create: (_) => sl<HistoryCubit>(),
+                    child: OrderHistoryView(),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: OrderDetailsView.routePath + '/:orderId',
+                    builder: (context, state) {
+                      final orderId = state.pathParameters['orderId']!;
+                      return BlocProvider(
+                        create: (_) => sl<OrderDetailsCubit>(),
+                        child: OrderDetailsView(orderId: orderId),
+                      );
+                    },
+                  ),
+                ]),
           ],
         ),
         StatefulShellBranch(

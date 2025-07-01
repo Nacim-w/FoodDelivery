@@ -10,6 +10,8 @@ import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/service/home_service.dart';
 import 'package:legy/features/cart/presentation/app/order_cubit.dart';
 import 'package:legy/features/cart/service/order_service.dart';
+import 'package:legy/features/order_details/presentation/app/adapter/order_details_cubit.dart';
+import 'package:legy/features/order_details/service/order_details_service.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/service/product_service.dart';
 import 'package:legy/features/profile/favorite/presentation/app/favorite_cubit.dart';

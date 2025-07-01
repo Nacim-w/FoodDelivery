@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:legy/features/history/model/history_order_models.dart';
+import 'package:legy/features/history/presentation/views/order_history_view.dart';
 import 'package:legy/features/history/presentation/widgets/grid_order_item_widget.dart';
 
 class OrderGrid extends StatefulWidget {
-  static const routePath = 'onboarding';
-
   final List<OrderModel> orders;
 
   const OrderGrid({super.key, required this.orders});
@@ -23,14 +23,23 @@ class _OrderGridState extends State<OrderGrid> {
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
         children: widget.orders.map((order) {
-          return GridOrderItem(
-            orderid: order.id,
-            pic: order.restaurant.logo,
-            name: order.items.isNotEmpty
-                ? order.items[0].productName
-                : 'Commande',
-            details: order.restaurant.name,
-            price: '${order.total.toStringAsFixed(2)} CFA',
+          return GestureDetector(
+            onTap: () {
+              debugPrint(
+                  ' me trying things out ${OrderHistoryView.routePath}/order-details/${order.id}');
+              context.go(
+                '${OrderHistoryView.routePath}/order-details/${order.id}',
+              );
+            },
+            child: GridOrderItem(
+              orderid: order.id,
+              pic: order.restaurant.logo,
+              name: order.items.isNotEmpty
+                  ? order.items[0].productName
+                  : 'Commande',
+              details: order.restaurant.name,
+              price: '${order.total.toStringAsFixed(2)} CFA',
+            ),
           );
         }).toList(),
       ),
