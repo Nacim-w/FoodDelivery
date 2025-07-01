@@ -6,6 +6,7 @@ import 'package:iconly/iconly.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
 import 'package:legy/core/extension/gap_extension.dart';
+import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -13,7 +14,6 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/utils/core_utils.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
-import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seperator_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_up/checkbox_widget.dart';
@@ -110,12 +110,17 @@ class _RegisterFormState extends State<RegisterForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               context.adaptiveGap,
-              buildAutoSizeText("Créez votre nouveau compte"),
+              SizedBox(
+                width: context.width * 0.8,
+                child: Text("Créez votre nouveau compte",
+                    style: TextStyles.titleBoldLarge.orange5),
+              ),
+              Gap(10),
               Text(
                 "Créez un compte pour commencer à chercher les plats que vous aimez.",
                 style: TextStyles.textMedium.grey1,
               ),
-              const Gap(20),
+              const Gap(30),
               VerticalLabelField(
                 defaultValidation: false,
                 label: "Adresse e-mail",
@@ -130,7 +135,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   final emailRegex =
                       RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
                   if (!emailRegex.hasMatch(val)) {
-                    return "Veuillez entrer une adresse e-mail valide";
+                    return "Veuillez saisir une adresse e-mail valide";
                   }
 
                   return null;
@@ -207,7 +212,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   final passwordRegex = RegExp(
                       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$');
                   if (!passwordRegex.hasMatch(val)) {
-                    return "Le mot de passe doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial.";
+                    return "8 caract min. avec majuscule, chiffre et symbole.";
                   }
 
                   return null;

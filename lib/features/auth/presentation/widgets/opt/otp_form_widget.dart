@@ -2,8 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/common/widgets/rounded_button.dart';
+import 'package:legy/core/extension/gap_extension.dart';
+import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/core/extension/widget_extensions.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/views/change_password_view.dart';
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
@@ -14,8 +20,6 @@ import 'package:pinput/pinput.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
-import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
 
 class OtpForm extends StatefulWidget {
   const OtpForm({super.key});
@@ -28,6 +32,7 @@ class _OtpFormState extends State<OtpForm> {
   final _otpController = TextEditingController();
 
   bool canResend = false;
+  bool isResending = false;
   int remainingSeconds = 60;
   Timer? _timer;
 
@@ -47,7 +52,7 @@ class _OtpFormState extends State<OtpForm> {
   void startCountdown() {
     setState(() {
       canResend = false;
-      remainingSeconds = 60; // countdown duration in seconds
+      remainingSeconds = 60;
     });
 
     _timer?.cancel();
@@ -69,18 +74,20 @@ class _OtpFormState extends State<OtpForm> {
     final extra = GoRouterState.of(context).extra as Map<String, dynamic>;
     final email = extra['email'] as String;
 
+    setState(() => isResending = true);
+
     try {
       await context.read<AuthCubit>().sendResetCode(email);
       startCountdown();
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Le code a été renvoyé")),
       );
     } catch (e) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Erreur lors du renvoi : $e")),
       );
+    } finally {
+      if (mounted) setState(() => isResending = false);
     }
   }
 
@@ -107,9 +114,40 @@ class _OtpFormState extends State<OtpForm> {
       },
       builder: (context, state) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Gap(30),
-            buildAutoSizeText('Vérification par e-mail'),
+            context.adaptiveGap,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colours.lightThemeWhite1,
+                    border: Border.all(
+                      color: Colours.lightThemeGrey1.withAlpha(80),
+                    ),
+                  ),
+                  child: IconButton(
+                    icon: SvgPicture.asset(Media.authArrow),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Gap(20),
+            SizedBox(
+              width: context.width * 0.7,
+              child: Text(
+                'Vérification par e-mail',
+                style: TextStyles.titleBoldLarge.orange5,
+              ),
+            ),
+            Gap(15),
             Text(
               "Entrez le code de vérification que nous vous avons envoyé à : ${maskEmail(email)}",
               style: TextStyles.textMedium.grey1,
@@ -124,26 +162,37 @@ class _OtpFormState extends State<OtpForm> {
               ),
             ),
             const Gap(20),
-            resendOtpText(canResend, remainingSeconds, onResendPressed),
+
+            // LOADING SPINNER FOR RESEND
+            if (isResending)
+              const Center(child: CircularProgressIndicator())
+            else
+              Align(
+                alignment: Alignment.center,
+                child:
+                    resendOtpText(canResend, remainingSeconds, onResendPressed),
+              ),
+
             const Gap(20),
             resendOtpTimer(remainingSeconds),
             const Gap(40),
-            BuildLogInAndRegButton(
-              "Continuer",
-              "continuer",
-              () {
+
+            RoundedButton(
+              backgroundColour: Colours.lightThemeOrange5,
+              text: "Continuer",
+              onPressed: () {
                 final code = _otpController.text;
                 if (code.length == 6) {
                   context.read<AuthCubit>().verifyCode(email, code);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                        content: Text("Veuillez entrer un code à 6 chiffres")),
+                      content: Text("Veuillez entrer un code à 6 chiffres"),
+                    ),
                   );
                 }
               },
-            ),
-            if (state is AuthLoading) const CircularProgressIndicator(),
+            ).loading(state is AuthLoading),
           ],
         );
       },

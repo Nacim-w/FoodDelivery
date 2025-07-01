@@ -24,6 +24,7 @@ abstract class Media {
   static const delivery = '$_baseLottie/delivery.json';
 
   //auth
+  static const authArrow = '$_baseIcon/authArrow.svg';
   static const facebook = '$_baseIcon/facebook.png';
   static const google = '$_baseIcon/google.png';
   static const apple = '$_baseIcon/apple.png';

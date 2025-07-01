@@ -43,6 +43,10 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 10,
   );
+  static const TextStyle titleSemiBoldLarge = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 32,
+  );
   static const TextStyle titleSemiBold = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 24,

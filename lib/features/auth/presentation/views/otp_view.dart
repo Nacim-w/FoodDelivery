@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/widgets/opt/otp_form_widget.dart';
 
 class OtpView extends StatefulWidget {
@@ -53,10 +52,6 @@ class OtpViewState extends State<OtpView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('OTP', style: TextStyles.textSemiBold),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),

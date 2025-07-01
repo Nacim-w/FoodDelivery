@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -26,7 +25,8 @@ class VerticalLabelField extends StatelessWidget {
     this.contentPadding,
     this.prefixIcon,
     this.focusNode,
-    this.onTap, this.suffixIconConstraints,
+    this.onTap,
+    this.suffixIconConstraints,
   });
 
   final String label;
@@ -50,7 +50,6 @@ class VerticalLabelField extends StatelessWidget {
   final int prefixFlex;
   final VoidCallback? onTap;
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -58,7 +57,7 @@ class VerticalLabelField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyles.textBoldLarge,
+          style: TextStyles.textMedium,
         ),
         const Gap(10),
         Row(

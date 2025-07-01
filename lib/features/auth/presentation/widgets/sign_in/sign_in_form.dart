@@ -17,7 +17,6 @@ import 'package:legy/core/utils/core_utils.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
-import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_seperator_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/auth_widgets/thirdparty_login_widget.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_in/complete_profile_view.dart';
@@ -93,12 +92,14 @@ class _SignInFormState extends State<SignInForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               context.adaptiveGap,
-              buildAutoSizeText('Connectez-vous à votre compte.'),
+              Text('Connectez-vous à votre compte',
+                  style: TextStyles.titleBoldLarge.orange5),
+              Gap(10),
               Text(
                 "Veuillez vous connecter à votre compte",
                 style: TextStyles.textMedium.grey1,
               ),
-              const Gap(40),
+              const Gap(30),
               VerticalLabelField(
                 defaultValidation: false,
                 label: "Adresse e-mail",

@@ -76,12 +76,16 @@ class InputField extends StatelessWidget {
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(45),
-            borderSide: const BorderSide(),
+            borderSide: const BorderSide(color: Colours.lightThemeOrange5),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(45),
             borderSide:
                 const BorderSide(color: Colours.lightThemeOrange0, width: 1.5),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(45),
+            borderSide: const BorderSide(color: Colours.lightThemeOrange5),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(45),

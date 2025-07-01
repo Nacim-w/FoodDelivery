@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
+import 'package:legy/core/common/widgets/rounded_button.dart';
 import 'package:legy/core/common/widgets/vertical_label_field.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/extension/widget_extensions.dart';
+import 'package:legy/core/res/media.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
-import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
-import 'package:legy/features/auth/presentation/widgets/auth_widgets/auth_widgets.dart';
-import 'package:legy/features/auth/presentation/widgets/auth_widgets/build_login_reg_widget.dart';
+import 'package:legy/features/auth/presentation/widgets/change_password/custom_modal_widget.dart';
 
 class ChangePasswordForm extends StatefulWidget {
   const ChangePasswordForm({super.key});
@@ -60,11 +63,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
             SnackBar(content: Text(state.message)),
           );
         } else if (state is PasswordResetSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Mot de passe changé avec succès')),
-          );
-          context.go(SignInPage.routePath);
-          // Navigate away or reset form if needed
+          showCustomModal(context);
         }
       },
       builder: (context, state) {
@@ -76,8 +75,30 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Gap(30),
-                buildAutoSizeText("Réinitialiser le mot de passe"),
+                context.adaptiveGap,
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colours.lightThemeWhite1,
+                    border: Border.all(
+                      color: Colours.lightThemeGrey1.withAlpha(80),
+                    ),
+                  ),
+                  child: IconButton(
+                    icon: SvgPicture.asset(Media.authArrow),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                Gap(20),
+                Text(
+                  "Réinitialiser le mot de passe",
+                  style: TextStyles.titleBoldLarge.orange5,
+                ),
+                Gap(10),
                 Text(
                   "Votre nouveau mot de passe doit être différent de l'ancien.",
                   style: TextStyles.textMedium.grey1,
@@ -95,9 +116,19 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                       isPasswordVisible ? IconlyLight.hide : IconlyLight.show,
                     ),
                   ),
-                  validator: (val) => (val == null || val.isEmpty)
-                      ? "Veuillez entrer un mot de passe"
-                      : null,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return "Veuillez entrer un mot de passe";
+                    }
+
+                    final passwordRegex = RegExp(
+                        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$');
+                    if (!passwordRegex.hasMatch(val)) {
+                      return "8 caract min. avec majuscule, chiffre et symbole.";
+                    }
+
+                    return null;
+                  },
                 ),
                 const Gap(20),
                 VerticalLabelField(
@@ -123,10 +154,10 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                   },
                 ),
                 Gap(MediaQuery.of(context).size.height * 0.20),
-                BuildLogInAndRegButton(
-                  "Changer mot de passe",
-                  "Changer mot de passe",
-                  _submit,
+                RoundedButton(
+                  backgroundColour: Colours.lightThemeOrange5,
+                  text: "Changer mot de passe",
+                  onPressed: _submit,
                 ).loading(isLoading),
               ],
             ),

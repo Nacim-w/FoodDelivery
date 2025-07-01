@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -64,7 +61,6 @@ class OrderDetailsView extends StatelessWidget {
 
   Widget _buildOrderItem(BuildContext context, DetailsOrderItem item) {
     double totalSupplements = item.supplements.fold(0.0, (sum, supp) {
-      final qty = supp.quantity ?? 0;
       return sum;
     });
     final total = item.unitPrice * item.quantity + totalSupplements;
@@ -102,7 +98,7 @@ class OrderDetailsView extends StatelessWidget {
           ),
           const Gap(10),
           for (var supp in item.supplements)
-            if ((supp.quantity ?? 0) > 0)
+            if ((supp.quantity) > 0)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
