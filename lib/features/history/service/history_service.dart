@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -34,7 +35,7 @@ class HistoryService {
           HttpHeaders.contentTypeHeader: 'application/json',
         });
       }
-
+      debugPrint(response.body);
       if (response.statusCode == 200) {
         final decoded = jsonDecode(response.body);
         final List<dynamic> contentList = decoded['content'];

@@ -26,13 +26,13 @@ class _OrderGridState extends State<OrderGrid> {
           return GestureDetector(
             onTap: () {
               debugPrint(
-                  ' me trying things out ${OrderHistoryView.routePath}/order-details/${order.id}');
+                  ' me trying things out ${OrderHistoryView.routePath}/order-details/${order.orderId}');
               context.go(
-                '${OrderHistoryView.routePath}/order-details/${order.id}',
+                '${OrderHistoryView.routePath}/order-details/${order.orderId}',
               );
             },
             child: GridOrderItem(
-              orderid: order.id,
+              orderid: order.orderId,
               pic: order.restaurant.logo,
               name: order.items.isNotEmpty
                   ? order.items[0].productName

@@ -127,6 +127,20 @@ class _BurgerFinalScreenState extends State<BurgerFinalScreen> {
                       clipBehavior: Clip.none,
                       alignment: Alignment.bottomCenter,
                       children: [
+                        Positioned(
+                          width: context.width * 0.6,
+                          height: context.height * 0.3,
+                          right: context.width * 0,
+                          top: context.width * -0.2,
+                          child: Transform(
+                            alignment: Alignment.center,
+                            transform: Matrix4.identity()..scale(-1.5, -1.5),
+                            child: Image.asset(
+                              Media.bigSmoke,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                         if (widget.ingredients.contains(Media.burgerBottomBun))
                           Positioned(
                             bottom: 0,

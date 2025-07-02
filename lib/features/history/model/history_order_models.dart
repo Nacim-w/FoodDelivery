@@ -3,7 +3,7 @@ import 'package:legy/features/history/model/item_model.dart';
 import 'package:legy/features/history/model/history_restaurant_model.dart';
 
 class OrderModel {
-  final String id;
+  final String orderId;
   final List<ItemModel> items;
   final double total;
   final ClientModel client;
@@ -17,7 +17,7 @@ class OrderModel {
   final String orderStatus;
 
   OrderModel({
-    required this.id,
+    required this.orderId,
     required this.items,
     required this.total,
     required this.client,
@@ -33,7 +33,7 @@ class OrderModel {
 
   factory OrderModel.empty() {
     return OrderModel(
-      id: '',
+      orderId: '',
       items: [],
       total: 0.0,
       client: ClientModel.empty(),
@@ -50,7 +50,7 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
-      id: json['id'] ?? '',
+      orderId: json['orderId'] ?? '',
       items: (json['items'] as List<dynamic>? ?? [])
           .map((item) => ItemModel.fromJson(item))
           .toList(),
@@ -72,7 +72,7 @@ class OrderModel {
   }
 
   OrderModel copyWith({
-    String? id,
+    String? orderId,
     List<ItemModel>? items,
     double? total,
     ClientModel? client,
@@ -86,7 +86,7 @@ class OrderModel {
     String? orderStatus,
   }) {
     return OrderModel(
-      id: id ?? this.id,
+      orderId: orderId ?? this.orderId,
       items: items ?? this.items,
       total: total ?? this.total,
       client: client ?? this.client,

@@ -75,8 +75,8 @@ class _RestaurantViewState extends State<RestaurantView> {
       children: [
         BlocBuilder<RestaurantCubit, RestaurantState>(
           buildWhen: (previous, current) {
-            // Only rebuild if the restaurant ID changes
-            return previous.selectedRestaurant?.id != current.selectedRestaurant?.id;
+            return previous.selectedRestaurant?.id !=
+                current.selectedRestaurant?.id;
           },
           builder: (context, state) {
             return Column(

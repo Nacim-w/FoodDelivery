@@ -24,9 +24,10 @@ class DetailsOrderItem {
       unitPrice: (json['unitPrice'] as num).toDouble(),
       quantity: json['quantity'],
       promotionAmount: (json['promotionAmount'] as num).toDouble(),
-      supplements: (json['supplements'] as List<dynamic>)
-          .map((s) => DetailsSupplementModel.fromJson(s))
-          .toList(),
+      supplements: (json['supplements'] as List?)
+              ?.map((s) => DetailsSupplementModel.fromJson(s))
+              .toList() ??
+          [],
     );
   }
 }

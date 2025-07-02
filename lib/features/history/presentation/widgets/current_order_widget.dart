@@ -1,7 +1,6 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
@@ -12,15 +11,11 @@ class CurrentOrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DottedBorder(
+      color: Colours.lightThemeRed5,
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-        border: Border.all(
-          color: Colours.lightThemeGrey2,
-          width: 0.5,
-        ),
-      ),
+      radius: const Radius.circular(12),
+      borderType: BorderType.RRect,
       child: Column(
         children: [
           Row(
@@ -72,7 +67,7 @@ class CurrentOrderWidget extends StatelessWidget {
                       "Gourmet Griddle - Mangalore ",
                       style: TextStyles.textRegularSmallest,
                     ),
-                    Text(
+                    /*Text(
                       "10 CFA",
                       style: TextStyles.textRegularLarge.orange5,
                     ),
@@ -94,24 +89,13 @@ class CurrentOrderWidget extends StatelessWidget {
                         ),
                       ],
                     ),
+                    */
                   ],
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colours.lightThemeOrange5,
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.favorite,
-                      size: 16, color: Colours.lightThemeWhite3),
                 ),
               ),
             ],
           ),
-          Gap(15),
-          Row(
+          /*Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
@@ -152,7 +136,7 @@ class CurrentOrderWidget extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

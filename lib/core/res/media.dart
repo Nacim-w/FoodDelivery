@@ -217,6 +217,7 @@ abstract class Media {
   static const spinach = '$_baseImage/spinach.png';
   static const spinach2 = '$_baseImage/spinach2.png';
   static const pepper = '$_baseImage/pepper.png';
+  static const bigSmoke = '$_baseImage/bigSmoke.png';
 
   //preferences page
   static const pref1 = '$_baseIcon/pref1.svg';

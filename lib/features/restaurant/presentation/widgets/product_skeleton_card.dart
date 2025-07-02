@@ -46,19 +46,19 @@ class ProductSkeletonCard extends StatelessWidget {
               children: [
                 Container(
                   height: 14,
+                  width: textWidth * 0.5,
+                  color: Colors.grey[300],
+                ),
+                const Gap(5),
+                Container(
+                  height: 10,
                   width: textWidth * 0.8,
                   color: Colors.grey[300],
                 ),
                 const Gap(5),
                 Container(
                   height: 10,
-                  width: textWidth,
-                  color: Colors.grey[300],
-                ),
-                const Gap(5),
-                Container(
-                  height: 10,
-                  width: textWidth * 0.7,
+                  width: textWidth * 0.6,
                   color: Colors.grey[300],
                 ),
                 const Spacer(),
@@ -75,11 +75,6 @@ class ProductSkeletonCard extends StatelessWidget {
                           ),
                         ),
                         const Gap(5),
-                        Container(
-                          height: 12,
-                          width: 30,
-                          color: Colors.grey[300],
-                        ),
                         const Gap(20),
                       ],
                     );
