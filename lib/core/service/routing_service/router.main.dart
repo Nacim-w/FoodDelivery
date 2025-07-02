@@ -1,6 +1,63 @@
 part of 'router.dart';
 
+// import 'package:flutter/material.dart';
+
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
+
+CustomTransitionPage<T> fadeTransition<T>({required Widget child}) =>
+    CustomTransitionPage<T>(
+      transitionDuration: const Duration(milliseconds: 600),
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
+    );
+
+CustomTransitionPage<T> slideUpTransition<T>({required Widget child}) =>
+    CustomTransitionPage<T>(
+      transitionDuration: const Duration(milliseconds: 600),
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          SlideTransition(
+        position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
+            .animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
+        child: child,
+      ),
+    );
+
+CustomTransitionPage<T> slideHorizontalTransition<T>({required Widget child}) =>
+    CustomTransitionPage<T>(
+      transitionDuration: const Duration(milliseconds: 600),
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          SlideTransition(
+        position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+            .animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
+        child: child,
+      ),
+    );
+
+CustomTransitionPage<T> sharedAxisTransition<T>({
+  required Widget child,
+  SharedAxisTransitionType type = SharedAxisTransitionType.horizontal,
+}) =>
+    CustomTransitionPage<T>(
+      transitionDuration: const Duration(milliseconds: 800),
+      reverseTransitionDuration: const Duration(milliseconds: 600),
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          SharedAxisTransition(
+        animation: animation,
+        secondaryAnimation: secondaryAnimation,
+        transitionType: type,
+        child: child,
+      ),
+    );
 
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -24,88 +81,102 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: HomePage.routePath,
-              builder: (context, state) {
-                return BlocProvider(
+              pageBuilder: (context, state) => sharedAxisTransition(
+                child: BlocProvider(
                   create: (_) => sl<HomeCubit>(),
                   child: HomePage(),
-                );
-              },
+                ),
+              ),
               routes: [
                 GoRoute(
                   path: TrackingView.routePath,
-                  builder: (context, state) {
-                    return BlocProvider(
+                  pageBuilder: (context, state) => slideUpTransition(
+                    child: BlocProvider(
                       create: (_) => sl<TrackingCubit>(),
-                      child: TrackingView(
-                        orderId: '',
-                      ),
-                    );
-                  },
+                      child: TrackingView(orderId: ''),
+                    ),
+                  ),
                 ),
                 GoRoute(
                   path: PreferencesView.routePath,
-                  builder: (context, state) => const PreferencesView(),
+                  pageBuilder: (context, state) =>
+                      fadeTransition(child: const PreferencesView()),
                 ),
                 GoRoute(
                   path: OrderTrackingMapView.routePath,
-                  builder: (context, state) => const OrderTrackingMapView(),
+                  pageBuilder: (context, state) => slideUpTransition(
+                    child: const OrderTrackingMapView(),
+                  ),
                 ),
                 GoRoute(
                   path: BeginCustomization.routePath,
-                  builder: (context, state) => const BeginCustomization(),
+                  pageBuilder: (context, state) => slideUpTransition(
+                    child: const BeginCustomization(),
+                  ),
                   routes: [
                     GoRoute(
-                        path: BurgerFinalScreen.routePath,
-                        builder: (context, state) {
-                          final ingredients = state.extra as List<String>;
-                          return BurgerFinalScreen(ingredients: ingredients);
-                        }),
+                      path: BurgerFinalScreen.routePath,
+                      pageBuilder: (context, state) {
+                        final ingredients = state.extra as List<String>;
+                        return slideHorizontalTransition(
+                          child: BurgerFinalScreen(ingredients: ingredients),
+                        );
+                      },
+                    ),
                   ],
                 ),
                 GoRoute(
                   path: FullCartView.routePath,
-                  builder: (context, state) {
-                    return BlocProvider(
+                  pageBuilder: (context, state) => fadeTransition(
+                    child: BlocProvider(
                       create: (_) => sl<OrderCubit>(),
                       child: FullCartView(),
-                    );
-                  },
+                    ),
+                  ),
                 ),
                 GoRoute(
                   path: EmptyCartView.routePath,
-                  builder: (context, state) {
-                    return const EmptyCartView();
-                  },
+                  pageBuilder: (context, state) =>
+                      fadeTransition(child: const EmptyCartView()),
                 ),
                 GoRoute(
                   path: MapView.routePath,
-                  builder: (context, state) => const MapView(),
+                  pageBuilder: (context, state) => slideUpTransition(
+                    child: const MapView(),
+                  ),
                 ),
                 GoRoute(
                   path: PaymentPage.routePath,
-                  builder: (context, state) => const PaymentPage(),
+                  pageBuilder: (context, state) => slideUpTransition(
+                    child: const PaymentPage(),
+                  ),
                 ),
                 GoRoute(
                   path: CouponView.routePath,
-                  builder: (context, state) => const CouponView(),
+                  pageBuilder: (context, state) =>
+                      fadeTransition(child: const CouponView()),
                 ),
                 GoRoute(
                   path: 'restaurant/:restaurantId',
-                  builder: (context, state) {
+                  pageBuilder: (context, state) {
                     final restaurantId = state.pathParameters['restaurantId']!;
-                    return BlocProvider(
-                      create: (_) => sl<RestaurantCubit>(),
-                      child: RestaurantView(restaurantId: restaurantId),
+                    return slideHorizontalTransition(
+                      child: BlocProvider(
+                        create: (_) => sl<RestaurantCubit>(),
+                        child: RestaurantView(restaurantId: restaurantId),
+                      ),
                     );
                   },
                   routes: [
                     GoRoute(
                       path: 'product/:productId',
-                      builder: (context, state) {
+                      pageBuilder: (context, state) {
                         final productId = state.pathParameters['productId']!;
-                        return BlocProvider(
-                          create: (_) => sl<ProductCubit>(),
-                          child: ProductView(productId: productId),
+                        return slideHorizontalTransition(
+                          child: BlocProvider(
+                            create: (_) => sl<ProductCubit>(),
+                            child: ProductView(productId: productId),
+                          ),
                         );
                       },
                     ),
@@ -113,32 +184,36 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: AllRestaurantsView.routePath,
-                  builder: (context, state) {
-                    return BlocProvider(
+                  pageBuilder: (context, state) => fadeTransition(
+                    child: BlocProvider(
                       create: (_) => sl<RestaurantCubit>(),
                       child: AllRestaurantsView(),
-                    );
-                  },
+                    ),
+                  ),
                   routes: [
                     GoRoute(
                       path: 'restaurant/:restaurantId',
-                      builder: (context, state) {
+                      pageBuilder: (context, state) {
                         final restaurantId =
                             state.pathParameters['restaurantId']!;
-                        return BlocProvider(
-                          create: (_) => sl<RestaurantCubit>(),
-                          child: RestaurantView(restaurantId: restaurantId),
+                        return slideHorizontalTransition(
+                          child: BlocProvider(
+                            create: (_) => sl<RestaurantCubit>(),
+                            child: RestaurantView(restaurantId: restaurantId),
+                          ),
                         );
                       },
                       routes: [
                         GoRoute(
                           path: 'restaurant/:productId',
-                          builder: (context, state) {
+                          pageBuilder: (context, state) {
                             final productId =
                                 state.pathParameters['restaurantId']!;
-                            return BlocProvider(
-                              create: (_) => sl<ProductCubit>(),
-                              child: ProductView(productId: productId),
+                            return slideHorizontalTransition(
+                              child: BlocProvider(
+                                create: (_) => sl<ProductCubit>(),
+                                child: ProductView(productId: productId),
+                              ),
                             );
                           },
                         ),
@@ -148,28 +223,40 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: CategoryDetails.routePath,
-                  builder: (context, state) {
-                    return BlocProvider(
+                  pageBuilder: (context, state) => sharedAxisTransition(
+                    child: BlocProvider(
                       create: (_) => sl<CategoryCubit>(),
                       child: CategoryView(),
-                    );
-                  },
+                    ),
+                  ),
                   routes: [
                     GoRoute(
                       path: SaladDetails.routePath,
-                      builder: (context, state) => const SaladDetails(),
+                      pageBuilder: (context, state) =>
+                          slideHorizontalTransition(
+                        child: const SaladDetails(),
+                      ),
                     ),
                     GoRoute(
                       path: BurgerDetails.routePath,
-                      builder: (context, state) => const BurgerDetails(),
+                      pageBuilder: (context, state) =>
+                          slideHorizontalTransition(
+                        child: const BurgerDetails(),
+                      ),
                     ),
                     GoRoute(
                       path: PizzaDetails.routePath,
-                      builder: (context, state) => const PizzaDetails(),
+                      pageBuilder: (context, state) =>
+                          slideHorizontalTransition(
+                        child: const PizzaDetails(),
+                      ),
                     ),
                     GoRoute(
                       path: DessertDetails.routePath,
-                      builder: (context, state) => const DessertDetails(),
+                      pageBuilder: (context, state) =>
+                          slideHorizontalTransition(
+                        child: const DessertDetails(),
+                      ),
                     ),
                   ],
                 ),
@@ -177,56 +264,55 @@ final router = GoRouter(
             ),
           ],
         ),
+        // Order history branch
         StatefulShellBranch(
           routes: [
             GoRoute(
-                path: OrderHistoryView.routePath,
-                builder: (context, state) {
-                  return BlocProvider(
-                    create: (_) => sl<HistoryCubit>(),
-                    child: OrderHistoryView(),
-                  );
-                },
-                routes: [
-                  GoRoute(
-                    path: OrderDetailsView.routePath + '/:orderId',
-                    builder: (context, state) {
-                      final orderId = state.pathParameters['orderId']!;
-                      return BlocProvider(
-                        create: (_) => sl<OrderDetailsCubit>(),
-                        child: OrderDetailsView(orderId: orderId),
-                      );
-                    },
-                  ),
-                ]),
+              path: OrderHistoryView.routePath,
+              builder: (context, state) => BlocProvider(
+                create: (_) => sl<HistoryCubit>(),
+                child: OrderHistoryView(),
+              ),
+              routes: [
+                GoRoute(
+                  path: OrderDetailsView.routePath + '/:orderId',
+                  builder: (context, state) {
+                    final orderId = state.pathParameters['orderId']!;
+                    return BlocProvider(
+                      create: (_) => sl<OrderDetailsCubit>(),
+                      child: OrderDetailsView(orderId: orderId),
+                    );
+                  },
+                ),
+              ],
+            ),
           ],
         ),
+        // Search branch
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: SearchView.routePath,
-              builder: (context, state) {
-                return BlocProvider(
-                  create: (_) => sl<SearchCubit>(),
-                  child: SearchView(),
-                );
-              },
+              builder: (context, state) => BlocProvider(
+                create: (_) => sl<SearchCubit>(),
+                child: SearchView(),
+              ),
             ),
           ],
         ),
+        // Reels branch
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: ReelsView.routePath,
-              builder: (context, state) {
-                return BlocProvider(
-                  create: (_) => sl<ReelsCubit>(),
-                  child: ReelsView(),
-                );
-              },
+              builder: (context, state) => BlocProvider(
+                create: (_) => sl<ReelsCubit>(),
+                child: ReelsView(),
+              ),
             ),
           ],
         ),
+        // Profile/settings branch
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -243,12 +329,10 @@ final router = GoRouter(
                 ),
                 GoRoute(
                   path: FavoriteView.routePath,
-                  builder: (context, state) {
-                    return BlocProvider(
-                      create: (_) => sl<FavoriteCubit>(),
-                      child: FavoriteView(),
-                    );
-                  },
+                  builder: (context, state) => BlocProvider(
+                    create: (_) => sl<FavoriteCubit>(),
+                    child: FavoriteView(),
+                  ),
                 ),
                 GoRoute(
                   path: ParamsView.routePath,
@@ -256,12 +340,10 @@ final router = GoRouter(
                   routes: [
                     GoRoute(
                       path: ChangePasswordView.routePath,
-                      builder: (context, state) {
-                        return BlocProvider(
-                          create: (_) => sl<ProfileCubit>(),
-                          child: ChangePasswordView(),
-                        );
-                      },
+                      builder: (context, state) => BlocProvider(
+                        create: (_) => sl<ProfileCubit>(),
+                        child: ChangePasswordView(),
+                      ),
                     ),
                     GoRoute(
                       path: TermsServiceView.routePath,
@@ -269,12 +351,10 @@ final router = GoRouter(
                     ),
                     GoRoute(
                       path: PersonalDataPage.routePath,
-                      builder: (context, state) {
-                        return BlocProvider(
-                          create: (_) => sl<ProfileCubit>(),
-                          child: PersonalDataPage(),
-                        );
-                      },
+                      builder: (context, state) => BlocProvider(
+                        create: (_) => sl<ProfileCubit>(),
+                        child: PersonalDataPage(),
+                      ),
                     ),
                   ],
                 ),
@@ -284,63 +364,54 @@ final router = GoRouter(
         ),
       ],
     ),
+    // Sign-in flow
     GoRoute(
-        path: SignInPage.routePath,
-        builder: (context, state) {
-          return BlocProvider(
+      path: SignInPage.routePath,
+      builder: (context, state) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: SignInPage(),
+      ),
+      routes: [
+        GoRoute(
+          path: CompleteProfileView.routePath,
+          builder: (context, state) => BlocProvider(
             create: (_) => sl<AuthCubit>(),
-            child: SignInPage(),
-          );
-        },
-        routes: [
-          GoRoute(
-            path: CompleteProfileView.routePath,
-            builder: (context, state) {
-              return BlocProvider(
-                create: (_) => sl<AuthCubit>(),
-                child: CompleteProfileView(),
-              );
-            },
+            child: CompleteProfileView(),
           ),
-          GoRoute(
-            path: SignUpPage.routePath,
-            builder: (context, state) {
-              return BlocProvider(
-                create: (_) => sl<AuthCubit>(),
-                child: SignUpPage(),
-              );
-            },
+        ),
+        GoRoute(
+          path: SignUpPage.routePath,
+          builder: (context, state) => BlocProvider(
+            create: (_) => sl<AuthCubit>(),
+            child: SignUpPage(),
           ),
-          GoRoute(
-            path: ForgotPasswordView.routePath,
-            builder: (context, state) {
-              return BlocProvider(
-                create: (_) => sl<AuthCubit>(),
-                child: ForgotPasswordView(),
-              );
-            },
-            routes: [
-              GoRoute(
-                  path: OtpView.routePath,
-                  builder: (context, state) {
-                    return BlocProvider(
-                      create: (_) => sl<AuthCubit>(),
-                      child: OtpView(),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: ChangePasswordPage.routePath,
-                      builder: (context, state) {
-                        return BlocProvider(
-                          create: (_) => sl<AuthCubit>(),
-                          child: ChangePasswordPage(),
-                        );
-                      },
-                    ),
-                  ]),
-            ],
+        ),
+        GoRoute(
+          path: ForgotPasswordView.routePath,
+          builder: (context, state) => BlocProvider(
+            create: (_) => sl<AuthCubit>(),
+            child: ForgotPasswordView(),
           ),
-        ]),
+          routes: [
+            GoRoute(
+              path: OtpView.routePath,
+              builder: (context, state) => BlocProvider(
+                create: (_) => sl<AuthCubit>(),
+                child: OtpView(),
+              ),
+              routes: [
+                GoRoute(
+                  path: ChangePasswordPage.routePath,
+                  builder: (context, state) => BlocProvider(
+                    create: (_) => sl<AuthCubit>(),
+                    child: ChangePasswordPage(),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    ),
   ],
 );

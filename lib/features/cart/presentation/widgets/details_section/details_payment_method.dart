@@ -4,16 +4,35 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/cart/presentation/widgets/details_section/details_payment_bottom_sheet.dart';
 
-class DetailsPaymentMethod extends StatefulWidget {
+class DetailsPaymentMethod extends StatelessWidget {
   final String payMethod;
-  const DetailsPaymentMethod({super.key, required this.payMethod});
+  final void Function(String) onPaymentMethodSelected;
 
-  @override
-  State<DetailsPaymentMethod> createState() => _DetailsPaymentMethodState();
-}
+  const DetailsPaymentMethod({
+    super.key,
+    required this.payMethod,
+    required this.onPaymentMethodSelected,
+  });
 
-class _DetailsPaymentMethodState extends State<DetailsPaymentMethod> {
+  void _showPaymentMethodSheet(BuildContext context) {
+    showModalBottomSheet(
+      showDragHandle: true,
+      backgroundColor: Colours.lightThemeWhite1,
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return PaymentMethodBottomSheet(
+          selected: payMethod,
+          onSelected: onPaymentMethodSelected,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,11 +49,10 @@ class _DetailsPaymentMethodState extends State<DetailsPaymentMethod> {
         ),
         title:
             Text("Méthode de paiement", style: TextStyles.textSemiBold.black1),
-        subtitle:
-            Text(widget.payMethod, style: TextStyles.textMediumLarge.black1),
+        subtitle: Text(payMethod, style: TextStyles.textMediumLarge.black1),
         trailing: Icon(Icons.arrow_forward_ios_rounded,
             size: 16, color: Colours.lightThemeGrey1),
-        onTap: () {},
+        onTap: () => _showPaymentMethodSheet(context),
       ),
     );
   }

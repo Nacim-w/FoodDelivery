@@ -16,42 +16,52 @@ class SearchService {
   SearchService(this._cacheHelper);
 
   Future<List<SearchModel>> search(String query) async {
-    try {
-      final uri = Uri.parse('${NetworkConstants.baseUrl}$SEARCH_ENDPOINT');
-      final token = _cacheHelper.getSessionToken();
+    final token = _cacheHelper.getSessionToken();
 
-      final response = await http.get(
-        uri.replace(queryParameters: {'query': query}),
-        headers: {
-          HttpHeaders.authorizationHeader: 'Bearer $token',
-        },
+    if (token == null) {
+      throw const ForceLogoutException(
+        message: "Session expirée. Veuillez vous reconnecter.",
       );
+    }
 
-      if (response.statusCode == 401) {
-        // Token expired, try refreshing
-        try {
-          final refreshed = await AuthService().refreshToken();
-          if (refreshed) {
-            return await search(query); // retry
-          } else {
-            throw const ForceLogoutException(
-                message: "Session expirée, veuillez vous reconnecter.");
-          }
-        } on ForceLogoutException {
-          rethrow;
+    try {
+      final response = await _makeSearchRequest(query, token);
+
+      if (response.statusCode == 200) {
+        final body = jsonDecode(response.body);
+        if (body is List) {
+          return body.map((item) => SearchModel.fromJson(item)).toList();
+        } else {
+          throw const ServerException(
+            message: "Format de réponse inattendu.",
+          );
         }
       }
 
-      if (response.statusCode != 200) {
-        final errorJson = jsonDecode(response.body);
-        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
-        throw ServerException(message: errorMessage);
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          final newToken = _cacheHelper.getSessionToken();
+          if (newToken != null) {
+            final retryResponse = await _makeSearchRequest(query, newToken);
+            if (retryResponse.statusCode == 200) {
+              final retryBody = jsonDecode(retryResponse.body);
+              if (retryBody is List) {
+                return retryBody
+                    .map((item) => SearchModel.fromJson(item))
+                    .toList();
+              }
+            }
+          }
+        }
+        throw const ForceLogoutException(
+          message: "Session expirée. Veuillez vous reconnecter.",
+        );
       }
 
-      final data = jsonDecode(response.body) as List;
-      final searchResults =
-          data.map((item) => SearchModel.fromJson(item)).toList();
-      return searchResults;
+      final errorJson = jsonDecode(response.body);
+      final errorMessage = errorJson['error'] ?? 'Erreur inconnue.';
+      throw ServerException(message: errorMessage);
     } on ForceLogoutException {
       rethrow;
     } catch (e) {
@@ -60,5 +70,14 @@ class SearchService {
             "Une erreur s'est produite lors de la recherche. Veuillez réessayer plus tard.",
       );
     }
+  }
+
+  Future<http.Response> _makeSearchRequest(String query, String token) {
+    final uri = Uri.parse('${NetworkConstants.baseUrl}$SEARCH_ENDPOINT')
+        .replace(queryParameters: {'query': query});
+
+    return http.get(uri, headers: {
+      HttpHeaders.authorizationHeader: 'Bearer $token',
+    });
   }
 }

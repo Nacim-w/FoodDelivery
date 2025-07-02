@@ -12,6 +12,7 @@ class DetailsWidget extends StatefulWidget {
 
 class _DetailsWidgetState extends State<DetailsWidget> {
   String selectedLocationName = "aucun";
+  String selectedPaymentMethod = "Cash";
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,12 @@ class _DetailsWidgetState extends State<DetailsWidget> {
           },
         ),
         DetailsPaymentMethod(
-          payMethod: "Cash",
+          payMethod: selectedPaymentMethod,
+          onPaymentMethodSelected: (newMethod) {
+            setState(() {
+              selectedPaymentMethod = newMethod;
+            });
+          },
         ),
         DetailsDiscounts(),
       ],

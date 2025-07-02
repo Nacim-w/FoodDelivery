@@ -56,4 +56,7 @@ import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart'
 import 'package:legy/features/search/presentation/view/search_view.dart';
 import 'package:legy/features/web_socket/presentation/app/adapter/tracking_cubit.dart';
 import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
+import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
+
 part 'router.main.dart';

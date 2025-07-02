@@ -50,9 +50,10 @@ class _DetailsLocationWidgetState extends State<DetailsLocation> {
     if (!_initialized) return;
 
     final savedLocations = _cacheHelper.getSavedLocations();
-    List<SavedLocation> locations = List.from(savedLocations); // mutable copy
+    List<SavedLocation> locations = List.from(savedLocations);
 
     showModalBottomSheet(
+      showDragHandle: true,
       backgroundColor: Colours.lightThemeWhite1,
       context: context,
       shape: const RoundedRectangleBorder(
@@ -62,7 +63,7 @@ class _DetailsLocationWidgetState extends State<DetailsLocation> {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
-            final double sheetHeight = MediaQuery.of(context).size.height * 0.5;
+            final double sheetHeight = MediaQuery.of(context).size.height * 0.3;
 
             if (locations.isEmpty) {
               return SizedBox(
