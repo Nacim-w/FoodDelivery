@@ -33,6 +33,10 @@ class BuildListTile extends StatelessWidget {
           width: 20,
           height: 20,
           icon,
+          colorFilter: ColorFilter.mode(
+            textColor ?? Colours.lightThemeBlack1,
+            BlendMode.srcIn,
+          ),
         ),
         title: Text(title,
             style: TextStyles.textMedium

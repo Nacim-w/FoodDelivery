@@ -63,7 +63,8 @@ class _DetailsLocationWidgetState extends State<DetailsLocation> {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
-            final double sheetHeight = MediaQuery.of(context).size.height * 0.3;
+            final double sheetHeight =
+                MediaQuery.of(context).size.height * 0.35;
 
             if (locations.isEmpty) {
               return SizedBox(

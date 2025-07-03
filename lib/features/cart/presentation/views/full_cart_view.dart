@@ -54,7 +54,6 @@ class _FullCartWidgetState extends State<FullCartView> {
         total += supplement.price * (supplement.quantity ?? 0);
       }
     }
-
     return total;
   }
 
@@ -81,9 +80,20 @@ class _FullCartWidgetState extends State<FullCartView> {
                       product: product,
                       supplements: product.supplements,
                       onRemoved: () {
-                        // Reload the cart when a product is removed
                         loadCart();
-                      }, // linked supplements
+                      },
+                      onIncrement: () {
+                        setState(() {
+                          product.quantity++;
+                        });
+                      },
+                      onDecrement: () {
+                        setState(() {
+                          if (product.quantity > 1) {
+                            product.quantity--;
+                          }
+                        });
+                      },
                     ),
                   );
                 }),

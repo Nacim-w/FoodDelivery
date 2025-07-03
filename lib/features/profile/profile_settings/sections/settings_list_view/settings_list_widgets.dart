@@ -81,6 +81,8 @@ class BuiltListView extends StatelessWidget {
               .go('${ProfileSettingsPage.routePath}/${ParamsView.routePath}'),
         ),
         BuildListTile(
+            color: Colours.lightThemeRed5,
+            textColor: Colours.lightThemeWhite1,
             icon: Media.logOut,
             title: "Se déconnecter",
             onTap: () => showDialog(

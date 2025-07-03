@@ -3,23 +3,27 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/product/model/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 
 class CommandCardWidget extends StatefulWidget {
   final ProductModel product;
   final List<Supplement> supplements;
-  final VoidCallback? onRemoved; // Callback to notify parent
+  final VoidCallback? onRemoved;
+  final VoidCallback onIncrement;
+  final VoidCallback onDecrement;
 
   const CommandCardWidget({
     super.key,
     required this.product,
     required this.supplements,
     this.onRemoved,
+    required this.onIncrement,
+    required this.onDecrement,
   });
 
   @override
@@ -27,13 +31,11 @@ class CommandCardWidget extends StatefulWidget {
 }
 
 class _CommandCardWidgetState extends State<CommandCardWidget> {
-  late int productQuantity;
   late Uint8List imageBytes;
 
   @override
   void initState() {
     super.initState();
-    productQuantity = widget.product.quantity;
     _decodeImage();
   }
 
@@ -46,38 +48,17 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
   }
 
   void _decodeImage() {
-    final base64Str = widget.product.imageUrl.split(',').last;
-    imageBytes = base64Decode(base64Str);
+    imageBytes = base64Decode(widget.product.imageUrl.split(',').last);
   }
 
-  void increment() {
-    setState(() {
-      productQuantity++;
-    });
-  }
-
-  void decrement() {
-    if (productQuantity > 1) {
-      setState(() {
-        productQuantity--;
-      });
-    }
-  }
-
-  Future<void> removeProductFromCart() async {
+  Future<void> removeProductFromCart(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     final cacheHelper = CacheHelper(prefs);
 
-    // Get current cart products
     final currentProducts = cacheHelper.getCartProducts();
-
-    // Remove the product by ID
     currentProducts.removeWhere((p) => p.id == widget.product.id);
-
-    // Save updated list back to cache
     await cacheHelper.cacheCartProducts(currentProducts);
 
-    // Optional: Notify parent widget to reload cart
     if (widget.onRemoved != null) {
       widget.onRemoved!();
     }
@@ -85,18 +66,28 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final activeSupplements = widget.supplements
-        .where((supplement) =>
-            supplement.quantity != null && supplement.quantity! > 0)
-        .toList();
+    final Map<String, Map<String, dynamic>> supplementMap = {};
 
-    double productTotal = productQuantity * widget.product.pricePostCom;
+    for (var supp in widget.supplements) {
+      if (supp.quantity != null && supp.quantity! > 0) {
+        if (supplementMap.containsKey(supp.name)) {
+          supplementMap[supp.name]!['quantity'] += supp.quantity!;
+        } else {
+          supplementMap[supp.name] = {
+            'quantity': supp.quantity!,
+            'price': supp.price,
+          };
+        }
+      }
+    }
+
+    final double productTotal =
+        widget.product.pricePostCom * widget.product.quantity;
 
     return Stack(
       children: [
         Container(
           padding: const EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: Colours.lightThemeWhite1,
             borderRadius: BorderRadius.circular(20),
@@ -129,15 +120,11 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.product.name,
-                        style: TextStyles.textMediumSmall.black1,
-                      ),
+                      Text(widget.product.name,
+                          style: TextStyles.textMediumSmall.black1),
                       const Gap(10),
-                      Text(
-                        '${productTotal.toInt()}  CFA',
-                        style: TextStyles.textMediumLarge.red5,
-                      ),
+                      Text('${productTotal.toInt()} CFA',
+                          style: TextStyles.textMediumLarge.red5),
                       const Gap(10),
                       Row(
                         children: [
@@ -155,14 +142,15 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                               child: IconButton(
                                 icon: const Icon(Icons.remove),
                                 color: Colours.lightThemeOrange5,
-                                onPressed: decrement,
+                                onPressed: widget.onDecrement,
                                 iconSize: 12,
+                                padding: EdgeInsets.zero,
                               ),
                             ),
                           ),
                           const Gap(10),
                           Text(
-                            productQuantity.toString(),
+                            widget.product.quantity.toString(),
                             style: TextStyles.textMediumLarge.orange5,
                           ),
                           const Gap(10),
@@ -180,8 +168,9 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                               child: IconButton(
                                 icon: const Icon(Icons.add),
                                 color: Colours.lightThemeOrange5,
-                                onPressed: increment,
+                                onPressed: widget.onIncrement,
                                 iconSize: 12,
+                                padding: EdgeInsets.zero,
                               ),
                             ),
                           ),
@@ -197,18 +186,15 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                 endIndent: 5,
                 indent: 5,
               ),
-              for (var supp in activeSupplements)
+              for (var entry in supplementMap.entries)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Text("${entry.key} x${entry.value['quantity']}",
+                        style: TextStyles.textMediumSmall.black1),
                     Text(
-                      "${supp.name} x${supp.quantity}",
-                      style: TextStyles.textMediumSmall.black1,
-                    ),
-                    Text(
-                      "${supp.price * supp.quantity!} CFA",
-                      style: TextStyles.textMediumSmall.red5,
-                    ),
+                        "${entry.value['price'] * entry.value['quantity']} CFA",
+                        style: TextStyles.textMediumSmall.red5),
                   ],
                 ),
               const Gap(20),
@@ -219,17 +205,11 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
           top: 15,
           right: 15,
           child: GestureDetector(
-            onTap: removeProductFromCart,
-            child: Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,
-              ),
-              child: const Icon(
-                Icons.close,
-                size: 16,
-                color: Colours.lightThemeGrey0,
-              ),
+            onTap: () => removeProductFromCart(context),
+            child: const Icon(
+              Icons.close,
+              size: 16,
+              color: Colours.lightThemeGrey0,
             ),
           ),
         ),

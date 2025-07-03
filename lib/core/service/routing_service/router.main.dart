@@ -6,8 +6,8 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 
 CustomTransitionPage<T> fadeTransition<T>({required Widget child}) =>
     CustomTransitionPage<T>(
-      transitionDuration: const Duration(milliseconds: 600),
-      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 200),
       child: child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(
@@ -18,8 +18,8 @@ CustomTransitionPage<T> fadeTransition<T>({required Widget child}) =>
 
 CustomTransitionPage<T> slideUpTransition<T>({required Widget child}) =>
     CustomTransitionPage<T>(
-      transitionDuration: const Duration(milliseconds: 600),
-      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 200),
       child: child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           SlideTransition(
@@ -31,8 +31,8 @@ CustomTransitionPage<T> slideUpTransition<T>({required Widget child}) =>
 
 CustomTransitionPage<T> slideHorizontalTransition<T>({required Widget child}) =>
     CustomTransitionPage<T>(
-      transitionDuration: const Duration(milliseconds: 600),
-      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 200),
       child: child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           SlideTransition(
@@ -47,8 +47,8 @@ CustomTransitionPage<T> sharedAxisTransition<T>({
   SharedAxisTransitionType type = SharedAxisTransitionType.horizontal,
 }) =>
     CustomTransitionPage<T>(
-      transitionDuration: const Duration(milliseconds: 800),
-      reverseTransitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 200),
       child: child,
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           SharedAxisTransition(
