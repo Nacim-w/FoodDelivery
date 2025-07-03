@@ -23,6 +23,7 @@ dependencies:
   firebase_messaging: ^15.2.8
   flutter_advanced_switch: ^3.1.0
   flutter_bloc: ^9.0.0
+  flutter_local_notifications: ^19.3.0
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17

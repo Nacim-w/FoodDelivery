@@ -1,37 +1,94 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:legy/core/service/routing_service/router.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
-@pragma('vm:entry-point')
-Future<void> handleBackgroundMessage(RemoteMessage message) async {
-  print('--- Background Message Received ---');
-  print('Title: ${message.notification?.title}');
-  print('Body: ${message.notification?.body}');
-  print('Data: ${message.data}');
-}
+// Notification plugin instance
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
+// Message tap handler
 void handleMessage(RemoteMessage? message) {
   if (message == null) return;
   router.go(HomePage.routePath);
 }
 
+// Init push notifications + local UI
 Future initPushNotifications() async {
+  // Foreground presentation settings
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
+
+  // Notification tap when app is terminated
   FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
+
+  // Notification tap when app is backgrounded
   FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-  FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+
+  // Foreground message handler: show local notification
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Foreground message received: ${message.notification?.title}');
+    if (message.notification != null) {
+      final notification = message.notification!;
+      final android = notification.android;
+
+      flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            'high_importance_channel',
+            'High Importance Notifications',
+            channelDescription:
+                'This channel is used for important notifications.',
+            importance: Importance.high,
+            priority: Priority.high,
+            icon: android?.smallIcon ?? '@mipmap/ic_launcher',
+          ),
+        ),
+      );
+    }
+  });
 }
 
+// Setup local notifications
+Future initLocalNotification() async {
+  const AndroidInitializationSettings androidSettings =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  const InitializationSettings settings =
+      InitializationSettings(android: androidSettings);
+
+  await flutterLocalNotificationsPlugin.initialize(settings);
+
+  const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel',
+    'High Importance Notifications',
+    description: 'This channel is used for important notifications.',
+    importance: Importance.high,
+  );
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+}
+
+// Firebase API class
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
+
   Future<void> initNotifications() async {
     await _firebaseMessaging.requestPermission();
+
     final fCMToken = await _firebaseMessaging.getToken();
     print('FCM Token: $fCMToken');
-    initPushNotifications();
+
+    await initLocalNotification(); // init local notifications
+    await initPushNotifications(); // init FCM + handlers
   }
 }
