@@ -16,6 +16,9 @@ class SearchService {
   SearchService(this._cacheHelper);
 
   Future<List<SearchModel>> search(String query) async {
+    if (query.trim().length < 3) {
+      return [];
+    }
     final token = _cacheHelper.getSessionToken();
 
     if (token == null) {
