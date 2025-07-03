@@ -40,6 +40,7 @@ class CacheHelper {
 
   Future<void> resetSession() async {
     await _prefs.remove(_sessionTokenKey);
+    await _prefs.remove(_refreshTokenKey);
     await _prefs.remove(_userProfileKey);
     Cache.instance.resetSession();
   }
@@ -93,10 +94,6 @@ class CacheHelper {
     if (profileString == null) return null;
     final profileJson = jsonDecode(profileString);
     return HomeProfileModel.fromJson(profileJson);
-  }
-
-  Future<void> clearUserProfile() async {
-    await _prefs.remove(_userProfileKey);
   }
 
   Future<void> cacheSavedLocations(List<SavedLocation> locations) async {

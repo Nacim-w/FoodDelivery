@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -83,9 +82,7 @@ class HomeService {
         uri,
         headers: NetworkConstants.headers,
       );
-      debugPrint('Response uri : ${uri}');
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
+
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
@@ -141,6 +138,7 @@ class HomeService {
       final data = jsonDecode(response.body);
       final userProfile = HomeProfileModel.fromJson(data);
       await _cacheHelper.cacheUserProfile(userProfile);
+      await _cacheHelper.getCachedUserProfile();
       return userProfile;
     } on TokenExpiredException {
       rethrow;
@@ -160,9 +158,7 @@ class HomeService {
         uri,
         headers: NetworkConstants.headers,
       );
-      debugPrint('Response uri : ${uri}');
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
+
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
