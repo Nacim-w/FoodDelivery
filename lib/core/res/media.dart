@@ -54,6 +54,7 @@ abstract class Media {
   static const favoriteMeal4 = '$_baseImage/favoriteMeal4.png';
   static const favoriteMeal5 = '$_baseImage/favoriteMeal5.png';
   static const favoriteMeal6 = '$_baseImage/favoriteMeal6.png';
+  static const emptyFavorite = '$_baseLottie/empty.json';
 
   //bottom navigation bar icons
   static const home = '$_baseIcon/home.svg';

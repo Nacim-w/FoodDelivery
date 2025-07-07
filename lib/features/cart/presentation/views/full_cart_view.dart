@@ -3,6 +3,10 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/gap_extension.dart';
+import 'package:legy/core/extension/media_extension.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/cart/presentation/views/empty_cart_view.dart';
 import 'package:legy/features/cart/presentation/widgets/command_section/command_card_widget.dart';
@@ -46,6 +50,14 @@ class _FullCartWidgetState extends State<FullCartView> {
     });
   }
 
+  Future<void> clearCart() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cacheHelper = CacheHelper(prefs);
+
+    await cacheHelper.clearCart();
+    context.go('${HomePage.routePath}/${EmptyCartView.routePath}');
+  }
+
   double calculateTotalPrice() {
     double total = 0;
     for (var product in products) {
@@ -68,6 +80,32 @@ class _FullCartWidgetState extends State<FullCartView> {
           padding:
               const EdgeInsets.symmetric(horizontal: 16.0).copyWith(bottom: 16),
           child: ProfileSettingsAppbar(title: 'Mon Panier'),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Détails commande',
+                style: TextStyles.textMedium.black1,
+              ),
+              SizedBox(
+                height: context.width * 0.08,
+                child: OutlinedButton(
+                  onPressed: clearCart,
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colours.lightThemeRed5),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                  ),
+                  child: Text(
+                    'vider le panier',
+                    style: TextStyles.textMedium.red5,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         Expanded(
           child: SingleChildScrollView(
