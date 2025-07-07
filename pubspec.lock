@@ -209,6 +209,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
+  dchs_motion_sensors:
+    dependency: transitive
+    description:
+      name: dchs_motion_sensors
+      sha256: "2a6eec0c47fd59d0f923aa758286ded0d74ae79519dec560d003e6d0797877e2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   diff_match_patch:
     dependency: transitive
     description:
@@ -422,6 +430,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
+  flutter_cube:
+    dependency: transitive
+    description:
+      name: flutter_cube
+      sha256: "71cf679a251166eb97f86751c56582b09abdbf859485fbf60524948813914c3b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   flutter_inappwebview:
     dependency: transitive
     description:
@@ -1096,6 +1112,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  panorama_viewer:
+    dependency: "direct main"
+    description:
+      name: panorama_viewer
+      sha256: "8e8d46604cde75f18ff7019da8dfec4a731cff073841e8d65eabd4feecbe40da"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   path:
     dependency: transitive
     description:

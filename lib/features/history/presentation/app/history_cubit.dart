@@ -41,7 +41,8 @@ class HistoryCubit extends Cubit<HistoryState> {
 
       // Step 2: Submit report with image URL
       emit(ReportSubmitting());
-      final reportWithImage = report.copyWith(imageUrl: imageUrl);
+      final reportWithImage = report.copyWith(attachmentUrls: [imageUrl]);
+
       await historyService.sendReport(reportWithImage);
       emit(ReportSubmitted());
     } catch (e) {

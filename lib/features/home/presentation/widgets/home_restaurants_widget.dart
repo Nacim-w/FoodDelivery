@@ -8,6 +8,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:panorama_viewer/panorama_viewer.dart';
 
 class HomeRestaurants extends StatelessWidget {
   final String image;
@@ -108,18 +109,21 @@ class HomeRestaurants extends StatelessWidget {
           Positioned(
             top: 0,
             right: 0,
-            child: Container(
-              width: 50,
-              height: 30,
-              decoration: BoxDecoration(
-                color: Colours.lightThemeOrange0,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
+            child: GestureDetector(
+              onTap: () => showPanoramaDialog(context),
+              child: Container(
+                width: 50,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: Colours.lightThemeOrange0,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
                 ),
-              ),
-              child: Center(
-                child: SvgPicture.asset(Media.homeCamera),
+                child: Center(
+                  child: SvgPicture.asset(Media.homeCamera),
+                ),
               ),
             ),
           ),
@@ -127,4 +131,39 @@ class HomeRestaurants extends StatelessWidget {
       ),
     );
   }
+}
+
+void showPanoramaDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierColor: Colors.black.withAlpha(200),
+    builder: (context) => Stack(
+      children: [
+        Center(
+          child: AspectRatio(
+            aspectRatio: 16 / 12,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: PanoramaViewer(
+                animSpeed: 1.0,
+                child: Image.asset(
+                  'assets/images/360.jpg',
+                  fit: BoxFit.cover, // keeps the image well scaled
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 40,
+          right: 20,
+          child: IconButton(
+            icon: Icon(Icons.close, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        )
+      ],
+    ),
+  );
 }

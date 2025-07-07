@@ -72,7 +72,7 @@ class HistoryService {
         if (!refreshed) {
           throw const TokenExpiredException(message: "Session expirée.");
         }
-
+        debugPrint(response.body);
         final newToken = sl<CacheHelper>().getSessionToken();
         response = await http.post(
           uri,
@@ -108,9 +108,10 @@ class HistoryService {
       });
       request.files
           .add(await http.MultipartFile.fromPath('file', imageFile.path));
-
+      debugPrint('Uploading image: ${imageFile.path}');
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
+      debugPrint('Image upload response: ${response.body}');
 
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();

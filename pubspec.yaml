@@ -42,6 +42,7 @@ dependencies:
   lottie: ^3.3.1
   mocktail: ^1.0.4
   model_viewer_plus: ^1.9.3
+  panorama_viewer: ^2.0.4
   pinput: ^5.0.1
   provider: ^6.1.4
   shared_preferences: ^2.5.2

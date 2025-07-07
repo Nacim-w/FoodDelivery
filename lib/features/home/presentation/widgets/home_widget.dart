@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/features/burger_customization/presentation/views/begin_customization.dart';
+import 'package:legy/features/home/presentation/app/adapter/home_cubit.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/delegates/appbar_delegate.dart';
 import 'package:legy/features/home/presentation/widgets/delegates/story_delegate.dart';
@@ -18,17 +20,20 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final stories = context.watch<HomeCubit>().state.stories;
+
     return CustomScrollView(
       slivers: [
         SliverPersistentHeader(
           pinned: true,
           delegate: AnimatedHomeAppBarDelegate(),
         ),
-        SliverPersistentHeader(
-          delegate: AnimatedHomeStoryDelegate(),
-          pinned: false,
-          floating: false,
-        ),
+        if (stories != null && stories.isNotEmpty)
+          SliverPersistentHeader(
+            delegate: AnimatedHomeStoryDelegate(),
+            pinned: false,
+            floating: false,
+          ),
         SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

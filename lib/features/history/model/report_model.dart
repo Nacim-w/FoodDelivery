@@ -1,14 +1,14 @@
 class ReportModel {
   final String orderId;
-  final String type; // Enum name as string, like "MISSING_PRODUCT"
+  final String type;
   final String description;
-  final String? imageUrl; // S3 URL of uploaded image
+  final List<String>? attachmentUrls;
 
   ReportModel({
     required this.orderId,
     required this.type,
     required this.description,
-    this.imageUrl,
+    this.attachmentUrls,
   });
 
   factory ReportModel.empty() {
@@ -16,7 +16,7 @@ class ReportModel {
       orderId: '',
       type: '',
       description: '',
-      imageUrl: null,
+      attachmentUrls: [],
     );
   }
 
@@ -25,7 +25,7 @@ class ReportModel {
       orderId: json['orderId'] ?? '',
       type: json['type'] ?? '',
       description: json['description'] ?? '',
-      imageUrl: json['imageUrl'],
+      attachmentUrls: List<String>.from(json['attachmentUrls'] ?? []),
     );
   }
 
@@ -33,13 +33,13 @@ class ReportModel {
     String? orderId,
     String? type,
     String? description,
-    String? imageUrl,
+    List<String>? attachmentUrls,
   }) {
     return ReportModel(
       orderId: orderId ?? this.orderId,
       type: type ?? this.type,
       description: description ?? this.description,
-      imageUrl: imageUrl ?? this.imageUrl,
+      attachmentUrls: attachmentUrls ?? this.attachmentUrls,
     );
   }
 
@@ -48,7 +48,8 @@ class ReportModel {
       'orderId': orderId,
       'type': type,
       'description': description,
-      if (imageUrl != null) 'imageUrl': imageUrl,
+      if (attachmentUrls != null && attachmentUrls!.isNotEmpty)
+        'attachmentUrls': attachmentUrls,
     };
   }
 }
