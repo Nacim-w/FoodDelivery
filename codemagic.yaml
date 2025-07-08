@@ -50,12 +50,6 @@ workflows:
           cd $CM_BUILD_DIR
           flutter pub get
 
-      - name: Build APK with Shorebird
-        script: |
-          export PATH="$HOME/.shorebird/bin:$PATH"
-          cd $CM_BUILD_DIR
-          shorebird release android --artifact=apk --flavor=release
-
       - name: Authenticate Firebase CLI
         script: |
           echo $FIREBASE_SERVICE_ACCOUNT | base64 --decode > /tmp/firebase-service-account.json
