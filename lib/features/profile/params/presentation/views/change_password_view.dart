@@ -51,97 +51,102 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            context.adaptiveGap,
-            GreenAppBar(
-              title: 'Gestionnaire de mots de passe',
-              onTap: () {
-                if (context.canPop()) {
-                  context.pop();
-                } else {
-                  context.go(HomePage.routePath);
-                }
-              },
-            ),
-            const Gap(20),
-            BlocConsumer<ProfileCubit, ProfileState>(
-              listener: (context, state) {
-                if (state is ProfileError) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.props.first.toString())),
-                  );
-                } else if (state is PasswordChanged) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Mot de passe changé avec succès')),
-                  );
-                  context.go(HomePage.routePath);
-                }
-              },
-              builder: (context, state) {
-                final isLoading = state is ProfileLoading;
-                return Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Gap(20),
-                      VerticalLabelField(
-                        defaultValidation: false,
-                        label: 'Mot de passe actuel',
-                        hintText: "Écrivez votre mot de passe actuel",
-                        controller: _currentPasswordController,
-                        obscureText: isPasswordVisible,
-                        suffixIcon: IconButton(
-                          onPressed: _togglePasswordVisibility,
-                          icon: Icon(
-                            isPasswordVisible
-                                ? IconlyLight.hide
-                                : IconlyLight.show,
-                          ),
-                        ),
-                        validator: (val) => (val == null || val.isEmpty)
-                            ? "Veuillez entrer un mot de passe"
-                            : null,
-                      ),
-                      const Gap(20),
-                      VerticalLabelField(
-                        defaultValidation: false,
-                        label: "Nouveau mot de passe",
-                        hintText: "Nouveau mot de passe",
-                        controller: _newPasswordController,
-                        obscureText: isPasswordVisible,
-                        suffixIcon: IconButton(
-                          onPressed: _togglePasswordVisibility,
-                          icon: Icon(
-                            isPasswordVisible
-                                ? IconlyLight.hide
-                                : IconlyLight.show,
-                          ),
-                        ),
-                        validator: (val) => (val == null || val.isEmpty)
-                            ? "Veuillez entrer un mot de passe"
-                            : null,
-                      ),
-                      const Gap(40),
-                      BuildLogInAndRegButton(
-                        "Changer mot de passe",
-                        "Changer mot de passe",
-                        _submit,
-                      ).loading(isLoading),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
+    return Column(
+      children: [
+        context.adaptiveGap,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: GreenAppBar(
+            title: 'Gestionnaire de mots de passe',
+            onTap: () {
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.go(HomePage.routePath);
+              }
+            },
+          ),
         ),
-      ),
+        SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Gap(20),
+              BlocConsumer<ProfileCubit, ProfileState>(
+                listener: (context, state) {
+                  if (state is ProfileError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.props.first.toString())),
+                    );
+                  } else if (state is PasswordChanged) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Mot de passe changé avec succès')),
+                    );
+                    context.go(HomePage.routePath);
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state is ProfileLoading;
+                  return Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(20),
+                        VerticalLabelField(
+                          defaultValidation: false,
+                          label: 'Mot de passe actuel',
+                          hintText: "Écrivez votre mot de passe actuel",
+                          controller: _currentPasswordController,
+                          obscureText: isPasswordVisible,
+                          suffixIcon: IconButton(
+                            onPressed: _togglePasswordVisibility,
+                            icon: Icon(
+                              isPasswordVisible
+                                  ? IconlyLight.hide
+                                  : IconlyLight.show,
+                            ),
+                          ),
+                          validator: (val) => (val == null || val.isEmpty)
+                              ? "Veuillez entrer un mot de passe"
+                              : null,
+                        ),
+                        const Gap(20),
+                        VerticalLabelField(
+                          defaultValidation: false,
+                          label: "Nouveau mot de passe",
+                          hintText: "Nouveau mot de passe",
+                          controller: _newPasswordController,
+                          obscureText: isPasswordVisible,
+                          suffixIcon: IconButton(
+                            onPressed: _togglePasswordVisibility,
+                            icon: Icon(
+                              isPasswordVisible
+                                  ? IconlyLight.hide
+                                  : IconlyLight.show,
+                            ),
+                          ),
+                          validator: (val) => (val == null || val.isEmpty)
+                              ? "Veuillez entrer un mot de passe"
+                              : null,
+                        ),
+                        const Gap(40),
+                        BuildLogInAndRegButton(
+                          "Changer mot de passe",
+                          "Changer mot de passe",
+                          _submit,
+                        ).loading(isLoading),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

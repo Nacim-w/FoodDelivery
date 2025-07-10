@@ -1,4 +1,4 @@
-import 'package:legy/main_common.dart';
+import 'package:legy/main.dart';
 import 'package:legy/core/flavors/flavor_config.dart';
 
 void main() {
