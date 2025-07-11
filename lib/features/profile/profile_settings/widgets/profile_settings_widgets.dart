@@ -61,7 +61,7 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ProfileSettingsAppbar(title: 'Paramètres du profil'),
         ),
-        Gap(50),
+        Gap(30),
         Expanded(
           child: SingleChildScrollView(
             child: isLoggedIn
@@ -80,14 +80,9 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           name: cachedProfile!.firstname,
           email: cachedProfile!.email,
         ),
-        Gap(50),
+        Gap(25),
         OrdersContainer(),
-        Divider(
-          color: Colours.lightThemeGrey1,
-          thickness: 0.5,
-          endIndent: 25,
-          indent: 25,
-        ),
+        Gap(20),
         BuiltListView(),
       ],
     );

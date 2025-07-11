@@ -42,6 +42,7 @@ abstract class Media {
   static const notification = '$_baseIcon/notification.svg';
   static const location = '$_baseIcon/location.svg';
   static const login = '$_baseIcon/login.svg';
+  static const locationParam = '$_baseIcon/locationParam.svg';
   //params page
   static const paramChangePassword = '$_baseIcon/paramChangePassword.svg';
   static const paramProfileDetails = '$_baseIcon/paramProfileDetails.svg';

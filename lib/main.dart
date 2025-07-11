@@ -44,8 +44,19 @@ class MyApp extends StatelessWidget {
             dragHandleSize: const Size(60, 3.5),
             dragHandleColor: Colours.lightThemeGrey1,
           ),
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Colours.lightThemeOrange5),
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xFFFFA500), // pure orange example
+            onPrimary: Colors.white,
+            secondary: Color(0xFF444444),
+            onSecondary: Colors.white,
+            error: Colors.red,
+            onError: Colors.white,
+            background: Colors.white,
+            onBackground: Colors.black,
+            surface: Colors.white,
+            onSurface: Colors.black,
+          ),
           brightness: Brightness.light,
           fontFamily: 'Montserrat',
         ),

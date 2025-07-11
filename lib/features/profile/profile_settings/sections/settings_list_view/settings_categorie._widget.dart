@@ -16,11 +16,11 @@ class SettingsCategorieWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.width * 0.25,
+      width: context.width * 0.32,
       height: 30,
       decoration: BoxDecoration(
-          color: Colours.lightThemeWhite1,
-          borderRadius: BorderRadius.circular(12),
+          color: Colours.lightThemeOrange0,
+          borderRadius: BorderRadius.circular(40),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withValues(alpha: 0.2),
@@ -34,13 +34,15 @@ class SettingsCategorieWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(
             icon,
-            width: 15,
-            height: 15,
+            width: 20,
+            height: 20,
+            colorFilter:
+                ColorFilter.mode(Colours.lightThemeWhite1, BlendMode.srcIn),
           ),
           Gap(10),
           Text(
             text,
-            style: TextStyles.textMediumSmallest.black1,
+            style: TextStyles.textSemiBoldSmall.white1,
             textAlign: TextAlign.center,
           ),
         ],

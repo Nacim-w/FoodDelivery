@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: HomeDrawer(),
+      drawer: CustomHomeDrawer(),
       body: RefreshIndicator(
         key: UniqueKey(),
         onRefresh: _onRefresh,

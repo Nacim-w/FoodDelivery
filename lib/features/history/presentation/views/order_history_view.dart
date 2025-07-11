@@ -4,12 +4,16 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/widgets/black_app_bar.dart';
 import 'package:legy/core/extension/gap_extension.dart';
+import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/history/presentation/app/history_cubit.dart';
 import 'package:legy/features/history/presentation/app/history_state.dart';
 import 'package:legy/features/history/presentation/widgets/current_order_widget.dart';
 import 'package:legy/features/history/presentation/widgets/order_card.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+
+enum OrderFilter { tous, suivi, ancien }
 
 class OrderHistoryView extends StatefulWidget {
   static const routePath = '/orders';
@@ -21,6 +25,8 @@ class OrderHistoryView extends StatefulWidget {
 }
 
 class _OrderHistoryViewState extends State<OrderHistoryView> {
+  OrderFilter _selectedFilter = OrderFilter.tous;
+
   @override
   void initState() {
     super.initState();
@@ -36,10 +42,22 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
             if (state is HistoryLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is HistoryLoaded) {
-              final orders = state.orders;
-              if (orders.isEmpty) {
-                return const Center(child: Text('Aucune commande trouvée.'));
-              }
+              final allOrders = state.orders;
+              final pendingOrder = allOrders
+                      .where((order) => order.orderStatus == 'PENDING')
+                      .cast<dynamic>()
+                      .isNotEmpty
+                  ? allOrders
+                      .firstWhere((order) => order.orderStatus == 'PENDING')
+                  : null;
+              final historyOrders = allOrders
+                  .where((order) => order.orderStatus != 'PENDING')
+                  .toList();
+
+              final showCurrent = _selectedFilter == OrderFilter.tous ||
+                  _selectedFilter == OrderFilter.suivi;
+              final showHistory = _selectedFilter == OrderFilter.tous ||
+                  _selectedFilter == OrderFilter.ancien;
 
               return SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -48,7 +66,8 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
                   children: [
                     context.adaptiveGap,
                     BlackAppBar(
-                      title: 'Livraison en cours',
+                      color: Colours.lightThemeGreen5,
+                      title: 'Historique des commandes',
                       onTap: () {
                         if (context.canPop()) {
                           context.pop();
@@ -57,28 +76,40 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
                         }
                       },
                     ),
+                    Gap(30),
+                    Text(
+                      'Commandes récentes',
+                      style: TextStyles.textBold.green5,
+                    ),
                     const Gap(20),
-                    Text("Livraison en cours", style: TextStyles.textSemiBold),
-                    const Gap(10),
-                    const CurrentOrderWidget(),
+                    _buildFilterButtons(),
                     const Gap(20),
-                    Text("Commandes récentes", style: TextStyles.textSemiBold),
-                    const Gap(10),
-                    ...orders.map((order) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            debugPrint(
-                                '${OrderHistoryView.routePath}/order-details/${order.orderId}');
-
-                            context.go(
-                                '${OrderHistoryView.routePath}/order-details/${order.orderId}');
-                          },
-                          child: OrderCard(order: order),
-                        ),
-                      );
-                    }).toList(),
+                    if (showCurrent) ...[
+                      Text("Livraison en cours", style: TextStyles.textBold),
+                      const Gap(20),
+                      if (pendingOrder != null)
+                        CurrentOrderWidget(order: pendingOrder),
+                      const Gap(20),
+                    ],
+                    if (showHistory && historyOrders.isNotEmpty) ...[
+                      Text("Commandes récentes",
+                          style: TextStyles.textSemiBold.black1),
+                      const Gap(10),
+                      ...historyOrders.map((order) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              context.go(
+                                  '${OrderHistoryView.routePath}/order-details/${order.orderId}');
+                            },
+                            child: OrderCard(order: order),
+                          ),
+                        );
+                      }),
+                    ],
+                    if (!showCurrent && !showHistory)
+                      const Center(child: Text("Aucune commande à afficher.")),
                   ],
                 ),
               );
@@ -87,6 +118,42 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
             }
             return const SizedBox.shrink();
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildFilterButton("Suivi", OrderFilter.suivi),
+        _buildFilterButton("Ancien", OrderFilter.ancien),
+        _buildFilterButton("Tous", OrderFilter.tous),
+      ],
+    );
+  }
+
+  Widget _buildFilterButton(String label, OrderFilter filter) {
+    final isSelected = _selectedFilter == filter;
+    return GestureDetector(
+      onTap: () => setState(() => _selectedFilter = filter),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color:
+              isSelected ? Colours.lightThemeGreen5 : Colours.lightThemeWhite1,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colours.lightThemeGreen5),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected
+                ? Colours.lightThemeWhite1
+                : Colours.lightThemeGreen5,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

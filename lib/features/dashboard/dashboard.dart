@@ -32,7 +32,7 @@ class _DashboardPageState extends State<DashboardPage> {
     ];
 
     return Scaffold(
-      drawer: const HomeDrawer(),
+      drawer: const CustomHomeDrawer(),
       body: widget.navigationShell,
       bottomNavigationBar: shouldHideBottomNav.contains(location)
           ? null

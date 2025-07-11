@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -39,6 +40,7 @@ class HistoryAppbar extends StatelessWidget {
             ),
           ),
         ),
+        Gap(10),
         Expanded(
           child: Center(
             child: Text('Historique des commandes',

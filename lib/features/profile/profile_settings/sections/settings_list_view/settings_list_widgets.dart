@@ -26,6 +26,7 @@ class BuiltListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Gap(5),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
@@ -45,7 +46,7 @@ class BuiltListView extends StatelessWidget {
                   );
                 },
                 child: SettingsCategorieWidget(
-                  icon: Media.location,
+                  icon: Media.paymentLocation,
                   text: "Adresses",
                 ),
               ),
@@ -61,7 +62,7 @@ class BuiltListView extends StatelessWidget {
             ],
           ),
         ),
-        Gap(20),
+        Gap(30),
         BuildListTile(
           icon: Media.favorites,
           title: "Mes favoris",
@@ -81,8 +82,8 @@ class BuiltListView extends StatelessWidget {
               .go('${ProfileSettingsPage.routePath}/${ParamsView.routePath}'),
         ),
         BuildListTile(
-            color: Colours.lightThemeRed5,
-            textColor: Colours.lightThemeWhite1,
+            color: Colours.lightThemeRed0,
+            textColor: Colours.lightThemeRed0,
             icon: Media.logOut,
             title: "Se déconnecter",
             onTap: () => showDialog(

@@ -62,13 +62,17 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: Colours.lightThemeOrange5),
+              icon: SvgPicture.asset(
+                Media.categoryArrow,
+              ),
               style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                  Colours.lightThemeOrange5,
+                ),
                 shape: WidgetStateProperty.all(
                   CircleBorder(
                     side: BorderSide(
-                      color: Colours.lightThemeGrey1,
+                      color: Colours.lightThemeOrange0,
                       width: 1,
                     ),
                   ),
@@ -112,14 +116,21 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   hintText: "Rechercher dans Restaurants",
                   hintStyle: TextStyles.textMediumSmall.grey3,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(40),
                     borderSide: BorderSide(
-                      color: Colours.lightThemeGrey1,
+                      color: Colours.lightThemeOrange0,
+                      width: 1,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(40.0),
+                    borderSide: BorderSide(
+                      color: Colours.lightThemeOrange0,
                       width: 1,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(40.0),
                     borderSide: BorderSide(
                       color: Colours.lightThemeOrange0,
                     ),
