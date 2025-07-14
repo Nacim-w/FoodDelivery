@@ -22,6 +22,8 @@ class OrderService {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}/api/orders');
       String? token = cacheHelper.getSessionToken();
+      debugPrint('PLACE ORDER Token: $token');
+      debugPrint('PLACE ORDER uri : $uri ');
 
       final orderBody = {
         "client": {
@@ -48,7 +50,7 @@ class OrderService {
           };
         }).toList(),
       };
-      print('Order body: $orderBody');
+      print('place order body: $orderBody');
       var response = await http.post(
         uri,
         headers: {
@@ -57,7 +59,7 @@ class OrderService {
         },
         body: jsonEncode(orderBody),
       );
-      debugPrint('Response status: ${response.statusCode}');
+      debugPrint('place order Response status: ${response.statusCode}');
       debugPrint('ORDER ID: ${response.body}');
 
       if (response.statusCode == 401) {
@@ -78,7 +80,22 @@ class OrderService {
               message: "Session expirée, veuillez vous reconnecter.");
         }
       }
-      debugPrint('Response body: ${response.body}');
+      if (response.statusCode == 400) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage = errorJson['message'] ?? '';
+
+        debugPrint('Parsed 400 message: $errorMessage');
+
+        if (errorMessage
+            .toLowerCase()
+            .contains('already have an active order')) {
+          throw const ActiveOrderAlreadyExistsException(
+            message: "Vous avez déjà une commande en cours.",
+          );
+        }
+
+        throw ServerException(message: errorMessage);
+      }
 
       if (response.statusCode != 200 && response.statusCode != 201) {
         final errorJson = jsonDecode(response.body);
@@ -90,6 +107,8 @@ class OrderService {
     } on ForceLogoutException {
       rethrow;
     } catch (e) {
+      if (e is ActiveOrderAlreadyExistsException) rethrow;
+      if (e is ForceLogoutException) rethrow;
       throw const ServerException(
         message:
             "Une erreur s'est produite lors de la commande. Veuillez réessayer plus tard.",

@@ -78,8 +78,8 @@ class OrderButtonWidget extends StatelessWidget {
 
                     cacheHelper.clearCart();
 
-                    context.go(
-                        '${HomePage.routePath}/${OrderTrackingMapView.routePath}');
+                    /*context.go(
+                        '${HomePage.routePath}/${OrderTrackingMapView.routePath}');*/
                   } on ForceLogoutException catch (_) {
                     if (context.mounted) {
                       await showDialog(
@@ -102,6 +102,32 @@ class OrderButtonWidget extends StatelessWidget {
                               },
                               child: Text('Se connecter',
                                   style: TextStyles.textMedium.orange5),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  } on ActiveOrderAlreadyExistsException catch (_) {
+                    if (context.mounted) {
+                      await showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          backgroundColor: Colours.lightThemeWhite1,
+                          title: Text(
+                            'Commande déjà en cours',
+                            style: TextStyles.textBoldLarge.black1,
+                          ),
+                          content: Text(
+                            "Vous avez déjà une commande en cours. Veuillez la terminer avant d'en créer une nouvelle.",
+                            style: TextStyles.textMedium.black1,
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(ctx).pop(),
+                              child: Text(
+                                'OK',
+                                style: TextStyles.textMedium.orange5,
+                              ),
                             ),
                           ],
                         ),

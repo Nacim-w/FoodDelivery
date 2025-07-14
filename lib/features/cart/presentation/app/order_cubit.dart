@@ -26,6 +26,7 @@ class OrderCubit extends Cubit<OrderState> {
       emit(state.copyWith(isLoading: false, success: true));
     } catch (e) {
       emit(state.copyWith(isLoading: false, error: e.toString()));
+      rethrow;
     }
   }
 }
