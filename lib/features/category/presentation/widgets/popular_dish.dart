@@ -28,7 +28,7 @@ class _PopularDishState extends State<PopularDish> {
             width: context.width * 0.37,
             height: context.height * 0.21,
             decoration: BoxDecoration(
-                color: Colours.lightThemeWhite4,
+                color: Colours.lightThemeWhite1,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(

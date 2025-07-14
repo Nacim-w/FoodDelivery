@@ -94,10 +94,10 @@ class _FavoriteViewState extends State<FavoriteView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     'Restaurants préférés',
-                    style: TextStyles.textSemiBold.black1,
+                    style: TextStyles.textSemiBold.orange5,
                   ),
                 ),
-                const Gap(15),
+                const Gap(40),
                 SizedBox(
                   height: context.height * 0.22,
                   child: ListView.builder(
@@ -124,7 +124,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                     },
                   ),
                 ),
-                const Gap(15),
+                const Gap(40),
               ],
 
               // --- Products Section (only if not empty) ---
@@ -133,18 +133,16 @@ class _FavoriteViewState extends State<FavoriteView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     'Aliments préférés',
-                    style: TextStyles.textSemiBold.black1,
+                    style: TextStyles.textSemiBold.orange5,
                   ),
                 ),
-                const Gap(15),
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: SizedBox(
                     height: context.height * 0.4,
                     child: GridView.builder(
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
+                      scrollDirection: Axis.vertical,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,

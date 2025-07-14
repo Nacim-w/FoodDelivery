@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -86,119 +87,144 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
 
     return Stack(
       children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colours.lightThemeWhite1,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colours.lightThemeGrey2.withAlpha(127),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Gap(10),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: MemoryImage(imageBytes),
-                        fit: BoxFit.cover,
+        DottedBorder(
+          color: Colours.lightThemeOrange5,
+          dashPattern: const [6, 6],
+          strokeWidth: 1.5,
+          strokeCap: StrokeCap.round,
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colours.lightThemeWhite1,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colours.lightThemeGrey2.withAlpha(127),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Gap(15),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Gap(10),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: MemoryImage(imageBytes),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  const Gap(30),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(widget.product.name,
-                          style: TextStyles.textMediumSmall.black1),
-                      const Gap(10),
-                      Text('${productTotal.toInt()} CFA',
-                          style: TextStyles.textMediumLarge.red5),
-                      const Gap(10),
-                      Row(
-                        children: [
-                          Center(
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colours.lightThemeGrey2,
+                    const Gap(30),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.product.name,
+                            style: TextStyles.textMediumSmall.black1),
+                        const Gap(10),
+                        Text('${productTotal.toInt()} CFA',
+                            style: TextStyles.textMediumLarge.orange5),
+                        const Gap(10),
+                        Row(
+                          children: [
+                            Center(
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: Colours.lightThemeOrange5,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colours.lightThemeBlack0
+                                          .withAlpha(50),
+                                      blurRadius: 2,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
                                 ),
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                icon: const Icon(Icons.remove),
-                                color: Colours.lightThemeOrange5,
-                                onPressed: widget.onDecrement,
-                                iconSize: 12,
-                                padding: EdgeInsets.zero,
+                                child: IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  color: Colours.lightThemeWhite1,
+                                  onPressed: widget.onDecrement,
+                                  iconSize: 12,
+                                  padding: EdgeInsets.zero,
+                                ),
                               ),
                             ),
-                          ),
-                          const Gap(10),
-                          Text(
-                            widget.product.quantity.toString(),
-                            style: TextStyles.textMediumLarge.orange5,
-                          ),
-                          const Gap(10),
-                          Center(
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colours.lightThemeGrey2,
-                                ),
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                icon: const Icon(Icons.add),
-                                color: Colours.lightThemeOrange5,
-                                onPressed: widget.onIncrement,
-                                iconSize: 12,
-                                padding: EdgeInsets.zero,
+                            const Gap(10),
+                            SizedBox(
+                              width: 24, // enough for 2-3 digits
+                              child: Text(
+                                widget.product.quantity.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyles.textMediumLarge.orange5,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Divider(
-                color: Colours.lightThemeGrey2,
-                thickness: 0.5,
-                endIndent: 5,
-                indent: 5,
-              ),
-              for (var entry in supplementMap.entries)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("${entry.key} x${entry.value['quantity']}",
-                        style: TextStyles.textMediumSmall.black1),
-                    Text(
-                        "${entry.value['price'] * entry.value['quantity']} CFA",
-                        style: TextStyles.textMediumSmall.red5),
+                            const Gap(10),
+                            Center(
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: Colours.lightThemeOrange0,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colours.lightThemeBlack0
+                                          .withAlpha(50),
+                                      blurRadius: 2,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(Icons.add),
+                                  color: Colours.lightThemeWhite1,
+                                  onPressed: widget.onIncrement,
+                                  iconSize: 12,
+                                  padding: EdgeInsets.zero,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              const Gap(20),
-            ],
+                Gap(10),
+                Divider(
+                  color: Colours.lightThemeGrey2,
+                  thickness: 0.5,
+                  endIndent: 5,
+                  indent: 5,
+                ),
+                Gap(10),
+                for (var entry in supplementMap.entries)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("${entry.key} x${entry.value['quantity']}",
+                          style: TextStyles.textMediumSmall.black1),
+                      Text(
+                          "${entry.value['price'] * entry.value['quantity']} CFA",
+                          style: TextStyles.textMedium.orange5),
+                    ],
+                  ),
+                const Gap(20),
+              ],
+            ),
           ),
         ),
         Positioned(

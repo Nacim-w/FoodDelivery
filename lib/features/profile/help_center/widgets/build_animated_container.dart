@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 
 import 'package:legy/features/profile/help_center/widgets/built_expanded_tile.dart';
@@ -13,14 +14,19 @@ class BuildAnimatedContainer extends StatelessWidget {
       child: ListView(
         children: [
           BuildExpendableTile(
-              title: "Comment créer un compte ?",
-              description: "Work on progress"),
+            title: "Comment créer un compte ?",
+            description: "Work on progress",
+            oneLine: true,
+          ),
+          Gap(10),
           BuildExpendableTile(
               title: "Quels moyens de paiement  sont acceptés ?",
               description: "Work on progress"),
+          Gap(10),
           BuildExpendableTile(
               title: "Que faire si ma commande  est en retard ?",
               description: "Work on progress"),
+          Gap(10),
           BuildExpendableTile(
               title: "Comment modifier mon adresse  de livraison ?",
               description: "Work on progress"),

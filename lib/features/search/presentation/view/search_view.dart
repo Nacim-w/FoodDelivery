@@ -73,7 +73,7 @@ class _SearchViewState extends State<SearchView> {
               TextButton(
                 onPressed: () {
                   Navigator.of(ctx).pop();
-                  context.go(SignInPage.routePath);
+                  context.push(SignInPage.routePath);
                 },
                 child: Text('Connecter', style: TextStyles.textMedium.orange5),
               ),
@@ -136,13 +136,41 @@ class _SearchViewState extends State<SearchView> {
               indent: 10,
               endIndent: 10,
             ),
+            Gap(15),
+            GestureDetector(
+              onTap: () => context
+                  .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
+              child: _searchCategory(
+                Media.searchCategory1,
+                'Sénégalaise',
+              ),
+            ),
+            Gap(20),
+            GestureDetector(
+              onTap: () => context
+                  .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
+              child: _searchCategory(
+                Media.searchCategory2,
+                'Healthy',
+              ),
+            ),
+            Gap(20),
+            GestureDetector(
+              onTap: () => context
+                  .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
+              child: _searchCategory(
+                Media.searchCategory3,
+                'Internationale',
+              ),
+            ),
+            Gap(20),
             Text(
               'Mes commandes récentes',
               style: TextStyles.textMediumLarge,
             ),
             GestureDetector(
               onTap: () => context
-                  .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+                  .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
               child: const RecentOrdersWidget(
                 image: Media.restaurant1,
                 title: 'La Table des Délices',
@@ -151,7 +179,7 @@ class _SearchViewState extends State<SearchView> {
             ),
             GestureDetector(
               onTap: () => context
-                  .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+                  .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
               child: const RecentOrdersWidget(
                 image: Media.search2,
                 title: 'L\'Art de la Pizza',
@@ -160,7 +188,7 @@ class _SearchViewState extends State<SearchView> {
             ),
             GestureDetector(
               onTap: () => context
-                  .go('${HomePage.routePath}/${CategoryDetails.routePath}'),
+                  .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
               child: const RecentOrdersWidget(
                 image: Media.search3,
                 title: 'Au Bon Appétit',
@@ -202,4 +230,43 @@ class _SearchHeroPlaceholder extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _searchCategory(String image, String title) {
+  return Container(
+    height: 100,
+    width: 500,
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withAlpha(80),
+          blurRadius: 10,
+          offset: const Offset(0, 5),
+        ),
+      ],
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            image,
+            fit: BoxFit.cover,
+          ),
+          Container(
+            color: Colors.black.withAlpha(65), // Black filter
+          ),
+          Center(
+            child: Text(
+              title,
+              style: TextStyles.textBoldLargest.white1,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

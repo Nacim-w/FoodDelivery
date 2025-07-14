@@ -44,7 +44,7 @@ class NotificationAppbar extends StatelessWidget {
         Expanded(
           child: Center(
             child:
-                Text('Notifications', style: TextStyles.textBoldLarge.green5),
+                Text('Notifications', style: TextStyles.textBoldLarge.black1),
           ),
         ),
         SizedBox(width: context.width * 0.1),

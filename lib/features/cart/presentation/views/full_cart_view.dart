@@ -81,36 +81,37 @@ class _FullCartWidgetState extends State<FullCartView> {
               const EdgeInsets.symmetric(horizontal: 16.0).copyWith(bottom: 16),
           child: ProfileSettingsAppbar(title: 'Mon Panier'),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Détails commande',
-                style: TextStyles.textMedium.black1,
-              ),
-              SizedBox(
-                height: context.width * 0.08,
-                child: OutlinedButton(
-                  onPressed: clearCart,
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colours.lightThemeRed5),
-                    padding: EdgeInsets.symmetric(horizontal: 12),
-                  ),
-                  child: Text(
-                    'vider le panier',
-                    style: TextStyles.textMedium.red5,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Détails commande',
+                        style: TextStyles.textMedium.black1,
+                      ),
+                      SizedBox(
+                        height: context.width * 0.08,
+                        child: ElevatedButton(
+                          onPressed: clearCart,
+                          style: OutlinedButton.styleFrom(
+                            shadowColor: Colors.transparent,
+                            backgroundColor: Colours.lightThemeOrange5,
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                          ),
+                          child: Text(
+                            'vider le panier',
+                            style: TextStyles.textMedium.white1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ...products.map((product) {
                   return Padding(
                     padding: const EdgeInsets.all(16.0),

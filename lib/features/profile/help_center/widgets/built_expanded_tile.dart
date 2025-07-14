@@ -8,22 +8,24 @@ import 'package:legy/features/profile/help_center/widgets/animated_container_wid
 class BuildExpendableTile extends StatelessWidget {
   final String title;
   final String description;
+  final bool? oneLine;
 
   const BuildExpendableTile({
     super.key,
     required this.title,
     required this.description,
+    this.oneLine,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpandableTile(
-      //Autosizetext has an issue with ExpandbleTile thats why I wrapped it with Sizedbox
-      title: SizedBox(
+      oneLine: oneLine,
+      title: Container(
         width: context.width * 0.7,
         child: AutoSizeText(
           title,
-          style: TextStyles.textSemiBold,
+          style: TextStyles.textMedium,
           maxLines: 2,
         ),
       ),

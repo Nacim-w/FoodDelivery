@@ -35,6 +35,7 @@ class BuiltListView extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
+                    backgroundColor: Colours.lightThemeWhite1.withAlpha(220),
                     showDragHandle: true,
                     context: context,
                     isScrollControlled: true,
@@ -105,19 +106,20 @@ class _AddressBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: SizedBox(
+      child: Container(
         width: context.width,
         height: context.height * 0.2,
         child: Column(
           children: [
             Text('Vos addresses', style: TextStyles.textSemiBoldLarge.black1),
-            Gap(10),
+            Gap(15),
             SvgPicture.asset(Media.location),
+            Gap(15),
             Text(
               'Aucune adresse n\'a encore été ajoutée.',
               style: TextStyles.textRegularSmall,
             ),
-            Gap(15),
+            Gap(20),
             RoundedButton(
               text: '',
               widgetContentButton: Row(

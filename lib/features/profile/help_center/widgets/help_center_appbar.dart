@@ -45,7 +45,7 @@ class HelpCenterAppbar extends StatelessWidget {
           child: Center(
             child: Text(
               'Centre d’aide',
-              style: TextStyles.textBoldLarge.green5,
+              style: TextStyles.textBoldLarge.black1,
             ),
           ),
         ),

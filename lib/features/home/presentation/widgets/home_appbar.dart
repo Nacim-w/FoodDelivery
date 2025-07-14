@@ -42,56 +42,43 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Hero(
                 tag: 'searchBarHero',
                 child: Material(
-                  borderRadius: BorderRadius.circular(20),
                   color: Colours.lightThemeOrange5,
+                  borderRadius: BorderRadius.circular(99),
                   child: InkWell(
                     onTap: () => context.push(SearchView.routePath),
-                    borderRadius: BorderRadius.circular(20),
-                    child: IgnorePointer(
-                      child: TextField(
-                        enabled: false,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colours.lightThemeWhite3,
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 8.0),
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: Colours.lightThemeOrange0,
-                          ),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.all(14.0),
-                            child: SvgPicture.asset(
-                              Media.searchSettings,
-                              colorFilter: const ColorFilter.mode(
-                                Colours.lightThemeOrange0,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                          ),
-                          hintText: "Rechercher dans Restaurants",
-                          hintStyle: TextStyles.textMediumSmall.grey3,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
-                              color: Colours.lightThemeGrey1,
-                              width: 1,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
+                    borderRadius: BorderRadius.circular(99),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(99),
+                      child: IgnorePointer(
+                        child: TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colours.lightThemeWhite3,
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 12.0),
+                            prefixIcon: const Icon(
+                              Icons.search,
                               color: Colours.lightThemeOrange0,
                             ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
-                              color: Colours.lightThemeGrey1,
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: SvgPicture.asset(
+                                Media.searchSettings,
+                                colorFilter: ColorFilter.mode(
+                                  Colours.lightThemeOrange0,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
                             ),
+                            hintText: "Rechercher dans Restaurants",
+                            hintStyle: TextStyles.textMediumSmall.grey3,
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
                           ),
+                          style: TextStyles.textMediumSmall,
                         ),
-                        style: TextStyles.textMediumSmall,
                       ),
                     ),
                   ),
@@ -99,7 +86,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
               child: Center(

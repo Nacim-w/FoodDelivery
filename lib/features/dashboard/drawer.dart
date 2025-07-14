@@ -83,7 +83,7 @@ class _CustomHomeDrawerState extends State<CustomHomeDrawer> {
             color: Colours.lightThemeWhite1.withAlpha(230),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha(25),
+                color: Colors.black.withAlpha(120),
                 blurRadius: 8,
               ),
             ],
@@ -143,7 +143,7 @@ class _CustomHomeDrawerState extends State<CustomHomeDrawer> {
                             const Gap(35),
                           ],
                           _buildDrawerItem(
-                            icon: Media.profileDrawer,
+                            icon: Media.guestActive,
                             label: 'Mon compte',
                             onTap: () =>
                                 context.push(ProfileSettingsPage.routePath),
@@ -158,6 +158,7 @@ class _CustomHomeDrawerState extends State<CustomHomeDrawer> {
                           ),
                           Gap(_isExpanded ? 20 : 40),
                           _buildDrawerItem(
+                            size: 16,
                             icon: Media.paymentDrawer,
                             label: 'Paiement',
                             onTap: () => context.push(
@@ -205,6 +206,7 @@ class _CustomHomeDrawerState extends State<CustomHomeDrawer> {
     required String icon,
     required String label,
     required VoidCallback onTap,
+    double? size,
   }) {
     return InkWell(
       onTap: () {
@@ -222,8 +224,10 @@ class _CustomHomeDrawerState extends State<CustomHomeDrawer> {
           children: [
             SvgPicture.asset(
               icon,
-              width: 20,
-              height: 20,
+              width: size ?? 20,
+              height: size ?? 20,
+              colorFilter:
+                  ColorFilter.mode(Colours.lightThemeBrown5, BlendMode.srcIn),
             ),
             if (_isExpanded) ...[
               const SizedBox(width: 16),

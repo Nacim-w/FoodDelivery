@@ -82,6 +82,10 @@ abstract class Media {
   static const activeStar = '$_baseIcon/activeStar.svg';
   static const inActiveStar = '$_baseIcon/inActiveStar.svg';
   // homepage
+  static const homeCategory1 = '$_baseImage/homeCategory1.png';
+  static const homeCategory2 = '$_baseImage/homeCategory2.png';
+  static const homeCategory3 = '$_baseImage/homeCategory3.png';
+  static const homeCategory4 = '$_baseImage/homeCategory4.png';
   static const sidebar = '$_baseIcon/sidebar.svg';
   static const cart = '$_baseIcon/cart.svg';
   static const homeClock = '$_baseIcon/homeClock.svg';
@@ -116,6 +120,9 @@ abstract class Media {
   static const searchLocation = '$_baseIcon/searchLocation.svg';
   static const search2 = '$_baseImage/search2.png';
   static const search3 = '$_baseImage/search3.png';
+  static const searchCategory1 = '$_baseImage/searchCategory1.jpeg';
+  static const searchCategory2 = '$_baseImage/searchCategory2.jpeg';
+  static const searchCategory3 = '$_baseImage/searchCategory3.jpeg';
 
   //notification Page
 
@@ -125,8 +132,13 @@ abstract class Media {
   static const augmentedReality = '$_baseIcon/augmentedReality.svg';
 
   //drawer
+
   static const legyDrawer = '$_baseImage/legy.png';
   static const profileDrawer = '$_baseIcon/profileDrawer.svg';
+  static const homeDrawer = '$_baseIcon/homeDrawer.svg';
+  static const locationIchrak = '$_baseIcon/locationIchrak.svg';
+  static const paymentIchrak = '$_baseIcon/paymentIchrak.svg';
+  static const paramIchrak = '$_baseIcon/paramIchrak.svg';
   static const orderDrawer = '$_baseIcon/orderDrawer.svg';
   static const paymentDrawer = '$_baseIcon/paymentDrawer.svg';
   static const locationDrawer = '$_baseIcon/locationDrawer.svg';

@@ -29,12 +29,12 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Sous-total",
-                style: TextStyles.textMediumLarge.black2,
+                "Sous-total :",
+                style: TextStyles.textSemiBold.black2,
               ),
               Text(
                 "${widget.totalPrice.toInt()} CFA",
-                style: TextStyles.textMediumLarge.black2,
+                style: TextStyles.textMedium.black2,
               ),
             ],
           ),
@@ -43,12 +43,12 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Frais de livraison",
-                style: TextStyles.textMediumLarge.black2,
+                "Frais de livraison :",
+                style: TextStyles.textSemiBold.black2,
               ),
               Text(
                 "FREE",
-                style: TextStyles.textMediumLarge.black2,
+                style: TextStyles.textMedium.black2,
               ),
             ],
           ),
@@ -57,19 +57,21 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Remise",
-                style: TextStyles.textMediumLarge.black2,
+                "Remise :",
+                style: TextStyles.textSemiBold.black2,
               ),
               Text(
                 "0 CFA",
-                style: TextStyles.textMediumLarge.black2,
+                style: TextStyles.textMedium.black2,
               ),
             ],
           ),
+          Gap(10),
           Divider(
             color: Colours.lightThemeBlack2,
             thickness: 1,
           ),
+          Gap(10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -83,7 +85,7 @@ class _PaymentWidgetState extends State<PaymentWidget> {
               )
             ],
           ),
-          Gap(10),
+          Gap(30),
           OrderButtonWidget(
             totalPrice: widget.totalPrice,
             products: widget.products,

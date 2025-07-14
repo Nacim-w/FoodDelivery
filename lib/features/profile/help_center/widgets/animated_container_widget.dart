@@ -8,6 +8,7 @@ class ExpandableTile extends StatefulWidget {
   final Widget? trailing;
   final ShapeBorder? shapeCollapsed;
   final double? elevationExpanded;
+  final bool? oneLine;
 
   const ExpandableTile({
     super.key,
@@ -16,6 +17,7 @@ class ExpandableTile extends StatefulWidget {
     this.trailing,
     this.shapeCollapsed,
     this.elevationExpanded,
+    this.oneLine,
   });
 
   @override
@@ -36,11 +38,20 @@ class _ExpandableTileState extends State<ExpandableTile> {
       child: Column(
         children: [
           AnimatedContainer(
-            height: _expanded ? 120 : 70,
+            height: _expanded ? 120 : (widget.oneLine == true ? 50 : 70),
             duration: const Duration(milliseconds: 300),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              color: Colours.lightThemeWhite1,
+              boxShadow: [
+                BoxShadow(
+                  color: Colours.lightThemeBlack1.withAlpha(20),
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(30),
               border: Border.all(color: Colours.lightThemeGrey2),
             ),
             child: Column(
@@ -52,7 +63,7 @@ class _ExpandableTileState extends State<ExpandableTile> {
                     widget.trailing ??
                         Icon(
                           _expanded ? Icons.remove : Icons.add,
-                          color: Colours.lightThemeRed5,
+                          color: Colours.lightThemeGreen5,
                         ),
                   ],
                 ),
