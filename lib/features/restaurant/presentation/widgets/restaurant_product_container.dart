@@ -19,31 +19,49 @@ class RestaurantProduct extends StatelessWidget {
   final String distance;
   final String rating;
 
-  const RestaurantProduct(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.description,
-      required this.time,
-      required this.distance,
-      required this.rating});
+  const RestaurantProduct({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.description,
+    required this.time,
+    required this.distance,
+    required this.rating,
+  });
+
+  ImageProvider _getImageProvider() {
+    if (image.isEmpty) {
+      return const AssetImage(Media.recommandedProduct1);
+    } else if (image.startsWith('http')) {
+      return NetworkImage(image);
+    } else if (image.startsWith('data:image')) {
+      try {
+        final base64Str = image.split(',').last;
+        Uint8List imageBytes = base64Decode(base64Str);
+        return MemoryImage(imageBytes);
+      } catch (_) {
+        return const AssetImage(Media.restaurant1);
+      }
+    } else {
+      return const AssetImage(Media.restaurant1);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final base64Str = image.split(',').last;
-    Uint8List imageBytes = base64Decode(base64Str);
     return Container(
       height: context.height * 0.115,
       decoration: BoxDecoration(
-          color: Colours.lightThemeWhite1,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colours.lightThemeBlack1.withAlpha(10),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ]),
+        color: Colours.lightThemeWhite1,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colours.lightThemeBlack1.withAlpha(10),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
       child: Stack(
         children: [
           Row(
@@ -54,46 +72,48 @@ class RestaurantProduct extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: MemoryImage(imageBytes),
+                    image: _getImageProvider(),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: TextStyles.textMediumSmall.brown5),
-                  Gap(5),
-                  SizedBox(
-                    width: context.width * 0.55,
-                    child: AutoSizeText(
-                      description,
-                      style: TextStyles.textRegularTiny.black1,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              const SizedBox(width: 10),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(Media.homeClock),
-                      Gap(5),
-                      Text(time, style: TextStyles.textMediumSmall.red5),
-                      Gap(20),
-                      Icon(Icons.star,
-                          color: Colours.lightThemeYellow5, size: 20),
-                      Gap(5),
-                      Text(rating, style: TextStyles.textMediumSmall.red5),
-                      Gap(20),
-                      SvgPicture.asset(Media.dot),
-                      Gap(5),
-                      Text(distance, style: TextStyles.textMediumSmall.red5),
+                      Text(title, style: TextStyles.textMediumSmall.brown5),
+                      const Gap(5),
+                      AutoSizeText(
+                        description,
+                        style: TextStyles.textRegularTiny.black1,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          SvgPicture.asset(Media.homeClock),
+                          const Gap(5),
+                          Text(time, style: TextStyles.textMediumSmall.red5),
+                          const Gap(20),
+                          const Icon(Icons.star,
+                              color: Colours.lightThemeYellow5, size: 20),
+                          const Gap(5),
+                          Text(rating, style: TextStyles.textMediumSmall.red5),
+                          const Gap(20),
+                          SvgPicture.asset(Media.dot),
+                          const Gap(5),
+                          Text(distance,
+                              style: TextStyles.textMediumSmall.red5),
+                        ],
+                      ),
+                      const Gap(15),
                     ],
                   ),
-                  Gap(15),
-                ],
+                ),
               ),
             ],
           ),
