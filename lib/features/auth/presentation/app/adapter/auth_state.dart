@@ -73,3 +73,5 @@ class LoggedInGoogle extends AuthState {
 }
 
 class PhoneUpdated extends AuthState {}
+
+class AuthMissingPhoneNumber extends AuthState {}
