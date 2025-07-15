@@ -9,7 +9,6 @@ import 'package:legy/features/category/presentation/app/provider/category_provid
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
-import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeCategorySection extends StatelessWidget {
@@ -28,7 +27,7 @@ class HomeCategorySection extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   context.read<CategoryProvider>().changeIndex(newIndex: 0);
-                  context.go('${HomePage.routePath}/${TrackingView.routePath}');
+                  //context.go('${HomePage.routePath}/${TrackingView.routePath}');
                 },
                 child: Text('Tout voir',
                     style: TextStyles.textSemiBoldSmall.orange5),

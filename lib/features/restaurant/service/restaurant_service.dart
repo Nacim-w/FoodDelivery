@@ -138,21 +138,20 @@ class RestaurantService {
     try {
       final queryParams = {'categoryId': categoryId};
 
-      final uri = NetworkConstants.baseUrl.startsWith('https')
-          ? Uri.https(
-              NetworkConstants.developAuthority,
-              '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
-              queryParams,
-            )
-          : Uri.http(
-              NetworkConstants.localhostAuthority,
-              '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
-              queryParams,
-            );
+      final baseUri = Uri.parse(NetworkConstants.baseUrl);
+      final uri = Uri(
+        scheme: baseUri.scheme,
+        host: baseUri.host,
+        port: baseUri.hasPort ? baseUri.port : null,
+        path: '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
+        queryParameters: queryParams,
+      );
+
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
+
       debugPrint('Request URI: ${uri.toString()}');
       debugPrint('Response Status Code: ${response.statusCode}');
 
@@ -164,6 +163,7 @@ class RestaurantService {
 
       final data = jsonDecode(response.body);
       debugPrint('Response Data: $data');
+
       if (data is List) {
         return data
             .map((productJson) => RestaurantProductModel.fromJson(productJson))

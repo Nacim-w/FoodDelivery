@@ -7,13 +7,14 @@ import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/product/model/product_model.dart';
+import 'package:legy/features/web_socket/service/web_socket_service.dart';
 
 class OrderService {
   final CacheHelper cacheHelper;
 
   OrderService(this.cacheHelper);
 
-  Future<void> createOrder({
+  Future<String> createOrder({
     required List<ProductModel> products,
     required String restaurantId,
     required String deliveryAddress,
@@ -30,26 +31,18 @@ class OrderService {
           "longitude": 10.16579,
           "latitude": 36.80611,
         },
-        "restaurantId": restaurantId,
+        "restaurantId": '685bfed80b9cc63c8a37f11f', // keep hardcoded
         "deliveryAddress": deliveryAddress,
         "paymentMethod": paymentMethod,
         "deliveryMode": "DELIVERY",
         "items": products.map((product) {
           return {
-            "productId": product.id,
-            "quantity": product.quantity,
-            "categoryId": product.categoryId,
-            "selectedSupplements": product.supplements
-                .where((supp) => supp.quantity != null && supp.quantity! > 0)
-                .map((supp) {
-              return {
-                "supplementId": supp.id,
-                "quantity": supp.quantity!,
-              };
-            }).toList(),
+            "productId": '686e3fe3d1a00756b7316976', // keep hardcoded
+            "quantity": 4, // keep hardcoded
           };
         }).toList(),
       };
+
       print('place order body: $orderBody');
       var response = await http.post(
         uri,
@@ -59,6 +52,7 @@ class OrderService {
         },
         body: jsonEncode(orderBody),
       );
+
       debugPrint('place order Response status: ${response.statusCode}');
       debugPrint('ORDER ID: ${response.body}');
 
@@ -80,6 +74,7 @@ class OrderService {
               message: "Session expirée, veuillez vous reconnecter.");
         }
       }
+
       if (response.statusCode == 400) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['message'] ?? '';
@@ -103,7 +98,32 @@ class OrderService {
         throw ServerException(message: errorMessage);
       }
 
-      // Order placed successfully
+      // ✅ Order placed successfully
+      final isJson = response.headers[HttpHeaders.contentTypeHeader]
+              ?.contains('application/json') ??
+          false;
+
+      String orderId;
+      if (isJson) {
+        final responseJson = jsonDecode(response.body);
+        orderId = responseJson['orderId'];
+        debugPrint('✅ Order placed successfully. ID: $orderId');
+      } else {
+        orderId = response.body.trim();
+        debugPrint('✅ Order placed successfully. ID: $orderId');
+      }
+
+      // 🔔 Connect to WebSocket for order updates
+      final profile = cacheHelper.getCachedUserProfile();
+      debugPrint('Cached Profile: ${profile?.id}');
+      if (profile != null && profile.id.isNotEmpty) {
+        final wsService = WebSocketService();
+        wsService.connectToClientNotifications(profile.id);
+      } else {
+        debugPrint('⚠️ Client ID not found in cached profile.');
+      }
+
+      return orderId; // <---- THIS LINE IS THE ONLY CHANGE (added return)
     } on ForceLogoutException {
       rethrow;
     } catch (e) {

@@ -26,10 +26,26 @@ class FavoriteMealContainer extends StatelessWidget {
     required this.price,
   });
 
+  ImageProvider _getImageProvider() {
+    if (image.isEmpty) {
+      return const AssetImage(Media.restaurant1);
+    } else if (image.startsWith('http')) {
+      return NetworkImage(image);
+    } else if (image.startsWith('data:image')) {
+      try {
+        final base64Str = image.split(',').last;
+        Uint8List imageBytes = base64Decode(base64Str);
+        return MemoryImage(imageBytes);
+      } catch (_) {
+        return const AssetImage(Media.restaurant1);
+      }
+    } else {
+      return const AssetImage(Media.restaurant1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final base64Str = image.split(',').last;
-    Uint8List imageBytes = base64Decode(base64Str);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7),
@@ -52,39 +68,38 @@ class FavoriteMealContainer extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: MemoryImage(imageBytes),
+                        image: _getImageProvider(),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
-                Gap(5),
+                const Gap(5),
                 Text(
                   name,
                   style: TextStyles.textBoldSmallest.black1,
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.star,
                       size: 12,
                       color: Colours.lightThemeOrange5,
                     ),
-                    Gap(5),
+                    const Gap(5),
                     Text(
                       rating.toString(),
                       style: TextStyles.textMediumSmallest.black1,
                     ),
-                    Gap(5),
+                    const Gap(5),
                     Text(
-                      // ignore: unnecessary_string_escapes
-                      '($reviews\k)',
+                      '(${reviews.toInt()}k)',
                       style: TextStyles.textMediumSmallest.black1,
                     ),
                   ],
                 ),
                 Text(
-                  price.toInt().toString(),
+                  '${price.toInt()} TND',
                   style: TextStyles.textBoldSmallest.orange0,
                 ),
               ],
@@ -96,7 +111,7 @@ class FavoriteMealContainer extends StatelessWidget {
             child: Container(
               width: context.width * 0.07,
               height: context.height * 0.07,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colours.lightThemeOrange0,
               ),

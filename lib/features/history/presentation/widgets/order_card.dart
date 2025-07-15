@@ -1,28 +1,45 @@
 import 'dart:convert';
-import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:dotted_border/dotted_border.dart';
+
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:legy/features/history/model/history_order_models.dart';
 import 'package:legy/features/history/presentation/app/history_cubit.dart';
 import 'package:legy/features/history/presentation/widgets/bottom_sheet.dart';
-import 'package:dotted_border/dotted_border.dart';
 
 class OrderCard extends StatelessWidget {
   final OrderModel order;
 
   const OrderCard({super.key, required this.order});
 
+  ImageProvider _getImageProvider(String image) {
+    if (image.isEmpty) {
+      return const AssetImage(Media.restaurant1);
+    } else if (image.startsWith('http')) {
+      return NetworkImage(image);
+    } else if (image.startsWith('data:image')) {
+      try {
+        final base64Str = image.split(',').last;
+        final imageBytes = base64Decode(base64Str);
+        return MemoryImage(imageBytes);
+      } catch (_) {
+        return const AssetImage(Media.restaurant1);
+      }
+    } else {
+      return const AssetImage(Media.restaurant1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final base64Str = order.restaurant.logo.split(',').last;
-    Uint8List imageBytes = base64Decode(base64Str);
-
     return DottedBorder(
       color: Colours.lightThemeGreen5,
       dashPattern: const [6, 6],
@@ -38,8 +55,8 @@ class OrderCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.memory(
-                  imageBytes,
+                child: Image(
+                  image: _getImageProvider(order.restaurant.logo),
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,

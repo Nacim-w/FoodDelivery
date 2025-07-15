@@ -9,10 +9,10 @@ import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/cart/presentation/app/order_cubit.dart';
 import 'package:legy/features/cart/presentation/app/order_state.dart';
-//import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
-//import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/product/model/product_model.dart';
+import 'package:legy/features/web_socket/presentation/presentation/order_tracking_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderButtonWidget extends StatelessWidget {
@@ -71,15 +71,16 @@ class OrderButtonWidget extends StatelessWidget {
                   }
 
                   try {
-                    await context.read<OrderCubit>().placeOrder(
+                    final orderId = await context.read<OrderCubit>().placeOrder(
                           products: products,
                           profile: profile,
                         );
 
                     cacheHelper.clearCart();
 
-                    /*context.go(
-                        '${HomePage.routePath}/${OrderTrackingMapView.routePath}');*/
+                    // Navigate passing the orderId as query param
+                    context.go(
+                        '${HomePage.routePath}/${OrderTrackingView.routePath}?orderId=$orderId');
                   } on ForceLogoutException catch (_) {
                     if (context.mounted) {
                       await showDialog(

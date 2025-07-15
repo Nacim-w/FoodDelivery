@@ -38,7 +38,8 @@ class _DashboardPageState extends State<DashboardPage> {
           ? null
           : BottomNavigationBar(
               items: destinations,
-              onTap: (index) => widget.navigationShell.goBranch(index),
+              onTap: (index) =>
+                  widget.navigationShell.goBranch(index, initialLocation: true),
               currentIndex: widget.navigationShell.currentIndex,
               selectedItemColor: Colours.lightThemeOrange5,
               elevation: 5,
