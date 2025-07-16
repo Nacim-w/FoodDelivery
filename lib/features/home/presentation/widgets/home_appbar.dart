@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       color: Colours.lightThemeOrange0,
       child: Padding(
-        padding: const EdgeInsets.symmetric().copyWith(top: 40, bottom: 10),
+        padding: const EdgeInsets.symmetric().copyWith(top: 60, bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

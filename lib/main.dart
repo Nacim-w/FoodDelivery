@@ -9,14 +9,16 @@ import 'package:legy/core/service/routing_service/router.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:provider/provider.dart';
 
-Future<void> mainCommon({
-  required Flavor flavor,
-  required String baseUrl,
-  required String name,
-}) async {
+Future<void> main(
+//     {
+//   required Flavor flavor,
+//   required String baseUrl,
+//   required String name,
+// }
+) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FlavorConfig(flavor: flavor, baseUrl: baseUrl, name: name);
+  //FlavorConfig(flavor: flavor, baseUrl: baseUrl, name: name);
 
   await Firebase.initializeApp();
   await FirebaseApi().initNotifications();

@@ -49,6 +49,11 @@ Future initPushNotifications() async {
             priority: Priority.high,
             icon: android?.smallIcon ?? '@mipmap/ic_launcher',
           ),
+          iOS: const DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          ),
         ),
       );
     }
@@ -59,9 +64,10 @@ Future initPushNotifications() async {
 Future initLocalNotification() async {
   const AndroidInitializationSettings androidSettings =
       AndroidInitializationSettings('@mipmap/ic_launcher');
+  const ios = DarwinInitializationSettings();
 
   const InitializationSettings settings =
-      InitializationSettings(android: androidSettings);
+      InitializationSettings(android: androidSettings, iOS: ios);
 
   await flutterLocalNotificationsPlugin.initialize(settings);
 

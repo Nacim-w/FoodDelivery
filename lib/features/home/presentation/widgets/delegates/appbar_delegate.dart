@@ -3,9 +3,9 @@ import 'package:legy/features/home/presentation/widgets/home_appbar.dart';
 
 class AnimatedHomeAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 100;
+  double get minExtent => 120;
   @override
-  double get maxExtent => 100;
+  double get maxExtent => 120;
 
   @override
   Widget build(
