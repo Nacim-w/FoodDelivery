@@ -53,7 +53,6 @@ class AuthService {
       final userResponse = LoginResponseModel.fromJson(data);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
       await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
-
       return userResponse;
     } on ServerException {
       rethrow;
