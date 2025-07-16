@@ -19,13 +19,17 @@ class _DetailsDiscountsState extends State<DetailsDiscounts> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2.5),
       child: ListTile(
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colours.lightThemeGrey2),
-          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: const Color.fromARGB(150, 126, 126, 126)),
+          borderRadius: BorderRadius.circular(20),
         ),
         leading: SvgPicture.asset(
           width: 20,
           height: 20,
           Media.paymentDiscount,
+          colorFilter: ColorFilter.mode(
+            Colours.lightThemeOrange5,
+            BlendMode.srcIn,
+          ),
         ),
         title: Text("Promotions", style: TextStyles.textSemiBold.black2),
         trailing: Icon(Icons.arrow_forward_ios_rounded,

@@ -24,25 +24,24 @@ class BuildListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListTile(
-        tileColor: color,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colours.lightThemeGrey2),
-          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: color ?? Colours.lightThemeGrey6),
+          borderRadius: BorderRadius.circular(40),
         ),
         leading: SvgPicture.asset(
           width: 20,
           height: 20,
           icon,
           colorFilter: ColorFilter.mode(
-            textColor ?? Colours.lightThemeBlack1,
+            textColor ?? Colours.lightThemeGrey6,
             BlendMode.srcIn,
           ),
         ),
         title: Text(title,
             style: TextStyles.textMedium
-                .copyWith(color: textColor ?? Colours.lightThemeBlack1)),
+                .copyWith(color: textColor ?? Colours.lightThemeGrey6)),
         trailing: Icon(Icons.arrow_forward_ios_rounded,
-            size: 16, color: Colours.lightThemeGrey2),
+            size: 16, color: color ?? Colours.lightThemeGrey6),
         onTap: onTap,
       ),
     );

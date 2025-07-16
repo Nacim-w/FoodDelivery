@@ -32,13 +32,14 @@ class _DashboardPageState extends State<DashboardPage> {
     ];
 
     return Scaffold(
-      drawer: const HomeDrawer(),
+      drawer: const CustomHomeDrawer(),
       body: widget.navigationShell,
       bottomNavigationBar: shouldHideBottomNav.contains(location)
           ? null
           : BottomNavigationBar(
               items: destinations,
-              onTap: (index) => widget.navigationShell.goBranch(index),
+              onTap: (index) =>
+                  widget.navigationShell.goBranch(index, initialLocation: true),
               currentIndex: widget.navigationShell.currentIndex,
               selectedItemColor: Colours.lightThemeOrange5,
               elevation: 5,

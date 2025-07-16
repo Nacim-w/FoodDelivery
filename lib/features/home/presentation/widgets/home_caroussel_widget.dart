@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -21,6 +22,7 @@ class _HomeCaroussalState extends State<HomeCaroussal> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Gap(15),
         CarouselSlider(
           items: [
             CaroussalItems(

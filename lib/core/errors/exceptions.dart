@@ -40,3 +40,15 @@ class ForceLogoutException extends Equatable implements Exception {
   @override
   List<Object?> get props => [message];
 }
+
+class ActiveOrderAlreadyExistsException extends Equatable implements Exception {
+  const ActiveOrderAlreadyExistsException({required this.message});
+
+  final String message;
+
+  @override
+  List<Object?> get props => [message];
+
+  @override
+  String toString() => message;
+}

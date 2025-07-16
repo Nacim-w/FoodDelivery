@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
 import 'package:legy/features/auth/model/google_response_model.dart';
 import 'package:legy/features/auth/model/login_response_model.dart';
@@ -70,7 +71,11 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError("Connexion annulée."));
       }
     } catch (e) {
-      emit(AuthError(e.toString()));
+      if (e is ServerException && e.message == 'MISSING_PHONE_NUMBER') {
+        emit(AuthMissingPhoneNumber());
+      } else {
+        emit(AuthError(e.toString()));
+      }
     }
   }
 

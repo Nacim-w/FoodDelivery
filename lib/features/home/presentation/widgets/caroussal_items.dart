@@ -80,7 +80,7 @@ class CaroussalItems extends StatelessWidget {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: Colours.lightThemeGreen5,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                         child: Text(
                           buttonName,

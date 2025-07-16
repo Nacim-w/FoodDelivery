@@ -162,18 +162,18 @@ class AuthService {
 
       final userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-
       final user = userCredential.user;
       if (user == null) return null;
 
-      // Get Firebase ID token here:
       final firebaseIdToken = await user.getIdToken();
 
-      print('Firebase ID Token: $firebaseIdToken');
       final client = await _loginWithFirebaseIdToken(firebaseIdToken!);
-
-      // Return the Firebase ID token instead of the user
       return client;
+    } on ServerException catch (e) {
+      if (e.message == 'missingPhoneNumber') {
+        throw ServerException(message: 'MISSING_PHONE_NUMBER');
+      }
+      rethrow;
     } catch (e) {
       print('Error during Google sign-in: $e');
       throw Exception("Erreur lors de la connexion avec Google.");
@@ -182,9 +182,11 @@ class AuthService {
 
   Future<GoogleResponseModel> _loginWithFirebaseIdToken(
       String firebaseIdToken) async {
+    print('firebaseIdToken: $firebaseIdToken');
+
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$GOOGLE_ENDPOINT');
-
+      debugPrint('uri: $uri');
       final response = await http.post(
         uri,
         headers: {
@@ -194,19 +196,24 @@ class AuthService {
           'idToken': firebaseIdToken,
         }),
       );
+      final data = jsonDecode(response.body);
+
       debugPrint(
           'AuthService _loginWithFirebaseIdToken response: ${response.body}');
       debugPrint(
           'AuthService _loginWithFirebaseIdToken status code: ${response.statusCode}');
 
+      if (response.statusCode == 422 && data['missingPhoneNumber'] == true) {
+        await sl<CacheHelper>().cacheSessionToken(data['token']);
+        await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
+        throw const ServerException(message: 'missingPhoneNumber');
+      }
+
       if (response.statusCode != 200 && response.statusCode != 201) {
-        final errorJson = jsonDecode(response.body);
-        final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
+        final errorMessage = data['error'] ?? 'Une erreur est survenue.';
         throw ServerException(message: errorMessage.toString());
       }
 
-      final data = jsonDecode(response.body);
-      debugPrint('AuthService _loginWithFirebaseIdToken data: $data');
       final userResponse = GoogleResponseModel.fromJson(data);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
       await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);

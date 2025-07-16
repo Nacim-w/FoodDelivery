@@ -20,24 +20,34 @@ class ParamsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colours.lightThemeGrey2),
-          borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colours.lightThemeWhite1,
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: Colours.lightThemeGreen5),
         ),
-        leading: SvgPicture.asset(
-          width: 20,
-          height: 20,
-          icon,
+        child: ListTile(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          leading: SvgPicture.asset(
+            width: 20,
+            height: 20,
+            icon,
+            colorFilter: ColorFilter.mode(
+              Colours.lightThemeGreen5,
+              BlendMode.srcIn,
+            ),
+          ),
+          title: Text(title, style: TextStyles.textMedium.black1),
+          trailing: Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 16,
+            color: Colours.lightThemeGreen5,
+          ),
+          onTap: onTap,
+          horizontalTitleGap: 12,
         ),
-        title: Text(title, style: TextStyles.textMedium.black1),
-        trailing: Icon(
-          Icons.arrow_forward_ios_rounded,
-          size: 16,
-          color: Colours.lightThemeGrey2,
-        ),
-        onTap: onTap,
-        horizontalTitleGap: 12,
       ),
     );
   }

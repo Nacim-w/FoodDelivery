@@ -52,6 +52,11 @@ class _SignInFormState extends State<SignInForm> {
         if (state is AuthError) {
           showToast(message: state.message, success: false);
         }
+        if (state is AuthMissingPhoneNumber) {
+          context
+              .go('${SignInPage.routePath}/${CompleteProfileView.routePath}');
+          return;
+        }
 
         if (state is LoggedIn || state is LoggedInGoogle) {
           try {

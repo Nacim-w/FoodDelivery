@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
@@ -7,13 +8,20 @@ import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 
 class BlackAppBar extends StatelessWidget {
-  const BlackAppBar({super.key, required this.title, required this.onTap});
+  const BlackAppBar({
+    super.key,
+    required this.title,
+    required this.onTap,
+    this.color,
+  });
   final String title;
   final VoidCallback onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
           onTap: onTap,
@@ -23,7 +31,7 @@ class BlackAppBar extends StatelessWidget {
             height: context.width * 0.1,
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Colours.lightThemeOrange5,
+              color: color ?? Colours.lightThemeOrange5,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -42,9 +50,10 @@ class BlackAppBar extends StatelessWidget {
             ),
           ),
         ),
+        Gap(20),
         Expanded(
           child: Center(
-            child: Text(title, style: TextStyles.textSemiBoldLarge.black1),
+            child: Text(title, style: TextStyles.textBoldLarge.black1),
           ),
         ),
         SizedBox(width: context.width * 0.1),

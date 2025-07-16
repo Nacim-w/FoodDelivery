@@ -9,7 +9,6 @@ import 'package:legy/features/category/presentation/app/provider/category_provid
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
-import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeCategorySection extends StatelessWidget {
@@ -28,7 +27,7 @@ class HomeCategorySection extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   context.read<CategoryProvider>().changeIndex(newIndex: 0);
-                  context.go('${HomePage.routePath}/${TrackingView.routePath}');
+                  //context.go('${HomePage.routePath}/${TrackingView.routePath}');
                 },
                 child: Text('Tout voir',
                     style: TextStyles.textSemiBoldSmall.orange5),
@@ -44,16 +43,16 @@ class HomeCategorySection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
               _categoryItem(context,
-                  index: 0, image: Media.category3, name: 'Sénégalaise'),
-              const Gap(30),
+                  index: 1, image: Media.homeCategory2, name: 'Internationale'),
+              const Gap(20),
               _categoryItem(context,
-                  index: 1, image: Media.category2, name: 'Internationale'),
-              const Gap(30),
+                  index: 0, image: Media.homeCategory1, name: 'Sénégalaise'),
+              const Gap(20),
               _categoryItem(context,
-                  index: 2, image: Media.category1, name: 'Saine'),
-              const Gap(30),
+                  index: 2, image: Media.homeCategory3, name: 'Saine'),
+              const Gap(20),
               _categoryItem(context,
-                  index: 3, image: Media.category4, name: 'Desserts'),
+                  index: 3, image: Media.homeCategory4, name: 'Desserts'),
             ],
           ),
         ),

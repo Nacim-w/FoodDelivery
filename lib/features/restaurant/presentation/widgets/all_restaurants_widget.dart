@@ -4,9 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/product/presentation/widgets/product_container.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
+import 'package:legy/features/restaurant/presentation/widgets/restaurant_container.dart';
 import 'package:legy/features/restaurant/presentation/widgets/skeleton_card.dart';
 
 class AllRestaurantsWidget extends StatefulWidget {

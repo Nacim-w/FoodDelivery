@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -65,14 +66,16 @@ class RestaurantService {
         uri,
         headers: NetworkConstants.headers,
       );
+      debugPrint('Request URI: ${uri.toString()}');
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'test error';
         throw ServerException(message: errorMessage);
       }
-
+      debugPrint('Response Status Code: ${response.statusCode}');
+      debugPrint('Response Body: ${response.body}');
       final data = jsonDecode(response.body);
-
+      debugPrint('Parsed Data: $data');
       if (data is Map) {
         return RestaurantModel.fromJson(data as Map<String, dynamic>);
       } else {
@@ -96,6 +99,7 @@ class RestaurantService {
       final uri = Uri.parse(
           '${NetworkConstants.baseUrl}$RESTAURANT_ENDPOINT/$restaurantId$CATEGORIES_ENDPOINT');
 
+      debugPrint('Request URI: ${uri.toString()}');
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
@@ -107,7 +111,8 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
-
+      debugPrint('Response Data: $data');
+      debugPrint('Response Status Code: ${response.statusCode}');
       if (data is List) {
         return data
             .map((categoryJson) =>
@@ -133,21 +138,22 @@ class RestaurantService {
     try {
       final queryParams = {'categoryId': categoryId};
 
-      final uri = NetworkConstants.baseUrl.startsWith('https')
-          ? Uri.https(
-              NetworkConstants.developAuthority,
-              '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
-              queryParams,
-            )
-          : Uri.http(
-              NetworkConstants.localhostAuthority,
-              '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
-              queryParams,
-            );
+      final baseUri = Uri.parse(NetworkConstants.baseUrl);
+      final uri = Uri(
+        scheme: baseUri.scheme,
+        host: baseUri.host,
+        port: baseUri.hasPort ? baseUri.port : null,
+        path: '$RESTAURANT_ENDPOINT/$restaurantId$PRODUCT_CATEGORY_ENDPOINT',
+        queryParameters: queryParams,
+      );
+
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
       );
+
+      debugPrint('Request URI: ${uri.toString()}');
+      debugPrint('Response Status Code: ${response.statusCode}');
 
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
@@ -156,6 +162,8 @@ class RestaurantService {
       }
 
       final data = jsonDecode(response.body);
+      debugPrint('Response Data: $data');
+
       if (data is List) {
         return data
             .map((productJson) => RestaurantProductModel.fromJson(productJson))

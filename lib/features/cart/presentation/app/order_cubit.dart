@@ -9,14 +9,15 @@ class OrderCubit extends Cubit<OrderState> {
 
   OrderCubit({required this.orderService}) : super(const OrderState());
 
-  Future<void> placeOrder({
+  // Now returns the orderId as a String
+  Future<String> placeOrder({
     required List<ProductModel> products,
     required HomeProfileModel profile,
   }) async {
     emit(state.copyWith(isLoading: true, error: null, success: false));
 
     try {
-      await orderService.createOrder(
+      final orderId = await orderService.createOrder(
         products: products,
         restaurantId: products.first.restaurantId,
         deliveryAddress: profile.address,
@@ -24,8 +25,10 @@ class OrderCubit extends Cubit<OrderState> {
       );
 
       emit(state.copyWith(isLoading: false, success: true));
+      return orderId; // return orderId here
     } catch (e) {
       emit(state.copyWith(isLoading: false, error: e.toString()));
+      rethrow;
     }
   }
 }

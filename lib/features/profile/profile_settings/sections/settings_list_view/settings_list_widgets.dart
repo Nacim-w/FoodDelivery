@@ -26,6 +26,7 @@ class BuiltListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Gap(5),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
@@ -34,6 +35,7 @@ class BuiltListView extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
+                    backgroundColor: Colours.lightThemeWhite1.withAlpha(220),
                     showDragHandle: true,
                     context: context,
                     isScrollControlled: true,
@@ -45,7 +47,7 @@ class BuiltListView extends StatelessWidget {
                   );
                 },
                 child: SettingsCategorieWidget(
-                  icon: Media.location,
+                  icon: Media.paymentLocation,
                   text: "Adresses",
                 ),
               ),
@@ -61,7 +63,7 @@ class BuiltListView extends StatelessWidget {
             ],
           ),
         ),
-        Gap(20),
+        Gap(30),
         BuildListTile(
           icon: Media.favorites,
           title: "Mes favoris",
@@ -81,8 +83,8 @@ class BuiltListView extends StatelessWidget {
               .go('${ProfileSettingsPage.routePath}/${ParamsView.routePath}'),
         ),
         BuildListTile(
-            color: Colours.lightThemeRed5,
-            textColor: Colours.lightThemeWhite1,
+            color: Colours.lightThemeRed0,
+            textColor: Colours.lightThemeRed0,
             icon: Media.logOut,
             title: "Se déconnecter",
             onTap: () => showDialog(
@@ -104,19 +106,20 @@ class _AddressBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: SizedBox(
+      child: Container(
         width: context.width,
         height: context.height * 0.2,
         child: Column(
           children: [
             Text('Vos addresses', style: TextStyles.textSemiBoldLarge.black1),
-            Gap(10),
+            Gap(15),
             SvgPicture.asset(Media.location),
+            Gap(15),
             Text(
               'Aucune adresse n\'a encore été ajoutée.',
               style: TextStyles.textRegularSmall,
             ),
-            Gap(15),
+            Gap(20),
             RoundedButton(
               text: '',
               widgetContentButton: Row(

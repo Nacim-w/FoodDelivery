@@ -43,7 +43,7 @@ class ParamAppbar extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: Text('Paramètre', style: TextStyles.textBoldLarge.green5),
+            child: Text('Paramètre', style: TextStyles.textBoldLarge.black1),
           ),
         ),
         SizedBox(width: context.width * 0.1),

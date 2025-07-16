@@ -35,13 +35,13 @@ class HomeRestaurants extends StatelessWidget {
       height: context.width * 0.26,
       width: context.width * 0.95,
       decoration: BoxDecoration(
-        color: Colours.lightThemeWhite4,
+        color: const Color.fromARGB(255, 216, 216, 216).withAlpha(30),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colours.lightThemeBlack1.withAlpha(25),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colours.lightThemeBlack1.withAlpha(5),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -115,7 +115,7 @@ class HomeRestaurants extends StatelessWidget {
                 width: 50,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colours.lightThemeOrange0,
+                  color: Colours.lightThemeOrange5,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(20),
                     bottomLeft: Radius.circular(20),

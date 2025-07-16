@@ -43,7 +43,7 @@ class HomeProfileModel {
       lastname: json['lastname'] ?? '',
       email: json['email'] ?? '',
       phoneNumber: json['phoneNumber'] ?? '',
-      address: json['address'] ?? '',
+      address: json['address'] ?? 'test',
       latitude: json['latitude']?.toDouble(),
       longitude: json['longitude']?.toDouble(),
     );

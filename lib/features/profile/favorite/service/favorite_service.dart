@@ -87,7 +87,7 @@ class FavoriteService {
         throw ServerException(message: errorMessage);
       }
       debugPrint('getFavoriteProduct response: ${response.body}');
-      return response.body; // ✅ return the body for use in Cubit
+      return response.body;
     } on TokenExpiredException {
       rethrow;
     } catch (e) {

@@ -33,7 +33,7 @@ class _CategoryHeroState extends State<CategoryHero> {
     Media.categorySwap1,
     Media.categorySwap2,
     Media.categorySwap3,
-    Media.categorie4,
+    Media.homeCategory4,
   ];
 
   final List<Color> categoryColors = [
@@ -54,7 +54,7 @@ class _CategoryHeroState extends State<CategoryHero> {
     'Dégustez l’authenticité des saveurs sénégalaises !',
     'Saveurs italiennes, asiatiques, libanaises et plus !',
     'Dégustez l’authenticité des saveurs sénégalaises !',
-    'Dégustez les douceurs sucrées de notre sélection !',
+    'Dégustez les douceurs sucrées de nos plats !',
   ];
 
   final List<String> categoryButton = [

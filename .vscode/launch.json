@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "Flutter Dev Flavor",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_development.dart",
+      "args": [
+        "--flavor",
+        "dev"
+      ]
+    },
+    {
+      "name": "Flutter Staging Flavor",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_staging.dart",
+      "args": [
+        "--flavor",
+        "staging"
+      ]
+    },
+    {
+      "name": "Flutter Prod Flavor",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_production.dart",
+      "args": [
+        "--flavor",
+        "prod"
+      ]
+    }
+  ]
+}

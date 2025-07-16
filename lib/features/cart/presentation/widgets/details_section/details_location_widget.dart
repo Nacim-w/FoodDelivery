@@ -166,24 +166,28 @@ class _DetailsLocationWidgetState extends State<DetailsLocation> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2.5),
       child: ListTile(
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colours.lightThemeGrey2),
-          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: const Color.fromARGB(150, 126, 126, 126)),
+          borderRadius: BorderRadius.circular(20),
         ),
         leading: SvgPicture.asset(
-          width: 20,
-          height: 20,
+          width: 26,
+          height: 26,
           Media.paymentLocation,
+          colorFilter: ColorFilter.mode(
+            Colours.lightThemeOrange5,
+            BlendMode.srcIn,
+          ),
         ),
         title: Text(
           "${widget.from} -> ${widget.to}",
-          style: TextStyles.textSemiBoldLarge.black1,
+          style: TextStyles.textSemiBold.black1,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
         subtitle: Text("Cliquez pour choisir un emplacement",
-            style: TextStyles.textMediumLarge.black1),
+            style: TextStyles.textMediumSmall.black1),
         trailing: Icon(Icons.arrow_forward_ios_rounded,
-            size: 16, color: Colours.lightThemeGrey2),
+            size: 16, color: Colours.lightThemeGrey1),
         onTap: _showLocationBottomSheet,
       ),
     );

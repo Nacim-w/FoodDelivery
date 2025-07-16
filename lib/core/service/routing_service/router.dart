@@ -54,9 +54,9 @@ import 'package:legy/features/restaurant/presentation/views/restaurant_view.dart
 import 'package:legy/features/restaurant/presentation/views/all_restaurants_view.dart';
 import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';
 import 'package:legy/features/search/presentation/view/search_view.dart';
-import 'package:legy/features/web_socket/presentation/app/adapter/tracking_cubit.dart';
-import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
+//import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:legy/features/web_socket/presentation/presentation/order_tracking_view.dart';
 
 part 'router.main.dart';

@@ -88,7 +88,7 @@ final router = GoRouter(
                 ),
               ),
               routes: [
-                GoRoute(
+                /*  GoRoute(
                   path: TrackingView.routePath,
                   pageBuilder: (context, state) => slideUpTransition(
                     child: BlocProvider(
@@ -96,6 +96,23 @@ final router = GoRouter(
                       child: TrackingView(orderId: ''),
                     ),
                   ),
+                ),*/
+                GoRoute(
+                  path: OrderTrackingView.routePath,
+                  pageBuilder: (context, state) {
+                    final orderId = state.uri.queryParameters['orderId'];
+                    if (orderId == null || orderId.isEmpty) {
+                      // Handle missing orderId, maybe show error page or default view
+                      return fadeTransition(
+                        child: Scaffold(
+                          body: Center(child: Text('Order ID is missing')),
+                        ),
+                      );
+                    }
+                    return fadeTransition(
+                      child: OrderTrackingView(orderId: orderId),
+                    );
+                  },
                 ),
                 GoRoute(
                   path: PreferencesView.routePath,

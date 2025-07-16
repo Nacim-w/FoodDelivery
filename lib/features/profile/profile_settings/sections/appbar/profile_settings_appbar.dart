@@ -51,7 +51,7 @@ class ProfileSettingsAppbar extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: Text(title, style: TextStyles.textMediumLarge.black1),
+            child: Text(title, style: TextStyles.textBoldLarge.black1),
           ),
         ),
         SizedBox(width: context.width * 0.1),
