@@ -7,6 +7,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
+import 'package:legy/features/chat/presentation/views/chat_view.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/home/presentation/widgets/home_category_widget.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ class HomeCategorySection extends StatelessWidget {
                 onPressed: () {
                   context.read<CategoryProvider>().changeIndex(newIndex: 0);
                   //context.go('${HomePage.routePath}/${TrackingView.routePath}');
+                  context.go('${HomePage.routePath}/${ChatView.routePath}');
                 },
                 child: Text('Tout voir',
                     style: TextStyles.textSemiBoldSmall.orange5),

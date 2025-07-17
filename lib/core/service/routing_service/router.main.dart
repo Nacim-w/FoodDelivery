@@ -88,6 +88,13 @@ final router = GoRouter(
                 ),
               ),
               routes: [
+                GoRoute(
+                  path: ChatView.routePath,
+                  pageBuilder: (context, state) => slideUpTransition(
+                    child: const ChatView(),
+                  ),
+                ),
+
                 /*  GoRoute(
                   path: TrackingView.routePath,
                   pageBuilder: (context, state) => slideUpTransition(

@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/singletons/cache.dart';
@@ -11,6 +10,7 @@ import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';
 import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/views/category_view.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
+import 'package:legy/features/chat/presentation/views/chat_view.dart';
 import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/dashboard/dashboard.dart';
 import 'package:legy/features/auth/presentation/views/change_password_view.dart';
