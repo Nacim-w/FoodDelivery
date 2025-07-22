@@ -5,8 +5,9 @@ import 'package:stomp_dart_client/stomp_dart_client.dart';
 class WebSocketService {
   StompClient? _stompClient;
 
-  // Connect for order status notifications
-  void connectToClientNotifications(String clientId) {
+  // Connect for order status notifications with a callback
+  void connectToClientNotifications(
+      String clientId, void Function(String status) onStatusUpdate) {
     _stompClient = StompClient(
       config: StompConfig.sockJS(
         url: '${NetworkConstants.baseUrl}/ws',
@@ -19,6 +20,7 @@ class WebSocketService {
               if (message.body != null) {
                 final body = message.body!;
                 print('📬 Received order status update: $body');
+                onStatusUpdate(body);
               }
             },
           );

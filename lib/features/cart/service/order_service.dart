@@ -7,7 +7,6 @@ import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/product/model/product_model.dart';
-import 'package:legy/features/web_socket/service/web_socket_service.dart';
 
 class OrderService {
   final CacheHelper cacheHelper;
@@ -123,10 +122,6 @@ class OrderService {
       // 🔔 Connect to WebSocket for order updates
       final profile = cacheHelper.getCachedUserProfile();
       debugPrint('Cached Profile: ${profile?.id}');
-      if (profile != null && profile.id.isNotEmpty) {
-        final wsService = WebSocketService();
-        wsService.connectToClientNotifications(profile.id);
-      } else {}
 
       return orderId;
     } on ForceLogoutException {
