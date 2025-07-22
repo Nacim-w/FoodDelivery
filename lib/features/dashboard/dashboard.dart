@@ -1,52 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/dashboard/bottom_nav_items.dart';
 import 'package:legy/features/dashboard/drawer.dart';
-import 'package:legy/features/dish/pizza/presentation/widgets/pizza_body/pizza_details.dart';
+import 'package:legy/features/history/presentation/views/order_history_view.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
+import 'package:legy/features/reels/presentation/views/reels_view.dart';
+import 'package:legy/features/search/presentation/view/search_view.dart';
 
-class DashboardPage extends StatefulWidget {
+class DashboardPage extends StatelessWidget {
+  final Widget child;
+
   const DashboardPage({
     Key? key,
-    required this.navigationShell,
-  }) : super(key: key ?? const ValueKey<String>('DashboardPage'));
+    required this.child,
+  }) : super(key: key);
 
-  final StatefulNavigationShell navigationShell;
+  int _calculateSelectedIndex(BuildContext context) {
+    final location = GoRouterState.of(context).uri.path;
 
-  @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
+    if (location.startsWith(HomePage.routePath)) return 0;
+    if (location.startsWith(OrderHistoryView.routePath)) return 1;
+    if (location.startsWith(SearchView.routePath)) return 2;
+    if (location.startsWith(ReelsView.routePath)) return 3;
+    if (location.startsWith(ProfileSettingsPage.routePath)) return 4;
 
-class _DashboardPageState extends State<DashboardPage> {
+    return 0; // default to home
+  }
+
   @override
   Widget build(BuildContext context) {
-    final location = GoRouterState.of(context).uri.toString();
-
-    final shouldHideBottomNav = [
-      '${HomePage.routePath}/${CategoryDetails.routePath}/${PizzaDetails.routePath}',
-    ];
+    final selectedIndex = _calculateSelectedIndex(context);
 
     return Scaffold(
       drawer: const CustomHomeDrawer(),
-      body: widget.navigationShell,
-      bottomNavigationBar: shouldHideBottomNav.contains(location)
-          ? null
-          : BottomNavigationBar(
-              items: destinations,
-              onTap: (index) =>
-                  widget.navigationShell.goBranch(index, initialLocation: true),
-              currentIndex: widget.navigationShell.currentIndex,
-              selectedItemColor: Colours.lightThemeOrange5,
-              elevation: 5,
-              showUnselectedLabels: false,
-              selectedLabelStyle: TextStyles.textBoldSmallest.orange5,
-              type: BottomNavigationBarType.fixed,
-            ),
+      body: child,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        selectedItemColor: Colours.lightThemeOrange5,
+        showUnselectedLabels: false,
+        selectedLabelStyle: TextStyles.textBoldSmallest.orange5,
+        type: BottomNavigationBarType.fixed,
+        items: destinations,
+        onTap: (index) {
+          final paths = [
+            HomePage.routePath,
+            OrderHistoryView.routePath,
+            SearchView.routePath,
+            ReelsView.routePath,
+            ProfileSettingsPage.routePath,
+          ];
+          context.go(paths[index]);
+        },
+      ),
     );
   }
 }

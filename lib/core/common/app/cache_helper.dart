@@ -93,7 +93,6 @@ class CacheHelper {
     final profileString = _prefs.getString(_userProfileKey);
     if (profileString == null) return null;
     final profileJson = jsonDecode(profileString);
-    print('Cached profile: $profileJson');
     return HomeProfileModel.fromJson(profileJson);
   }
 

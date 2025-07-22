@@ -30,7 +30,6 @@ Future initPushNotifications() async {
 
   // Foreground message handler: show local notification
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Foreground message received: ${message.notification?.title}');
     if (message.notification != null) {
       final notification = message.notification!;
       final android = notification.android;
@@ -90,10 +89,6 @@ class FirebaseApi {
 
   Future<void> initNotifications() async {
     await _firebaseMessaging.requestPermission();
-
-    final fCMToken = await _firebaseMessaging.getToken();
-    print('FCM Token: $fCMToken');
-
     await initLocalNotification(); // init local notifications
     await initPushNotifications(); // init FCM + handlers
   }

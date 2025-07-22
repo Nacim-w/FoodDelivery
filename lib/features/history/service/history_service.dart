@@ -17,12 +17,13 @@ class HistoryService {
     try {
       final token = sl<CacheHelper>().getSessionToken();
       final uri = Uri.parse('${NetworkConstants.baseUrl}/api/orders/history');
-
+      debugPrint('Fetching orders from: ${uri.toString()}');
+      debugPrint('Using token: $token');
       var response = await http.get(uri, headers: {
         HttpHeaders.authorizationHeader: 'Bearer $token',
         HttpHeaders.contentTypeHeader: 'application/json',
       });
-
+      debugPrint('Response Status Code: ${response.statusCode}');
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
         if (!refreshed) {
@@ -72,7 +73,6 @@ class HistoryService {
         if (!refreshed) {
           throw const TokenExpiredException(message: "Session expirée.");
         }
-        debugPrint(response.body);
         final newToken = sl<CacheHelper>().getSessionToken();
         response = await http.post(
           uri,

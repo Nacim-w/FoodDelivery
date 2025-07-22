@@ -43,7 +43,6 @@ class OrderService {
         }).toList(),
       };
 
-      print('place order body: $orderBody');
       var response = await http.post(
         uri,
         headers: {
@@ -68,7 +67,6 @@ class OrderService {
             },
             body: jsonEncode(orderBody),
           );
-          print(response);
         } else {
           throw const ForceLogoutException(
               message: "Session expirée, veuillez vous reconnecter.");

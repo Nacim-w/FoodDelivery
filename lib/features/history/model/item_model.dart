@@ -32,14 +32,16 @@ class ItemModel {
   }
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
-    final rawSupplements = json['supplements'];
-    List<SupplementModel> parsedSupplements = [];
-    if (rawSupplements != null && rawSupplements is List) {
-      parsedSupplements = rawSupplements
+    final rawSupplements = json['supplements'] ?? json['selectedSupplements'];
+
+    List<SupplementModel> supplements = [];
+    if (rawSupplements is List) {
+      supplements = rawSupplements
           .where((e) => e != null)
           .map((e) => SupplementModel.fromJson(e as Map<String, dynamic>))
           .toList();
     }
+
     return ItemModel(
       productId: json['productId'] ?? '',
       productName: json['productName'] ?? '',
@@ -47,7 +49,7 @@ class ItemModel {
       quantity: json['quantity'] ?? 0,
       categoryId: json['categoryId'] ?? '',
       promotionAmount: (json['promotionAmount'] as num?)?.toDouble() ?? 0.0,
-      supplements: parsedSupplements,
+      supplements: supplements, // ✅ now List<SupplementModel>
     );
   }
 

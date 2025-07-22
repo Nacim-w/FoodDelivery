@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -24,11 +23,6 @@ class ProductService {
         uri,
         headers: NetworkConstants.headers,
       );
-      debugPrint('Request URL: ${response.request?.url}');
-      debugPrint('Request method: ${response.request?.method}');
-      debugPrint('Fetching product with ID: $id');
-      debugPrint('Response status: ${response.statusCode}');
-      debugPrint('Response body: ${response.body}');
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';

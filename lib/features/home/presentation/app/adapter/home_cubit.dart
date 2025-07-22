@@ -8,15 +8,11 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit({required this.homeService}) : super(HomeState());
 
   Future<void> loadRestaurants() async {
-    print('loadRestaurants called');
-
     emit(state.copyWith(
       isLoadingRestaurants: true,
       clearRestaurantsError: true,
       restaurants: null,
     ));
-    print(
-        'After emit loading true & reset error: ${state.restaurantsError}'); // May still be old state because emit is async
 
     try {
       final restaurants = await homeService.getNearbyRestaurants(

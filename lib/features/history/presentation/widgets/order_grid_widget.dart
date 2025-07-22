@@ -25,8 +25,6 @@ class _OrderGridState extends State<OrderGrid> {
         children: widget.orders.map((order) {
           return GestureDetector(
             onTap: () {
-              debugPrint(
-                  ' me trying things out ${OrderHistoryView.routePath}/order-details/${order.orderId}');
               context.go(
                 '${OrderHistoryView.routePath}/order-details/${order.orderId}',
               );

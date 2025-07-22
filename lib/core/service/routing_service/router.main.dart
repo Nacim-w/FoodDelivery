@@ -73,113 +73,134 @@ final router = GoRouter(
         return SignInPage.routePath;
       },
     ),
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) =>
-          DashboardPage(navigationShell: navigationShell),
-      branches: [
-        StatefulShellBranch(
+
+    // ShellRoute replaces StatefulShellRoute.indexedStack for tab management,
+    // which resets state when switching tabs
+    ShellRoute(
+      builder: (context, state, child) =>
+          DashboardPage(child: child), // pass child for current route
+      routes: [
+        // Home tab branch
+        GoRoute(
+          path: HomePage.routePath,
+          pageBuilder: (context, state) => sharedAxisTransition(
+            child: BlocProvider(
+              create: (_) => sl<HomeCubit>(),
+              child: HomePage(),
+            ),
+          ),
           routes: [
             GoRoute(
-              path: HomePage.routePath,
-              pageBuilder: (context, state) => sharedAxisTransition(
-                child: BlocProvider(
-                  create: (_) => sl<HomeCubit>(),
-                  child: HomePage(),
-                ),
+              path: ChatView.routePath,
+              pageBuilder: (context, state) => slideUpTransition(
+                child: const ChatView(),
+              ),
+            ),
+            GoRoute(
+              path: OrderTrackingView.routePath,
+              pageBuilder: (context, state) {
+                final orderId = state.uri.queryParameters['orderId'];
+                if (orderId == null || orderId.isEmpty) {
+                  return fadeTransition(
+                    child: Scaffold(
+                      body: Center(child: Text('Order ID is missing')),
+                    ),
+                  );
+                }
+                return fadeTransition(
+                  child: OrderTrackingView(orderId: orderId),
+                );
+              },
+            ),
+            GoRoute(
+              path: PreferencesView.routePath,
+              pageBuilder: (context, state) =>
+                  fadeTransition(child: const PreferencesView()),
+            ),
+            GoRoute(
+              path: OrderTrackingMapView.routePath,
+              pageBuilder: (context, state) => slideUpTransition(
+                child: const OrderTrackingMapView(),
+              ),
+            ),
+            GoRoute(
+              path: BeginCustomization.routePath,
+              pageBuilder: (context, state) => slideUpTransition(
+                child: const BeginCustomization(),
               ),
               routes: [
                 GoRoute(
-                  path: ChatView.routePath,
-                  pageBuilder: (context, state) => slideUpTransition(
-                    child: const ChatView(),
-                  ),
-                ),
-
-                /*  GoRoute(
-                  path: TrackingView.routePath,
-                  pageBuilder: (context, state) => slideUpTransition(
-                    child: BlocProvider(
-                      create: (_) => sl<TrackingCubit>(),
-                      child: TrackingView(orderId: ''),
-                    ),
-                  ),
-                ),*/
-                GoRoute(
-                  path: OrderTrackingView.routePath,
+                  path: BurgerFinalScreen.routePath,
                   pageBuilder: (context, state) {
-                    final orderId = state.uri.queryParameters['orderId'];
-                    if (orderId == null || orderId.isEmpty) {
-                      // Handle missing orderId, maybe show error page or default view
-                      return fadeTransition(
-                        child: Scaffold(
-                          body: Center(child: Text('Order ID is missing')),
-                        ),
-                      );
-                    }
-                    return fadeTransition(
-                      child: OrderTrackingView(orderId: orderId),
+                    final ingredients = state.extra as List<String>;
+                    return slideHorizontalTransition(
+                      child: BurgerFinalScreen(ingredients: ingredients),
                     );
                   },
                 ),
-                GoRoute(
-                  path: PreferencesView.routePath,
-                  pageBuilder: (context, state) =>
-                      fadeTransition(child: const PreferencesView()),
+              ],
+            ),
+            GoRoute(
+              path: FullCartView.routePath,
+              pageBuilder: (context, state) => fadeTransition(
+                child: BlocProvider(
+                  create: (_) => sl<OrderCubit>(),
+                  child: FullCartView(),
                 ),
-                GoRoute(
-                  path: OrderTrackingMapView.routePath,
-                  pageBuilder: (context, state) => slideUpTransition(
-                    child: const OrderTrackingMapView(),
+              ),
+            ),
+            GoRoute(
+              path: MapView.routePath,
+              pageBuilder: (context, state) => slideUpTransition(
+                child: const MapView(),
+              ),
+            ),
+            GoRoute(
+              path: PaymentPage.routePath,
+              pageBuilder: (context, state) => slideUpTransition(
+                child: const PaymentPage(),
+              ),
+            ),
+            GoRoute(
+              path: CouponView.routePath,
+              pageBuilder: (context, state) =>
+                  fadeTransition(child: const CouponView()),
+            ),
+            GoRoute(
+              path: 'restaurant/:restaurantId',
+              pageBuilder: (context, state) {
+                final restaurantId = state.pathParameters['restaurantId']!;
+                return slideHorizontalTransition(
+                  child: BlocProvider(
+                    create: (_) => sl<RestaurantCubit>(),
+                    child: RestaurantView(restaurantId: restaurantId),
                   ),
-                ),
+                );
+              },
+              routes: [
                 GoRoute(
-                  path: BeginCustomization.routePath,
-                  pageBuilder: (context, state) => slideUpTransition(
-                    child: const BeginCustomization(),
-                  ),
-                  routes: [
-                    GoRoute(
-                      path: BurgerFinalScreen.routePath,
-                      pageBuilder: (context, state) {
-                        final ingredients = state.extra as List<String>;
-                        return slideHorizontalTransition(
-                          child: BurgerFinalScreen(ingredients: ingredients),
-                        );
-                      },
-                    ),
-                  ],
+                  path: 'product/:productId',
+                  pageBuilder: (context, state) {
+                    final productId = state.pathParameters['productId']!;
+                    return slideHorizontalTransition(
+                      child: BlocProvider(
+                        create: (_) => sl<ProductCubit>(),
+                        child: ProductView(productId: productId),
+                      ),
+                    );
+                  },
                 ),
-                GoRoute(
-                  path: FullCartView.routePath,
-                  pageBuilder: (context, state) => fadeTransition(
-                    child: BlocProvider(
-                      create: (_) => sl<OrderCubit>(),
-                      child: FullCartView(),
-                    ),
-                  ),
+              ],
+            ),
+            GoRoute(
+              path: AllRestaurantsView.routePath,
+              pageBuilder: (context, state) => fadeTransition(
+                child: BlocProvider(
+                  create: (_) => sl<RestaurantCubit>(),
+                  child: AllRestaurantsView(),
                 ),
-                GoRoute(
-                  path: EmptyCartView.routePath,
-                  pageBuilder: (context, state) =>
-                      fadeTransition(child: const EmptyCartView()),
-                ),
-                GoRoute(
-                  path: MapView.routePath,
-                  pageBuilder: (context, state) => slideUpTransition(
-                    child: const MapView(),
-                  ),
-                ),
-                GoRoute(
-                  path: PaymentPage.routePath,
-                  pageBuilder: (context, state) => slideUpTransition(
-                    child: const PaymentPage(),
-                  ),
-                ),
-                GoRoute(
-                  path: CouponView.routePath,
-                  pageBuilder: (context, state) =>
-                      fadeTransition(child: const CouponView()),
-                ),
+              ),
+              routes: [
                 GoRoute(
                   path: 'restaurant/:restaurantId',
                   pageBuilder: (context, state) {
@@ -193,9 +214,9 @@ final router = GoRouter(
                   },
                   routes: [
                     GoRoute(
-                      path: 'product/:productId',
+                      path: 'restaurant/:productId',
                       pageBuilder: (context, state) {
-                        final productId = state.pathParameters['productId']!;
+                        final productId = state.pathParameters['restaurantId']!;
                         return slideHorizontalTransition(
                           child: BlocProvider(
                             create: (_) => sl<ProductCubit>(),
@@ -206,181 +227,126 @@ final router = GoRouter(
                     ),
                   ],
                 ),
+              ],
+            ),
+            GoRoute(
+              path: CategoryDetails.routePath,
+              pageBuilder: (context, state) => sharedAxisTransition(
+                child: BlocProvider(
+                  create: (_) => sl<CategoryCubit>(),
+                  child: CategoryView(),
+                ),
+              ),
+              routes: [
                 GoRoute(
-                  path: AllRestaurantsView.routePath,
-                  pageBuilder: (context, state) => fadeTransition(
-                    child: BlocProvider(
-                      create: (_) => sl<RestaurantCubit>(),
-                      child: AllRestaurantsView(),
-                    ),
+                  path: SaladDetails.routePath,
+                  pageBuilder: (context, state) => slideHorizontalTransition(
+                    child: const SaladDetails(),
                   ),
-                  routes: [
-                    GoRoute(
-                      path: 'restaurant/:restaurantId',
-                      pageBuilder: (context, state) {
-                        final restaurantId =
-                            state.pathParameters['restaurantId']!;
-                        return slideHorizontalTransition(
-                          child: BlocProvider(
-                            create: (_) => sl<RestaurantCubit>(),
-                            child: RestaurantView(restaurantId: restaurantId),
-                          ),
-                        );
-                      },
-                      routes: [
-                        GoRoute(
-                          path: 'restaurant/:productId',
-                          pageBuilder: (context, state) {
-                            final productId =
-                                state.pathParameters['restaurantId']!;
-                            return slideHorizontalTransition(
-                              child: BlocProvider(
-                                create: (_) => sl<ProductCubit>(),
-                                child: ProductView(productId: productId),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
                 ),
                 GoRoute(
-                  path: CategoryDetails.routePath,
-                  pageBuilder: (context, state) => sharedAxisTransition(
-                    child: BlocProvider(
-                      create: (_) => sl<CategoryCubit>(),
-                      child: CategoryView(),
-                    ),
+                  path: BurgerDetails.routePath,
+                  pageBuilder: (context, state) => slideHorizontalTransition(
+                    child: const BurgerDetails(),
                   ),
-                  routes: [
-                    GoRoute(
-                      path: SaladDetails.routePath,
-                      pageBuilder: (context, state) =>
-                          slideHorizontalTransition(
-                        child: const SaladDetails(),
-                      ),
-                    ),
-                    GoRoute(
-                      path: BurgerDetails.routePath,
-                      pageBuilder: (context, state) =>
-                          slideHorizontalTransition(
-                        child: const BurgerDetails(),
-                      ),
-                    ),
-                    GoRoute(
-                      path: PizzaDetails.routePath,
-                      pageBuilder: (context, state) =>
-                          slideHorizontalTransition(
-                        child: const PizzaDetails(),
-                      ),
-                    ),
-                    GoRoute(
-                      path: DessertDetails.routePath,
-                      pageBuilder: (context, state) =>
-                          slideHorizontalTransition(
-                        child: const DessertDetails(),
-                      ),
-                    ),
-                  ],
+                ),
+                GoRoute(
+                  path: PizzaDetails.routePath,
+                  pageBuilder: (context, state) => slideHorizontalTransition(
+                    child: const PizzaDetails(),
+                  ),
+                ),
+                GoRoute(
+                  path: DessertDetails.routePath,
+                  pageBuilder: (context, state) => slideHorizontalTransition(
+                    child: const DessertDetails(),
+                  ),
                 ),
               ],
             ),
           ],
         ),
+
         // Order history branch
-        StatefulShellBranch(
+        GoRoute(
+          path: OrderHistoryView.routePath,
+          builder: (context, state) => BlocProvider(
+            create: (_) => sl<HistoryCubit>(),
+            child: OrderHistoryView(),
+          ),
           routes: [
             GoRoute(
-              path: OrderHistoryView.routePath,
-              builder: (context, state) => BlocProvider(
-                create: (_) => sl<HistoryCubit>(),
-                child: OrderHistoryView(),
-              ),
-              routes: [
-                GoRoute(
-                  path: OrderDetailsView.routePath + '/:orderId',
-                  builder: (context, state) {
-                    final orderId = state.pathParameters['orderId']!;
-                    return BlocProvider(
-                      create: (_) => sl<OrderDetailsCubit>(),
-                      child: OrderDetailsView(orderId: orderId),
-                    );
-                  },
-                ),
-              ],
+              path: OrderDetailsView.routePath + '/:orderId',
+              builder: (context, state) {
+                final orderId = state.pathParameters['orderId']!;
+                return BlocProvider(
+                  create: (_) => sl<OrderDetailsCubit>(),
+                  child: OrderDetailsView(orderId: orderId),
+                );
+              },
             ),
           ],
         ),
+
         // Search branch
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: SearchView.routePath,
-              builder: (context, state) => BlocProvider(
-                create: (_) => sl<SearchCubit>(),
-                child: SearchView(),
-              ),
-            ),
-          ],
+        GoRoute(
+          path: SearchView.routePath,
+          builder: (context, state) => BlocProvider(
+            create: (_) => sl<SearchCubit>(),
+            child: SearchView(),
+          ),
         ),
+
         // Reels branch
-        StatefulShellBranch(
+        GoRoute(
+          path: ReelsView.routePath,
+          builder: (context, state) => BlocProvider(
+            create: (_) => sl<ReelsCubit>(),
+            child: ReelsView(),
+          ),
+        ),
+
+        // Profile/settings branch
+        GoRoute(
+          path: ProfileSettingsPage.routePath,
+          builder: (context, state) => const ProfileSettingsPage(),
           routes: [
             GoRoute(
-              path: ReelsView.routePath,
+              path: NotificationView.routePath,
+              builder: (context, state) => const NotificationView(),
+            ),
+            GoRoute(
+              path: HelpCenterPage.routePath,
+              builder: (context, state) => const HelpCenterPage(),
+            ),
+            GoRoute(
+              path: FavoriteView.routePath,
               builder: (context, state) => BlocProvider(
-                create: (_) => sl<ReelsCubit>(),
-                child: ReelsView(),
+                create: (_) => sl<FavoriteCubit>(),
+                child: FavoriteView(),
               ),
             ),
-          ],
-        ),
-        // Profile/settings branch
-        StatefulShellBranch(
-          routes: [
             GoRoute(
-              path: ProfileSettingsPage.routePath,
-              builder: (context, state) => const ProfileSettingsPage(),
+              path: ParamsView.routePath,
+              builder: (context, state) => const ParamsView(),
               routes: [
                 GoRoute(
-                  path: NotificationView.routePath,
-                  builder: (context, state) => const NotificationView(),
-                ),
-                GoRoute(
-                  path: HelpCenterPage.routePath,
-                  builder: (context, state) => const HelpCenterPage(),
-                ),
-                GoRoute(
-                  path: FavoriteView.routePath,
+                  path: ChangePasswordView.routePath,
                   builder: (context, state) => BlocProvider(
-                    create: (_) => sl<FavoriteCubit>(),
-                    child: FavoriteView(),
+                    create: (_) => sl<ProfileCubit>(),
+                    child: ChangePasswordView(),
                   ),
                 ),
                 GoRoute(
-                  path: ParamsView.routePath,
-                  builder: (context, state) => const ParamsView(),
-                  routes: [
-                    GoRoute(
-                      path: ChangePasswordView.routePath,
-                      builder: (context, state) => BlocProvider(
-                        create: (_) => sl<ProfileCubit>(),
-                        child: ChangePasswordView(),
-                      ),
-                    ),
-                    GoRoute(
-                      path: TermsServiceView.routePath,
-                      builder: (context, state) => const TermsServiceView(),
-                    ),
-                    GoRoute(
-                      path: PersonalDataPage.routePath,
-                      builder: (context, state) => BlocProvider(
-                        create: (_) => sl<ProfileCubit>(),
-                        child: PersonalDataPage(),
-                      ),
-                    ),
-                  ],
+                  path: TermsServiceView.routePath,
+                  builder: (context, state) => const TermsServiceView(),
+                ),
+                GoRoute(
+                  path: PersonalDataPage.routePath,
+                  builder: (context, state) => BlocProvider(
+                    create: (_) => sl<ProfileCubit>(),
+                    child: PersonalDataPage(),
+                  ),
                 ),
               ],
             ),
@@ -388,6 +354,7 @@ final router = GoRouter(
         ),
       ],
     ),
+
     // Sign-in flow
     GoRoute(
       path: SignInPage.routePath,

@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
@@ -42,8 +41,6 @@ class AuthService {
         body: jsonEncode({'password': password, 'email': email}),
         headers: NetworkConstants.headers,
       );
-      debugPrint('AuthService login response: ${response.body}');
-      debugPrint('AuthService login status code: ${response.statusCode}');
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
@@ -75,9 +72,7 @@ class AuthService {
   }) async {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$REGISTER_ENDPOINT');
-      debugPrint('AuthService register uri: $uri');
-      debugPrint(
-          'AuthService register body: $username, $firstname, $lastname, $email, $password, $phoneNumber, $address');
+
       final response = await http.post(
         uri,
         body: jsonEncode({
@@ -93,8 +88,6 @@ class AuthService {
         }),
         headers: NetworkConstants.headers,
       );
-      debugPrint('AuthService register response: ${response.body}');
-      debugPrint('AuthService register status code: ${response.statusCode}');
       if (response.statusCode != 201 && response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ?? 'Une erreur est survenue.';
@@ -145,15 +138,11 @@ class AuthService {
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        debugPrint('Google sign-in was canceled by the user.');
         return null;
       }
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
-      debugPrint('Google Access Token: ${googleAuth.accessToken}');
-      debugPrint('Google ID Token: ${googleAuth.idToken}');
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -175,18 +164,14 @@ class AuthService {
       }
       rethrow;
     } catch (e) {
-      print('Error during Google sign-in: $e');
       throw Exception("Erreur lors de la connexion avec Google.");
     }
   }
 
   Future<GoogleResponseModel> _loginWithFirebaseIdToken(
       String firebaseIdToken) async {
-    print('firebaseIdToken: $firebaseIdToken');
-
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$GOOGLE_ENDPOINT');
-      debugPrint('uri: $uri');
       final response = await http.post(
         uri,
         headers: {
@@ -197,12 +182,6 @@ class AuthService {
         }),
       );
       final data = jsonDecode(response.body);
-
-      debugPrint(
-          'AuthService _loginWithFirebaseIdToken response: ${response.body}');
-      debugPrint(
-          'AuthService _loginWithFirebaseIdToken status code: ${response.statusCode}');
-
       if (response.statusCode == 422 && data['missingPhoneNumber'] == true) {
         await sl<CacheHelper>().cacheSessionToken(data['token']);
         await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
-import 'package:legy/core/extension/text_style_extension.dart';
-import 'package:legy/core/res/styles/colours.dart';
-import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/preferences/presentation/widgets/preference_buttons.dart';
+import 'package:legy/features/preferences/presentation/widgets/preference_grid.dart';
+import 'package:legy/features/preferences/presentation/widgets/preference_header.dart';
 
 class PreferencesView extends StatefulWidget {
   static const routePath = "food-preferences";
@@ -86,110 +85,20 @@ class _PreferencesViewState extends State<PreferencesView>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Vos préférences culinaires ?',
-              style: TextStyles.titleBoldLarge.black1),
-          const Text(
-            'Des idées repas selon vos goûts',
-            style: TextStyles.titleRegularSmallest,
-          ),
+          const PreferencesHeader(),
           const SizedBox(height: 16),
           Expanded(
-            child: AnimatedBuilder(
-              animation: _shakeController,
-              builder: (context, child) {
-                final offset = _shakeAnimation.value;
-                return Transform.translate(
-                  offset: Offset(offset % 2 == 0 ? offset : -offset, 0),
-                  child: child,
-                );
-              },
-              child: GridView.builder(
-                itemCount: _preferences.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3.5,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                ),
-                itemBuilder: (context, index) {
-                  final pref = _preferences[index];
-                  final isSelected = _selectedIndexes.contains(index);
-
-                  return GestureDetector(
-                    onTap: () => _onSelect(index),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        color:
-                            isSelected ? Colors.orange.shade100 : Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withAlpha(20),
-                            spreadRadius: 0.2,
-                            blurRadius: 2,
-                          ),
-                        ],
-                        border: Border.all(
-                          color:
-                              isSelected ? Colors.orange : Colors.grey.shade200,
-                          width: 2,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            pref['icon']!,
-                            width: 28,
-                            height: 28,
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              pref['label']!,
-                              style: const TextStyle(fontSize: 16),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+            child: PreferencesGrid(
+              preferences: _preferences,
+              selectedIndexes: _selectedIndexes,
+              onSelect: _onSelect,
+              shakeAnimation: _shakeAnimation,
             ),
           ),
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => context.go(HomePage.routePath),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colours.lightThemeGrey2,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: Text(
-                    'Ignorer',
-                    style: TextStyles.textMediumLarge.black1,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _selectedIndexes.isEmpty ? null : _onPass,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        Colours.lightThemeOrange0.withAlpha(120),
-                    disabledForegroundColor: Colours.lightThemeWhite1,
-                  ),
-                  child: const Text('Passer'),
-                ),
-              ),
-            ],
+          PreferencesButtons(
+            canProceed: _selectedIndexes.isNotEmpty,
+            onPass: _onPass,
           ),
         ],
       ),

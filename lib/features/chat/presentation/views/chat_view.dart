@@ -53,7 +53,7 @@ class _ChatViewState extends State<ChatView> {
   Widget _messageBubble(String text, bool isUser) {
     final backgroundColor = isUser
         ? Colours.lightThemeOrange5
-        : Colours.lightThemeBlack1.withOpacity(0.6);
+        : Colours.lightThemeBlack1.withAlpha(170);
     final textColor = Colors.white;
 
     return Align(
@@ -118,7 +118,7 @@ class _ChatViewState extends State<ChatView> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(
-                          color: Colours.lightThemeBlack1.withOpacity(0.2),
+                          color: Colours.lightThemeBlack1.withAlpha(50),
                         ),
                       ),
                       child: TextField(

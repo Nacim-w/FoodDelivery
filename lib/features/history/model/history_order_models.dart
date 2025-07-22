@@ -63,9 +63,9 @@ class OrderModel {
           : HistoryRestaurantModel.empty(),
       deliveryInfo: json['deliveryInfo'] as String?,
       deliveryAddress: json['deliveryAddress'] ?? '',
-      livreurStatus: json['livreurStatus'] ?? '',
+      livreurStatus: json['livreurStatus']?.toString() ?? '',
       deliveryMode: json['deliveryMode'] as String?,
-      paymentStatus: json['paymentStatus'] ?? '',
+      paymentStatus: json['paymentStatus']?.toString() ?? '',
       paymentMethod: json['paymentMethod'] ?? '',
       orderStatus: json['orderStatus'] ?? '',
     );

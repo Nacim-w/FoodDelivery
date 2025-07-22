@@ -64,7 +64,6 @@ class _SignInFormState extends State<SignInForm> {
 
             if (token != null) {
               final profile = await sl<AuthService>().getClientProfile(token);
-              debugPrint("Profile: ${profile.toJson()}");
               final isProfileIncomplete = profile.phoneNumber.trim().isEmpty ||
                   profile.address.trim().isEmpty;
 

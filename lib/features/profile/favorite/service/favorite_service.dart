@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -29,7 +28,6 @@ class FavoriteService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
-      debugPrint('getFavoriteRestaurant response: ${response.statusCode}');
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
         if (refreshed) {
@@ -45,7 +43,6 @@ class FavoriteService {
             errorJson['error'] ?? 'Une erreur est survenue (add favorite).';
         throw ServerException(message: errorMessage);
       }
-      debugPrint('getFavoriteRestaurant response: ${response.body}');
       return response.body; // ✅ return the body for use in Cubit
     } on TokenExpiredException {
       rethrow;
@@ -70,7 +67,6 @@ class FavoriteService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
-      debugPrint('getFavoriteProduct response: ${response.statusCode}');
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
         if (refreshed) {
@@ -86,7 +82,6 @@ class FavoriteService {
             errorJson['error'] ?? 'Une erreur est survenue (remove favorite).';
         throw ServerException(message: errorMessage);
       }
-      debugPrint('getFavoriteProduct response: ${response.body}');
       return response.body;
     } on TokenExpiredException {
       rethrow;
