@@ -9,7 +9,7 @@ class OrderCubit extends Cubit<OrderState> {
 
   OrderCubit({required this.orderService}) : super(const OrderState());
 
-  // Now returns the orderId as a String
+  // Your existing placeOrder method
   Future<String> placeOrder({
     required List<ProductModel> products,
     required HomeProfileModel profile,
@@ -22,13 +22,28 @@ class OrderCubit extends Cubit<OrderState> {
         restaurantId: products.first.restaurantId,
         deliveryAddress: profile.address,
         paymentMethod: 'CASH',
+        latitude: state.selectedLatitude!,
+        longitude: state.selectedLongitude!,
       );
 
       emit(state.copyWith(isLoading: false, success: true));
-      return orderId; // return orderId here
+      return orderId;
     } catch (e) {
       emit(state.copyWith(isLoading: false, error: e.toString()));
       rethrow;
     }
+  }
+
+  // New method to update location name in state
+  void updateLocation({
+    required String name,
+    required double latitude,
+    required double longitude,
+  }) {
+    emit(state.copyWith(
+      selectedLocationName: name,
+      selectedLatitude: latitude,
+      selectedLongitude: longitude,
+    ));
   }
 }

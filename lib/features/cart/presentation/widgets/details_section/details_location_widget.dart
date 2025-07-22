@@ -22,7 +22,8 @@ class DetailsLocation extends StatefulWidget {
 
   final String from;
   final String to;
-  final Function(String) onLocationSelected;
+  final Function(String name, double latitude, double longitude)
+      onLocationSelected;
 
   @override
   State<DetailsLocation> createState() => _DetailsLocationWidgetState();
@@ -148,7 +149,10 @@ class _DetailsLocationWidgetState extends State<DetailsLocation> {
                     ),
                     onTap: () {
                       Navigator.of(context).pop();
-                      widget.onLocationSelected(location.name);
+                      widget.onLocationSelected(
+                          location.name, location.latitude, location.longitude);
+                      print(
+                          "Selected Location: ${location.name}, Lat: ${location.latitude}, Lng: ${location.longitude}");
                     },
                   );
                 },

@@ -1,39 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legy/features/cart/presentation/app/order_cubit.dart';
+import 'package:legy/features/cart/presentation/app/order_state.dart';
 import 'package:legy/features/cart/presentation/widgets/details_section/details_discounts_widget.dart';
 import 'package:legy/features/cart/presentation/widgets/details_section/details_location_widget.dart';
 import 'package:legy/features/cart/presentation/widgets/details_section/details_payment_method.dart';
 
-class DetailsWidget extends StatefulWidget {
+class DetailsWidget extends StatelessWidget {
   const DetailsWidget({super.key});
-
-  @override
-  State<DetailsWidget> createState() => _DetailsWidgetState();
-}
-
-class _DetailsWidgetState extends State<DetailsWidget> {
-  String selectedLocationName = "aucun";
-  String selectedPaymentMethod = "Cash";
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DetailsLocation(
-          from: "Livrer à",
-          to: selectedLocationName,
-          onLocationSelected: (newName) {
-            setState(() {
-              selectedLocationName = newName;
-            });
+        BlocBuilder<OrderCubit, OrderState>(
+          builder: (context, state) {
+            return DetailsLocation(
+              from: "Livrer à",
+              to: state.selectedLocationName,
+              onLocationSelected: (name, lat, lng) {
+                context.read<OrderCubit>().updateLocation(
+                      name: name,
+                      latitude: lat,
+                      longitude: lng,
+                    );
+              },
+            );
           },
         ),
         DetailsPaymentMethod(
-          payMethod: selectedPaymentMethod,
-          onPaymentMethodSelected: (newMethod) {
-            setState(() {
-              selectedPaymentMethod = newMethod;
-            });
-          },
+          payMethod: "Cash",
+          onPaymentMethodSelected: (newMethod) {},
         ),
         DetailsDiscounts(),
       ],

@@ -19,6 +19,8 @@ class OrderService {
     required String restaurantId,
     required String deliveryAddress,
     required String paymentMethod,
+    required double latitude,
+    required double longitude,
   }) async {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}/api/orders');
@@ -28,8 +30,8 @@ class OrderService {
 
       final orderBody = {
         "client": {
-          "longitude": 10.16579,
-          "latitude": 36.80611,
+          "longitude": latitude,
+          "latitude": longitude,
         },
         "restaurantId": '685bfed80b9cc63c8a37f11f', // keep hardcoded
         "deliveryAddress": deliveryAddress,
@@ -49,7 +51,7 @@ class OrderService {
           };
         }).toList(),
       };
-
+      debugPrint('Order Body: ${jsonEncode(orderBody)}');
       var response = await http.post(
         uri,
         headers: {
