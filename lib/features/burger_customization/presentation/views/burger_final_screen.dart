@@ -9,7 +9,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/core/common/widgets/rounded_button.dart';
-import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class BurgerFinalScreen extends StatefulWidget {
@@ -221,8 +221,8 @@ class _BurgerFinalScreenState extends State<BurgerFinalScreen> {
                         width: context.width * 0.6,
                         height: context.height * 0.05,
                         backgroundColour: Colours.lightThemeOrange5,
-                        onPressed: () => context.go(
-                            '${HomePage.routePath}/${FullCartView.routePath}'),
+                        onPressed: () => context
+                            .go('${HomePage.routePath}/${CartView.routePath}'),
                       ),
                     ],
                   ),

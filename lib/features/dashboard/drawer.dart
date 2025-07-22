@@ -9,7 +9,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/coupons/presentation/views/coupon_view.dart';
 import 'package:legy/features/home/model/home_profile_model.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
@@ -153,7 +153,7 @@ class _CustomHomeDrawerState extends State<CustomHomeDrawer> {
                             icon: Media.orderDrawer,
                             label: 'Mes commandes',
                             onTap: () => context.push(
-                              '${HomePage.routePath}/${FullCartView.routePath}',
+                              '${HomePage.routePath}/${CartView.routePath}',
                             ),
                           ),
                           Gap(_isExpanded ? 20 : 40),

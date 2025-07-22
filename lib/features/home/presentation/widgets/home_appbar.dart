@@ -7,7 +7,7 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/search/presentation/view/search_view.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -92,8 +92,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Center(
                 child: IconButton(
                   onPressed: () {
-                    context.push(
-                        '${HomePage.routePath}/${FullCartView.routePath}');
+                    context.push('${HomePage.routePath}/${CartView.routePath}');
                   },
                   icon: SvgPicture.asset(
                     Media.cart,

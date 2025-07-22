@@ -19,16 +19,16 @@ import 'package:legy/features/product/model/product_model.dart';
 import 'package:legy/features/restaurant/presentation/views/all_restaurants_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FullCartView extends StatefulWidget {
+class CartView extends StatefulWidget {
   static const routePath = 'fullCart';
 
-  const FullCartView({super.key});
+  const CartView({super.key});
 
   @override
-  State<FullCartView> createState() => _FullCartViewState();
+  State<CartView> createState() => _CartViewState();
 }
 
-class _FullCartViewState extends State<FullCartView> {
+class _CartViewState extends State<CartView> {
   List<ProductModel> products = [];
 
   @override
@@ -71,10 +71,10 @@ class _FullCartViewState extends State<FullCartView> {
   Widget build(BuildContext context) {
     return products.isEmpty
         ? _buildEmptyView(context)
-        : _buildFullCartView(context);
+        : _buildCartView(context);
   }
 
-  Widget _buildFullCartView(BuildContext context) {
+  Widget _buildCartView(BuildContext context) {
     final totalPrice = calculateTotalPrice();
 
     return Column(

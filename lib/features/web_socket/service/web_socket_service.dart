@@ -38,7 +38,7 @@ class WebSocketService {
 
   // Connect specifically for livreur location updates
   void connectToLivreurLocation(
-    String livreurId,
+    String orderid,
     void Function(double lat, double lon) onLocationUpdate,
   ) {
     _stompClient = StompClient(
@@ -48,7 +48,7 @@ class WebSocketService {
           print('✅ WebSocket connected for livreur location tracking');
 
           _stompClient!.subscribe(
-            destination: '/topic/livreurs/$livreurId/location',
+            destination: '/topic/orders/$orderid/location',
             callback: (StompFrame message) {
               print('📬 Livreur location frame: ${message.body}');
 

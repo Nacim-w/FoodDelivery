@@ -7,7 +7,7 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/category/presentation/app/provider/category_provider.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
@@ -69,8 +69,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Center(
               child: IconButton(
                 onPressed: () {
-                  context
-                      .push('${HomePage.routePath}/${FullCartView.routePath}');
+                  context.push('${HomePage.routePath}/${CartView.routePath}');
                 },
                 icon: SvgPicture.asset(
                   Media.cart,

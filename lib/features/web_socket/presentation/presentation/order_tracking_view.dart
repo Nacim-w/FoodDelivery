@@ -1,13 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/features/web_socket/service/web_socket_service.dart';
-import 'package:legy/core/utils/network_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderTrackingView extends StatefulWidget {
   static const routePath = 'order-trackingg';
@@ -24,74 +18,53 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
   GoogleMapController? _mapController;
   Marker? _livreurMarker;
   LatLng _initialPosition = const LatLng(36.80611, 10.16579); // Tunis default
+  LatLng? _previousPosition;
+  Timer? _animationTimer;
 
   late WebSocketService _webSocketService;
-  Timer? _pollingTimer;
-  String? _livreurId;
 
   @override
   void initState() {
     super.initState();
     _webSocketService = WebSocketService();
-    _startPollingForLivreurId();
-  }
 
-  Future<void> _startPollingForLivreurId() async {
-    final cacheHelper = CacheHelper(await SharedPreferences.getInstance());
-    final token = cacheHelper.getSessionToken();
-
-    if (token == null) {
-      debugPrint('⚠️ No auth token found.');
-      return;
-    }
-
-    _pollingTimer = Timer.periodic(const Duration(seconds: 5), (timer) async {
-      try {
-        final livreurId = await _fetchDeliveryPersonId(widget.orderId, token);
-        if (livreurId != null && livreurId.isNotEmpty) {
-          timer.cancel();
-          debugPrint('✅ Livreur assigned: $livreurId');
-          setState(() => _livreurId = livreurId);
-
-          _webSocketService.connectToLivreurLocation(_livreurId!, (lat, lon) {
-            debugPrint('📍 WebSocket location update received: $lat, $lon');
-            _updateLivrerMarker(lat, lon);
-          });
-        } else {
-          debugPrint('🔁 Still waiting for livreur assignment...');
-        }
-      } catch (e) {
-        debugPrint('❌ Polling error: $e');
-      }
+    _webSocketService.connectToLivreurLocation(widget.orderId, (lat, lon) {
+      debugPrint('📍 WebSocket location update received: $lat, $lon');
+      _animateMarker(LatLng(lat, lon));
     });
   }
 
-  Future<String?> _fetchDeliveryPersonId(String orderId, String token) async {
-    final url =
-        Uri.parse('${NetworkConstants.baseUrl}/api/orders/$orderId/details');
-    final response = await http.get(url, headers: {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json',
-    });
+  void _animateMarker(LatLng newPosition) {
+    _animationTimer?.cancel(); // cancel any existing animation
+    final start = _previousPosition ?? newPosition;
+    _previousPosition = newPosition;
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final livreurId = data['deliveryInfo']?['deliveryPersonId'];
-      debugPrint('📦 API responded with livreurId: $livreurId');
-      if (livreurId is String && livreurId.isNotEmpty) {
-        return livreurId;
+    const steps = 30;
+    const totalDuration = Duration(milliseconds: 600);
+    final interval = totalDuration.inMilliseconds ~/ steps;
+    int currentStep = 0;
+
+    _animationTimer = Timer.periodic(Duration(milliseconds: interval), (timer) {
+      if (currentStep >= steps) {
+        timer.cancel();
+        return;
       }
-    } else {
-      debugPrint(
-          '❌ Failed to fetch order details: HTTP ${response.statusCode}');
-    }
-    return null;
+
+      final double lat = _lerp(start.latitude, newPosition.latitude, currentStep / steps);
+      final double lon = _lerp(start.longitude, newPosition.longitude, currentStep / steps);
+      final LatLng intermediatePosition = LatLng(lat, lon);
+
+      _setMarkerPosition(intermediatePosition);
+
+      currentStep++;
+    });
   }
 
-  void _updateLivrerMarker(double latitude, double longitude) {
-    final position = LatLng(latitude, longitude);
-    debugPrint('🗺 Updating marker position to: $position');
+  double _lerp(double start, double end, double t) {
+    return start + (end - start) * t;
+  }
 
+  void _setMarkerPosition(LatLng position) {
     setState(() {
       _livreurMarker = Marker(
         markerId: const MarkerId('livreur_marker'),
@@ -101,19 +74,15 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
       );
     });
 
-    if (_mapController != null) {
-      _mapController!
-          .animateCamera(CameraUpdate.newLatLng(position))
-          .then((_) => debugPrint('📹 Camera moved to $position'))
-          .catchError((e) => debugPrint('❌ Camera movement error: $e'));
-    } else {
-      debugPrint('⚠️ Map controller is null; can’t animate camera.');
-    }
+    _mapController?.animateCamera(CameraUpdate.newLatLng(position)).then(
+          (_) => debugPrint('📹 Camera moved to $position'),
+          onError: (e) => debugPrint('❌ Camera movement error: $e'),
+        );
   }
 
   @override
   void dispose() {
-    _pollingTimer?.cancel();
+    _animationTimer?.cancel();
     _webSocketService.disconnect();
     _mapController?.dispose();
     super.dispose();

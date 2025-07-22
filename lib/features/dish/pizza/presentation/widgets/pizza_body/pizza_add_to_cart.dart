@@ -4,7 +4,7 @@ import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/cart/presentation/views/full_cart_view.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 
 class AddToCartButton extends StatelessWidget {
@@ -23,7 +23,7 @@ class AddToCartButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),
         onPressed: () =>
-            context.push('${HomePage.routePath}/${FullCartView.routePath}'),
+            context.push('${HomePage.routePath}/${CartView.routePath}'),
         child: Text(
           'Ajouter Au Panier',
           style: TextStyles.textSemiBoldLarge.white1,

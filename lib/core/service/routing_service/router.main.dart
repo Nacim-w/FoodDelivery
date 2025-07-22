@@ -73,9 +73,6 @@ final router = GoRouter(
         return SignInPage.routePath;
       },
     ),
-
-    // ShellRoute replaces StatefulShellRoute.indexedStack for tab management,
-    // which resets state when switching tabs
     ShellRoute(
       builder: (context, state, child) =>
           DashboardPage(child: child), // pass child for current route
@@ -141,11 +138,11 @@ final router = GoRouter(
               ],
             ),
             GoRoute(
-              path: FullCartView.routePath,
+              path: CartView.routePath,
               pageBuilder: (context, state) => fadeTransition(
                 child: BlocProvider(
                   create: (_) => sl<OrderCubit>(),
-                  child: FullCartView(),
+                  child: CartView(),
                 ),
               ),
             ),

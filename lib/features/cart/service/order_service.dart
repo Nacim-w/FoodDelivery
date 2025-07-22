@@ -39,6 +39,13 @@ class OrderService {
           return {
             "productId": '686e3fe3d1a00756b7316976', // keep hardcoded
             "quantity": 4, // keep hardcoded
+            /*"selectedSupplements": product.supplements.map((supplement) {
+              return {
+                "supplementId": supplement.id,
+                "supplementName": supplement.name,
+                "quantity": supplement.quantity,
+              };
+            }).toList(),*/
           };
         }).toList(),
       };
@@ -117,11 +124,9 @@ class OrderService {
       if (profile != null && profile.id.isNotEmpty) {
         final wsService = WebSocketService();
         wsService.connectToClientNotifications(profile.id);
-      } else {
-        debugPrint('⚠️ Client ID not found in cached profile.');
-      }
+      } else {}
 
-      return orderId; // <---- THIS LINE IS THE ONLY CHANGE (added return)
+      return orderId;
     } on ForceLogoutException {
       rethrow;
     } catch (e) {
