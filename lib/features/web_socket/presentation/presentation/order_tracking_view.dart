@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:legy/features/web_socket/service/web_socket_service.dart';
+import 'package:lottie/lottie.dart' hide Marker;
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum OrderStatus { idle, accepted, onTheWay }
@@ -37,13 +40,11 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
     _wsLocationService = WebSocketService();
     _wsStatusService = WebSocketService();
 
-    // Connect to location updates
     _wsLocationService.connectToLivreurLocation(widget.orderId, (lat, lon) {
       debugPrint('📍 WebSocket location update received: $lat, $lon');
       _animateMarker(LatLng(lat, lon));
     });
 
-    // Connect to status updates
     _connectToStatusUpdates();
   }
 
@@ -61,10 +62,10 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
           final String message = data['message'] ?? '';
 
           setState(() {
-            if (message.contains('accepted')) {
+            if (message.toLowerCase().contains('accepted')) {
               _orderStatus = OrderStatus.accepted;
-            } else if (message.contains('picked up') ||
-                message.contains('driver is coming')) {
+            } else if (message.toLowerCase().contains('picked up') ||
+                message.toLowerCase().contains('driver is coming')) {
               _orderStatus = OrderStatus.onTheWay;
             } else {
               _orderStatus = OrderStatus.idle;
@@ -78,7 +79,7 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
   }
 
   void _animateMarker(LatLng newPosition) {
-    _animationTimer?.cancel(); // cancel any existing animation
+    _animationTimer?.cancel();
     final start = _previousPosition ?? newPosition;
     _previousPosition = newPosition;
 
@@ -105,9 +106,7 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
     });
   }
 
-  double _lerp(double start, double end, double t) {
-    return start + (end - start) * t;
-  }
+  double _lerp(double start, double end, double t) => start + (end - start) * t;
 
   void _setMarkerPosition(LatLng position) {
     setState(() {
@@ -119,44 +118,77 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
       );
     });
 
-    _mapController?.animateCamera(CameraUpdate.newLatLng(position)).then(
-          (_) => debugPrint('📹 Camera moved to $position'),
-          onError: (e) => debugPrint('❌ Camera movement error: $e'),
-        );
+    _mapController?.animateCamera(CameraUpdate.newLatLng(position));
   }
 
-  Widget _buildStatusBanner() {
-    String text;
-    Color bgColor;
+  Widget _buildProgressBar() {
+    // Active color and inactive color for steps
+    final activeColor = Colors.orange.shade400;
+    final inactiveColor = Colors.grey.shade400;
 
-    switch (_orderStatus) {
-      case OrderStatus.accepted:
-        text = 'Commande acceptée par le restaurant';
-        bgColor = Colors.green.shade400;
-        break;
-      case OrderStatus.onTheWay:
-        text = 'Livreur en chemin';
-        bgColor = Colors.orange.shade400;
-        break;
-      default:
-        text = 'En attente de confirmation du restaurant';
-        bgColor = Colors.grey.shade400;
+    Color colorForStep(int stepIndex) {
+      switch (_orderStatus) {
+        case OrderStatus.idle:
+          return stepIndex == 0 ? activeColor : inactiveColor;
+        case OrderStatus.accepted:
+          return stepIndex <= 1 ? activeColor : inactiveColor;
+        case OrderStatus.onTheWay:
+          return activeColor;
+      }
     }
 
-    return Container(
-      width: double.infinity,
-      color: bgColor,
-      padding: const EdgeInsets.all(12),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
+    Widget stepIcon(int index, IconData iconData) {
+      final isActive = colorForStep(index) == activeColor;
+      return CircleAvatar(
+        radius: 16,
+        backgroundColor: isActive ? activeColor : inactiveColor,
+        child: Icon(iconData, color: Colors.white, size: 20),
+      );
+    }
+
+    Widget stepLine(int index) {
+      final isActive = colorForStep(index) == activeColor &&
+          colorForStep(index + 1) == activeColor;
+      return Expanded(
+        child: Container(
+          height: 4,
+          color: isActive ? activeColor : inactiveColor,
         ),
-        textAlign: TextAlign.center,
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      child: Row(
+        children: [
+          stepIcon(0, Icons.schedule), // waiting
+          stepLine(0),
+          stepIcon(1, Icons.restaurant_menu), // cooking
+          stepLine(1),
+          stepIcon(2, Icons.delivery_dining), // on the way
+        ],
       ),
     );
+  }
+
+  Widget _buildContent() {
+    switch (_orderStatus) {
+      case OrderStatus.idle:
+        return Center(child: Lottie.asset(Media.delivery));
+      case OrderStatus.accepted:
+        return Center(child: Lottie.asset(Media.cooking));
+      case OrderStatus.onTheWay:
+        return GoogleMap(
+          initialCameraPosition:
+              CameraPosition(target: _initialPosition, zoom: 14),
+          markers: _livreurMarker != null ? {_livreurMarker!} : {},
+          onMapCreated: (controller) {
+            _mapController = controller;
+            debugPrint('🗺 Google Map created');
+          },
+          myLocationEnabled: true,
+        );
+    }
   }
 
   @override
@@ -176,21 +208,8 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
       ),
       body: Column(
         children: [
-          _buildStatusBanner(),
-          Expanded(
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: _initialPosition,
-                zoom: 14,
-              ),
-              markers: _livreurMarker != null ? {_livreurMarker!} : {},
-              onMapCreated: (controller) {
-                _mapController = controller;
-                debugPrint('🗺 Google Map created');
-              },
-              myLocationEnabled: true,
-            ),
-          ),
+          _buildProgressBar(),
+          Expanded(child: _buildContent()),
         ],
       ),
     );
