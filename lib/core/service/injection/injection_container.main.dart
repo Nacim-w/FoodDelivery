@@ -16,6 +16,7 @@ Future<void> init() async {
   await _orderInit();
   await _categoryInit();
   await _reelsInit();
+  await _socketInit();
 }
 
 Future<void> _cacheInit() async {
@@ -96,4 +97,8 @@ Future<void> _reelsInit() async {
   sl
     ..registerFactory(() => ReelsCubit(reelsService: sl()))
     ..registerLazySingleton(() => ReelsService());
+}
+
+Future<void> _socketInit() async {
+  sl.registerLazySingleton(() => SocketManager());
 }

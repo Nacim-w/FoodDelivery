@@ -24,6 +24,7 @@ import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cub
 import 'package:legy/features/restaurant/service/restaurant_service.dart';
 import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';
 import 'package:legy/features/search/service/search_service.dart';
+import 'package:legy/features/web_socket/presentation/presentation/socket_manager.dart';
 //import 'package:legy/features/web_socket/service/web_socket_service.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
