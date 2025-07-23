@@ -115,12 +115,6 @@ final router = GoRouter(
                   fadeTransition(child: const PreferencesView()),
             ),
             GoRoute(
-              path: OrderTrackingMapView.routePath,
-              pageBuilder: (context, state) => slideUpTransition(
-                child: const OrderTrackingMapView(),
-              ),
-            ),
-            GoRoute(
               path: BeginCustomization.routePath,
               pageBuilder: (context, state) => slideUpTransition(
                 child: const BeginCustomization(),

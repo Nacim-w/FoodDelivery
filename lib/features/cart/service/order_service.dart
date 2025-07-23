@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
+import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/core/utils/network_constants.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/product/model/product_model.dart';
@@ -122,7 +123,7 @@ class OrderService {
       // 🔔 Connect to WebSocket for order updates
       final profile = cacheHelper.getCachedUserProfile();
       debugPrint('Cached Profile: ${profile?.id}');
-
+      await sl<CacheHelper>().cacheLastActiveOrderId(orderId);
       return orderId;
     } on ForceLogoutException {
       rethrow;

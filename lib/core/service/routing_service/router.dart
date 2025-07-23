@@ -6,7 +6,6 @@ import 'package:legy/features/auth/presentation/app/adapter/auth_cubit.dart';
 import 'package:legy/features/auth/presentation/widgets/sign_in/complete_profile_view.dart';
 import 'package:legy/features/burger_customization/presentation/views/begin_customization.dart';
 import 'package:legy/features/burger_customization/presentation/views/burger_final_screen.dart';
-import 'package:legy/features/cart/presentation/views/order_tracking_view.dart';
 import 'package:legy/features/category/presentation/app/category_cubit.dart';
 import 'package:legy/features/category/presentation/views/category_view.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
@@ -53,7 +52,6 @@ import 'package:legy/features/restaurant/presentation/views/restaurant_view.dart
 import 'package:legy/features/restaurant/presentation/views/all_restaurants_view.dart';
 import 'package:legy/features/search/presentation/app/adapter/search_cubit.dart';
 import 'package:legy/features/search/presentation/view/search_view.dart';
-//import 'package:legy/features/web_socket/presentation/presentation/tracking_view.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:legy/features/web_socket/presentation/presentation/order_tracking_view.dart';

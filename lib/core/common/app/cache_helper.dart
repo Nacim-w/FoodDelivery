@@ -10,22 +10,22 @@ class CacheHelper {
   const CacheHelper(this._prefs);
 
   final SharedPreferences _prefs;
+
   static const _firstTimerKey = 'is-user-first-timer';
   static const _sessionTokenKey = 'user-session-token';
   static const _cartProductsKey = 'cart-products';
   static const _userProfileKey = 'user-profile';
   static const _savedLocationsKey = 'saved-locations';
+  static const _refreshTokenKey = 'user-refresh-token';
+  static const _lastOrderIdKey = 'last-active-order-id';
 
+  // Session token
   String? getSessionToken() {
     final sessionToken = _prefs.getString(_sessionTokenKey);
     if (sessionToken != null) {
       Cache.instance.setSessionToken(sessionToken);
     }
     return sessionToken;
-  }
-
-  Future<void> cacheFirstTimer() async {
-    await _prefs.setBool(_firstTimerKey, false);
   }
 
   Future<bool> cacheSessionToken(String token) async {
@@ -42,18 +42,19 @@ class CacheHelper {
     await _prefs.remove(_sessionTokenKey);
     await _prefs.remove(_refreshTokenKey);
     await _prefs.remove(_userProfileKey);
+    await _prefs.remove(_lastOrderIdKey);
     Cache.instance.resetSession();
+  }
+
+  // First timer
+  Future<void> cacheFirstTimer() async {
+    await _prefs.setBool(_firstTimerKey, false);
   }
 
   bool isFirstTime() => _prefs.getBool(_firstTimerKey) ?? true;
 
-  //refresh token
-  static const _refreshTokenKey = 'user-refresh-token';
-
-  String? getRefreshToken() {
-    final refreshToken = _prefs.getString(_refreshTokenKey);
-    return refreshToken;
-  }
+  // Refresh token
+  String? getRefreshToken() => _prefs.getString(_refreshTokenKey);
 
   Future<bool> cacheRefreshToken(String token) async {
     try {
@@ -67,6 +68,7 @@ class CacheHelper {
     await _prefs.remove(_refreshTokenKey);
   }
 
+  // Cart
   Future<void> cacheCartProducts(List<ProductModel> products) async {
     final productListJson =
         jsonEncode(products.map((p) => p.toJson()).toList());
@@ -84,6 +86,7 @@ class CacheHelper {
     await _prefs.remove(_cartProductsKey);
   }
 
+  // User Profile
   Future<void> cacheUserProfile(HomeProfileModel profile) async {
     final profileJson = jsonEncode(profile.toJson());
     await _prefs.setString(_userProfileKey, profileJson);
@@ -96,6 +99,7 @@ class CacheHelper {
     return HomeProfileModel.fromJson(profileJson);
   }
 
+  // Saved locations
   Future<void> cacheSavedLocations(List<SavedLocation> locations) async {
     final locationsJson = jsonEncode(locations.map((e) => e.toJson()).toList());
     await _prefs.setString(_savedLocationsKey, locationsJson);
@@ -106,5 +110,18 @@ class CacheHelper {
     if (locationsString == null) return [];
     final List<dynamic> decoded = jsonDecode(locationsString);
     return decoded.map((e) => SavedLocation.fromJson(e)).toList();
+  }
+
+  // ✅ New: Last active order ID
+  Future<void> cacheLastActiveOrderId(String orderId) async {
+    await _prefs.setString(_lastOrderIdKey, orderId);
+  }
+
+  Future<String?> getLastActiveOrderId() async {
+    return _prefs.getString(_lastOrderIdKey);
+  }
+
+  Future<void> clearLastActiveOrderId() async {
+    await _prefs.remove(_lastOrderIdKey);
   }
 }

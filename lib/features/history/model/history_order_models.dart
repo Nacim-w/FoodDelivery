@@ -1,4 +1,5 @@
 import 'package:legy/features/history/model/history_client_model.dart';
+import 'package:legy/features/history/model/history_delivery_info_model.dart';
 import 'package:legy/features/history/model/item_model.dart';
 import 'package:legy/features/history/model/history_restaurant_model.dart';
 
@@ -8,7 +9,7 @@ class OrderModel {
   final double total;
   final ClientModel client;
   final HistoryRestaurantModel restaurant;
-  final String? deliveryInfo;
+  final DeliveryInfo? deliveryInfo; // updated type here
   final String deliveryAddress;
   final String livreurStatus;
   final String? deliveryMode;
@@ -61,7 +62,9 @@ class OrderModel {
       restaurant: json['restaurant'] != null
           ? HistoryRestaurantModel.fromJson(json['restaurant'])
           : HistoryRestaurantModel.empty(),
-      deliveryInfo: json['deliveryInfo'] as String?,
+      deliveryInfo: json['deliveryInfo'] != null
+          ? DeliveryInfo.fromJson(json['deliveryInfo'])
+          : null,
       deliveryAddress: json['deliveryAddress'] ?? '',
       livreurStatus: json['livreurStatus']?.toString() ?? '',
       deliveryMode: json['deliveryMode'] as String?,
@@ -77,7 +80,7 @@ class OrderModel {
     double? total,
     ClientModel? client,
     HistoryRestaurantModel? restaurant,
-    String? deliveryInfo,
+    DeliveryInfo? deliveryInfo,
     String? deliveryAddress,
     String? livreurStatus,
     String? deliveryMode,

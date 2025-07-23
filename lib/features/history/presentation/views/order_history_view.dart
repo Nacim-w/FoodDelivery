@@ -12,6 +12,7 @@ import 'package:legy/features/history/presentation/app/history_state.dart';
 import 'package:legy/features/history/presentation/widgets/current_order_widget.dart';
 import 'package:legy/features/history/presentation/widgets/order_card.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/web_socket/presentation/presentation/order_tracking_view.dart';
 
 enum OrderFilter { tous, suivi, ancien }
 
@@ -88,7 +89,12 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
                       Text("Livraison en cours", style: TextStyles.textBold),
                       const Gap(20),
                       if (pendingOrder != null)
-                        CurrentOrderWidget(order: pendingOrder),
+                        GestureDetector(
+                            onTap: () => {
+                                  context.go(
+                                      '${HomePage.routePath}/${OrderTrackingView.routePath}?orderId=${pendingOrder.orderId}'),
+                                },
+                            child: CurrentOrderWidget(order: pendingOrder)),
                       const Gap(20),
                     ],
                     if (showHistory && historyOrders.isNotEmpty) ...[
@@ -99,9 +105,9 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 16.0),
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               context.go(
-                                  '${OrderHistoryView.routePath}/order-details/${order.orderId}');
+                                  '${HomePage.routePath}/${OrderTrackingView.routePath}?orderId=${order.orderId}');
                             },
                             child: OrderCard(order: order),
                           ),
