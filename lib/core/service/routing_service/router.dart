@@ -29,6 +29,7 @@ import 'package:legy/features/cart/presentation/app/order_cubit.dart';
 import 'package:legy/features/cart/presentation/views/cart_view.dart';
 import 'package:legy/features/history/presentation/views/order_history_view.dart';
 import 'package:legy/features/error/error_page.dart';
+import 'package:legy/features/notification/presentation/adapter/notification_cubit.dart';
 import 'package:legy/features/notification/presentation/view/notification_view.dart';
 import 'package:legy/features/order_details/presentation/app/adapter/order_details_cubit.dart';
 import 'package:legy/features/order_details/presentation/views/order_details_view.dart';

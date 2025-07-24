@@ -6,17 +6,18 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/notification/model/notification_model.dart';
 
-class NotificationItem extends StatefulWidget {
-  const NotificationItem({super.key});
+class NotificationItem extends StatelessWidget {
+  final NotificationModel notification;
 
-  @override
-  State<NotificationItem> createState() => _NotificationItemState();
-}
+  const NotificationItem({required this.notification, super.key});
 
-class _NotificationItemState extends State<NotificationItem> {
   @override
   Widget build(BuildContext context) {
+    // Here you could parse and format your notification date if available
+    // For now, I'll just keep a placeholder like in your example
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -35,20 +36,20 @@ class _NotificationItemState extends State<NotificationItem> {
         ),
         Container(
           width: context.width * 0.6,
-          height: context.height * 0.14,
           margin: const EdgeInsets.only(left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Évaluez votre commande',
+                'Notification',
                 style: TextStyles.textSemiBoldLarge,
               ),
               AutoSizeText(
-                'Comment avons-nous fait ? Faites-nous savoir en notant votre commande récente et en partageant votre avis.',
+                notification.message,
                 style: TextStyles.textRegularSmall,
                 maxLines: 4,
               ),
+              const SizedBox(height: 4),
               Text(
                 'Il y a 1 jour.',
                 style: TextStyles.textSemiBoldSmall.grey0,

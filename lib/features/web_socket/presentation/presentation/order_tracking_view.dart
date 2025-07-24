@@ -161,9 +161,9 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
     final status = socketManager.orderStatus.value;
     switch (status) {
       case OrderStatus.idle:
-        return Center(child: Lottie.asset(Media.delivery));
-      case OrderStatus.accepted:
         return Center(child: Lottie.asset(Media.cooking));
+      case OrderStatus.accepted:
+        return Center(child: Lottie.asset(Media.delivery));
       case OrderStatus.onTheWay:
         final pos = socketManager.livreurLocation.value ?? _initialPosition;
         return Stack(

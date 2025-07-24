@@ -304,7 +304,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: NotificationView.routePath,
-              builder: (context, state) => const NotificationView(),
+              builder: (context, state) => BlocProvider(
+                create: (_) => sl<NotificationCubit>(),
+                child: NotificationView(),
+              ),
             ),
             GoRoute(
               path: HelpCenterPage.routePath,

@@ -17,6 +17,7 @@ Future<void> init() async {
   await _categoryInit();
   await _reelsInit();
   await _socketInit();
+  await _NotificationInit();
 }
 
 Future<void> _cacheInit() async {
@@ -101,4 +102,10 @@ Future<void> _reelsInit() async {
 
 Future<void> _socketInit() async {
   sl.registerLazySingleton(() => SocketManager());
+}
+
+Future<void> _NotificationInit() async {
+  sl
+    ..registerFactory(() => NotificationCubit(notificationService: sl()))
+    ..registerLazySingleton(() => NotificationService(sl()));
 }

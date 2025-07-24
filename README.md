@@ -21,42 +21,57 @@ This project is built using Flutter and includes a rich set of dependencies sour
 
 ## ✅ Notable Direct Dependencies
 
-| Package                      | Version  | Description                              |
-|-----------------------------|----------|------------------------------------------|
-| flutter                     | 0.0.0    | Core Flutter SDK                         |
-| auto_size_text              | 3.0.0    | Auto-resizing text widget                |
-| cached_network_image        | 3.4.1    | Efficient image caching                  |
-| carousel_slider             | 5.0.0    | Image carousels                          |
-| dots_indicator              | 4.0.1    | Page indicators                          |
-| dotted_border               | 2.1.0    | Dotted border widget                     |
-| dropdown_button2            | 2.3.9    | Enhanced dropdown                        |
-| equatable                   | 2.0.7    | Value equality utilities                 |
-| expand                      | 1.2.0    | Expansion panel builder                  |
-| flutter_advanced_switch     | 3.1.0    | Advanced toggle switch                   |
-| flutter_bloc                | 9.1.0    | Bloc state management                    |
-| flutter_lints               | 5.0.0    | Lint rules                               |
-| flutter_rating              | 2.0.2    | Rating widgets                           |
-| flutter_screenutil          | 5.9.3    | Responsive design utilities              |
-| flutter_secure_storage      | 9.2.4    | Secure local storage                     |
-| flutter_svg                 | 2.0.17   | SVG rendering                            |
-| fluttertoast                | 8.2.12   | Toast messages                           |
-| gap                         | 3.0.1    | Spacer widget                            |
-| geocoding                   | 3.0.0    | Address lookup from coordinates          |
-| geolocator                  | 14.0.0   | Geolocation                              |
-| get_it                      | 8.0.3    | Dependency injection                     |
-| go_router                   | 14.8.1   | Declarative routing                      |
-| google_maps_flutter         | 2.12.1   | Maps integration                         |
-| http                        | 1.3.0    | Networking                               |
-| iconly                      | 1.0.1    | Icon package                             |
-| lottie                      | 3.3.1    | Lottie animations                        |
-| model_viewer_plus           | 1.9.3    | 3D model viewer                          |
-| pinput                      | 5.0.1    | PIN code input                           |
-| provider                    | 6.1.4    | State management                         |
-| shared_preferences          | 2.5.3    | Simple key-value storage                 |
-| syncfusion_flutter_sliders  | 29.1.40  | Advanced sliders                         |
-| toggle_switch               | 2.3.0    | Toggle button UI                         |
-| video_player                | 2.9.5    | Video playback                           |
-| youtube_player_flutter      | 9.1.1    | YouTube video player widget              |
+| Package                     | Version   | Description                                   |
+|----------------------------|-----------|-----------------------------------------------|
+| flutter                    | —         | Core Flutter SDK                              |
+| animated_text_kit          | 4.2.3     | Animated text effects                         |
+| animations                 | 2.0.11    | Pre-built Material animations                 |
+| auto_size_text             | 3.0.0     | Auto-resizing text widget                     |
+| bloc_test                  | 10.0.0    | Testing utilities for BLoC                    |
+| cached_network_image       | 3.4.1     | Network image caching                         |
+| carousel_slider            | 5.0.0     | Image and content sliders                     |
+| dots_indicator             | 4.0.1     | Page indicators                               |
+| dotted_border              | 2.1.0     | Dotted border widgets                         |
+| dotted_line                | 3.2.3     | Dotted horizontal or vertical lines           |
+| dropdown_button2           | 2.3.9     | Enhanced dropdown menus                       |
+| equatable                  | 2.0.7     | Simplified value equality                     |
+| expand                     | 1.2.0     | Expansion panel builder                       |
+| firebase_auth              | 5.6.2     | Firebase Authentication                       |
+| firebase_core              | 3.15.1    | Firebase Core Setup                           |
+| firebase_messaging         | 15.2.9    | Push notifications with FCM                   |
+| flutter_advanced_switch    | 3.1.0     | Customizable switch widget                    |
+| flutter_bloc               | 9.0.0     | State management using BLoC                   |
+| flutter_local_notifications| 19.3.0    | Local notifications handling                  |
+| flutter_rating_bar         | 4.0.1     | Rating bar widget                             |
+| flutter_secure_storage     | 9.2.4     | Encrypted local storage                       |
+| flutter_svg                | 2.0.17    | SVG rendering                                 |
+| fluttertoast               | 8.2.12    | Toast message notifications                   |
+| gap                        | 3.0.1     | Spacer widget for layout                      |
+| geocoding                  | 3.0.0     | Address lookup from coordinates               |
+| geolocator                 | 14.0.0    | Device location tracking                      |
+| get_it                     | 8.0.3     | Dependency injection                          |
+| go_router                  | 14.8.1    | Declarative routing                           |
+| google_maps_flutter        | 2.12.1    | Maps integration                              |
+| google_sign_in             | 6.3.0     | Google account sign-in                        |
+| http                       | 1.3.0     | HTTP client for REST APIs                     |
+| iconly                     | 1.0.1     | Icon pack with minimal design                 |
+| image_picker               | 1.1.2     | Image selection from gallery or camera        |
+| intl_phone_field           | 3.2.0     | International phone number input              |
+| lottie                     | 3.3.1     | Lottie animation support                      |
+| mocktail                   | 1.0.4     | Mocking library for testing                   |
+| model_viewer_plus          | 1.9.3     | 3D model viewer (GLTF/GLB/WebXR)              |
+| panorama_viewer            | 2.0.4     | 360° panorama viewer                          |
+| pinput                     | 5.0.1     | Customizable PIN input widget                 |
+| provider                   | 6.1.4     | Lightweight state management                  |
+| shared_preferences         | 2.5.2     | Simple key-value persistent storage           |
+| skeletonizer               | 2.0.1     | Shimmer-style skeleton loading UI             |
+| stomp_dart_client          | 2.1.3     | STOMP over WebSocket client                   |
+| story_view                 | 0.16.5    | Instagram-like story display                  |
+| syncfusion_flutter_sliders | 29.1.40   | Advanced sliders                              |
+| toggle_switch              | 2.3.0     | Customizable toggle buttons                   |
+| video_player               | 2.9.5     | Video playback                                |
+| web_socket_channel         | 3.0.3     | WebSocket client abstraction                  |
+| youtube_player_flutter     | 9.1.1     | YouTube video player integration              |
 
 ---
 
