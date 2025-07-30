@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:legy/core/res/styles/colours.dart';
 
-class ReviewModal extends StatefulWidget {
-  const ReviewModal({super.key});
+class ProductReviewModel extends StatefulWidget {
+  const ProductReviewModel({super.key});
 
   @override
-  State<ReviewModal> createState() => _ReviewModalState();
+  State<ProductReviewModel> createState() => _ProductReviewModalState();
 }
 
-class _ReviewModalState extends State<ReviewModal> {
+class _ProductReviewModalState extends State<ProductReviewModel> {
   double _rating = 3;
 
   @override

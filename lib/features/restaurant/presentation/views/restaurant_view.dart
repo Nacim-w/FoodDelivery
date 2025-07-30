@@ -2,14 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:legy/core/extension/media_extension.dart';
-import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/features/restaurant/presentation/widgets/restaurant_action_button.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_appbar.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_cover.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_sheet.dart';
-import 'package:legy/features/restaurant/presentation/widgets/review_model.dart';
 
 class RestaurantView extends StatefulWidget {
   final String restaurantId;
@@ -49,35 +47,10 @@ class _RestaurantViewState extends State<RestaurantView> {
       builder: (context, state) {
         return Scaffold(
           body: _buildContent(context),
-          floatingActionButton: (state.isLoadingRestaurantById ||
-                  state.isLoadingCategories)
-              ? null
-              : Container(
-                  width: context.width * 0.3,
-                  child: FloatingActionButton.extended(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        backgroundColor:
-                            Colours.lightThemeWhite1.withAlpha(220),
-                        showDragHandle: true,
-                        context: context,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(20)),
-                        ),
-                        isScrollControlled: true,
-                        builder: (context) => const ReviewModal(),
-                      );
-                    },
-                    icon: const Icon(Icons.star_rate_rounded),
-                    label: const Text("Review"),
-                    backgroundColor: Colours.lightThemeGreen5,
-                    foregroundColor: Colours.lightThemeWhite1,
-                    shape: const StadiumBorder(),
-                    elevation: 6,
-                    highlightElevation: 12,
-                  ),
-                ),
+          floatingActionButton:
+              (state.isLoadingRestaurantById || state.isLoadingCategories)
+                  ? null
+                  : RestaurantActionButton(restaurantId: widget.restaurantId),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         );
       },

@@ -18,6 +18,7 @@ class CacheHelper {
   static const _savedLocationsKey = 'saved-locations';
   static const _refreshTokenKey = 'user-refresh-token';
   static const _lastOrderIdKey = 'last-active-order-id';
+  static const _recentSearchesKey = 'recent-searches';
 
   // Session token
   String? getSessionToken() {
@@ -123,5 +124,17 @@ class CacheHelper {
 
   Future<void> clearLastActiveOrderId() async {
     await _prefs.remove(_lastOrderIdKey);
+  }
+
+  Future<void> cacheRecentSearches(List<String> searches) async {
+    await _prefs.setStringList(_recentSearchesKey, searches);
+  }
+
+  List<String> getRecentSearches() {
+    return _prefs.getStringList(_recentSearchesKey) ?? [];
+  }
+
+  Future<void> clearRecentSearches() async {
+    await _prefs.remove(_recentSearchesKey);
   }
 }

@@ -8,18 +8,21 @@ class RestaurantState extends Equatable {
   final RestaurantModel? selectedRestaurant;
   final List<RestaurantCategoryModel>? categories;
   final List<RestaurantProductModel>? products;
+  final bool reviewSubmittedSuccessfully;
 
   final bool isLoadingRestaurants;
   final bool isLoadingRestaurantById;
   final bool isLoadingCategories;
   final bool isLoadingProducts;
   final bool isSelectedRestaurantFavorite;
+  final bool isSubmittingReview;
 
   final String? restaurantsError;
   final String? restaurantError;
   final String? categoriesError;
   final String? productsError;
   final String? selectedCategoryId;
+  final String? submitReviewError;
 
   const RestaurantState({
     this.restaurants,
@@ -36,6 +39,9 @@ class RestaurantState extends Equatable {
     this.categoriesError,
     this.productsError,
     this.selectedCategoryId,
+    this.isSubmittingReview = false,
+    this.submitReviewError,
+    this.reviewSubmittedSuccessfully = false,
   });
 
   RestaurantState copyWith({
@@ -53,6 +59,9 @@ class RestaurantState extends Equatable {
     String? categoriesError,
     String? productsError,
     String? selectedCategoryId,
+    bool? isSubmittingReview,
+    String? submitReviewError,
+    bool? reviewSubmittedSuccessfully,
   }) {
     return RestaurantState(
       restaurants: restaurants ?? this.restaurants,
@@ -71,6 +80,10 @@ class RestaurantState extends Equatable {
       selectedCategoryId: selectedCategoryId ?? this.selectedCategoryId,
       isSelectedRestaurantFavorite:
           isSelectedRestaurantFavorite ?? this.isSelectedRestaurantFavorite,
+      isSubmittingReview: isSubmittingReview ?? this.isSubmittingReview,
+      submitReviewError: submitReviewError ?? this.submitReviewError,
+      reviewSubmittedSuccessfully:
+          reviewSubmittedSuccessfully ?? this.reviewSubmittedSuccessfully,
     );
   }
 
@@ -90,5 +103,8 @@ class RestaurantState extends Equatable {
         productsError,
         selectedCategoryId,
         isSelectedRestaurantFavorite,
+        isSubmittingReview,
+        submitReviewError,
+        reviewSubmittedSuccessfully,
       ];
 }

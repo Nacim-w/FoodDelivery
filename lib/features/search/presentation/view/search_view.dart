@@ -6,16 +6,13 @@ import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/core/service/injection/injection_container.dart';
-import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/features/category/presentation/widgets/category_details.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/search/presentation/widgets/recent_orders_widget.dart';
 import 'package:legy/features/search/presentation/widgets/recent_search_widget.dart';
 import 'package:legy/features/search/presentation/widgets/search_bar_widget.dart';
-import 'package:legy/features/search/service/search_service.dart';
-import 'package:legy/core/common/app/cache_helper.dart';
-import 'package:legy/core/errors/exceptions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchView extends StatefulWidget {
   static const routePath = '/search';
@@ -27,16 +24,15 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  final searchService = SearchService(sl<CacheHelper>());
-
   List<String> recentSearches = [];
   bool isSearching = false;
   bool _heroAnimationFinished = false;
+  late CacheHelper cacheHelper;
 
   @override
   void initState() {
     super.initState();
-    // Wait one frame after Hero transition finishes before building SearchBarWidget
+    _initCacheAndLoad();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         setState(() {
@@ -46,54 +42,41 @@ class _SearchViewState extends State<SearchView> {
     });
   }
 
-  void addRecentSearch(String search) async {
-    try {
-      await searchService.search(search);
-      setState(() {
-        if (!recentSearches.contains(search)) {
-          recentSearches.add(search);
-        }
-        isSearching = false;
-      });
-    } on ForceLogoutException catch (_) {
-      if (context.mounted) {
-        await showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            backgroundColor: Colours.lightThemeWhite1,
-            title: Text(
-              'Session expirée',
-              style: TextStyles.titleBold.black1,
-            ),
-            content: Text(
-              'Veuillez vous connecter ou créer un compte pour continuer.',
-              style: TextStyles.textMediumLarge.black1,
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                  context.push(SignInPage.routePath);
-                },
-                child: Text('Connecter', style: TextStyles.textMedium.orange5),
-              ),
-            ],
-          ),
-        );
-      }
-    } catch (e) {}
+  Future<void> _initCacheAndLoad() async {
+    final prefs = await SharedPreferences.getInstance();
+    cacheHelper = CacheHelper(prefs);
+    final savedSearches = cacheHelper.getRecentSearches();
+
+    setState(() {
+      recentSearches = savedSearches;
+    });
   }
 
-  void removeSearch(String search) {
+  Future<void> addRecentSearch(String search) async {
+    setState(() {
+      if (!recentSearches.contains(search)) {
+        recentSearches.insert(0, search);
+        if (recentSearches.length > 10) {
+          recentSearches = recentSearches.sublist(0, 10);
+        }
+      }
+      isSearching = false;
+    });
+    await cacheHelper.cacheRecentSearches(recentSearches);
+  }
+
+  Future<void> removeSearch(String search) async {
     setState(() {
       recentSearches.remove(search);
     });
+    await cacheHelper.cacheRecentSearches(recentSearches);
   }
 
-  void clearAllSearches() {
+  Future<void> clearAllSearches() async {
     setState(() {
       recentSearches.clear();
     });
+    await cacheHelper.clearRecentSearches();
   }
 
   void updateSearching(bool searching) {
@@ -120,7 +103,7 @@ class _SearchViewState extends State<SearchView> {
                       onSearch: addRecentSearch,
                       onSearchTyping: updateSearching,
                     )
-                  : _SearchHeroPlaceholder(),
+                  : const _SearchHeroPlaceholder(),
             ),
           ),
           if (!isSearching && _heroAnimationFinished) ...[
@@ -136,38 +119,26 @@ class _SearchViewState extends State<SearchView> {
               indent: 10,
               endIndent: 10,
             ),
-            Gap(15),
+            const Gap(15),
             GestureDetector(
               onTap: () => context
                   .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
-              child: _searchCategory(
-                Media.searchCategory1,
-                'Sénégalaise',
-              ),
+              child: _searchCategory(Media.searchCategory1, 'Sénégalaise'),
             ),
-            Gap(20),
+            const Gap(20),
             GestureDetector(
               onTap: () => context
                   .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
-              child: _searchCategory(
-                Media.searchCategory2,
-                'Healthy',
-              ),
+              child: _searchCategory(Media.searchCategory2, 'Healthy'),
             ),
-            Gap(20),
+            const Gap(20),
             GestureDetector(
               onTap: () => context
                   .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
-              child: _searchCategory(
-                Media.searchCategory3,
-                'Internationale',
-              ),
+              child: _searchCategory(Media.searchCategory3, 'Internationale'),
             ),
-            Gap(20),
-            Text(
-              'Mes commandes récentes',
-              style: TextStyles.textMediumLarge,
-            ),
+            const Gap(20),
+            Text('Mes commandes récentes', style: TextStyles.textMediumLarge),
             GestureDetector(
               onTap: () => context
                   .push('${HomePage.routePath}/${CategoryDetails.routePath}'),
@@ -251,13 +222,8 @@ Widget _searchCategory(String image, String title) {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            image,
-            fit: BoxFit.cover,
-          ),
-          Container(
-            color: Colors.black.withAlpha(65), // Black filter
-          ),
+          Image.asset(image, fit: BoxFit.cover),
+          Container(color: Colors.black.withAlpha(65)),
           Center(
             child: Text(
               title,

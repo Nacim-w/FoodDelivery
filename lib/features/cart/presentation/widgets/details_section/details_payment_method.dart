@@ -39,7 +39,8 @@ class DetailsPaymentMethod extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListTile(
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: const Color.fromARGB(150, 126, 126, 126)),
+          side: BorderSide(
+              color: const Color.fromARGB(150, 126, 126, 126), width: 1.5),
           borderRadius: BorderRadius.circular(20),
         ),
         leading: SvgPicture.asset(

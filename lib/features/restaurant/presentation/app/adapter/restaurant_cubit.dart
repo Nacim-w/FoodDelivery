@@ -145,4 +145,34 @@ class RestaurantCubit extends Cubit<RestaurantState> {
       // Optionally handle error
     }
   }
+
+  Future<void> submitRestaurantReview({
+    required String restaurantId,
+    required int rating,
+    required String comment,
+  }) async {
+    emit(state.copyWith(
+      isSubmittingReview: true,
+      submitReviewError: null,
+      reviewSubmittedSuccessfully: false,
+    ));
+
+    try {
+      await restaurantsService.addRestaurantReview(
+        restaurantId: restaurantId,
+        rating: rating,
+        comment: comment,
+      );
+
+      emit(state.copyWith(
+        isSubmittingReview: false,
+        reviewSubmittedSuccessfully: true,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmittingReview: false,
+        submitReviewError: e.toString(),
+      ));
+    }
+  }
 }

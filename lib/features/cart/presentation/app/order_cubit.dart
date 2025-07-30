@@ -9,12 +9,30 @@ class OrderCubit extends Cubit<OrderState> {
 
   OrderCubit({required this.orderService}) : super(const OrderState());
 
-  // Your existing placeOrder method
   Future<String> placeOrder({
     required List<ProductModel> products,
     required HomeProfileModel profile,
   }) async {
-    emit(state.copyWith(isLoading: true, error: null, success: false));
+    // Validate location before order
+    if (state.selectedLatitude == null || state.selectedLongitude == null) {
+      // Emit error state with locationError = true
+      emit(state.copyWith(locationError: true));
+
+      // Reset locationError back to false so future errors retrigger listener
+      Future.delayed(const Duration(milliseconds: 100), () {
+        emit(state.copyWith(locationError: false));
+      });
+
+      throw Exception('Veuillez sélectionner un emplacement de livraison.');
+    }
+
+    // Reset locationError if valid
+    emit(state.copyWith(
+      isLoading: true,
+      error: null,
+      success: false,
+      locationError: false,
+    ));
 
     try {
       final orderId = await orderService.createOrder(
@@ -34,7 +52,6 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  // New method to update location name in state
   void updateLocation({
     required String name,
     required double latitude,

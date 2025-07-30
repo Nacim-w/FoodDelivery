@@ -9,6 +9,8 @@ class OrderState extends Equatable {
   final double? selectedLatitude;
   final double? selectedLongitude;
 
+  final bool locationError; // NEW
+
   const OrderState({
     this.isLoading = false,
     this.success = false,
@@ -16,6 +18,7 @@ class OrderState extends Equatable {
     this.selectedLocationName = 'aucun',
     this.selectedLatitude,
     this.selectedLongitude,
+    this.locationError = false, // NEW
   });
 
   OrderState copyWith({
@@ -25,6 +28,7 @@ class OrderState extends Equatable {
     String? selectedLocationName,
     double? selectedLatitude,
     double? selectedLongitude,
+    bool? locationError, // NEW
   }) {
     return OrderState(
       isLoading: isLoading ?? this.isLoading,
@@ -33,6 +37,7 @@ class OrderState extends Equatable {
       selectedLocationName: selectedLocationName ?? this.selectedLocationName,
       selectedLatitude: selectedLatitude ?? this.selectedLatitude,
       selectedLongitude: selectedLongitude ?? this.selectedLongitude,
+      locationError: locationError ?? this.locationError, // NEW
     );
   }
 
@@ -44,5 +49,6 @@ class OrderState extends Equatable {
         selectedLocationName,
         selectedLatitude,
         selectedLongitude,
+        locationError, // NEW
       ];
 }

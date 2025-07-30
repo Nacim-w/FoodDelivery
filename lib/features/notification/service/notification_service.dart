@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -29,6 +30,9 @@ class NotificationService {
         },
       );
 
+      debugPrint("Response status: ${response.statusCode}");
+      debugPrint("Response body: ${response.body}");
+
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
         if (refreshed) {
@@ -38,6 +42,11 @@ class NotificationService {
         }
       }
 
+      // ✅ Return empty list if no content
+      if (response.statusCode == 204 || response.body.trim().isEmpty) {
+        return [];
+      }
+
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ??
@@ -45,18 +54,18 @@ class NotificationService {
         throw ServerException(message: errorMessage);
       }
 
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body.trim());
+
       if (data is List) {
         return data.map((json) => NotificationModel.fromJson(json)).toList();
       } else {
-        throw ServerException(
-          message:
-              "Format invalide. Une liste de notifications était attendue.",
-        );
+        return [];
       }
     } on TokenExpiredException {
       rethrow;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint("NotificationService error: $e");
+      debugPrint("StackTrace: $stackTrace");
       throw const ServerException(
         message:
             "Une erreur est survenue lors de la récupération des notifications.",

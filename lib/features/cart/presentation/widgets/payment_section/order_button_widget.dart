@@ -161,15 +161,7 @@ class OrderButtonWidget extends StatelessWidget {
                         ),
                       );
                     }
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content:
-                            Text('❌ Échec de la commande: ${e.toString()}'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
+                  } catch (e) {}
                 },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,

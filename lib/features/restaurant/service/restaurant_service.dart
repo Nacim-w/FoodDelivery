@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -64,6 +65,10 @@ class RestaurantService {
       final response = await http.get(
         uri,
         headers: NetworkConstants.headers,
+      );
+      debugPrint('Uri: $uri');
+      debugPrint(
+        'GET Restaurant by ID: ${response.statusCode} - ${response.body}',
       );
       if (response.statusCode != 200) {
         final errorJson = jsonDecode(response.body);
@@ -299,6 +304,60 @@ class RestaurantService {
       throw const ServerException(
         message:
             "Une erreur s'est produite lors de la vérification du statut favori.",
+      );
+    }
+  }
+
+  Future<void> addRestaurantReview({
+    required String restaurantId,
+    required int rating,
+    required String comment,
+  }) async {
+    try {
+      final uri = Uri.parse(
+        '${NetworkConstants.baseUrl}/restaurant/$restaurantId/avis',
+      );
+      final token = _cacheHelper.getSessionToken();
+
+      final response = await http.post(
+        uri,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+        body: jsonEncode({
+          'rating': rating,
+          'comment': comment,
+        }),
+      );
+
+      if (response.statusCode == 401) {
+        final refreshed = await AuthService().refreshToken();
+        if (refreshed) {
+          return await addRestaurantReview(
+            restaurantId: restaurantId,
+            rating: rating,
+            comment: comment,
+          );
+        } else {
+          throw const TokenExpiredException(message: "Session expirée.");
+        }
+      }
+
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        final errorJson = jsonDecode(response.body);
+        final errorMessage =
+            errorJson['error'] ?? 'Une erreur est survenue (avis).';
+        throw ServerException(message: errorMessage);
+      }
+
+      // Success: no return needed
+    } on TokenExpiredException {
+      rethrow;
+    } catch (e) {
+      throw const ServerException(
+        message:
+            "Une erreur s'est produite lors de l'envoi de l'avis. Veuillez réessayer plus tard.",
       );
     }
   }
