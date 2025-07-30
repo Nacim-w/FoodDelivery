@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
@@ -97,7 +97,7 @@ class _DetailsLocationWidgetState extends State<DetailsLocation>
 
     showModalBottomSheet(
       showDragHandle: true,
-      backgroundColor: Colours.lightThemeWhite1,
+      backgroundColor: Colours.lightThemeWhite1.withAlpha(225),
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -151,50 +151,77 @@ class _DetailsLocationWidgetState extends State<DetailsLocation>
 
             return SizedBox(
               height: sheetHeight,
-              child: ListView.separated(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                itemCount: locations.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  final location = locations[index];
-                  return ListTile(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(color: Colours.lightThemeGrey2),
-                    ),
-                    leading: Icon(Icons.location_on,
-                        color: Colours.lightThemeOrange5),
-                    title: Text(
-                      location.name,
-                      style: TextStyles.textSemiBoldLarge.black1,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    subtitle: Text(
-                      '(${location.latitude.toStringAsFixed(4)}, ${location.longitude.toStringAsFixed(4)})',
-                      style: TextStyles.textMediumLarge.grey1,
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.close,
-                          size: 20, color: Colours.lightThemeGrey3),
-                      onPressed: () async {
-                        locations.removeAt(index);
-                        await _cacheHelper.cacheSavedLocations(locations);
-                        setModalState(() {});
-                        setState(() {});
+              child: Column(
+                children: [
+                  Flexible(
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
+                      itemCount: locations.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 10),
+                      itemBuilder: (context, index) {
+                        final location = locations[index];
+                        return ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: BorderSide(color: Colours.lightThemeGrey2),
+                          ),
+                          leading: Icon(Icons.location_on,
+                              color: Colours.lightThemeOrange5),
+                          title: Text(
+                            location.name,
+                            style: TextStyles.textSemiBoldLarge.black1,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          subtitle: Text(
+                            '(${location.latitude.toStringAsFixed(4)}, ${location.longitude.toStringAsFixed(4)})',
+                            style: TextStyles.textMediumLarge.grey1,
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.close,
+                                size: 20, color: Colours.lightThemeGrey3),
+                            onPressed: () async {
+                              locations.removeAt(index);
+                              await _cacheHelper.cacheSavedLocations(locations);
+                              setModalState(() {});
+                              setState(() {});
+                            },
+                            tooltip: "Supprimer",
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            widget.onLocationSelected(location.name,
+                                location.latitude, location.longitude);
+                          },
+                        );
                       },
-                      tooltip: "Supprimer",
                     ),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      widget.onLocationSelected(
-                          location.name, location.latitude, location.longitude);
-                      print(
-                          "Selected Location: ${location.name}, Lat: ${location.latitude}, Lng: ${location.longitude}");
-                    },
-                  );
-                },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 4, 24, 16),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colours.lightThemeOrange5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        context
+                            .go('${HomePage.routePath}/${MapView.routePath}');
+                      },
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Center(
+                          child: Text('Ajouter un emplacement',
+                              style: TextStyles.textMediumLarge.white1),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           },
