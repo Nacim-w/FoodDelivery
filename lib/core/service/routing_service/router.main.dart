@@ -110,6 +110,11 @@ final router = GoRouter(
               },
             ),
             GoRoute(
+              path: OnBoarding.routePath,
+              pageBuilder: (context, state) =>
+                  fadeTransition(child: OnBoarding()),
+            ),
+            GoRoute(
               path: PreferencesView.routePath,
               pageBuilder: (context, state) =>
                   fadeTransition(child: const PreferencesView()),

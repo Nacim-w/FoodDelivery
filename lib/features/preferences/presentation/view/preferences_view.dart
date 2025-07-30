@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/service/injection/injection_container.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:legy/features/preferences/presentation/widgets/preference_buttons.dart';
@@ -85,6 +86,7 @@ class _PreferencesViewState extends State<PreferencesView>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          context.adaptiveGap,
           const PreferencesHeader(),
           const SizedBox(height: 16),
           Expanded(
