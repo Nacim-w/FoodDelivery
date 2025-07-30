@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/errors/exceptions.dart';
@@ -29,6 +30,8 @@ class NotificationService {
         },
       );
 
+      debugPrint('Response status: ${response.statusCode} and response body: ${response.body}');
+
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
         if (refreshed) {
@@ -38,7 +41,7 @@ class NotificationService {
         }
       }
 
-      if (response.statusCode != 200) {
+      if (response.statusCode != 204) {
         final errorJson = jsonDecode(response.body);
         final errorMessage = errorJson['error'] ??
             'Erreur lors de la récupération des notifications.';

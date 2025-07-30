@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
@@ -33,21 +34,21 @@ class OrderService {
           "longitude": latitude,
           "latitude": longitude,
         },
-        "restaurantId": '685bfed80b9cc63c8a37f11f', // keep hardcoded
+        "restaurantId": restaurantId, // keep hardcoded
         "deliveryAddress": deliveryAddress,
         "paymentMethod": paymentMethod,
         "deliveryMode": "DELIVERY",
         "items": products.map((product) {
           return {
-            "productId": '686e3fe3d1a00756b7316976', // keep hardcoded
-            "quantity": 4, // keep hardcoded
-            /*"selectedSupplements": product.supplements.map((supplement) {
+            "productId": product.id, // keep hardcoded
+            "quantity": product.quantity, // keep hardcoded
+            "selectedSupplements": product.supplements.map((supplement) {
               return {
                 "supplementId": supplement.id,
                 "supplementName": supplement.name,
                 "quantity": supplement.quantity,
               };
-            }).toList(),*/
+            }).toList(),
           };
         }).toList(),
       };

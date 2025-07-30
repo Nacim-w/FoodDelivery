@@ -27,8 +27,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () => Scaffold.of(context).openDrawer(),
                 icon: SvgPicture.asset(
                   Media.sidebar,
-                  width: 14,
-                  height: 14,
+                  width: 16,
+                  height: 16,
                   colorFilter: ColorFilter.mode(
                     Colours.lightThemeWhite1,
                     BlendMode.srcIn,
@@ -103,6 +103,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   iconSize: 14,
                 ),
+
               ),
             ),
           ],
