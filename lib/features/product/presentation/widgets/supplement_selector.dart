@@ -27,7 +27,7 @@ class SupplementsSelector extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  'Choose Supplements',
+                  'Choisir Suppléments',
                   style: TextStyles.titleMediumTiny.black1,
                 ),
               ),
