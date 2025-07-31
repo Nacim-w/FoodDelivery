@@ -326,11 +326,16 @@ class RestaurantService {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
         body: jsonEncode({
-          'rating': rating,
-          'comment': comment,
+          'score': 4,
+          'comment': 'place holder comment', // Placeholder for comment
         }),
       );
-
+      debugPrint('Adding review for restaurant: $restaurantId');
+      debugPrint('Rating: $rating, Comment: $comment');
+      debugPrint('Uri: $uri');
+      debugPrint(
+        'POST Restaurant Review: ${response.statusCode} - ${response.body}',
+      );
       if (response.statusCode == 401) {
         final refreshed = await AuthService().refreshToken();
         if (refreshed) {

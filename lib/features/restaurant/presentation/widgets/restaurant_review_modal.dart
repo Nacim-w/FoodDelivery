@@ -26,6 +26,12 @@ class _RestaurantReviewModalState extends State<RestaurantReviewModal> {
           prev.submitReviewError != curr.submitReviewError,
       listener: (context, state) {
         if (state.reviewSubmittedSuccessfully) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text("Avis soumis avec succès !"),
+              backgroundColor: Colors.green,
+            ),
+          );
           Navigator.of(context).pop();
         }
 

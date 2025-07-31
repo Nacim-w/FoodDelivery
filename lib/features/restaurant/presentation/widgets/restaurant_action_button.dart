@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/core/extension/media_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
+import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_review_modal.dart';
 
 class RestaurantActionButton extends StatelessWidget {
@@ -15,6 +17,8 @@ class RestaurantActionButton extends StatelessWidget {
       width: context.width * 0.3,
       child: FloatingActionButton.extended(
         onPressed: () {
+          final cubit = context.read<RestaurantCubit>();
+
           showModalBottomSheet(
             backgroundColor: Colours.lightThemeWhite1.withAlpha(220),
             showDragHandle: true,
@@ -23,8 +27,11 @@ class RestaurantActionButton extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             isScrollControlled: true,
-            builder: (context) => RestaurantReviewModal(
-              restaurantId: restaurantId,
+            builder: (context) => BlocProvider.value(
+              value: cubit,
+              child: RestaurantReviewModal(
+                restaurantId: restaurantId,
+              ),
             ),
           );
         },
