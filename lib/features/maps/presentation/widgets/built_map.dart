@@ -183,6 +183,7 @@ class _BuiltMapState extends State<BuiltMap> {
                     latitude: center.latitude,
                     longitude: center.longitude,
                     name: _customNameController.text.trim(),
+                    description: _readonlyZoneController.text.trim(),
                   );
 
                   final currentLocations = cacheHelper.getSavedLocations();

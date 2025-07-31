@@ -175,7 +175,7 @@ class _DetailsLocationWidgetState extends State<DetailsLocation>
                             maxLines: 1,
                           ),
                           subtitle: Text(
-                            '(${location.latitude.toStringAsFixed(4)}, ${location.longitude.toStringAsFixed(4)})',
+                            '(${location.description})',
                             style: TextStyles.textMediumLarge.grey1,
                           ),
                           trailing: IconButton(
