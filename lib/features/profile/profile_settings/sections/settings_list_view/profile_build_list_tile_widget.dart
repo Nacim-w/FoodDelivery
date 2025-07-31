@@ -24,6 +24,7 @@ class BuildListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: ListTile(
+        tileColor: color ?? Colors.transparent,
         shape: RoundedRectangleBorder(
           side: BorderSide(color: color ?? Colours.lightThemeGrey6),
           borderRadius: BorderRadius.circular(40),
@@ -41,7 +42,7 @@ class BuildListTile extends StatelessWidget {
             style: TextStyles.textMedium
                 .copyWith(color: textColor ?? Colours.lightThemeGrey6)),
         trailing: Icon(Icons.arrow_forward_ios_rounded,
-            size: 16, color: color ?? Colours.lightThemeGrey6),
+            size: 16, color: textColor ?? Colours.lightThemeGrey6),
         onTap: onTap,
       ),
     );

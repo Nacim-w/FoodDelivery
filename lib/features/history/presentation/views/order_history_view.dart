@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/common/widgets/black_app_bar.dart';
 import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/core/service/injection/injection_container.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 import 'package:legy/features/history/presentation/app/history_cubit.dart';
 import 'package:legy/features/history/presentation/app/history_state.dart';
 import 'package:legy/features/history/presentation/widgets/current_order_widget.dart';
@@ -27,18 +30,81 @@ class OrderHistoryView extends StatefulWidget {
 
 class _OrderHistoryViewState extends State<OrderHistoryView> {
   OrderFilter _selectedFilter = OrderFilter.tous;
+  bool _dialogShown = false;
 
   @override
   void initState() {
     super.initState();
-    context.read<HistoryCubit>().loadOrders();
+
+    final token = sl<CacheHelper>().getSessionToken();
+
+    if (token == null || token.isEmpty) {
+      // No token = guest → show login prompt directly
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoginDialog();
+      });
+    } else {
+      context.read<HistoryCubit>().loadOrders();
+    }
+  }
+
+  void _showLoginDialog() {
+    if (_dialogShown) return;
+    _dialogShown = true;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Colours.lightThemeWhite1,
+        title: Text(
+          'Session expirée',
+          style: TextStyles.titleBold.black1,
+        ),
+        content: Text(
+          'Veuillez vous connecter ou créer un compte pour continuer.',
+          style: TextStyles.textMediumLarge.black1,
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  context.go(HomePage.routePath);
+                },
+                child: Text('Retour', style: TextStyles.textMedium.black1),
+              ),
+              const SizedBox(width: 16), // space between buttons
+
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  context.go(SignInPage.routePath);
+                },
+                child:
+                    Text('Se connecter', style: TextStyles.textMedium.orange5),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ).then((_) => _dialogShown = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<HistoryCubit, HistoryState>(
+        child: BlocConsumer<HistoryCubit, HistoryState>(
+          listener: (context, state) {
+            if (state is HistorySessionExpired) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _showLoginDialog();
+              });
+            }
+          },
           builder: (context, state) {
             if (state is HistoryLoading) {
               return const Center(child: CircularProgressIndicator());
@@ -77,7 +143,7 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
                         }
                       },
                     ),
-                    Gap(30),
+                    const Gap(30),
                     Text(
                       'Commandes récentes',
                       style: TextStyles.textBold.green5,
@@ -122,6 +188,8 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
             } else if (state is HistoryError) {
               return Center(child: Text('Erreur: ${state.message}'));
             }
+
+            // By default, show nothing or maybe a placeholder
             return const SizedBox.shrink();
           },
         ),

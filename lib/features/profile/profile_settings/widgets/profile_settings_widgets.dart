@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/gap_extension.dart';
@@ -96,8 +97,26 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
         children: [
-          Icon(Icons.person_outline,
-              size: 100, color: Colours.lightThemeBlack0),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colours.lightThemeGrey1.withAlpha(10),
+              border: Border.all(
+                color: Colors.white,
+                width: 4,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colours.lightThemeBlack2.withAlpha(25),
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: SvgPicture.asset(Media.guestAvatar),
+          ),
           Gap(40),
           BuildListTile(
             icon: Media.login,

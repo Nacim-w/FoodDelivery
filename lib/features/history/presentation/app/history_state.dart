@@ -30,6 +30,8 @@ class HistoryError extends HistoryState {
   List<Object?> get props => [message];
 }
 
+class HistorySessionExpired extends HistoryState {}
+
 class ReportSubmitting extends HistoryState {}
 
 class ImageUploading extends HistoryState {}

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/history/presentation/app/history_state.dart';
 import 'package:legy/features/history/service/history_service.dart';
 import 'package:legy/features/history/model/report_model.dart';
+import 'package:legy/core/errors/exceptions.dart'; // Assuming TokenExpiredException is here
 
 class HistoryCubit extends Cubit<HistoryState> {
   final HistoryService historyService;
@@ -14,6 +15,8 @@ class HistoryCubit extends Cubit<HistoryState> {
     try {
       final orders = await historyService.fetchOrders();
       emit(HistoryLoaded(orders));
+    } on TokenExpiredException {
+      emit(HistorySessionExpired());
     } catch (e) {
       emit(HistoryError(e.toString()));
     }
@@ -34,12 +37,10 @@ class HistoryCubit extends Cubit<HistoryState> {
     required File imageFile,
   }) async {
     try {
-      // Step 1: Upload image to S3
       emit(ImageUploading());
       final imageUrl = await historyService.uploadReportImage(imageFile);
       emit(ImageUploadSuccess(imageUrl));
 
-      // Step 2: Submit report with image URL
       emit(ReportSubmitting());
       final reportWithImage = report.copyWith(attachmentUrls: [imageUrl]);
 

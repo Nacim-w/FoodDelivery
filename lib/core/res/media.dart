@@ -31,6 +31,7 @@ abstract class Media {
   static const whatsapp = '$_baseIcon/whatsapp.png';
   static const email = '$_baseIcon/email.png';
   //settings pages
+  static const guestAvatar = '$_baseIcon/guestAvatar.svg';
   static const favorites = '$_baseIcon/favorites.svg';
   static const language = '$_baseIcon/language.svg';
   static const parametre = '$_baseIcon/parametre.svg';

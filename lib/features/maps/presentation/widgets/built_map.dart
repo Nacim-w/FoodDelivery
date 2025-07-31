@@ -28,6 +28,8 @@ class _BuiltMapState extends State<BuiltMap> {
 
   final TextEditingController _customNameController = TextEditingController();
   final TextEditingController _readonlyZoneController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocus = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late CacheHelper cacheHelper;
@@ -87,7 +89,26 @@ class _BuiltMapState extends State<BuiltMap> {
   void dispose() {
     _customNameController.dispose();
     _readonlyZoneController.dispose();
+    _searchController.dispose();
+    _searchFocus.dispose();
     super.dispose();
+  }
+
+  Future<void> _searchAndNavigate(String query) async {
+    if (query.isEmpty) return;
+
+    try {
+      final locations = await locationFromAddress(query);
+      if (locations.isNotEmpty) {
+        final location = locations.first;
+        final target = LatLng(location.latitude, location.longitude);
+        mapController.animateCamera(CameraUpdate.newLatLngZoom(target, 16));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Adresse introuvable")),
+      );
+    }
   }
 
   Future<void> _onConfirmLocation() async {
@@ -95,10 +116,8 @@ class _BuiltMapState extends State<BuiltMap> {
     String readableAddress = 'Adresse inconnue';
 
     try {
-      final placemarks = await placemarkFromCoordinates(
-        center.latitude,
-        center.longitude,
-      );
+      final placemarks =
+          await placemarkFromCoordinates(center.latitude, center.longitude);
       if (placemarks.isNotEmpty) {
         final place = placemarks.first;
         readableAddress = [place.street, place.locality, place.country]
@@ -223,18 +242,41 @@ class _BuiltMapState extends State<BuiltMap> {
           zoomControlsEnabled: false,
           onCameraMove: (position) {
             _currentCenter = position.target;
-            setState(() {
-              _isMapMoving = true;
-            });
+            setState(() => _isMapMoving = true);
           },
-          onCameraIdle: () {
-            setState(() {
-              _isMapMoving = false;
-            });
-          },
+          onCameraIdle: () => setState(() => _isMapMoving = false),
         ),
 
-        // Center pointer
+        // Search bar
+        Positioned(
+          top: 20,
+          left: 20,
+          right: 20,
+          child: Material(
+            elevation: 3,
+            borderRadius: BorderRadius.circular(12),
+            child: TextField(
+              controller: _searchController,
+              focusNode: _searchFocus,
+              onSubmitted: _searchAndNavigate,
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                hintText: 'Rechercher un lieu...',
+                prefixIcon: const Icon(Icons.search),
+                filled: true,
+                fillColor: Colours.lightThemeWhite1,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
+        ),
+
+        // Center marker
         IgnorePointer(
           child: AnimatedScale(
             scale: _isMapMoving ? 1.2 : 1.0,
