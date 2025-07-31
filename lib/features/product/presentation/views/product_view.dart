@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/presentation/app/product_state.dart';
-import 'package:legy/features/product/presentation/widgets/product_appbar.dart';
 import 'package:legy/features/product/presentation/widgets/product_cover.dart';
 import 'package:legy/features/product/presentation/widgets/product_middle_section.dart';
+import 'package:legy/features/product/presentation/widgets/product_appbar.dart';
 
 class ProductView extends StatefulWidget {
   const ProductView({super.key, required this.productId});
@@ -37,18 +37,23 @@ class _ProductViewState extends State<ProductView> {
         final product = state.product!;
 
         return Scaffold(
-          extendBody: true,
-          body: Column(
+          body: Stack(
             children: [
-              ProductCover(image: product.imageUrl),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: Platform.isAndroid ? 10 : 30,
-                ),
-                child: ProductAppbar(productId: product.id),
+              Column(
+                children: [
+                  ProductCover(
+                    image: product.imageUrl,
+                  ),
+                  Expanded(
+                    child: ProductMiddleSection(product: product),
+                  ),
+                ],
               ),
-              Expanded(
-                child: ProductMiddleSection(product: product),
+              Positioned(
+                top: Platform.isAndroid ? 30 : 60,
+                left: 16,
+                right: 16,
+                child: ProductAppbar(productId: product.id),
               ),
             ],
           ),

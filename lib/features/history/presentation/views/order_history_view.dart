@@ -133,9 +133,9 @@ class _OrderHistoryViewState extends State<OrderHistoryView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        _buildFilterButton("Tous", OrderFilter.tous),
         _buildFilterButton("Suivi", OrderFilter.suivi),
         _buildFilterButton("Ancien", OrderFilter.ancien),
-        _buildFilterButton("Tous", OrderFilter.tous),
       ],
     );
   }

@@ -106,7 +106,7 @@ class OrdersContainer extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "14 articles",
+                      "2 articles",
                       style: TextStyles.textMediumSmall.black1,
                     ),
                   ],

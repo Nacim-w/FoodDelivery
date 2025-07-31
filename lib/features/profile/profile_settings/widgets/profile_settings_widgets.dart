@@ -5,6 +5,7 @@ import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
+import 'package:legy/features/history/presentation/views/order_history_view.dart';
 import 'package:legy/features/profile/help_center/help_center_page.dart';
 import 'package:legy/features/profile/profile_settings/profile_settings_page.dart';
 import 'package:legy/features/profile/profile_settings/sections/appbar/profile_settings_appbar.dart';
@@ -81,7 +82,9 @@ class _ProfileSettingsFormState extends State<ProfileSettingsForm> {
           email: cachedProfile!.email,
         ),
         Gap(25),
-        OrdersContainer(),
+        GestureDetector(
+            onTap: () => context.go(OrderHistoryView.routePath),
+            child: OrdersContainer()),
         Gap(20),
         BuiltListView(),
       ],

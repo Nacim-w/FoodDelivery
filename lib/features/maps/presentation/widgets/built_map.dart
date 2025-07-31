@@ -22,7 +22,7 @@ class BuiltMap extends StatefulWidget {
 class _BuiltMapState extends State<BuiltMap> {
   late GoogleMapController mapController;
   LatLng? _initialPosition;
-  final Set<Marker> _markers = {};
+  LatLng? _currentCenter;
 
   final TextEditingController _customNameController = TextEditingController();
   final TextEditingController _readonlyZoneController = TextEditingController();
@@ -31,6 +31,7 @@ class _BuiltMapState extends State<BuiltMap> {
   late CacheHelper cacheHelper;
   bool _isCacheReady = false;
   bool _isLocationReady = false;
+  bool _isMapMoving = false;
 
   @override
   void initState() {
@@ -60,9 +61,10 @@ class _BuiltMapState extends State<BuiltMap> {
     }
 
     Position position = await Geolocator.getCurrentPosition(
-        // ignore: deprecated_member_use
-        desiredAccuracy: LocationAccuracy.high);
+      desiredAccuracy: LocationAccuracy.high,
+    );
     _initialPosition = LatLng(position.latitude, position.longitude);
+    _currentCenter = _initialPosition;
 
     setState(() {
       _isCacheReady = true;
@@ -72,6 +74,7 @@ class _BuiltMapState extends State<BuiltMap> {
 
   void _useFallbackLocation() {
     _initialPosition = const LatLng(14.6928, -17.4467);
+    _currentCenter = _initialPosition;
     setState(() {
       _isCacheReady = true;
       _isLocationReady = true;
@@ -85,32 +88,23 @@ class _BuiltMapState extends State<BuiltMap> {
     super.dispose();
   }
 
-  Future<void> _onMapTapped(LatLng tappedPoint) async {
-    setState(() {
-      _markers.clear();
-      _markers.add(
-        Marker(
-          markerId: MarkerId(tappedPoint.toString()),
-          position: tappedPoint,
-          infoWindow: const InfoWindow(title: 'Selected Location'),
-        ),
-      );
-    });
-
+  Future<void> _onConfirmLocation() async {
+    final LatLng center = _currentCenter!;
     String readableAddress = 'Adresse inconnue';
+
     try {
       final placemarks = await placemarkFromCoordinates(
-        tappedPoint.latitude,
-        tappedPoint.longitude,
+        center.latitude,
+        center.longitude,
       );
-
       if (placemarks.isNotEmpty) {
         final place = placemarks.first;
         readableAddress = [place.street, place.locality, place.country]
-            .where((e) => e != null && (e).isNotEmpty)
+            .where((e) => e != null && e.isNotEmpty)
             .join(', ');
       }
     } catch (_) {}
+
     _readonlyZoneController.text = readableAddress;
     _customNameController.clear();
 
@@ -184,8 +178,8 @@ class _BuiltMapState extends State<BuiltMap> {
               onPressed: () async {
                 if (_formKey.currentState?.validate() ?? false) {
                   final newLocation = SavedLocation(
-                    latitude: tappedPoint.latitude,
-                    longitude: tappedPoint.longitude,
+                    latitude: center.latitude,
+                    longitude: center.longitude,
                     name: _customNameController.text.trim(),
                   );
 
@@ -212,17 +206,59 @@ class _BuiltMapState extends State<BuiltMap> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    return GoogleMap(
-      onMapCreated: (controller) => mapController = controller,
-      initialCameraPosition: CameraPosition(
-        target: _initialPosition!,
-        zoom: 15.0,
-      ),
-      myLocationEnabled: true,
-      myLocationButtonEnabled: true,
-      zoomControlsEnabled: false,
-      markers: _markers,
-      onTap: _onMapTapped,
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        GoogleMap(
+          onMapCreated: (controller) => mapController = controller,
+          initialCameraPosition: CameraPosition(
+            target: _initialPosition!,
+            zoom: 15.0,
+          ),
+          myLocationEnabled: true,
+          myLocationButtonEnabled: true,
+          zoomControlsEnabled: false,
+          onCameraMove: (position) {
+            _currentCenter = position.target;
+            setState(() {
+              _isMapMoving = true;
+            });
+          },
+          onCameraIdle: () {
+            setState(() {
+              _isMapMoving = false;
+            });
+          },
+        ),
+
+        // Center pointer
+        IgnorePointer(
+          child: AnimatedScale(
+            scale: _isMapMoving ? 1.2 : 1.0,
+            duration: const Duration(milliseconds: 200),
+            child: const Icon(Icons.location_on,
+                size: 40, color: Colours.lightThemeOrange5),
+          ),
+        ),
+
+        // Confirmation button
+        Positioned(
+          bottom: 30,
+          left: 20,
+          right: 20,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colours.lightThemeOrange5,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+            ),
+            onPressed: _onConfirmLocation,
+            child: Text('Confirmer cet emplacement',
+                style: TextStyles.textMediumLarge.white1),
+          ),
+        ),
+      ],
     );
   }
 }
