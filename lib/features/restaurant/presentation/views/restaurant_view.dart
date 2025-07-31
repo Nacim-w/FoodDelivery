@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legy/features/restaurant/presentation/widgets/restaurant_action_button.dart';
 import 'package:legy/features/restaurant/presentation/widgets/restaurant_appbar.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
@@ -46,6 +47,11 @@ class _RestaurantViewState extends State<RestaurantView> {
       builder: (context, state) {
         return Scaffold(
           body: _buildContent(context),
+          floatingActionButton:
+              (state.isLoadingRestaurantById || state.isLoadingCategories)
+                  ? null
+                  : RestaurantActionButton(restaurantId: widget.restaurantId),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         );
       },
     );

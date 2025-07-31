@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
+import 'package:legy/features/cart/presentation/views/cart_view.dart';
+import 'package:legy/features/home/presentation/views/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
@@ -81,7 +85,7 @@ class _BuiltMapState extends State<BuiltMap> {
     super.dispose();
   }
 
-  void _onMapTapped(LatLng tappedPoint) {
+  Future<void> _onMapTapped(LatLng tappedPoint) async {
     setState(() {
       _markers.clear();
       _markers.add(
@@ -93,16 +97,28 @@ class _BuiltMapState extends State<BuiltMap> {
       );
     });
 
-    String formattedCoords =
-        '(${tappedPoint.latitude.toStringAsFixed(4)}, ${tappedPoint.longitude.toStringAsFixed(4)})';
-    _readonlyZoneController.text = formattedCoords;
+    String readableAddress = 'Adresse inconnue';
+    try {
+      final placemarks = await placemarkFromCoordinates(
+        tappedPoint.latitude,
+        tappedPoint.longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        final place = placemarks.first;
+        readableAddress = [place.street, place.locality, place.country]
+            .where((e) => e != null && (e).isNotEmpty)
+            .join(', ');
+      }
+    } catch (_) {}
+    _readonlyZoneController.text = readableAddress;
     _customNameController.clear();
 
     showDialog(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          backgroundColor: Colours.lightThemeWhite1,
+          backgroundColor: Colours.lightThemeWhite1.withAlpha(200),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text('Ajouter un emplacement',
@@ -178,6 +194,7 @@ class _BuiltMapState extends State<BuiltMap> {
                   await cacheHelper.cacheSavedLocations(currentLocations);
 
                   Navigator.of(dialogContext).pop();
+                  context.push('${HomePage.routePath}/${CartView.routePath}');
                 }
               },
               child:

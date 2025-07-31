@@ -7,8 +7,10 @@ import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
+import 'package:legy/features/preferences/presentation/view/preferences_view.dart';
 
 class OnBoarding extends StatefulWidget {
+  static const routePath = "onboarding";
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
@@ -94,7 +96,7 @@ class _OnBoardingState extends State<OnBoarding> {
         dotsCount: onboardingData.length,
         position: _currentPage.toDouble(),
         decorator: DotsDecorator(
-          activeColor: Colors.orange,
+          activeColor: Colours.lightThemeOrange5,
           size: const Size.square(8.0),
           activeSize: const Size(18.0, 8.0),
           activeShape: RoundedRectangleBorder(
@@ -127,7 +129,7 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.orange,
+              backgroundColor: Colours.lightThemeOrange5,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
             ),
@@ -138,7 +140,8 @@ class _OnBoardingState extends State<OnBoarding> {
                   curve: Curves.easeIn,
                 );
               } else {
-                context.go(HomePage.routePath);
+                context
+                    .go('${HomePage.routePath}/${PreferencesView.routePath}');
               }
             },
             child: Row(

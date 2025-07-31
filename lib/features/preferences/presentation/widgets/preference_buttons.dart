@@ -37,8 +37,8 @@ class PreferencesButtons extends StatelessWidget {
           child: ElevatedButton(
             onPressed: canProceed ? onPass : null,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.orange,
-              foregroundColor: Colors.white,
+              backgroundColor: Colours.lightThemeOrange5,
+              foregroundColor: Colours.lightThemeWhite1,
               disabledBackgroundColor: Colours.lightThemeOrange0.withAlpha(120),
               disabledForegroundColor: Colours.lightThemeWhite1,
             ),

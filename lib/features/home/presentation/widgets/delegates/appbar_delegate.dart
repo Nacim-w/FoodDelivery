@@ -10,7 +10,7 @@ class AnimatedHomeAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return HomeAppBar();
+    return SizedBox.expand(child: HomeAppBar());
   }
 
   @override
