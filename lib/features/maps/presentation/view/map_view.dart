@@ -18,18 +18,16 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            context.adaptiveGap,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: BlackAppBar(title: 'Carte', onTap: () => context.pop()),
-            ),
-            Gap(10),
-            Expanded(child: BuiltMap()), // <-- Important
-          ],
-        ),
+      body: Column(
+        children: [
+          context.adaptiveGap,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: BlackAppBar(title: 'Carte', onTap: () => context.pop()),
+          ),
+          Gap(10),
+          Expanded(child: BuiltMap()), // <-- Important
+        ],
       ),
     );
   }

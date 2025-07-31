@@ -55,12 +55,6 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
                 .where((r) => r.nom.toLowerCase().contains(query))
                 .toList();
 
-        if (!isLoading && filtered.isEmpty) {
-          return const Center(child: Text('Aucun restaurant trouvé.'));
-        }
-
-        final itemCount = isLoading ? 6 : filtered.length;
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,7 +63,7 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: BlackAppBar(title: 'Restaurants', onTap: context.pop),
             ),
-            // Fixed top area: Title + Search bar
+            // Top section with title and search bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
@@ -97,8 +91,7 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
                               color: Colors.black.withAlpha(30),
                               spreadRadius: 1,
                               blurRadius: 4,
-                              offset:
-                                  const Offset(0, 3), // shadow direction: down
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
@@ -136,11 +129,11 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
               ),
             ),
 
-            // Scrollable restaurant grid fills remaining space
+            // Scrollable content
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: isLoading && filtered.isEmpty
+                child: isLoading
                     ? GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -152,29 +145,33 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
                         itemCount: 6,
                         itemBuilder: (_, __) => const SkeletonCard(),
                       )
-                    : GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: 3 / 4,
-                        ),
-                        itemCount: itemCount,
-                        itemBuilder: (context, index) {
-                          final restaurant = filtered[index];
-                          return GestureDetector(
-                            key: ValueKey(restaurant.id), // avoids flicker
-                            onTap: () => context.push(
-                                '/home/restaurants/restaurant/${restaurant.id}'),
-                            child: RestaurantContainer(
-                              image: restaurant.logo,
-                              name: restaurant.nom,
-                              rating: restaurant.averageRating,
+                    : filtered.isEmpty
+                        ? const Center(
+                            child: Text('Aucun restaurant trouvé.'),
+                          )
+                        : GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
+                              childAspectRatio: 3 / 4,
                             ),
-                          );
-                        },
-                      ),
+                            itemCount: filtered.length,
+                            itemBuilder: (context, index) {
+                              final restaurant = filtered[index];
+                              return GestureDetector(
+                                key: ValueKey(restaurant.id),
+                                onTap: () => context.push(
+                                    '/home/restaurants/restaurant/${restaurant.id}'),
+                                child: RestaurantContainer(
+                                  image: restaurant.logo,
+                                  name: restaurant.nom,
+                                  rating: restaurant.averageRating,
+                                ),
+                              );
+                            },
+                          ),
               ),
             ),
           ],
