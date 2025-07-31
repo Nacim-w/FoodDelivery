@@ -2,15 +2,16 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:legy/core/common/app/cache_helper.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
 import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
-import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/preferences/presentation/view/preferences_view.dart';
+import 'package:legy/core/service/injection/injection_container.dart';
+import 'package:legy/features/auth/presentation/views/sign_in_view.dart';
 
 class OnBoarding extends StatefulWidget {
-  static const routePath = "onboarding";
+  static const routePath = "/onboarding";
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
@@ -133,15 +134,15 @@ class _OnBoardingState extends State<OnBoarding> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
             ),
-            onPressed: () {
+            onPressed: () async {
               if (_currentPage < onboardingData.length - 1) {
                 _pageController.nextPage(
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeIn,
                 );
               } else {
-                context
-                    .go('${HomePage.routePath}/${PreferencesView.routePath}');
+                await sl<CacheHelper>().cacheFirstLogin();
+                context.go(SignInPage.routePath);
               }
             },
             child: Row(

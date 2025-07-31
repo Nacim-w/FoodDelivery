@@ -23,7 +23,7 @@ import 'package:legy/features/auth/presentation/widgets/sign_in/complete_profile
 import 'package:legy/features/auth/presentation/widgets/sign_in/suggest_register_widget.dart';
 import 'package:legy/features/auth/service/auth_service.dart';
 import 'package:legy/features/home/presentation/views/home_page.dart';
-import 'package:legy/features/onboarding/onboarding.dart';
+import 'package:legy/features/preferences/presentation/view/preferences_view.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -73,7 +73,8 @@ class _SignInFormState extends State<SignInForm> {
               } else {
                 final isFirstTime = sl<CacheHelper>().isFirstTime();
                 if (isFirstTime) {
-                  context.go('${HomePage.routePath}/${OnBoarding.routePath}');
+                  context
+                      .go('${HomePage.routePath}/${PreferencesView.routePath}');
                 } else {
                   context.go(HomePage.routePath);
                 }

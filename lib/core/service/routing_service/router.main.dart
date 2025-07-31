@@ -67,6 +67,11 @@ final router = GoRouter(
       path: '/',
       redirect: (context, state) {
         final sessionToken = Cache.instance.sessionToken;
+        final isFirstLogin = sl<CacheHelper>().isFirstLogin();
+        if (isFirstLogin) {
+          sl<CacheHelper>().cacheFirstLogin();
+          return OnBoarding.routePath;
+        }
         if (sessionToken != null) {
           return HomePage.routePath;
         }
@@ -108,11 +113,6 @@ final router = GoRouter(
                   child: OrderTrackingView(orderId: orderId),
                 );
               },
-            ),
-            GoRoute(
-              path: OnBoarding.routePath,
-              pageBuilder: (context, state) =>
-                  fadeTransition(child: OnBoarding()),
             ),
             GoRoute(
               path: PreferencesView.routePath,
@@ -402,6 +402,11 @@ final router = GoRouter(
           ],
         ),
       ],
+    ),
+    // Onboarding flow
+    GoRoute(
+      path: OnBoarding.routePath,
+      pageBuilder: (context, state) => fadeTransition(child: OnBoarding()),
     ),
   ],
 );

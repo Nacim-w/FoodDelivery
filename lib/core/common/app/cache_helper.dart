@@ -12,6 +12,7 @@ class CacheHelper {
   final SharedPreferences _prefs;
 
   static const _firstTimerKey = 'is-user-first-timer';
+  static const _firstLoginKey = 'is-user-first-login';
   static const _sessionTokenKey = 'user-session-token';
   static const _cartProductsKey = 'cart-products';
   static const _userProfileKey = 'user-profile';
@@ -53,6 +54,13 @@ class CacheHelper {
   }
 
   bool isFirstTime() => _prefs.getBool(_firstTimerKey) ?? true;
+
+  // First time login
+  Future<void> cacheFirstLogin() async {
+    await _prefs.setBool(_firstLoginKey, false);
+  }
+
+  bool isFirstLogin() => _prefs.getBool(_firstLoginKey) ?? true;
 
   // Refresh token
   String? getRefreshToken() => _prefs.getString(_refreshTokenKey);
