@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -67,8 +65,8 @@ class RestaurantProduct extends StatelessWidget {
           Row(
             children: [
               Container(
-                height: context.height * 0.115,
-                width: context.width * 0.25,
+                height: context.width * 0.26,
+                width: context.width * 0.23,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
@@ -77,43 +75,50 @@ class RestaurantProduct extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              Gap(20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: context.width * 0.48,
+                    child: Text(
+                      title,
+                      style: TextStyles.textBoldSmall.brown5,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                  const Gap(5),
+                  Container(
+                    width: context.width * 0.48,
+                    height: context.height * 0.04,
+                    child: Text(
+                      description,
+                      style: TextStyles.textSemiBoldSmall.grey5,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const Spacer(),
+                  Row(
                     children: [
-                      Text(title, style: TextStyles.textMediumSmall.brown5),
-                      const Gap(5),
-                      AutoSizeText(
-                        description,
-                        style: TextStyles.textRegularTiny.black1,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          SvgPicture.asset(Media.homeClock),
-                          const Gap(5),
-                          Text(time, style: TextStyles.textMediumSmall.red5),
-                          const Gap(20),
-                          const Icon(Icons.star,
-                              color: Colours.lightThemeYellow5, size: 20),
-                          const Gap(5),
-                          Text(rating, style: TextStyles.textMediumSmall.red5),
-                          const Gap(20),
-                          SvgPicture.asset(Media.dot),
-                          const Gap(5),
-                          Text(distance,
-                              style: TextStyles.textMediumSmall.red5),
-                        ],
-                      ),
-                      const Gap(15),
+                      SvgPicture.asset(Media.homeClock),
+                      Gap(3),
+                      Text(time, style: TextStyles.textMediumSmall.orange0),
+                      Gap(32),
+                      SvgPicture.asset(Media.ratingStar,
+                          colorFilter: ColorFilter.mode(
+                              Colours.lightThemeYellow0, BlendMode.srcIn)),
+                      Gap(3),
+                      Text(rating, style: TextStyles.textMediumSmall.orange0),
+                      Gap(32),
+                      SvgPicture.asset(Media.dot),
+                      Gap(3),
+                      Text(distance, style: TextStyles.textMediumSmall.orange0),
                     ],
                   ),
-                ),
+                  const Gap(15),
+                ],
               ),
             ],
           ),

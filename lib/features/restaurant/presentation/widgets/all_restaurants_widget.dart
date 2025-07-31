@@ -63,7 +63,7 @@ class _AllRestaurantsWidgetState extends State<AllRestaurantsWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: BlackAppBar(title: 'Restaurants', onTap: context.pop),
             ),
-            // Top section with title and search bar
+            // Top section with and search bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(

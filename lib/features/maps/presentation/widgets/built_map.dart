@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/cart/presentation/views/cart_view.dart';
@@ -253,24 +255,35 @@ class _BuiltMapState extends State<BuiltMap> {
           left: 20,
           right: 20,
           child: Material(
+            color: Colours.lightThemeOrange5,
+            borderRadius: BorderRadius.circular(99),
             elevation: 3,
-            borderRadius: BorderRadius.circular(12),
-            child: TextField(
-              controller: _searchController,
-              focusNode: _searchFocus,
-              onSubmitted: _searchAndNavigate,
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                hintText: 'Rechercher un lieu...',
-                prefixIcon: const Icon(Icons.search),
-                filled: true,
-                fillColor: Colours.lightThemeWhite1,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(99),
+              child: TextField(
+                controller: _searchController,
+                focusNode: _searchFocus,
+                onSubmitted: _searchAndNavigate,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colours.lightThemeWhite3,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 14.0),
+                  prefixIcon: SizedBox(
+                    width: 48,
+                    child: const Icon(
+                      Icons.search,
+                      color: Colours.lightThemeOrange0,
+                    ),
+                  ),
+                  hintText: "Rechercher",
+                  hintStyle: TextStyles.textMediumSmall.grey3,
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
                 ),
+                style: TextStyles.textMediumSmall,
               ),
             ),
           ),

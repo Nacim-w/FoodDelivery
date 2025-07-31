@@ -106,7 +106,13 @@ class RestaurantContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name, style: TextStyles.textBoldSmall.white1),
+              Container(
+                width: context.width * 0.3,
+                child: Text(name,
+                    style: TextStyles.textBoldSmall.white1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
+              ),
               Text('Indian - Mangalore',
                   style: TextStyles.textRegularSmallest.white1),
               Row(
