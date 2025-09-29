@@ -7,9 +7,9 @@ trigger:
 
 workflows:
   flutter-android:
-    name: Firebase CI/CD
+    name: Firebase CI/CD (Dev Flavor)
     environment:
-      flutter: 3.32.0
+      flutter: 3.35.5
       groups:
         - testers
     cache:
@@ -51,17 +51,16 @@ workflows:
           cd $CM_BUILD_DIR
           flutter pub get
 
-      - name: Build APK
+      - name: Build APK (Dev Flavor)
         script: |
           cd $CM_BUILD_DIR
           flutter build apk --release -t lib/main_development.dart --flavor dev
 
-
-      - name: Verify APK exists
+      - name: Verify APK exists (Dev Flavor)
         script: |
           cd $CM_BUILD_DIR
-          if [ ! -f build/app/outputs/flutter-apk/app-release.apk ]; then
-            echo "APK not found! Build failed."
+          if [ ! -f build/app/outputs/flutter-apk/app-dev-release.apk ]; then
+            echo "Dev APK not found! Build failed."
             exit 1
           fi
 
@@ -70,16 +69,16 @@ workflows:
           echo $FIREBASE_SERVICE_ACCOUNT | base64 --decode > /tmp/firebase-service-account.json
           export GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-service-account.json
 
-      - name: Distribute via Firebase App Distribution
+      - name: Distribute via Firebase App Distribution (Dev Flavor)
         script: |
           cd $CM_BUILD_DIR
-          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk \
             --app 1:540049131134:android:74e974643a939bc2317a2f \
             --groups "testers" \
             --release-notes-file android/release_notes.txt
 
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/flutter-apk/app-dev-release.apk
 
     publishing:
       email:
