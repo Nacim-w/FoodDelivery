@@ -9,7 +9,7 @@ workflows:
   flutter-android:
     name: Firebase CI/CD
     environment:
-      flutter: 3.32.0
+      flutter: 3.35.5
       groups:
         - testers
     cache:
@@ -40,10 +40,29 @@ workflows:
           sed -i.bak -E "s/versionCode [0-9]+/versionCode $VERSION_CODE/" android/app/build.gradle
           sed -i.bak -E "s/versionName \".*\"/versionName \"$VERSION_NAME\"/" android/app/build.gradle
 
+      - name: Clean old builds
+        script: |
+          cd $CM_BUILD_DIR
+          flutter clean
+          rm -f pubspec.lock
+
       - name: Get Flutter packages
         script: |
           cd $CM_BUILD_DIR
           flutter pub get
+
+      - name: Build APK
+        script: |
+          cd $CM_BUILD_DIR
+          flutter build apk --release
+
+      - name: Verify APK exists
+        script: |
+          cd $CM_BUILD_DIR
+          if [ ! -f build/app/outputs/flutter-apk/app-release.apk ]; then
+            echo "APK not found! Build failed."
+            exit 1
+          fi
 
       - name: Authenticate Firebase CLI
         script: |
@@ -52,6 +71,7 @@ workflows:
 
       - name: Distribute via Firebase App Distribution
         script: |
+          cd $CM_BUILD_DIR
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
             --app 1:540049131134:android:74e974643a939bc2317a2f \
             --groups "testers" \
