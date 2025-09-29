@@ -9,7 +9,7 @@ workflows:
   flutter-android:
     name: Firebase CI/CD
     environment:
-      flutter: 3.35.5
+      flutter: 3.32.0
       groups:
         - testers
     cache:
