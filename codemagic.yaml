@@ -54,7 +54,8 @@ workflows:
       - name: Build APK
         script: |
           cd $CM_BUILD_DIR
-          flutter build apk --release
+          flutter build apk --release -t lib/main_development.dart --flavor dev
+
 
       - name: Verify APK exists
         script: |
