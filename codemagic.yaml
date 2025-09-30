@@ -7,9 +7,9 @@ trigger:
 
 workflows:
   flutter-android:
-    name: Firebase CI/CD (APK + Shorebird)
+    name: Firebase CI/CD (Dev Flavor)
     environment:
-      flutter: 3.29.3
+      flutter: 3.32.0
       groups:
         - testers
     cache:
@@ -18,11 +18,6 @@ workflows:
         - $HOME/.gradle/wrapper
 
     scripts:
-      - name: Install Shorebird CLI
-        script: |
-          curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
-          echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
-
       - name: Setup the keystore
         script: |
           echo $CM_KEYSTORE | base64 --decode > /tmp/keystore.jks
@@ -38,32 +33,52 @@ workflows:
           cd $CM_BUILD_DIR
           VERSION_CODE=$(date +%s)
           MAJOR=1
-          MINOR=1
-          PATCH=9
+          MINOR=2
+          PATCH=0
           VERSION_NAME="$MAJOR.$MINOR.$PATCH"
           echo "Setting versionCode=$VERSION_CODE and versionName=$VERSION_NAME"
           sed -i.bak -E "s/versionCode [0-9]+/versionCode $VERSION_CODE/" android/app/build.gradle
           sed -i.bak -E "s/versionName \".*\"/versionName \"$VERSION_NAME\"/" android/app/build.gradle
+
+      - name: Clean old builds
+        script: |
+          cd $CM_BUILD_DIR
+          flutter clean
+          rm -f pubspec.lock
 
       - name: Get Flutter packages
         script: |
           cd $CM_BUILD_DIR
           flutter pub get
 
+      - name: Build APK (Dev Flavor)
+        script: |
+          cd $CM_BUILD_DIR
+          flutter build apk --release -t lib/main_development.dart --flavor dev
+
+      - name: Verify APK exists (Dev Flavor)
+        script: |
+          cd $CM_BUILD_DIR
+          if [ ! -f build/app/outputs/flutter-apk/app-dev-release.apk ]; then
+            echo "Dev APK not found! Build failed."
+            exit 1
+          fi
+
       - name: Authenticate Firebase CLI
         script: |
           echo $FIREBASE_SERVICE_ACCOUNT | base64 --decode > /tmp/firebase-service-account.json
           export GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-service-account.json
 
-      - name: Distribute via Firebase App Distribution
+      - name: Distribute via Firebase App Distribution (Dev Flavor)
         script: |
-          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+          cd $CM_BUILD_DIR
+          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk \
             --app 1:540049131134:android:74e974643a939bc2317a2f \
             --groups "testers" \
             --release-notes-file android/release_notes.txt
 
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/flutter-apk/app-dev-release.apk
 
     publishing:
       email:

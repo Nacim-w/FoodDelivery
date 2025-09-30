@@ -1,11 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:legy/core/common/app/cache_helper.dart';
+import 'package:legy/core/extension/gap_extension.dart';
 import 'package:legy/core/res/media.dart';
+import 'package:legy/features/profile/profile_settings/sections/appbar/profile_settings_appbar.dart';
 import 'package:legy/features/web_socket/presentation/presentation/socket_manager.dart';
 import 'package:lottie/lottie.dart' hide Marker;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 enum OrderStatus { idle, accepted, onTheWay }
 
@@ -25,6 +31,10 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
   LatLng _initialPosition = const LatLng(36.80611, 10.16579);
   LatLng? _previousPosition;
   Timer? _animationTimer;
+
+  final LatLng _destination = const LatLng(35.8233, 10.6360); // ISSAT Sousse
+  Set<Polyline> _polylines = {};
+  String? _estimatedTime; // ETA
 
   final socketManager = SocketManager();
 
@@ -51,7 +61,10 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
 
     _locationListener = () {
       final pos = socketManager.livreurLocation.value;
-      if (pos != null) _animateMarker(pos);
+      if (pos != null) {
+        _animateMarker(pos);
+        _drawRoute(pos, _destination);
+      }
     };
 
     socketManager.orderStatus.addListener(_statusListener);
@@ -78,14 +91,15 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
           _lerp(start.latitude, newPosition.latitude, currentStep / steps);
       final lon =
           _lerp(start.longitude, newPosition.longitude, currentStep / steps);
-      _setMarkerPosition(LatLng(lat, lon));
+      final intermediatePosition = LatLng(lat, lon);
+      _setMarkerPosition(intermediatePosition, animateCamera: true);
       currentStep++;
     });
   }
 
   double _lerp(double start, double end, double t) => start + (end - start) * t;
 
-  void _setMarkerPosition(LatLng position) {
+  void _setMarkerPosition(LatLng position, {bool animateCamera = false}) {
     if (!mounted) return;
     setState(() {
       _livreurMarker = Marker(
@@ -95,19 +109,78 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
       );
     });
-    _mapController?.animateCamera(CameraUpdate.newLatLng(position));
+
+    if (animateCamera) {
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLng(position),
+      );
+    }
   }
 
-  void _stopTracking() {
-    // Do NOT dispose socketManager here — keep it alive
-    if (!mounted) return;
-    setState(() {
-      _livreurMarker = null;
-      _previousPosition = null;
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Tracking stopped")),
-    );
+  /// Draw route along streets using Google Directions API + extract ETA
+  Future<void> _drawRoute(LatLng origin, LatLng destination) async {
+    const apiKey = 'AIzaSyCOxZCCAhsTSZPJwX7qumKmWaRKlTKpJew';
+    final url =
+        'https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=$apiKey';
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if ((data['routes'] as List).isNotEmpty) {
+        final route = data['routes'][0];
+        final points = route['overview_polyline']['points'];
+        final decodedPoints = _decodePolyline(points);
+
+        // ETA extraction
+        final legs = route['legs'] as List;
+        if (legs.isNotEmpty) {
+          final duration = legs[0]['duration']['text']; // e.g. "15 mins"
+          setState(() {
+            _estimatedTime = duration;
+          });
+        }
+
+        setState(() {
+          _polylines = {
+            Polyline(
+              polylineId: const PolylineId('route_to_destination'),
+              points: decodedPoints,
+              color: Colors.blue,
+              width: 5,
+            )
+          };
+        });
+      }
+    }
+  }
+
+  List<LatLng> _decodePolyline(String encoded) {
+    List<LatLng> poly = [];
+    int index = 0, len = encoded.length;
+    int lat = 0, lng = 0;
+
+    while (index < len) {
+      int b, shift = 0, result = 0;
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1F) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+      lat += dlat;
+
+      shift = 0;
+      result = 0;
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1F) << shift;
+        shift += 5;
+      } while (b >= 0x20);
+      int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+      lng += dlng;
+
+      poly.add(LatLng(lat / 1e5, lng / 1e5));
+    }
+    return poly;
   }
 
   Widget _buildProgressBar() {
@@ -143,8 +216,20 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 5,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
       child: Row(
         children: [
           stepIcon(0, Icons.schedule),
@@ -161,9 +246,32 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
     final status = socketManager.orderStatus.value;
     switch (status) {
       case OrderStatus.idle:
-        return Center(child: Lottie.asset(Media.cooking));
       case OrderStatus.accepted:
-        return Center(child: Lottie.asset(Media.delivery));
+        final lottieAsset =
+            status == OrderStatus.idle ? Media.cooking : Media.delivery;
+        return Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition:
+                  CameraPosition(target: _initialPosition, zoom: 14),
+              myLocationEnabled: false,
+              zoomControlsEnabled: false,
+              zoomGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+            ),
+            Positioned.fill(
+              child: ClipRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                  child: Container(color: Colors.transparent),
+                ),
+              ),
+            ),
+            Center(child: Lottie.asset(lottieAsset)),
+          ],
+        );
       case OrderStatus.onTheWay:
         final pos = socketManager.livreurLocation.value ?? _initialPosition;
         return Stack(
@@ -171,24 +279,33 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
             GoogleMap(
               initialCameraPosition: CameraPosition(target: pos, zoom: 14),
               markers: _livreurMarker != null ? {_livreurMarker!} : {},
-              onMapCreated: (controller) => _mapController = controller,
+              polylines: _polylines,
+              onMapCreated: (controller) {
+                _mapController = controller;
+                if (_livreurMarker != null) {
+                  _mapController!.moveCamera(
+                      CameraUpdate.newLatLng(_livreurMarker!.position));
+                }
+              },
               myLocationEnabled: true,
             ),
-            Positioned(
-              top: 16,
-              right: 16,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  foregroundColor: Colors.white,
+            if (_estimatedTime != null)
+              Positioned(
+                top: 16,
+                left: 16,
+                child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    "⏱ $_estimatedTime",
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
-                icon: const Icon(Icons.stop_circle),
-                label: const Text("Stop Tracking"),
-                onPressed: _stopTracking,
               ),
-            ),
           ],
         );
     }
@@ -200,16 +317,20 @@ class _OrderTrackingViewState extends State<OrderTrackingView> {
     _mapController?.dispose();
     socketManager.orderStatus.removeListener(_statusListener);
     socketManager.livreurLocation.removeListener(_locationListener);
-    // Do NOT dispose socketManager here to keep state persistent
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Suivi de la commande')),
       body: Column(
         children: [
+          context.adaptiveGap,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ProfileSettingsAppbar(title: 'Suivi de la commande'),
+          ),
+          Gap(20),
           _buildProgressBar(),
           Expanded(child: _buildContent()),
         ],

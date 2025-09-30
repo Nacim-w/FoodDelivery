@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/features/reels/presentation/app/adapter/reels_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReelsView extends StatefulWidget {
   const ReelsView({super.key});
@@ -41,6 +45,7 @@ class _ReelsViewState extends State<ReelsView>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     _pageController = PageController();
     _initializeControllerForIndex(_currentIndex);
+    _loadLikedStatus();
   }
 
   void _initializeControllerForIndex(int index) {
@@ -109,6 +114,29 @@ class _ReelsViewState extends State<ReelsView>
     setState(() {
       _isLoved = !_isLoved;
     });
+    _saveLikedStatus();
+  }
+
+  Future<void> _shareReel() async {
+    final videoUrl = youtubeUrls[_currentIndex];
+    await Share.share('Check out this reel: $videoUrl');
+  }
+
+  Future<void> _loadLikedStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString('likedReels') ?? '{}';
+    final Map<String, dynamic> likedMap = json.decode(jsonString);
+    setState(() {
+      _isLoved = likedMap[youtubeUrls[_currentIndex]] ?? false;
+    });
+  }
+
+  Future<void> _saveLikedStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString('likedReels') ?? '{}';
+    final Map<String, dynamic> likedMap = json.decode(jsonString);
+    likedMap[youtubeUrls[_currentIndex]] = _isLoved;
+    await prefs.setString('likedReels', json.encode(likedMap));
   }
 
   @override
@@ -120,7 +148,7 @@ class _ReelsViewState extends State<ReelsView>
         controller: _pageController,
         scrollDirection: Axis.vertical,
         itemCount: youtubeUrls.length,
-        onPageChanged: (index) {
+        onPageChanged: (index) async {
           _disposeController();
           setState(() {
             _currentIndex = index;
@@ -128,6 +156,7 @@ class _ReelsViewState extends State<ReelsView>
             _isLoved = false;
             _initializeControllerForIndex(index);
           });
+          await _loadLikedStatus();
         },
         itemBuilder: (context, index) {
           return index == _currentIndex && _currentController != null
@@ -175,45 +204,33 @@ class _ReelsViewState extends State<ReelsView>
                           const SizedBox(height: 4),
                           const Text('Amazing content! 🌟',
                               style: TextStyle(color: Colors.white)),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: const [
-                              Icon(Icons.music_note,
-                                  color: Colors.white, size: 16),
-                              SizedBox(width: 4),
-                              Text('Trending audio',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12)),
-                            ],
-                          ),
                         ],
                       ),
                     ),
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Like button
                         GestureDetector(
                           onTap: _toggleLove,
-                          child: Column(
-                            children: [
-                              Icon(
-                                _isLoved
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: _isLoved ? Colors.red : Colors.white,
-                                size: 32,
-                              ),
-                              const Text('1.2K',
-                                  style: TextStyle(color: Colors.white)),
-                            ],
+                          child: Icon(
+                            _isLoved ? Icons.favorite : Icons.favorite_border,
+                            color: _isLoved ? Colors.red : Colors.white,
+                            size: 32,
                           ),
                         ),
                         const SizedBox(height: 16),
-                        _buildAction(Icons.comment, '120'),
+
+                        // Share button
+                        GestureDetector(
+                          onTap: _shareReel,
+                          child: Icon(
+                            Icons.near_me, // Instagram-style arrow
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                        ),
                         const SizedBox(height: 16),
-                        _buildAction(Icons.bookmark, ''),
-                        const SizedBox(height: 16),
-                        _buildAction(Icons.share, ''),
                       ],
                     ),
                   ],
@@ -222,16 +239,6 @@ class _ReelsViewState extends State<ReelsView>
             ],
           ),
         ),
-      ],
-    );
-  }
-
-  Widget _buildAction(IconData icon, String label) {
-    return Column(
-      children: [
-        Icon(icon, color: Colors.white, size: 32),
-        if (label.isNotEmpty)
-          Text(label, style: const TextStyle(color: Colors.white)),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:legy/core/errors/exceptions.dart';
 import 'package:legy/features/auth/model/forgot_password_model.dart';
@@ -64,6 +65,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signInWithGoogle() async {
     emit(AuthLoading());
     try {
+      debugPrint('Google Sign In cubit');
       final client = await authService.signInWithGoogle();
       if (client != null) {
         emit(LoggedInGoogle(client));

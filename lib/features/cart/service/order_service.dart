@@ -34,21 +34,21 @@ class OrderService {
           "longitude": latitude,
           "latitude": longitude,
         },
-        "restaurantId": restaurantId, // keep hardcoded
+        "restaurantId": '685bfed80b9cc63c8a37f11f', // keep hardcoded
         "deliveryAddress": deliveryAddress,
         "paymentMethod": paymentMethod,
         "deliveryMode": "DELIVERY",
         "items": products.map((product) {
           return {
-            "productId": product.id, // keep hardcoded
-            "quantity": product.quantity, // keep hardcoded
-            "selectedSupplements": product.supplements.map((supplement) {
+            "productId": '686e3fe3d1a00756b7316976', // keep hardcoded
+            "quantity": 2, // keep hardcoded
+            /*"selectedSupplements": product.supplements.map((supplement) {
               return {
                 "supplementId": supplement.id,
                 "supplementName": supplement.name,
                 "quantity": supplement.quantity,
               };
-            }).toList(),
+            }).toList(),*/
           };
         }).toList(),
       };

@@ -19,6 +19,7 @@ class BuildThirdPartyLogin extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
+                debugPrint('Google Sign In');
                 context.read<AuthCubit>().signInWithGoogle();
               },
               child: reusableIcons(Media.google),

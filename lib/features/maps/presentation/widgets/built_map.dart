@@ -1,12 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:legy/core/extension/text_style_extension.dart';
-import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/core/res/styles/text.dart';
 import 'package:legy/features/cart/presentation/views/cart_view.dart';

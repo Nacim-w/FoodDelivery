@@ -87,7 +87,7 @@ class FavoriteMealContainer extends StatelessWidget {
                       color: Colours.lightThemeOrange5,
                     ),
                     const Gap(5),
-                    Text(
+                    /* Text(
                       rating.toString(),
                       style: TextStyles.textMediumSmallest.black1,
                     ),
@@ -95,7 +95,7 @@ class FavoriteMealContainer extends StatelessWidget {
                     Text(
                       '(${reviews.toInt()}k)',
                       style: TextStyles.textMediumSmallest.black1,
-                    ),
+                    ),*/
                   ],
                 ),
                 Text(

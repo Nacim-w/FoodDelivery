@@ -28,14 +28,13 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
   File? _imageFile;
 
   final picker = ImagePicker();
-
   final Map<IssueType, String> _issueTypeLabels = {
-    IssueType.MISSING_PRODUCT: 'Missing Product',
-    IssueType.WRONG_ORDER: 'Wrong Order',
-    IssueType.LATE_DELIVERY: 'Late Delivery',
-    IssueType.DRIVER: 'Driver Issue',
-    IssueType.APPLICATION: 'Application Issue',
-    IssueType.ORDER: 'Order Issue',
+    IssueType.MISSING_PRODUCT: 'Produit manquant',
+    IssueType.WRONG_ORDER: 'Mauvaise commande',
+    IssueType.LATE_DELIVERY: 'Livraison en retard',
+    IssueType.DRIVER: 'Problème avec le livreur',
+    IssueType.APPLICATION: 'Problème avec l’application',
+    IssueType.ORDER: 'Problème de commande',
   };
 
   Future<void> _pickImage() async {
@@ -91,7 +90,7 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Report an Issue',
+                  'Signaler un problème',
                   style: TextStyles.textSemiBold.black1.copyWith(fontSize: 18),
                 ),
                 const Gap(20),
@@ -100,11 +99,11 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colours.lightThemeOrange5,
+                        color: Colours.lightThemeGreen5,
                         width: 2,
                       ),
                     ),
-                    labelText: 'Issue Type',
+                    labelText: 'Type de problème',
                     filled: true,
                     fillColor: Colours.lightThemeWhite1,
                     border: OutlineInputBorder(
@@ -130,7 +129,7 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colours.lightThemeOrange5,
+                        color: Colours.lightThemeGreen5,
                         width: 2,
                       ),
                     ),
@@ -162,14 +161,13 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Icon(Icons.camera_alt,
-                            color: Colours.lightThemeOrange5),
+                        Icon(Icons.camera_alt, color: Colours.lightThemeGreen5),
                         SizedBox(width: 10),
                         Text(
-                          'Add Photo',
+                          'Ajouter une photo (optionnel)',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            color: Colours.lightThemeOrange5,
+                            color: Colours.lightThemeGreen5,
                           ),
                         ),
                       ],
@@ -198,7 +196,7 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
 
                       return ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colours.lightThemeOrange5,
+                          backgroundColor: Colours.lightThemeGreen5,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -253,7 +251,7 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
                                 ],
                               )
                             : Text(
-                                'Submit',
+                                'Envoyer',
                                 style: TextStyles.textSemiBoldLarge.white1,
                               ),
                       );

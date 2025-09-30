@@ -17,6 +17,7 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController(); // NEW
   final List<Map<String, String>> _messages = [];
   bool _isLoading = false;
 
@@ -27,15 +28,19 @@ class _ChatViewState extends State<ChatView> {
 
     setState(() {
       _messages.add({"role": "user", "text": text});
+      debugPrint('Sending message: $text');
       _controller.clear();
       _isLoading = true;
     });
+    _scrollToBottom(); // scroll after sending
 
     try {
       final response = await GeminiChatService.ask(text);
       setState(() {
+        debugPrint('Gemini Response: $response');
         _messages.add({"role": "assistant", "text": response});
       });
+      _scrollToBottom(); // scroll after receiving
     } catch (e) {
       setState(() {
         _messages.add({
@@ -43,10 +48,24 @@ class _ChatViewState extends State<ChatView> {
           "text": "Erreur: ${e.toString()}",
         });
       });
+      _scrollToBottom(); // scroll after error
     }
 
     setState(() {
       _isLoading = false;
+    });
+  }
+
+  void _scrollToBottom() {
+    // Run after the UI has finished rendering
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
     });
   }
 
@@ -94,6 +113,7 @@ class _ChatViewState extends State<ChatView> {
             ),
             Expanded(
               child: ListView.builder(
+                controller: _scrollController, // attach controller
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: _messages.length,
                 itemBuilder: (context, index) {

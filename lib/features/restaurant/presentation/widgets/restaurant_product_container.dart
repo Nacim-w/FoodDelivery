@@ -38,10 +38,10 @@ class RestaurantProduct extends StatelessWidget {
         Uint8List imageBytes = base64Decode(base64Str);
         return MemoryImage(imageBytes);
       } catch (_) {
-        return const AssetImage(Media.restaurant1);
+        return const AssetImage(Media.burgercover);
       }
     } else {
-      return const AssetImage(Media.restaurant1);
+      return const AssetImage(Media.burgercover);
     }
   }
 

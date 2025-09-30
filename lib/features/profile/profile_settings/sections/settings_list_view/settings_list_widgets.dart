@@ -72,7 +72,7 @@ class BuiltListView extends StatelessWidget {
         ),
         BuildListTile(
           icon: Media.helpCenter,
-          title: "Centre d’aide",
+          title: "Centre d'aide",
           onTap: () => context.go(
               '${ProfileSettingsPage.routePath}/${HelpCenterPage.routePath}'),
         ),
@@ -83,7 +83,7 @@ class BuiltListView extends StatelessWidget {
               .go('${ProfileSettingsPage.routePath}/${ParamsView.routePath}'),
         ),
         BuildListTile(
-            color: Colours.lightThemeRed0,
+            borderColor: Colours.lightThemeRed0,
             textColor: Colours.lightThemeRed0,
             icon: Media.logOut,
             title: "Se déconnecter",

@@ -127,20 +127,6 @@ class _BurgerFinalScreenState extends State<BurgerFinalScreen> {
                       clipBehavior: Clip.none,
                       alignment: Alignment.bottomCenter,
                       children: [
-                        Positioned(
-                          width: context.width * 0.6,
-                          height: context.height * 0.3,
-                          right: context.width * 0,
-                          top: context.width * -0.2,
-                          child: Transform(
-                            alignment: Alignment.center,
-                            transform: Matrix4.identity()..scale(-1.5, -1.5),
-                            child: Image.asset(
-                              Media.bigSmoke,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
                         if (widget.ingredients.contains(Media.burgerBottomBun))
                           Positioned(
                             bottom: 0,
@@ -186,10 +172,31 @@ class _BurgerFinalScreenState extends State<BurgerFinalScreen> {
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    widget.ingredients
-                        .map((path) =>
-                            path.split('/').last.replaceAll('.png', ''))
-                        .join(", "),
+                    () {
+                      final replacements = {
+                        'burgerPlacedMeat': 'Meat',
+                        'burgerBottomBun': 'Bun',
+                        'burgerTopBun': 'Bun',
+                        'burgerPlacedPickle': 'Pickle',
+                        'burgerPlacedBacon': 'Bacon',
+                        'burgerPlacedCheese': 'Cheese',
+                        'burgerPlacedTomato': 'Tomato',
+                      };
+
+                      // Count occurrences
+                      final counts = <String, int>{};
+                      for (final path in widget.ingredients) {
+                        final key = path.split('/').last.replaceAll('.png', '');
+                        final name = replacements[key] ?? key;
+                        counts[name] = (counts[name] ?? 0) + 1;
+                      }
+
+                      // Format with *n if repeated
+                      return counts.entries
+                          .map((e) =>
+                              e.value > 1 ? '${e.key}*${e.value}' : e.key)
+                          .join(", ");
+                    }(),
                     style: TextStyles.textMedium.white1,
                     textAlign: TextAlign.start,
                   ),

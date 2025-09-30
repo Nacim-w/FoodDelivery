@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:legy/core/common/app/cache_helper.dart';
@@ -137,13 +138,15 @@ class AuthService {
       );
 
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      debugPrint('Google User: $googleUser');
       if (googleUser == null) {
         return null;
       }
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
+      debugPrint(
+          'Google Auth: ${googleAuth.accessToken}, ${googleAuth.idToken}');
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -151,11 +154,12 @@ class AuthService {
 
       final userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
+      debugPrint('userCredential: $userCredential');
       final user = userCredential.user;
       if (user == null) return null;
 
       final firebaseIdToken = await user.getIdToken();
-
+      debugPrint('firebaseIdToken: $firebaseIdToken');
       final client = await _loginWithFirebaseIdToken(firebaseIdToken!);
       return client;
     } on ServerException catch (e) {
@@ -172,6 +176,7 @@ class AuthService {
       String firebaseIdToken) async {
     try {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$GOOGLE_ENDPOINT');
+      debugPrint('url: $uri');
       final response = await http.post(
         uri,
         headers: {
@@ -181,6 +186,8 @@ class AuthService {
           'idToken': firebaseIdToken,
         }),
       );
+      debugPrint('response: ${response.body}');
+      debugPrint('idToken: $firebaseIdToken');
       final data = jsonDecode(response.body);
       if (response.statusCode == 422 && data['missingPhoneNumber'] == true) {
         await sl<CacheHelper>().cacheSessionToken(data['token']);
@@ -196,6 +203,7 @@ class AuthService {
       final userResponse = GoogleResponseModel.fromJson(data);
       await sl<CacheHelper>().cacheSessionToken(data['token']);
       await sl<CacheHelper>().cacheRefreshToken(data['refreshToken']);
+      debugPrint('userResponse: $userResponse');
       return userResponse;
     } on ServerException {
       rethrow;

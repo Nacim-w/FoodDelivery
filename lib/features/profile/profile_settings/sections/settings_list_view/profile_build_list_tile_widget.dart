@@ -9,6 +9,7 @@ class BuildListTile extends StatelessWidget {
   final VoidCallback onTap;
   final Color? color;
   final Color? textColor;
+  final Color? borderColor;
 
   const BuildListTile({
     required this.icon,
@@ -16,6 +17,7 @@ class BuildListTile extends StatelessWidget {
     required this.onTap,
     this.color,
     this.textColor,
+    this.borderColor,
     super.key,
   });
 
@@ -26,7 +28,7 @@ class BuildListTile extends StatelessWidget {
       child: ListTile(
         tileColor: color ?? Colors.transparent,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: color ?? Colours.lightThemeGrey6),
+          side: BorderSide(color: borderColor ?? Colours.lightThemeGrey6),
           borderRadius: BorderRadius.circular(40),
         ),
         leading: SvgPicture.asset(

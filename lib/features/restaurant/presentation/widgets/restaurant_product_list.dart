@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:legy/core/extension/skeletonize_extension.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:legy/core/res/styles/colours.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_cubit.dart';
 import 'package:legy/features/restaurant/presentation/app/adapter/restaurant_state.dart';
@@ -51,7 +52,7 @@ class RestaurantProductList extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               splashColor: Colours.lightThemeOrange5.withAlpha(60),
               child: RestaurantProduct(
-                image: product.imageUrl,
+                image: Media.burger,
                 title: product.name,
                 description: product.description,
                 time: '20',

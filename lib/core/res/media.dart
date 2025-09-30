@@ -115,7 +115,7 @@ abstract class Media {
 
   //restaurant
   static const restaurant1 = '$_baseImage/restaurant1.png';
-
+  static const burgercover = '$_baseImage/burgercover.jpg';
   //search
   static const searchSettings = '$_baseIcon/searchSettings.svg';
   static const searchLocation = '$_baseIcon/searchLocation.svg';
