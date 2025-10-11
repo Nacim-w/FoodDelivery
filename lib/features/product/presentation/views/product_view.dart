@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:legy/features/product/presentation/app/product_cubit.dart';
 import 'package:legy/features/product/presentation/app/product_state.dart';
 import 'package:legy/features/product/presentation/widgets/product_cover.dart';
@@ -42,7 +43,7 @@ class _ProductViewState extends State<ProductView> {
               Column(
                 children: [
                   ProductCover(
-                    image: product.imageUrl,
+                    image: Media.burger,
                   ),
                   Expanded(
                     child: ProductMiddleSection(product: product),

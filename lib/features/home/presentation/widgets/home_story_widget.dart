@@ -13,29 +13,42 @@ class HomeStoryWidget extends StatelessWidget {
   final List<StoryItemModel> defaultStories = [
     StoryItemModel(
       storyId: "1",
-      restaurantName: "Pasta House",
-      restaurantLogoUrl: null,
+      restaurantName: "Coffee House",
+      restaurantLogoUrl: Media.restaurant1,
       imageUrls: [
-        "https://picsum.photos/400/700?1",
-        "https://picsum.photos/400/700?2",
+        "https://picsum.photos/id/42/400/700?2",
       ],
     ),
     StoryItemModel(
       storyId: "2",
       restaurantName: "Burger Spot",
-      restaurantLogoUrl: null,
+      restaurantLogoUrl: Media.burger,
       imageUrls: [
-        "https://picsum.photos/400/700?3",
-        "https://picsum.photos/400/700?4",
+        "https://picsum.photos/id/200/400/700?4",
       ],
     ),
     StoryItemModel(
       storyId: "3",
       restaurantName: "Sushi World",
-      restaurantLogoUrl: null,
+      restaurantLogoUrl: Media.restaurant2,
+      imageUrls: [
+        "https://picsum.photos/id/225/400/700?5",
+      ],
+    ),
+    StoryItemModel(
+      storyId: "4",
+      restaurantName: "Chef Lion",
+      restaurantLogoUrl: Media.restaurant3,
       imageUrls: [
         "https://picsum.photos/400/700?5",
-        "https://picsum.photos/400/700?6",
+      ],
+    ),
+    StoryItemModel(
+      storyId: "5",
+      restaurantName: "Food House",
+      restaurantLogoUrl: Media.restaurant4,
+      imageUrls: [
+        "https://picsum.photos/400/700?5",
       ],
     ),
   ];
@@ -80,8 +93,10 @@ class HomeStoryWidget extends StatelessWidget {
                     child: CircleAvatar(
                       radius: avatarRadius,
                       backgroundImage: restaurantLogo != null
-                          ? NetworkImage(restaurantLogo)
-                          : AssetImage(fallbackLogoAsset) as ImageProvider,
+                          ? (restaurantLogo.startsWith('http')
+                              ? NetworkImage(restaurantLogo)
+                              : AssetImage(restaurantLogo)) as ImageProvider
+                          : AssetImage(fallbackLogoAsset),
                     ),
                   ),
                   const SizedBox(height: 5),

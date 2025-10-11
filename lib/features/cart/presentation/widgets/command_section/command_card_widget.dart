@@ -49,7 +49,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
 
   void _resolveImage(String image) {
     if (image.isEmpty) {
-      imageProvider = const AssetImage(Media.restaurant1);
+      imageProvider = const AssetImage(Media.burgercover);
     } else if (image.startsWith('http')) {
       imageProvider = NetworkImage(image);
     } else if (image.startsWith('data:image')) {
@@ -58,10 +58,10 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
         final bytes = base64Decode(base64Str);
         imageProvider = MemoryImage(bytes);
       } catch (_) {
-        imageProvider = const AssetImage(Media.restaurant1);
+        imageProvider = const AssetImage(Media.burgercover);
       }
     } else {
-      imageProvider = const AssetImage(Media.restaurant1);
+      imageProvider = const AssetImage(Media.burgercover);
     }
 
     if (mounted) setState(() {});
@@ -133,7 +133,7 @@ class _CommandCardWidgetState extends State<CommandCardWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: DecorationImage(
-                          image: imageProvider,
+                          image: const AssetImage(Media.burgercover),
                           fit: BoxFit.cover,
                         ),
                       ),

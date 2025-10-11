@@ -77,7 +77,7 @@ class _BuiltMapState extends State<BuiltMap> {
   }
 
   void _useFallbackLocation() {
-    _initialPosition = const LatLng(14.6928, -17.4467);
+    _initialPosition = const LatLng(35.8125, 10.6383);
     _currentCenter = _initialPosition;
     setState(() {
       _isCacheReady = true;

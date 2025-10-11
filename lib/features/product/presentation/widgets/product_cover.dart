@@ -30,7 +30,7 @@ class _ProductCoverState extends State<ProductCover> {
 
   void _resolveImage(String image) {
     if (image.isEmpty) {
-      imageProvider = const AssetImage(Media.restaurant1);
+      imageProvider = const AssetImage(Media.burgercover);
     } else if (image.startsWith('http')) {
       imageProvider = NetworkImage(image);
     } else if (image.startsWith('data:image')) {
@@ -39,10 +39,10 @@ class _ProductCoverState extends State<ProductCover> {
         final bytes = base64Decode(base64Str);
         imageProvider = MemoryImage(bytes);
       } catch (_) {
-        imageProvider = const AssetImage(Media.restaurant1);
+        imageProvider = const AssetImage(Media.burgercover);
       }
     } else {
-      imageProvider = const AssetImage(Media.restaurant1);
+      imageProvider = const AssetImage(Media.burgercover);
     }
     if (mounted) setState(() {});
   }

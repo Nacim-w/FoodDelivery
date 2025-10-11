@@ -5,7 +5,7 @@ void main() {
   mainCommon(
     flavor: Flavor.dev,
     //baseUrl: 'https://api.dev.legy.bramasquare.com',
-    baseUrl: 'http://192.168.1.19:8080',
+    baseUrl: 'http://192.168.1.11:8080',
     name: 'Legy Development',
   );
 }

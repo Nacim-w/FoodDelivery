@@ -57,7 +57,7 @@ class RestaurantProductList extends StatelessWidget {
                 description: product.description,
                 time: '20',
                 distance: '7',
-                rating: '4.6',
+                rating: '4.7',
               ),
             );
           },

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:legy/core/res/media.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:story_view/story_view.dart';
 import 'package:legy/features/home/model/story_model.dart';
@@ -118,10 +119,11 @@ class _MultiUserStoryViewerState extends State<MultiUserStoryViewer> {
                   children: [
                     CircleAvatar(
                       radius: 18,
-                      backgroundImage: story.restaurantLogoUrl != null
+                      backgroundImage: (story.restaurantLogoUrl != null &&
+                              story.restaurantLogoUrl!.startsWith('http'))
                           ? NetworkImage(story.restaurantLogoUrl!)
-                          : const AssetImage("assets/images/default_logo.png")
-                              as ImageProvider,
+                          : AssetImage(story.restaurantLogoUrl ??
+                              'assets/default_logo.png') as ImageProvider,
                     ),
                     const SizedBox(width: 8),
                     Expanded(
